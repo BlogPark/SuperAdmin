@@ -11,6 +11,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SuperAdmin.DataDAL", "Super
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SuperAdmin.DataBLL", "SuperAdmin.DataBLL\SuperAdmin.DataBLL.csproj", "{04802566-5764-46B1-8842-B5B1B0EE5F49}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SuperAdmin.Common", "SuperAdmin.Common\SuperAdmin.Common.csproj", "{DD01C697-76EF-49E1-9D9A-A9F3D70BE507}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +35,10 @@ Global
 		{04802566-5764-46B1-8842-B5B1B0EE5F49}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{04802566-5764-46B1-8842-B5B1B0EE5F49}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{04802566-5764-46B1-8842-B5B1B0EE5F49}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DD01C697-76EF-49E1-9D9A-A9F3D70BE507}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DD01C697-76EF-49E1-9D9A-A9F3D70BE507}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DD01C697-76EF-49E1-9D9A-A9F3D70BE507}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DD01C697-76EF-49E1-9D9A-A9F3D70BE507}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
