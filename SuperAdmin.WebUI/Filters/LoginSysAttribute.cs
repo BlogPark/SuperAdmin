@@ -37,11 +37,14 @@ namespace SuperAdmin.WebUI.Filters
                 List<SysAdminMenuModel> list = model.UserMenus.Where(p => p.ControllerName == controllername).ToList();
                 if (list == null || list.Count < 1)
                 {
-                    var url = ctx.RequestContext.HttpContext.Request == null
-                       ? ""
-                       : ctx.RequestContext.HttpContext.Request.Url.ToString();
-                    ctx.Result = new RedirectResult("/Home/Index");
-                    return;
+                    if (controllername != "Home")
+                    {
+                        var url = ctx.RequestContext.HttpContext.Request == null
+                          ? ""
+                          : ctx.RequestContext.HttpContext.Request.Url.ToString();
+                        ctx.Result = new RedirectResult("/Home/Index");
+                        return;
+                    }
                 }
             }
         }

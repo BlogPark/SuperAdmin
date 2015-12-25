@@ -8,7 +8,7 @@ using SuperAdmin.datamodel;
 
 namespace SuperAdmin.DataBLL
 {
-    public  class SysMenuAndUserBll
+    public class SysMenuAndUserBll
     {
         private SysMenuAndUser dal = new SysMenuAndUser();
         /// <summary>
