@@ -45,7 +45,7 @@ namespace SuperAdmin.datamodel
         [DataMember]
         public string LinkUrl { get; set; }
         /// <summary>
-        /// 菜单状态
+        /// 菜单状态(1 激活 0 禁用)
         /// </summary>
         [DataMember]
         public int MenuStatus { get; set; }
@@ -74,7 +74,17 @@ namespace SuperAdmin.datamodel
         /// </summary>
         [DataMember]
         public string AreaName { get; set; }
-
+        /// <summary>
+        /// 菜单标识
+        /// </summary>
+        [DataMember]
+        public string MenuIcon { get; set; }
         #endregion
+
+        /// <summary>
+        /// 权限类型(1 查看 2 编辑  3修改 4 删除)
+        /// </summary>
+        [DataMember]
+        public int PermissionType { get; set; }
     }
 }

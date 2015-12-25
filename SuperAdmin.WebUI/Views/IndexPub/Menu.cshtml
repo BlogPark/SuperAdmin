@@ -1,158 +1,43 @@
-﻿<div id="sidebar" class="sidebar">
+﻿@model  SuperAdmin.WebUI.Models.MenuViewModel
+<div id="sidebar" class="sidebar">
     <div class="sidebar-menu nav-collapse">
         <div class="divide-20"></div>
-        <!-- SEARCH BAR -->
-        <div id="search-bar">
-            <input class="search" type="text" placeholder="Search"><i class="fa fa-search search-icon"></i>
-        </div>
-        <!-- /SEARCH BAR -->
         <!-- SIDEBAR MENU -->
         <ul>
             <li>
-                <a href="#">
-                    <i class="fa fa-tachometer fa-fw"></i> <span class="menu-text">首页</span>
-                </a>
-            </li>
-            <li class="has-sub">
-                <a href="javascript:;" class="">
-                    <i class="fa fa-bookmark-o fa-fw"></i> <span class="menu-text">产品管理</span>
-                    <span class="arrow"></span>
-                </a>
-                <ul class="sub">
-                    <li><a class="" href="#"><span class="sub-menu-text">添加产品</span></a></li>
-                    <li><a class="" href="#"><span class="sub-menu-text">管理产品</span></a></li>
-                    <li><a class="" href="#"><span class="sub-menu-text">管理产品参数</span></a></li>
-                    <li><a class="" href="#"><span class="sub-menu-text">管理产品分类</span></a></li>
-                    <li><a class="" href="#"><span class="sub-menu-text">管理产品标签</span></a></li>
-                    <li><a class="" href="#"><span class="sub-menu-text">产品的高级设置</span></a></li>
-                    <li><a class="" href="#"><span class="sub-menu-text">More...</span></a></li>
-                    <li><a class="" href="#"><span class="sub-menu-text">More...</span></a></li>
-                    <li class="has-sub-sub">
-                        <a href="javascript:;" class="">
-                            <span class="sub-menu-text">三级菜单</span>
-                            <span class="arrow"></span>
-                        </a>
-                        <ul class="sub-sub">
-                            <li><a class="" href="#"><span class="sub-sub-menu-text">菜单1</span></a></li>
-                            <li><a class="" href="#"><span class="sub-sub-menu-text">菜单2</span></a></li>
-                        </ul>
-                    </li>
-                </ul>
-            </li>
-            <li>
-                <a class="" href="frontend_theme/index.html" target="_blank">
-                    <i class="fa fa-desktop fa-fw"></i>
-                    <span class="menu-text">一级菜单</span>
-                </a>
-            </li>
-            <li><a class="" href="inbox.html"><i class="fa fa-envelope-o fa-fw"></i> <span class="menu-text">Inbox</span></a></li>
-            <li class="has-sub">
-                <a href="javascript:;" class="">
-                    <i class="fa fa-table fa-fw"></i> <span class="menu-text">文章管理</span>
-                    <span class="arrow"></span>
-                </a>
-                <ul class="sub">
-                    <li><a class="" href="#"><span class="sub-menu-text">发表文章</span></a></li>
-                    <li><a class="" href="#"><span class="sub-menu-text">文章管理</span></a></li>
-                    <li><a class="" href="#"><span class="sub-menu-text">文章分类</span></a></li>
-                    <li><a class="" href="#"><span class="sub-menu-text">文章高级设置</span></a></li>
-                </ul>
-            </li>
-            <li class="has-sub">
-                <a href="javascript:;" class="">
-                    <i class="fa fa-pencil-square-o fa-fw"></i> <span class="menu-text">留言管理</span>
-                    <span class="arrow"></span>
-                </a>
-                <ul class="sub">
-                    <li><a class="" href="#"><span class="sub-menu-text">增加留言</span></a></li>
-                    <li><a class="" href="#"><span class="sub-menu-text">留言管理</span></a></li>
-                    <li><a class="" href="#"><span class="sub-menu-text">Rich Text Editors</span></a></li>
-
-                    <li><a class="" href="#"><span class="sub-menu-text">Dropzone File Upload</span></a></li>
-                </ul>
-            </li>
-            <li><a class="" href="#"><i class="fa fa-th-large fa-fw"></i> <span class="menu-text">Widgets & Box</span></a></li>
-            <li class="has-sub">
-                <a href="javascript:;" class="">
-                    <i class="fa fa-bar-chart-o fa-fw"></i> <span class="menu-text">新闻资讯管理</span>
-                    <span class="arrow"></span>
-                </a>
-                <ul class="sub">
-                    <li><a class="" href="#"><span class="sub-menu-text">发布新闻</span></a></li>
-                    <li><a class="" href="#"><span class="sub-menu-text">新闻管理</span></a></li>
-                    <li><a class="" href="#"><span class="sub-menu-text">Others</span></a></li>
-                </ul>
-            </li>
-            <li class="has-sub">
-                <a href="javascript:;" class="">
-                    <i class="fa fa-columns fa-fw"></i> <span class="menu-text">会员管理</span>
-                    <span class="arrow"></span>
-                </a>
-                <ul class="sub">
-                    <li><a class="" href="#"><span class="sub-menu-text">会员管理</span></a></li>
-                    <li><a class="" href="#"><span class="sub-menu-text">会员等级管理</span></a></li>
-                    <li><a class="" href="#"><span class="sub-menu-text">管理员组管理</span></a></li>
-                </ul>
-            </li>
-            <li>
-                <a class="" href="#">
-                    <i class="fa fa-calendar fa-fw"></i>
-                    <span class="menu-text">
-                        一级菜单
-                        <span class="tooltip-error pull-right" title="" data-original-title="3 New Events">
-                            <span class="label label-success">New</span>
-                        </span>
-                    </span>
-                </a>
-            </li>
-            <li class="has-sub">
-                <a href="javascript:;" class="">
-                    <i class="fa fa-map-marker fa-fw"></i> <span class="menu-text">Maps</span>
-                    <span class="arrow"></span>
-                </a>
-                <ul class="sub">
-                    <li><a class="" href="#"><span class="sub-menu-text">Google Maps</span></a></li>
-                    <li><a class="" href="#"><span class="sub-menu-text">Vector Maps</span></a></li>
-                </ul>
-            </li>
-            <li><a class="" href="#"><i class="fa fa-picture-o fa-fw"></i> <span class="menu-text">网站报表</span></a></li>
-            <li class="has-sub">
-                <a href="javascript:;" class="">
-                    <i class="fa fa-file-text fa-fw"></i> <span class="menu-text">图册管理</span>
-                    <span class="arrow"></span>
-                </a>
-                <ul class="sub">
-                    <li><a class="" href="#"><span class="sub-menu-text">Login & Register Option 1</span></a></li>
-                    <li><a class="" href="#"><span class="sub-menu-text">Login & Register Option 2</span></a></li>
-                    <li><a class="" href="#"><span class="sub-menu-text">User profile</span></a></li>
-
-                    <li><a class="" href="#"><span class="sub-menu-text">Chats</span></a></li>
-                    <li><a class="" href="#"><span class="sub-menu-text">Todo & Timeline</span></a></li>
-                    <li><a class="" href="#"><span class="sub-menu-text">Address Book</span></a></li>
-
-                    <li><a class="" href="#"><span class="sub-menu-text">Pricing</span></a></li>
-                    <li><a class="" href="#"><span class="sub-menu-text">Invoice</span></a></li>
-                    <li><a class="" href="#"><span class="sub-menu-text">Orders</span></a></li>
-                </ul>
-            </li>
-            <li class="has-sub active">
-                <a href="javascript:;" class="">
-                    <i class="fa fa-briefcase fa-fw"></i> <span class="menu-text">系统管理 <span class="badge pull-right">9</span></span>
-                    <span class="arrow open"></span>
-                    <span class="selected"></span>
-                </a>
-                <ul class="sub">
-                    <li><a class="" href="#"><span class="sub-menu-text">系统用户</span></a></li>
-                    <li><a class="" href="#"><span class="sub-menu-text">系统菜单</span></a></li>
-                    <li><a class="" href="#"><span class="sub-menu-text">系统配置</span></a></li>
-                    <li><a class="" href="#"><span class="sub-menu-text">邮件配置</span></a></li>
-                    <li><a class="" href="#"><span class="sub-menu-text">系统菜单</span></a></li>
-                    <li><a class="" href="#"><span class="sub-menu-text">系统菜单</span></a></li>
-                    <li><a class="" href="#"><span class="sub-menu-text">系统菜单</span></a></li>
-                    <li><a class="" href="#"><span class="sub-menu-text">系统菜单</span></a></li>
-                    <li><a class="" href="#"><span class="sub-menu-text">系统菜单</span></a></li>
-                </ul>
-            </li>
+                    <a href="@Url.Action("Index", "Home", new { area=""})">
+                        <i class="fa fa-dashboard fa-fw"></i><span class="menu-text">首页</span>
+                    </a>
+                </li>
+            @{
+                foreach (SuperAdmin.datamodel.SysAdminMenuModel item in Model.firstlist)
+                {
+                    List<SuperAdmin.datamodel.SysAdminMenuModel> list = Model.sublist.Where(p => p.FatherID == item.ID).ToList();
+                    if (list.Count > 0)
+                    {
+                <li class="has-sub">
+                    <a href="javascript:;" class="">
+                        <i class="fa @(item.MenuIcon) fa-fw"></i><span class="menu-text">@item.MenuName</span>
+                        <span class="arrow"></span>
+                    </a>
+                    <ul class="sub">
+                        @foreach (SuperAdmin.datamodel.SysAdminMenuModel subitem in list)
+                        {
+                            <li><a class="" href="@Url.Action(item.ActionName, item.ControllerName, new { area=item.AreaName})"><span class="sub-menu-text">@subitem.MenuName</span></a></li>
+                        }
+                    </ul>
+                </li>
+                    }
+                    else
+                    { 
+                <li>
+                    <a href="@Url.Action(item.ActionName, item.ControllerName, new { area=item.AreaName})">
+                        <i class="fa @(item.MenuIcon) fa-fw"></i><span class="menu-text">@item.MenuName</span>
+                    </a>
+                </li>
+                    }
+                }
+            }
         </ul>
         <!-- /SIDEBAR MENU -->
     </div>

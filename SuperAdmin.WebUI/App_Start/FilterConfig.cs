@@ -1,5 +1,6 @@
 ﻿using System.Web;
 using System.Web.Mvc;
+using SuperAdmin.WebUI.Filters;
 
 namespace SuperAdmin.WebUI
 {
@@ -8,6 +9,7 @@ namespace SuperAdmin.WebUI
         public static void RegisterGlobalFilters(GlobalFilterCollection filters)
         {
             filters.Add(new HandleErrorAttribute());
+            filters.Add(new LoginSysAttribute());
         }
     }
 }

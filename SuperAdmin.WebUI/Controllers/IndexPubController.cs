@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using SuperAdmin.WebUI.Models;
 
 namespace SuperAdmin.WebUI.Controllers
 {
@@ -22,7 +23,11 @@ namespace SuperAdmin.WebUI.Controllers
 
         public ActionResult Menu()
         {
-            return View();
+            SessionLoginModel model = Session[AppContext.SESSION_LOGIN_NAME] as SessionLoginModel;
+            MenuViewModel models = new MenuViewModel();
+            models.firstlist = model.UserMenus.Where(p => p.FatherID == 0).ToList();
+            models.sublist = model.UserMenus.Where(p=>p.FatherID!=0).ToList();
+            return View(models);
         }
         /// <summary>
         /// 管理员通知

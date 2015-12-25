@@ -68,8 +68,18 @@ namespace SuperAdmin.datamodel
         /// 组名称
         /// </summary>
         [DataMember]
-        public string GName { get; set; } 
+        public string GName { get; set; }
+        /// <summary>
+        /// 登录名
+        /// </summary>
+        [DataMember]
+        public string LoginName { get; set; }
         #endregion
 
+        /// <summary>
+        /// 登录结果字符串
+        /// </summary>
+        [DataMember]
+        public string LoginResult { get; set; }
     }
 }

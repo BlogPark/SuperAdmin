@@ -12,7 +12,7 @@ namespace SuperAdmin.DataDAL
 {
     public class DbHelperSQL
     {
-        public string _connectionString =System.Configuration.ConfigurationManager.ConnectionStrings["Conn"].ConnectionString;// "Data Source=localhost;Initial Catalog=BBSProData;User ID=sa;password=!@#123qwe;pooling=false;";
+        public string _connectionString = AdminConfigs.Superstr;
 
         public string ConnectionString
         {
