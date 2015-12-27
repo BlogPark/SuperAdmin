@@ -29,5 +29,19 @@ namespace SuperAdmin.DataBLL
         {
             return dal.GetUserAttributeMenu(user);
         }
+
+        /// <summary>
+        /// 查询所有菜单
+        /// </summary>
+        /// <returns></returns>
+        public List<SysAdminMenuModel> GetAllSysMenu()
+        {
+            return dal.GetAllSysMenu();
+        }
+
+        public int AddAndUpdateData(SysAdminMenuModel model)
+        {
+            return dal.AddAndUpdateData(model);
+        }
     }
 }

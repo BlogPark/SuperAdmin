@@ -40,9 +40,9 @@ namespace SuperAdmin.WebUI.Filters
                     if (controllername != "Home")
                     {
                         var url = ctx.RequestContext.HttpContext.Request == null
-                          ? ""
+                          ? "/Home/Index"
                           : ctx.RequestContext.HttpContext.Request.Url.ToString();
-                        ctx.Result = new RedirectResult("/Home/Index");
+                        ctx.Result = new RedirectResult(url);
                         return;
                     }
                 }

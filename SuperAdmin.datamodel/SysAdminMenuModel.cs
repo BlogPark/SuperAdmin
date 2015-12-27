@@ -86,5 +86,10 @@ namespace SuperAdmin.datamodel
         /// </summary>
         [DataMember]
         public int PermissionType { get; set; }
+        /// <summary>
+        /// 操作类型
+        /// </summary>
+        [DataMember]
+        public int Type { get; set; }
     }
 }

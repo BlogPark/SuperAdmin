@@ -74,6 +74,12 @@ namespace SuperAdmin.datamodel
         /// </summary>
         [DataMember]
         public string LoginName { get; set; }
+
+        /// <summary>
+        /// 头像信息
+        /// </summary>
+        [DataMember]
+        public string HeaderImg { get; set; }
         #endregion
 
         /// <summary>

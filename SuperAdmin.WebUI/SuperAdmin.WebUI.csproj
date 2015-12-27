@@ -109,6 +109,9 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Areas\AdminMenu\AdminMenuAreaRegistration.cs" />
+    <Compile Include="Areas\AdminMenu\Controllers\SysMenuController.cs" />
+    <Compile Include="Areas\AdminMenu\Models\SysMenuIndexViewModel.cs" />
     <Compile Include="Controllers\AppContext.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\IndexPubController.cs" />
@@ -1016,6 +1019,7 @@
     <Content Include="js\jqvmap\maps\jquery.vmap.russia.js" />
     <Content Include="js\jqvmap\maps\jquery.vmap.usa.js" />
     <Content Include="js\jqvmap\maps\jquery.vmap.world.js" />
+    <Content Include="js\js.js" />
     <Content Include="js\justgage\js\justgage.1.0.1.js" />
     <Content Include="js\justgage\js\justgage.1.0.1.min.js" />
     <Content Include="js\justgage\js\raphael.2.1.0.min.js" />
@@ -1167,6 +1171,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Areas\AdminMenu\Views\Shared\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
@@ -1313,6 +1318,15 @@
       <Project>{fe798d72-93be-42c6-9685-14877a154e6a}</Project>
       <Name>SuperAdmin.datamodel</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\AdminMenu\Views\Web.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\AdminMenu\Views\SysMenu\Index.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\IndexPub\UserInfo.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

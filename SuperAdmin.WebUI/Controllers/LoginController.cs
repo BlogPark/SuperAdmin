@@ -41,7 +41,8 @@ namespace SuperAdmin.WebUI.Controllers
                 sessionmodel.User = result;
                 sessionmodel.UserMenus = usermenu;
                 Session[AppContext.SESSION_LOGIN_NAME] = sessionmodel;
-                if (!string.IsNullOrWhiteSpace(model.returnurl))
+                string url = Url.Action("LoginOut", "IndexPub");
+                if (!string.IsNullOrWhiteSpace(model.returnurl)&&!model.returnurl.Contains(url))
                 {
                     return Redirect(model.returnurl);
                 }

@@ -69,6 +69,7 @@
                                     {  @Html.LabelFor(m => m.loginresult)}
                                     <button type="submit" class="btn btn-danger" onclick="document.getElementsByTagName('form')[0].submit();return false;">登   录</button>
                                 </div>
+                                @Html.HiddenFor(m=>m.returnurl)
                             }
                         </div>
                     </div>

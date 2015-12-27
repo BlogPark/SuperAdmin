@@ -53,6 +53,21 @@ namespace SuperAdmin.WebUI.Controllers
         {
             return View();
         }
+        /// <summary>
+        /// 管理员信息
+        /// </summary>
+        /// <returns></returns>
+        public ActionResult UserInfo()
+        {
+            SessionLoginModel model = Session[AppContext.SESSION_LOGIN_NAME] as SessionLoginModel;
+            return View(model.User);
+        }
+
+        public ActionResult LoginOut()
+        {
+            Session.Clear();// Session[AppContext.SESSION_LOGIN_NAME] = null;
+            return RedirectToAction("Index", "Login", new { returnurl = "" });
+        }
 
     }
 }

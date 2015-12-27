@@ -23,7 +23,7 @@
                     <ul class="sub">
                         @foreach (SuperAdmin.datamodel.SysAdminMenuModel subitem in list)
                         {
-                            <li><a class="" href="@Url.Action(item.ActionName, item.ControllerName, new { area=item.AreaName})"><span class="sub-menu-text">@subitem.MenuName</span></a></li>
+                            <li><a class="" href="@Url.Action(subitem.ActionName, subitem.ControllerName, new { area = subitem.AreaName })"><span class="sub-menu-text">@subitem.MenuName</span></a></li>
                         }
                     </ul>
                 </li>
