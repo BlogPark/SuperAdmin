@@ -14,18 +14,17 @@
                 <div class="bootbox-body">
                     @using (Html.BeginForm("Auadmingroup", "SysMenu", FormMethod.Post, new { @role = "form", @class = "form-horizontal", @id = "form1" }))
                     {
-                        @Html.HiddenFor(m => m.AdminGroup.Type)
-                        @Html.HiddenFor(m => m.AdminGroup.ID)
+                        @Html.HiddenFor(m => m.SinglePermissions.ID)
                         <div class="form-group">
                             <label class="col-sm-3 control-label">用户组名称：</label>
                             <div class="col-sm-7">
-                                @Html.TextBoxFor(m => m.AdminGroup.GroupName, new { @class = "form-control", @placeholder = "用户组名称" })
+                                @Html.TextBoxFor(m => m.SinglePermissions.MName, new { @class = "form-control", @placeholder = "用户组名称" })
                             </div>
                         </div>
                         <div class="form-group">
                             <label class="col-sm-3 control-label">用户组描述：</label>
                             <div class="col-sm-7">
-                                @Html.TextBoxFor(m => m.AdminGroup.GroupAlt, new { @class = "form-control", @placeholder = "用户组描述" })
+                                @Html.TextBoxFor(m => m.SinglePermissions.MenuTypeName, new { @class = "form-control", @placeholder = "用户组描述" })
                             </div>
                         </div>
                        
@@ -34,7 +33,7 @@
                             <div class="col-sm-7">
                                 <label class="radio-inline"> <input type="radio" class="uniform" name="optionsRadios1" value="1" checked> 启用 </label>
                                 <label class="radio-inline"> <input type="radio" class="uniform" name="optionsRadios1" value="0"> 禁用 </label>
-                                @Html.HiddenFor(m => m.AdminGroup.GroupStatus)
+                                @Html.HiddenFor(m => m.SinglePermissions.FatherID)
                             </div>
                         </div>        
                     }
