@@ -103,6 +103,7 @@ FROM    dbo.SysAdminGrouprMenu A WITH ( NOLOCK )
         INNER JOIN dbo.SysAdminMenu B WITH ( NOLOCK ) ON A.MID = b.ID
 WHERE   A.GID = @gid
         AND b.MenuStatus = 1
+       AND A.PermissionType<>4
 ORDER BY b.SortIndex ASC";
             SqlParameter[] paramter = { 
                                       new SqlParameter("@gid",user.GID)
@@ -132,8 +133,6 @@ ORDER BY b.SortIndex ASC";
             }
             return list;
         }
-
-
         /// <summary>
         /// 查询所有菜单
         /// </summary>
@@ -179,7 +178,6 @@ ORDER BY b.SortIndex ASC";
             }
             return list;
         }
-
         /// <summary>
         /// 新增和修改系统菜单
         /// </summary>
@@ -252,6 +250,126 @@ ORDER BY b.SortIndex ASC";
                                       };
             rowcount = helper.ExecuteSql(sqltxt, paramter);
             return rowcount;
+        }
+        /// <summary>
+        /// 得到所有的用户组
+        /// </summary>
+        /// <returns></returns>
+        public List<SysAdminUserGroupModel> GetAllAdminGroup()
+        {
+            List<SysAdminUserGroupModel> list = new List<SysAdminUserGroupModel>();
+            string sqltxt = @"SELECT  ID ,
+        GroupName ,
+        GroupAlt ,
+        GroupStatus ,
+        Addtime
+FROM    dbo.SysAdminUserGroup";
+            DataTable dt = helper.Query(sqltxt).Tables[0];
+            foreach (DataRow item in dt.Rows)
+            {
+                SysAdminUserGroupModel model = new SysAdminUserGroupModel();
+                model.Addtime = DateTime.Parse(item["Addtime"].ToString());
+                model.GroupAlt = item["GroupAlt"].ToString();
+                model.GroupName = item["GroupName"].ToString();
+                model.GroupStatus = int.Parse(item["GroupStatus"].ToString());
+                model.ID = int.Parse(item["ID"].ToString());
+                list.Add(model);
+            }
+            return list;
+        }
+        /// <summary>
+        /// 添加和修改系统用户组
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
+        public int AddAndUpdateAdminGroup(SysAdminUserGroupModel model)
+        {
+            int rowcount = 0;
+            string sqltxt = "";
+            if (model.Type == 0)
+            {
+                sqltxt = @"INSERT INTO dbo.SysAdminUserGroup
+        ( GroupName ,
+          GroupAlt ,
+          GroupStatus ,
+          Addtime
+        )
+VALUES  ( @GroupName,
+          @GroupAlt,
+          @GroupStatus,
+          GETDATE()
+        )";
+            }
+            else
+            {
+                sqltxt = @"UPDATE  dbo.SysAdminUserGroup
+SET     GroupAlt = @GroupAlt ,
+        GroupName = @GroupName ,
+        GroupStatus = @GroupStatus
+WHERE   ID = @ID";
+            }
+            SqlParameter[] paramter = { 
+                                      new SqlParameter("@GroupName",model.GroupName),
+                                      new SqlParameter("@GroupAlt",model.GroupAlt),
+                                      new SqlParameter("@GroupStatus",model.GroupStatus),
+                                      new SqlParameter("@ID",model.ID)
+                                      };
+            rowcount = helper.ExecuteSql(sqltxt, paramter);
+            return rowcount;
+        }
+        /// <summary>
+        /// 得到所有用户组权限
+        /// </summary>
+        /// <returns></returns>
+        public List<SysAdminGrouprMenuModel> GetAllUserMenu()
+        {
+            List<SysAdminGrouprMenuModel> list = new List<SysAdminGrouprMenuModel>();
+            string sqltxt = @"SELECT  A.ID ,
+        A.GID ,
+        A.GName ,
+        A.MID ,
+        A.MName ,
+        A.MType ,
+        A.PermissionType ,
+        A.AddTime ,
+        A.IsEdit ,
+        B.FatherID ,
+        CASE a.PermissionType
+          WHEN 1 THEN '查看'
+          WHEN 2 THEN '编辑'
+          WHEN 3 THEN '修改'
+          WHEN 4 THEN '禁用'
+        END AS PermissionTypeName,
+        CASE a.MType
+          WHEN 1 THEN '菜单'
+          WHEN 2 THEN '按钮'
+        END AS MTypeName,
+        CASE a.IsEdit
+          WHEN 0 THEN '否'
+          WHEN 1 THEN '是'
+        END AS IsEditName
+FROM    dbo.SysAdminGrouprMenu A WITH ( NOLOCK )
+        INNER JOIN dbo.SysAdminMenu B WITH ( NOLOCK ) ON A.MID = B.ID";
+            DataTable dt = helper.Query(sqltxt).Tables[0];
+            foreach (DataRow item in dt.Rows)
+            {
+                SysAdminGrouprMenuModel model = new SysAdminGrouprMenuModel();
+                model.AddTime = DateTime.Parse(item["AddTime"].ToString());
+                model.FatherID = int.Parse(item["FatherID"].ToString());
+                model.GID = int.Parse(item["GID"].ToString());
+                model.GName = item["GName"].ToString();
+                model.ID = int.Parse(item["ID"].ToString());
+                model.IsEdit = int.Parse(item["IsEdit"].ToString());
+                model.MID = int.Parse(item["MID"].ToString());
+                model.MName = item["MName"].ToString();
+                model.MType = int.Parse(item["MType"].ToString());
+                model.PermissionType = int.Parse(item["PermissionType"].ToString());
+                model.PermissionTypeName = item["PermissionTypeName"].ToString();
+                model.MenuTypeName = item["MTypeName"].ToString();
+                model.IsEditName = item["IsEditName"].ToString();
+                list.Add(model);
+            }
+            return list;
         }
     }
 }

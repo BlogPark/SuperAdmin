@@ -10,6 +10,7 @@ namespace SuperAdmin.datamodel
     /// <summary>
     ///系统菜单
     /// </summary>
+    [Serializable]
     [DataContract]
     public class SysAdminMenuModel
     {

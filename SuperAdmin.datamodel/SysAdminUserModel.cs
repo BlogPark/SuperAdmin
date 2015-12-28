@@ -8,8 +8,9 @@ using System.Threading.Tasks;
 namespace SuperAdmin.datamodel
 {
     /// <summary>
-    ///SysAdminUser
+    ///系统用户
     /// </summary>
+    [Serializable]
     [DataContract]
     public class SysAdminUserModel
     {

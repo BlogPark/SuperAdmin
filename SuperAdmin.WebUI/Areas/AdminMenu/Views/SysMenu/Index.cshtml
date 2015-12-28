@@ -33,13 +33,13 @@
                             <div class="col-sm-7">
                                 @{
                         var mlist = Model.MenuLists.Where(p => p.FatherID == 0).ToList();
-                        <select class="form-control" id="fathermenu">
-                            <option value="0">--顶级菜单--</option>
-                            @foreach (SuperAdmin.datamodel.SysAdminMenuModel item in mlist)
-                            {
-                                <option value="@item.ID">@item.MenuName</option>
-                            }
-                        </select>
+                                    <select class="form-control" id="fathermenu">
+                                        <option value="0">--顶级菜单--</option>
+                                        @foreach (SuperAdmin.datamodel.SysAdminMenuModel item in mlist)
+                                        {
+                                            <option value="@item.ID">@item.MenuName</option>
+                                        }
+                                    </select>
                                 }
                                 @Html.HiddenFor(m => m.SingleMenu.FatherID)
                                 @Html.HiddenFor(m => m.SingleMenu.FatherName)
@@ -48,16 +48,24 @@
                         <div class="form-group">
                             <label class="col-sm-3 control-label">菜单状态：</label>
                             <div class="col-sm-7">
-                                <label class="radio-inline"> <input type="radio" class="uniform" name="optionsRadios1" value="1" checked> 启用 </label>
-                                <label class="radio-inline"> <input type="radio" class="uniform" name="optionsRadios1" value="0"> 禁用 </label>
+                                <label class="radio-inline">
+                                    <input type="radio" class="uniform" name="optionsRadios1" value="1" checked>
+                                    启用 </label>
+                                <label class="radio-inline">
+                                    <input type="radio" class="uniform" name="optionsRadios1" value="0">
+                                    禁用 </label>
                                 @Html.HiddenFor(m => m.SingleMenu.MenuStatus)
                             </div>
                         </div>
                         <div class="form-group">
                             <label class="col-sm-3 control-label">菜单类型：</label>
                             <div class="col-sm-7">
-                                <label class="radio-inline"> <input type="radio" class="uniform" name="optionsRadios2" value="1" checked> 菜单 </label>
-                                <label class="radio-inline"> <input type="radio" class="uniform" name="optionsRadios2" value="2"> 按钮 </label>
+                                <label class="radio-inline">
+                                    <input type="radio" class="uniform" name="optionsRadios2" value="1" checked>
+                                    菜单 </label>
+                                <label class="radio-inline">
+                                    <input type="radio" class="uniform" name="optionsRadios2" value="2">
+                                    按钮 </label>
                                 @Html.HiddenFor(m => m.SingleMenu.MenuType)
                             </div>
                         </div>
@@ -139,7 +147,7 @@
                 <div class="col-sm-11">
                     <div class="btn-group hidden-xs pull-right invoice-btn-group">
                         <p class="btn-toolbar">
-                            <a class="btn btn-primary" data-toggle="modal" href="#box-config" id="addnew"><i class="fa fa-plus"></i> 添加新菜单</a>
+                            <a class="btn btn-primary" data-toggle="modal" href="#box-config" id="addnew"><i class="fa fa-plus"></i>添加新菜单</a>
                         </p>
                     </div>
                 </div>
@@ -177,9 +185,13 @@
                                         <td>@item.FatherName</td>
                                         <td>@item.MenuAlt</td>
                                         <td>@item.LinkUrl</td>
-                                        <td name="@item.MenuStatus"><lable class="tip-bottom" data-original-title="@(item.MenuStatus == 0 ? "禁用" : "启用")">@item.MenuStatus</lable></td>
+                                        <td name="@item.MenuStatus">
+                                            <lable class="tip-bottom" data-original-title="@(item.MenuStatus == 0 ? "禁用" : "启用")">@item.MenuStatus</lable>
+                                        </td>
                                         <td>@item.SortIndex</td>
-                                        <td name="@item.MenuType"><lable class="tip-bottom" data-original-title="@(item.MenuType == 1 ? "菜单" : "按钮")">@item.MenuType</lable></td>
+                                        <td name="@item.MenuType">
+                                            <lable class="tip-bottom" data-original-title="@(item.MenuType == 1 ? "菜单" : "按钮")">@item.MenuType</lable>
+                                        </td>
                                         <td>@item.AreaName</td>
                                         <td>@item.ControllerName</td>
                                         <td>@item.ActionName</td>
@@ -225,6 +237,10 @@
             });
             $("#addnew").click(function () {
                 $("#SingleMenu_Type").val(0);
+                document.getElementById('form1').reset();
+                $("#fathermenu").val(0);
+                $("input:radio[name=optionsRadios1][value=1]").attr("checked", true);
+                $("input:radio[name=optionsRadios2][value=1]").attr("checked", true);                
             });
         });
         function updatemassage(id) {

@@ -38,10 +38,40 @@ namespace SuperAdmin.DataBLL
         {
             return dal.GetAllSysMenu();
         }
-
+        /// <summary>
+        /// 添加和修改系统菜单
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
         public int AddAndUpdateData(SysAdminMenuModel model)
         {
             return dal.AddAndUpdateData(model);
+        }
+        /// <summary>
+        /// 得到所有的用户组
+        /// </summary>
+        /// <returns></returns>
+        public List<SysAdminUserGroupModel> GetAllAdminGroup()
+        {
+            return dal.GetAllAdminGroup();
+        }
+        /// <summary>
+        /// 添加和修改用户组
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
+        public int AddAndUpdateAdminGroup(SysAdminUserGroupModel model)
+        {
+            return dal.AddAndUpdateAdminGroup(model);
+        }
+
+        /// <summary>
+        /// 得到所有用户组权限
+        /// </summary>
+        /// <returns></returns>
+        public List<SysAdminGrouprMenuModel> GetAllUserMenu()
+        {
+            return dal.GetAllUserMenu();
         }
     }
 }

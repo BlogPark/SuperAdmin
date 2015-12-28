@@ -29,7 +29,7 @@
             <div class="navbar-brand">
                 <!-- COMPANY LOGO -->
                 <a href="index.html">
-                    <img src="img/logo/logo.png" alt="Cloud Admin Logo" class="img-responsive" height="30" width="120">
+                    <img src="@Url.Content("/img/logo/logo.png")" alt="Cloud Admin Logo" class="img-responsive" height="30" width="120">
                 </a>
                 <!-- /COMPANY LOGO -->
                 <!-- TEAM STATUS FOR MOBILE -->
@@ -129,14 +129,14 @@
     <!-- SLIMSCROLL -->
     <script type="text/javascript" src="@Url.Content("/js/jQuery-slimScroll-1.3.0/jquery.slimscroll.min.js")"></script>
     <script type="text/javascript" src="@Url.Content("/js/jQuery-slimScroll-1.3.0/slimScrollHorizontal.min.js")"></script>
-    @RenderSection("myscript", required: false)
+    
     <!-- COOKIE -->
     <script type="text/javascript" src="@Url.Content("/js/jQuery-Cookie/jquery.cookie.min.js")"></script>
     <!-- CUSTOM SCRIPT -->
     <script src="@Url.Content("/js/script.js")"></script>
     <!-- My SCRIPT -->
     @*<script src="/js/js.js"></script>*@
-
+@RenderSection("myscript", required: false)
     <script>
 		jQuery(document).ready(function() {
 			App.setPage("widgets_box");  //Set current page

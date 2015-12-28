@@ -10,6 +10,7 @@ namespace SuperAdmin.datamodel
     /// <summary>
     ///SysAdminGrouprMenu
     /// </summary>
+    [Serializable]
     [DataContract]
     public class SysAdminGrouprMenuModel
     {
@@ -61,5 +62,25 @@ namespace SuperAdmin.datamodel
         public int IsEdit { get; set; }
 
         #endregion
+        /// <summary>
+        /// 上级ID
+        /// </summary>
+        [DataMember]
+        public int FatherID { get; set; }
+        /// <summary>
+        /// 菜单类型名称
+        /// </summary>
+        [DataMember]
+        public string MenuTypeName { get; set; }
+        /// <summary>
+        /// 菜单权限名称
+        /// </summary>
+        [DataMember]
+        public string PermissionTypeName { get; set; }
+        /// <summary>
+        /// 允许修改编辑
+        /// </summary>
+        [DataMember]
+        public string IsEditName { get; set; }
     }
 }

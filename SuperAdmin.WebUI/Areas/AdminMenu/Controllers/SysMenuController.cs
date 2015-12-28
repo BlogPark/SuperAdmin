@@ -35,5 +35,41 @@ namespace SuperAdmin.WebUI.Areas.AdminMenu.Controllers
             return RedirectToAction("Index", "SysMenu");
         }
 
+        /// <summary>
+        /// 系统用户组
+        /// </summary>
+        /// <returns></returns>
+        public ActionResult SysAdminGroup()
+        {
+            List<SysAdminUserGroupModel> list = bll.GetAllAdminGroup();
+            SysAdminGroupViewModel model = new SysAdminGroupViewModel();
+            model.AdminGroupLists = list;
+            model.AdminGroup = new SysAdminUserGroupModel();
+            return View(model);
+        }
+
+        [ValidateInput(false)]
+        [HttpPost]
+        public ActionResult Auadmingroup(SysAdminUserGroupModel AdminGroup)
+        {
+            if (AdminGroup != null)
+            {
+                int rowcount = bll.AddAndUpdateAdminGroup(AdminGroup);
+            }
+            return RedirectToAction("SysAdminGroup", "SysMenu", new { area = "AdminMenu" });
+        }
+
+        /// <summary>
+        /// 系统菜单和权限
+        /// </summary>
+        /// <returns></returns>
+        public ActionResult GroupAndMenu()
+        {
+            SysUserMenuViewModel model = new SysUserMenuViewModel();
+            model.AdminUser = bll.GetAllAdminGroup();
+            model.Menus = bll.GetAllUserMenu();
+            return View(model);
+        }
+
     }
 }

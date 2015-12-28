@@ -10,10 +10,11 @@ namespace SuperAdmin.datamodel
     /// <summary>
     /// 系统用户组
     /// </summary>
+   [Serializable]
     [DataContract]
     public class SysAdminUserGroupModel
     {
-
+        #region 原有字段
         /// <summary>
         /// ID
         /// </summary>
@@ -38,7 +39,12 @@ namespace SuperAdmin.datamodel
         /// 添加时间
         /// </summary>
         [DataMember]
-        public DateTime Addtime { get; set; }
-
+        public DateTime Addtime { get; set; } 
+        #endregion
+       /// <summary>
+       /// 操作类型
+       /// </summary>
+       [DataMember]
+        public int Type { get; set; }
     }
 }

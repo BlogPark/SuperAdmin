@@ -111,7 +111,9 @@
   <ItemGroup>
     <Compile Include="Areas\AdminMenu\AdminMenuAreaRegistration.cs" />
     <Compile Include="Areas\AdminMenu\Controllers\SysMenuController.cs" />
+    <Compile Include="Areas\AdminMenu\Models\SysAdminGroupViewModel.cs" />
     <Compile Include="Areas\AdminMenu\Models\SysMenuIndexViewModel.cs" />
+    <Compile Include="Areas\AdminMenu\Models\SysUserMenuViewModel.cs" />
     <Compile Include="Controllers\AppContext.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\IndexPubController.cs" />
@@ -1327,6 +1329,12 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\IndexPub\UserInfo.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\AdminMenu\Views\SysMenu\SysAdminGroup.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\AdminMenu\Views\SysMenu\GroupAndMenu.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
