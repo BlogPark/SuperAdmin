@@ -371,5 +371,54 @@ FROM    dbo.SysAdminGrouprMenu A WITH ( NOLOCK )
             }
             return list;
         }
+        /// <summary>
+        ///查询用户组没权限的菜单 
+        /// </summary>
+        /// <returns></returns>
+        public List<SysAdminMenuModel> GetOtherMenuByGroup(int gid)
+        {
+            List<SysAdminMenuModel> list = new List<SysAdminMenuModel>();
+            string sqltxt = @"  SELECT    ID ,
+            MenuName ,
+            FatherID ,
+            MenuAlt ,
+            FatherName ,
+            LinkUrl ,
+            MenuStatus ,
+            SortIndex ,
+            MenuType ,
+            ControllerName ,
+            ActionName ,
+            AreaName ,
+            MenuIcon
+  FROM      dbo.SysAdminMenu
+  WHERE     id NOT IN ( SELECT  mid
+                        FROM    dbo.SysAdminGrouprMenu
+                        WHERE   GID = @gid )
+            AND MenuStatus=1";
+            SqlParameter[] paramter = { 
+                                      new SqlParameter("@gid",gid)
+                                      };
+            DataTable dt = helper.Query(sqltxt,paramter).Tables[0];
+            foreach (DataRow item in dt.Rows)
+            {
+                SysAdminMenuModel model = new SysAdminMenuModel();
+                model.ActionName = item["ActionName"].ToString();
+                model.AreaName = item["AreaName"].ToString();
+                model.ControllerName = item["ControllerName"].ToString();
+                model.FatherID = int.Parse(item["FatherID"].ToString());
+                model.FatherName = item["FatherName"].ToString();
+                model.ID = int.Parse(item["ID"].ToString());
+                model.LinkUrl = item["LinkUrl"].ToString();
+                model.MenuAlt = item["MenuAlt"].ToString();
+                model.MenuIcon = item["MenuIcon"].ToString();
+                model.MenuName = item["MenuName"].ToString();
+                model.MenuStatus = int.Parse(item["MenuStatus"].ToString());
+                model.MenuType = int.Parse(item["MenuType"].ToString());
+                model.SortIndex = int.Parse(item["SortIndex"].ToString());
+                list.Add(model);
+            }
+            return list;
+        }
     }
 }

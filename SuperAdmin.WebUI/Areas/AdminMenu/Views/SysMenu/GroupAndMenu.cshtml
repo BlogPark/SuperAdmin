@@ -31,8 +31,14 @@
                         <div class="form-group">
                             <label class="col-sm-3 control-label">用户组状态：</label>
                             <div class="col-sm-7">
-                                <label class="radio-inline"> <input type="radio" class="uniform" name="optionsRadios1" value="1" checked> 启用 </label>
-                                <label class="radio-inline"> <input type="radio" class="uniform" name="optionsRadios1" value="0"> 禁用 </label>
+                                <label class="radio-inline">
+                                    <input type="radio" class="uniform" name="optionsRadios1" value="1" checked>
+                                    启用
+                                </label>
+                                <label class="radio-inline">
+                                    <input type="radio" class="uniform" name="optionsRadios1" value="0">
+                                    禁用
+                                </label>
                                 @Html.HiddenFor(m => m.SinglePermissions.FatherID)
                             </div>
                         </div>        
@@ -42,6 +48,36 @@
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">取 消</button>
                 <button type="button" class="btn btn-primary" onclick="javascript: document.getElementById('form1').submit(); return false;">保  存</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- /SAMPLE BOX CONFIGURATION MODAL FORM-->
+<!-- SAMPLE BOX CONFIGURATION MODAL FORM-->
+<div class="bootbox modal fade in" id="box-config1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content modal-form">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title">编辑用户组权限</h4>
+            </div>
+            <div class="modal-body">
+                <div class="bootbox-body">
+                    <!-- BOX -->
+                    <div class="box border orange">
+                        <div class="box-title">
+                            <h4><i class="fa fa-sitemap"></i>Tree View</h4>
+                        </div>
+                        <div class="box-body">
+                            <div id="tree35" class="tree"></div>
+                        </div>
+                    </div>
+                    <!-- /BOX -->
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">取 消</button>
+                <button type="button" class="btn btn-primary" onclick="">保  存</button>
             </div>
         </div>
     </div>
@@ -88,7 +124,7 @@
                     </div>
                     <div class="btn-group hidden-xs pull-right invoice-btn-group">
                         <p class="btn-toolbar">
-                            <a class="btn btn-primary" data-toggle="modal" href="#box-config" id="addnew"><i class="fa fa-plus"></i>增加权限</a>
+                            <a class="btn btn-primary" data-toggle="modal" href="#box-config1" id="addnew"><i class="fa fa-plus"></i>增加权限</a>
                         </p>
                     </div>
                 </div>
@@ -136,22 +172,111 @@
         </div>
     </div>
 </div>
+@section mycss{
+    <!-- FUELUX TREE -->
+    <link rel="stylesheet" type="text/css" href="@Url.Content("/js/fuelux-tree/fuelux.min.css")"/>
+}
+@section scriptfiles{
+    <script type="text/javascript" src="@Url.Content("/js/fuelux-tree/fuelux.tree-sampledata.js")"></script>
+    <script type="text/javascript" src="@Url.Content("/js/fuelux-tree/fuelux.tree.min.js")"></script>
+    }
 
-@section myscript{
+@section myscript{    
     <script type="text/javascript">
         $(function () {
             $("tr[id^='tr']").hide();
             var gid = $("#usergroup").val();
             $("tr[name=tr" + gid + "]").show();
             $("#usergroup").change(function () {
-                var gid = $("#usergroup").val();
-                $("tr[name=tr" + gid + "]").show();
-                $("tr[name!=tr" + gid + "]").hide();
+                var gids = $("#usergroup").val();
+                $("tr[name=tr" + gids + "]").show();
+                $("tr[name!=tr" + gids + "]").hide();
                 $("#tablehead").show();
             });
+            $("#addnew").click(function () {
+
+                var datastr = {
+                    '主菜单1': {
+                        name: '主菜单1', type: 'folder', id: "1", additionalParameters: {
+                            'children': {
+                                '二级菜单1': { name: '二级菜单1', id: "11", type: 'item' },
+                                '二级菜单2': { name: '二级菜单2', id: "12", type: 'item' },
+                                '二级菜单3': { name: '二级菜单3', id: "13", type: 'item' },
+                                '二级菜单4': { name: '二级菜单4', id: "14", type: 'item' },
+                                '二级菜单5': { name: '二级菜单5', id: "15", type: 'item' },
+                                '二级菜单6': { name: '二级菜单6', id: "16", type: 'item' },
+                                '二级菜单7': { name: '二级菜单7', id: "17", type: 'item' }
+                            }
+                        }
+                    },
+                    '主菜单2': {
+                        'name': '主菜单2', 'type': 'folder', 'id': "2", 'additionalParameters': {
+                            'children': {
+                                '二级菜单8': { name: '二级菜单8', id: "21", type: 'item', 'additionalParameters': { "item-selected": true } },
+                                '二级菜单9': { name: '二级菜单9', id: "22", type: 'item', 'additionalParameters': { "item-selected": true } },
+                                '二级菜单10': { name: '二级菜单10', id: "23", type: 'item', 'additionalParameters': { "item-selected": "true" } },
+                                '二级菜单11': { name: '二级菜单11', id: "24", type: 'item', 'additionalParameters': { "item-selected": "true" } },
+                                '二级菜单12': { name: '二级菜单12', id: "25", type: 'item', 'additionalParameters': { "item-selected": "true" } },
+                                '二级菜单13': { name: '二级菜单13', id: "26", type: 'item', 'additionalParameters': { "item-selected": "true" } },
+                                '二级菜单14': { name: '二级菜单14', id: "27", type: 'item', 'additionalParameters': { "item-selected": "true" } }
+                            }
+                        }
+                    },
+                };
+                var agid = $("#usergroup").val();
+                @*$.ajax({
+                    url: '@Url.Action("getmenulist", "SysMenu", new { area = "AdminMenu" })',
+                    datatype: 'json',
+                    async: false,
+                    type: 'POST',
+                    data: { 'gid': agid },
+                    success: function (data) {
+                        datastr = data;
+                    }
+                });*@
+                var tree_data_33 = new DataSourceTree({
+                    data: {
+                        '主菜单1': {
+                            name: '主菜单1', type: 'folder', id: "1", additionalParameters: {
+                                'children': {
+                                    '二级菜单1': { name: '二级菜单1', id: "11", type: 'item' },
+                                    '二级菜单2': { name: '二级菜单2', id: "12", type: 'item' },
+                                    '二级菜单3': { name: '二级菜单3', id: "13", type: 'item' },
+                                    '二级菜单4': { name: '二级菜单4', id: "14", type: 'item' },
+                                    '二级菜单5': { name: '二级菜单5', id: "15", type: 'item' },
+                                    '二级菜单6': { name: '二级菜单6', id: "16", type: 'item' },
+                                    '二级菜单7': { name: '二级菜单7', id: "17", type: 'item' }
+                                }
+                            }
+                        },
+                        '主菜单2': {
+                            'name': '主菜单2', 'type': 'folder', 'id': "2", 'additionalParameters': {
+                                'children': {
+                                    '二级菜单8': { name: '二级菜单8', id: "21", type: 'item', 'additionalParameters': { "item-selected": true } },
+                                    '二级菜单9': { name: '二级菜单9', id: "22", type: 'item', 'additionalParameters': { "item-selected": true } },
+                                    '二级菜单10': { name: '二级菜单10', id: "23", type: 'item', 'additionalParameters': { "item-selected": true } },
+                                    '二级菜单11': { name: '二级菜单11', id: "24", type: 'item', 'additionalParameters': { "item-selected": true } },
+                                    '二级菜单12': { name: '二级菜单12', id: "25", type: 'item', 'additionalParameters': { "item-selected": true } },
+                                    '二级菜单13': { name: '二级菜单13', id: "26", type: 'item', 'additionalParameters': { "item-selected": true } },
+                                    '二级菜单14': { name: '二级菜单14', id: "27", type: 'item', 'additionalParameters': { "item-selected": true } }
+                                }
+                            }
+                        },
+                    }
+                });
+                $('#tree35').admin_tree({
+                    dataSource: tree_data_33,
+                    multiSelect: true,
+                    loadingHTML: '<div class="tree-loading"><i class="fa fa-spinner fa-2x fa-spin"></i></div>',
+                    'open-icon': 'fa-minus-square',
+                    'close-icon': 'fa-plus-square',
+                    'selectable': true,
+                    'selected-icon': 'fa-check',
+                    'unselected-icon': 'fa-times'
+                });
+            });
         });
-        function updatemassage(id)
-        {
+        function updatemassage(id) {
         }
     </script>
 }

@@ -73,5 +73,14 @@ namespace SuperAdmin.DataBLL
         {
             return dal.GetAllUserMenu();
         }
+
+        /// <summary>
+        ///查询用户组没权限的菜单 
+        /// </summary>
+        /// <returns></returns>
+        public List<SysAdminMenuModel> GetOtherMenuByGroup(int gid)
+        {
+            return dal.GetOtherMenuByGroup(gid);
+        }
     }
 }
