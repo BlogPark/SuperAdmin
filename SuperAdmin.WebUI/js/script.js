@@ -1100,35 +1100,35 @@ var App = function () {
 	/*	Fuel UX Tree
 	/*-----------------------------------------------------------------------------------*/
 	var handleTree = function () {
-		$('#tree1').admin_tree({
-			dataSource: treeDataSource ,
-			multiSelect:true,
-			loadingHTML:'<div class="tree-loading"><i class="fa fa-spinner fa-2x fa-spin"></i></div>',
-			'open-icon' : 'fa-minus',
-			'close-icon' : 'fa-plus',
-			'selectable' : true,
-			'selected-icon' : 'fa-check',
-			'unselected-icon' : 'fa-times'
-		});
-		$('#tree3').admin_tree({
-			dataSource: treeDataSource3 ,
-			multiSelect:true,
-			loadingHTML:'<div class="tree-loading"><i class="fa fa-spinner fa-2x fa-spin"></i></div>',
-			'open-icon' : 'fa-minus-square',
-			'close-icon' : 'fa-plus-square',
-			'selectable' : true,
-			'selected-icon' : 'fa-check',
-			'unselected-icon' : 'fa-times'
-		});
-		$('#tree2').admin_tree({
-			dataSource: treeDataSource2 ,
-			loadingHTML:'<div class="tree-loading"><i class="fa fa-spinner fa-2x fa-spin"></i></div>',
-			'open-icon' : 'fa-folder-open',
-			'close-icon' : 'fa-folder',
-			'selectable' : false,
-			'selected-icon' : null,
-			'unselected-icon' : null
-		});
+		//$('#tree1').admin_tree({
+		//	dataSource: treeDataSource ,
+		//	multiSelect:true,
+		//	loadingHTML:'<div class="tree-loading"><i class="fa fa-spinner fa-2x fa-spin"></i></div>',
+		//	'open-icon' : 'fa-minus',
+		//	'close-icon' : 'fa-plus',
+		//	'selectable' : true,
+		//	'selected-icon' : 'fa-check',
+		//	'unselected-icon' : 'fa-times'
+		//});
+		//$('#tree3').admin_tree({
+		//	dataSource: treeDataSource3 ,
+		//	multiSelect:true,
+		//	loadingHTML:'<div class="tree-loading"><i class="fa fa-spinner fa-2x fa-spin"></i></div>',
+		//	'open-icon' : 'fa-minus-square',
+		//	'close-icon' : 'fa-plus-square',
+		//	'selectable' : true,
+		//	'selected-icon' : 'fa-check',
+		//	'unselected-icon' : 'fa-times'
+		//});
+		//$('#tree2').admin_tree({
+		//	dataSource: treeDataSource2 ,
+		//	loadingHTML:'<div class="tree-loading"><i class="fa fa-spinner fa-2x fa-spin"></i></div>',
+		//	'open-icon' : 'fa-folder-open',
+		//	'close-icon' : 'fa-folder',
+		//	'selectable' : false,
+		//	'selected-icon' : null,
+		//	'unselected-icon' : null
+		//});
 		
 		
 		//To add font awesome support
@@ -3208,9 +3208,9 @@ var App = function () {
 				handleProgress(); //Function to display progress bars
 				handleKnobs();	//Function to display knobs
             }
-			if (App.isPage("treeview")) {
-				handleTree();	//Function to handle tree display
-			}
+			
+			handleTree();	//Function to handle tree display (treeview)
+			
 			if (App.isPage("nestable_lists")) {
 				handleNestableLists();	//Function to handle nestable lists
 			}
