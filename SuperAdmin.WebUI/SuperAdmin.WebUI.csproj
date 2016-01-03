@@ -111,6 +111,7 @@
   <ItemGroup>
     <Compile Include="Areas\AdminMenu\AdminMenuAreaRegistration.cs" />
     <Compile Include="Areas\AdminMenu\Controllers\SysMenuController.cs" />
+    <Compile Include="Areas\AdminMenu\Models\AddPermissionsViewModel.cs" />
     <Compile Include="Areas\AdminMenu\Models\SysAdminGroupViewModel.cs" />
     <Compile Include="Areas\AdminMenu\Models\SysMenuIndexViewModel.cs" />
     <Compile Include="Areas\AdminMenu\Models\SysUserMenuViewModel.cs" />
@@ -1335,6 +1336,9 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Areas\AdminMenu\Views\SysMenu\GroupAndMenu.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\AdminMenu\Views\SysMenu\AddPermissions.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

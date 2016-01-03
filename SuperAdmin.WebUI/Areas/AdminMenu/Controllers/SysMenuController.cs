@@ -71,6 +71,15 @@ namespace SuperAdmin.WebUI.Areas.AdminMenu.Controllers
             return View(model);
         }
 
+        [ValidateInput(false)]
+        public ActionResult AddPermissions(int gid)
+        {
+            AddPermissionsViewModel model = new AddPermissionsViewModel();
+            model.MenuLists = bll.GetAllSysMenu();
+            model.AllPermissionMenu = bll.GetMenuByGroupID(gid);
+            return View();
+        }
+
 
 
         /// <summary>
@@ -113,7 +122,7 @@ namespace SuperAdmin.WebUI.Areas.AdminMenu.Controllers
             {
                 s += "'"+item.MenuName+"' : {name: '"+item.MenuName+"', type: 'folder',id:'"+item.ID+"',additionalParameters:{'children' : {";
                 string s1 = "";
-                var seclist = menulist.Where(p => p.FatherID != 0 && p.MenuType == 1).ToList();
+                var seclist = menulist.Where(p => p.FatherID ==item.ID && p.MenuType == 1).ToList();
                 foreach (SysAdminMenuModel subitem in seclist)
                 {
                     s1 += " '" + subitem.MenuName + "' : {name: '" + subitem.MenuName + "',id:'" + subitem.ID + "',fatherid:'" + subitem.FatherID + "',fathername:'" + subitem.FatherName + "', type: 'item'},";

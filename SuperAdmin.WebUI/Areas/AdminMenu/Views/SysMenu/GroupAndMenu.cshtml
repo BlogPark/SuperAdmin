@@ -124,7 +124,7 @@
                     </div>
                     <div class="btn-group hidden-xs pull-right invoice-btn-group">
                         <p class="btn-toolbar">
-                            <a class="btn btn-primary" data-toggle="modal" href="#box-config1" id="addnew"><i class="fa fa-plus"></i>增加权限</a>
+                            <a class="btn btn-primary" id="addnew"><i class="fa fa-plus"></i>增加权限</a>
                         </p>
                     </div>
                 </div>
@@ -183,38 +183,22 @@
 
 @section myscript{    
     <script type="text/javascript">
-        var tree_data_33 = new DataSourceTree({
-            data: {
-                '主菜单1': {
-                    name: '主菜单1', type: 'folder', id: "1", additionalParameters: {
-                        'children': {
-                            '二级菜单1': { name: '二级菜单1', id: "11", type: 'item' },
-                            '二级菜单2': { name: '二级菜单2', id: "12", type: 'item' },
-                            '二级菜单3': { name: '二级菜单3', id: "13", type: 'item' },
-                            '二级菜单4': { name: '二级菜单4', id: "14", type: 'item' },
-                            '二级菜单5': { name: '二级菜单5', id: "15", type: 'item' },
-                            '二级菜单6': { name: '二级菜单6', id: "16", type: 'item' },
-                            '二级菜单7': { name: '二级菜单7', id: "17", type: 'item' }
-                        }
-                    }
-                },
-                '主菜单2': {
-                    'name': '主菜单2', 'type': 'folder', 'id': "2", 'additionalParameters': {
-                        'children': {
-                            '二级菜单8': { name: '二级菜单8', id: "21", type: 'item', 'additionalParameters': { "item-selected": true } },
-                            '二级菜单9': { name: '二级菜单9', id: "22", type: 'item', 'additionalParameters': { "item-selected": true } },
-                            '二级菜单10': { name: '二级菜单10', id: "23", type: 'item', 'additionalParameters': { "item-selected": true } },
-                            '二级菜单11': { name: '二级菜单11', id: "24", type: 'item', 'additionalParameters': { "item-selected": true } },
-                            '二级菜单12': { name: '二级菜单12', id: "25", type: 'item', 'additionalParameters': { "item-selected": true } },
-                            '二级菜单13': { name: '二级菜单13', id: "26", type: 'item', 'additionalParameters': { "item-selected": true } },
-                            '二级菜单14': { name: '二级菜单14', id: "27", type: 'item', 'additionalParameters': { "item-selected": true } }
-                        }
-                    }
-                },
+        var data3;
+        $.ajax({
+            url: '@Url.Action("getmenulist", "SysMenu", new { area = "AdminMenu" })',
+            datatype: 'json',
+            async: false,
+            type: 'POST',
+            data: { 'gid': 2 },
+            success: function (data) {
+                data3 = eval("("+data+")");
             }
         });
+        var tree_data_32=new DataSourceTree({
+            data: data3
+        });
         $('#tree35').admin_tree({
-            dataSource: tree_data_33,
+            dataSource: tree_data_32,
             multiSelect: true,
             loadingHTML: '<div class="tree-loading"><i class="fa fa-spinner fa-2x fa-spin"></i></div>',
             'open-icon': 'fa-minus-square',
@@ -234,93 +218,11 @@
                 $("#tablehead").show();
             });
             $("#addnew").click(function () {
-               
+                var gid = $("#usergroup").val();
+                window.open("/AdminMenu/SysMenu/AddPermissions?gid=" + gid,"_self")
             });
         });
         function updatemassage(id) {
-        }
-
-        function loadmenu()
-        {
-            var datastr = {
-                '主菜单1': {
-                    name: '主菜单1', type: 'folder', id: "1", additionalParameters: {
-                        'children': {
-                            '二级菜单1': { name: '二级菜单1', id: "11", type: 'item' },
-                            '二级菜单2': { name: '二级菜单2', id: "12", type: 'item' },
-                            '二级菜单3': { name: '二级菜单3', id: "13", type: 'item' },
-                            '二级菜单4': { name: '二级菜单4', id: "14", type: 'item' },
-                            '二级菜单5': { name: '二级菜单5', id: "15", type: 'item' },
-                            '二级菜单6': { name: '二级菜单6', id: "16", type: 'item' },
-                            '二级菜单7': { name: '二级菜单7', id: "17", type: 'item' }
-                        }
-                    }
-                },
-                '主菜单2': {
-                    'name': '主菜单2', 'type': 'folder', 'id': "2", 'additionalParameters': {
-                        'children': {
-                            '二级菜单8': { name: '二级菜单8', id: "21", type: 'item', 'additionalParameters': { "item-selected": true } },
-                            '二级菜单9': { name: '二级菜单9', id: "22", type: 'item', 'additionalParameters': { "item-selected": true } },
-                            '二级菜单10': { name: '二级菜单10', id: "23", type: 'item', 'additionalParameters': { "item-selected": "true" } },
-                            '二级菜单11': { name: '二级菜单11', id: "24", type: 'item', 'additionalParameters': { "item-selected": "true" } },
-                            '二级菜单12': { name: '二级菜单12', id: "25", type: 'item', 'additionalParameters': { "item-selected": "true" } },
-                            '二级菜单13': { name: '二级菜单13', id: "26", type: 'item', 'additionalParameters': { "item-selected": "true" } },
-                            '二级菜单14': { name: '二级菜单14', id: "27", type: 'item', 'additionalParameters': { "item-selected": "true" } }
-                        }
-                    }
-                },
-            };
-            var agid = $("#usergroup").val();
-                @*$.ajax({
-                    url: '@Url.Action("getmenulist", "SysMenu", new { area = "AdminMenu" })',
-                    datatype: 'json',
-                    async: false,
-                    type: 'POST',
-                    data: { 'gid': agid },
-                    success: function (data) {
-                        datastr = data;
-                    }
-                });*@
-            var tree_data_33 = new DataSourceTree({
-                data: {
-                    '主菜单1': {
-                        name: '主菜单1', type: 'folder', id: "1", additionalParameters: {
-                            'children': {
-                                '二级菜单1': { name: '二级菜单1', id: "11", type: 'item' },
-                                '二级菜单2': { name: '二级菜单2', id: "12", type: 'item' },
-                                '二级菜单3': { name: '二级菜单3', id: "13", type: 'item' },
-                                '二级菜单4': { name: '二级菜单4', id: "14", type: 'item' },
-                                '二级菜单5': { name: '二级菜单5', id: "15", type: 'item' },
-                                '二级菜单6': { name: '二级菜单6', id: "16", type: 'item' },
-                                '二级菜单7': { name: '二级菜单7', id: "17", type: 'item' }
-                            }
-                        }
-                    },
-                    '主菜单2': {
-                        'name': '主菜单2', 'type': 'folder', 'id': "2", 'additionalParameters': {
-                            'children': {
-                                '二级菜单8': { name: '二级菜单8', id: "21", type: 'item', 'additionalParameters': { "item-selected": true } },
-                                '二级菜单9': { name: '二级菜单9', id: "22", type: 'item', 'additionalParameters': { "item-selected": true } },
-                                '二级菜单10': { name: '二级菜单10', id: "23", type: 'item', 'additionalParameters': { "item-selected": true } },
-                                '二级菜单11': { name: '二级菜单11', id: "24", type: 'item', 'additionalParameters': { "item-selected": true } },
-                                '二级菜单12': { name: '二级菜单12', id: "25", type: 'item', 'additionalParameters': { "item-selected": true } },
-                                '二级菜单13': { name: '二级菜单13', id: "26", type: 'item', 'additionalParameters': { "item-selected": true } },
-                                '二级菜单14': { name: '二级菜单14', id: "27", type: 'item', 'additionalParameters': { "item-selected": true } }
-                            }
-                        }
-                    },
-                }
-            });
-            $('#tree35').admin_tree({
-                dataSource: tree_data_33,
-                multiSelect: true,
-                loadingHTML: '<div class="tree-loading"><i class="fa fa-spinner fa-2x fa-spin"></i></div>',
-                'open-icon': 'fa-minus-square',
-                'close-icon': 'fa-plus-square',
-                'selectable': true,
-                'selected-icon': 'fa-check',
-                'unselected-icon': 'fa-times'
-            });
         }
     </script>
 }

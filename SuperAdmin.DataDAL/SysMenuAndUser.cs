@@ -420,5 +420,62 @@ FROM    dbo.SysAdminGrouprMenu A WITH ( NOLOCK )
             }
             return list;
         }
+        /// <summary>
+        /// 得到用户组拥有的权限菜单
+        /// </summary>
+        /// <returns></returns>
+        public List<SysAdminGrouprMenuModel> GetMenuByGroupID(int gid)
+        {
+            List<SysAdminGrouprMenuModel> list = new List<SysAdminGrouprMenuModel>();
+            string sqltxt = @"SELECT  A.ID ,
+        A.GID ,
+        A.GName ,
+        A.MID ,
+        A.MName ,
+        A.MType ,
+        A.PermissionType ,
+        A.AddTime ,
+        A.IsEdit ,
+        B.FatherID ,
+        CASE a.PermissionType
+          WHEN 1 THEN '查看'
+          WHEN 2 THEN '编辑'
+          WHEN 3 THEN '修改'
+          WHEN 4 THEN '禁用'
+        END AS PermissionTypeName,
+        CASE a.MType
+          WHEN 1 THEN '菜单'
+          WHEN 2 THEN '按钮'
+        END AS MTypeName,
+        CASE a.IsEdit
+          WHEN 0 THEN '否'
+          WHEN 1 THEN '是'
+        END AS IsEditName
+FROM    dbo.SysAdminGrouprMenu A WITH ( NOLOCK )
+        INNER JOIN dbo.SysAdminMenu B WITH ( NOLOCK ) ON A.MID = B.ID
+  where GID=@gid";
+            SqlParameter[] paramter = {new SqlParameter("@gid",gid) };
+            DataTable dt = helper.Query(sqltxt,paramter).Tables[0];
+            foreach (DataRow item in dt.Rows)
+            {
+                SysAdminGrouprMenuModel model = new SysAdminGrouprMenuModel();
+                model.AddTime = DateTime.Parse(item["AddTime"].ToString());
+                model.FatherID = int.Parse(item["FatherID"].ToString());
+                model.GID = int.Parse(item["GID"].ToString());
+                model.GName = item["GName"].ToString();
+                model.ID = int.Parse(item["ID"].ToString());
+                model.IsEdit = int.Parse(item["IsEdit"].ToString());
+                model.MID = int.Parse(item["MID"].ToString());
+                model.MName = item["MName"].ToString();
+                model.MType = int.Parse(item["MType"].ToString());
+                model.PermissionType = int.Parse(item["PermissionType"].ToString());
+                model.PermissionTypeName = item["PermissionTypeName"].ToString();
+                model.MenuTypeName = item["MTypeName"].ToString();
+                model.IsEditName = item["IsEditName"].ToString();
+                list.Add(model);
+            }
+            return list;
+
+        }
     }
 }
