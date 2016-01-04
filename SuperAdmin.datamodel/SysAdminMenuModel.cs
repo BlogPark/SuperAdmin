@@ -92,5 +92,10 @@ namespace SuperAdmin.datamodel
         /// </summary>
         [DataMember]
         public int Type { get; set; }
+        /// <summary>
+        /// 是否具有权限
+        /// </summary>
+        [DataMember]
+        public string IsHave { get; set; }
     }
 }

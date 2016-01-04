@@ -477,5 +477,56 @@ FROM    dbo.SysAdminGrouprMenu A WITH ( NOLOCK )
             return list;
 
         }
+        /// <summary>
+        /// 得到所有菜单并包含当前组是否有权限
+        /// </summary>
+        /// <param name="gid"></param>
+        /// <returns></returns>
+        public List<SysAdminMenuModel> GetAllMenuWithPermission(int gid)
+        {
+            List<SysAdminMenuModel> list = new List<SysAdminMenuModel>();
+            string sqltxt = @"SELECT  ID ,
+        MenuName ,
+        FatherID ,
+        MenuAlt ,
+        FatherName ,
+        LinkUrl ,
+        MenuStatus ,
+        SortIndex ,
+        MenuType ,
+        ControllerName ,
+        ActionName ,
+        AreaName ,
+        MenuIcon ,
+        ( SELECT    PermissionType
+          FROM      dbo.SysAdminGrouprMenu WITH ( NOLOCK )
+          WHERE     Gid = @gid
+                    AND MID = A.ID
+        ) AS ISHave
+FROM    dbo.SysAdminMenu A 
+WHERE A.MenuStatus=1 ";
+            SqlParameter[] paramter = { new SqlParameter("@gid",gid)};
+            DataTable dt = helper.Query(sqltxt,paramter).Tables[0];
+            foreach (DataRow item in dt.Rows)
+            {
+                SysAdminMenuModel model = new SysAdminMenuModel();
+                model.ActionName = item["ActionName"].ToString();
+                model.AreaName = item["AreaName"].ToString();
+                model.ControllerName = item["ControllerName"].ToString();
+                model.FatherID = int.Parse(item["FatherID"].ToString());
+                model.FatherName = item["FatherName"].ToString();
+                model.ID = int.Parse(item["ID"].ToString());
+                model.LinkUrl = item["LinkUrl"].ToString();
+                model.MenuAlt = item["MenuAlt"].ToString();
+                model.MenuIcon = item["MenuIcon"].ToString();
+                model.MenuName = item["MenuName"].ToString();
+                model.MenuStatus = int.Parse(item["MenuStatus"].ToString());
+                model.MenuType = int.Parse(item["MenuType"].ToString());
+                model.SortIndex = int.Parse(item["SortIndex"].ToString());
+                model.IsHave = item["ISHave"].ToString();
+                list.Add(model);
+            }
+           return list;
+        }
     }
 }

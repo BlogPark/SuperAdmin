@@ -74,10 +74,12 @@ namespace SuperAdmin.WebUI.Areas.AdminMenu.Controllers
         [ValidateInput(false)]
         public ActionResult AddPermissions(int gid)
         {
+            List<SysAdminMenuModel> AllMenuList = bll.GetAllMenuWithPermission(gid);
             AddPermissionsViewModel model = new AddPermissionsViewModel();
-            model.MenuLists = bll.GetAllSysMenu();
-            model.AllPermissionMenu = bll.GetMenuByGroupID(gid);
-            return View();
+            model.FirstMenuLists = AllMenuList.Where(p => p.FatherID == 0).ToList();
+            model.SecondMenuLists = AllMenuList.Where(p=>p.FatherID!=0).ToList();
+            model.ButtonMenuLists = AllMenuList.Where(p => p.MenuType == 2).ToList();
+            return View(model);
         }
 
 

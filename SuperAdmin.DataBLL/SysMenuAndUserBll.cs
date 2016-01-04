@@ -90,5 +90,14 @@ namespace SuperAdmin.DataBLL
         {
             return dal.GetMenuByGroupID(gid);
         }
+         /// <summary>
+        /// 得到所有菜单并包含当前组是否有权限
+        /// </summary>
+        /// <param name="gid"></param>
+        /// <returns></returns>
+        public List<SysAdminMenuModel> GetAllMenuWithPermission(int gid)
+        {
+            return dal.GetAllMenuWithPermission(gid);
+        }
     }
 }
