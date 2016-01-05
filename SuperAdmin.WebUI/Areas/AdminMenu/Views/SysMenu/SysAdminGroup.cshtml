@@ -125,7 +125,8 @@
 </div>
 @section myscript{
     <script type="text/javascript">
-        $(function () {            
+        $(function () {
+                App.init(); //Initialise plugins and elements
             $("#AdminGroup_GroupStatus").val($("input:radio[name=optionsRadios1]:checked").val());
             $("input:radio[name=optionsRadios1]").change(function () {
                 var raval = $("input:radio[name=optionsRadios1]:checked").val();

@@ -71,6 +71,14 @@ namespace SuperAdmin.WebUI.Areas.AdminMenu.Controllers
             return View(model);
         }
 
+
+        [HttpPost]
+        public ActionResult GroupAndMenu(SysAdminGrouprMenuModel SinglePermissions)
+        {
+            int rowcount = bll.UpdatePermissionByID(SinglePermissions);
+            return RedirectToAction("GroupAndMenu", "SysMenu", new { area = "AdminMenu" });
+        }
+
         [ValidateInput(false)]
         public ActionResult AddPermissions(int gid)
         {
@@ -79,10 +87,32 @@ namespace SuperAdmin.WebUI.Areas.AdminMenu.Controllers
             model.FirstMenuLists = AllMenuList.Where(p => p.FatherID == 0).ToList();
             model.SecondMenuLists = AllMenuList.Where(p=>p.FatherID!=0).ToList();
             model.ButtonMenuLists = AllMenuList.Where(p => p.MenuType == 2).ToList();
+            model.UserGroup = bll.GetUserGroupInfoByID(gid);
+            model.gid = model.UserGroup.ID;
+            model.gname = model.UserGroup.GroupName;
             return View(model);
         }
 
-
+        [HttpPost]
+        public ActionResult AddPermissions(AddPermissionsViewModel model)
+        {
+            if (string.IsNullOrWhiteSpace(model.MenuListstr))
+            {
+                return View();
+            }
+            string[] menuids = model.MenuListstr.TrimEnd('|').Split('|');
+            foreach (string item in menuids)
+            {
+                string[] idtype = item.Split(',');
+                SysAdminGrouprMenuModel gmodel = new SysAdminGrouprMenuModel();
+                gmodel.MID = int.Parse(idtype[0]);
+                gmodel.GID = model.gid;
+                gmodel.PermissionType = int.Parse(idtype[1]);
+                gmodel.GName = model.gname;
+                int rowcount = bll.AddUserGroupPermission(gmodel);
+            }
+            return RedirectToAction("GroupAndMenu", "SysMenu", new { area = "AdminMenu" });
+        }
 
         /// <summary>
         /// 得到组名称下无权限菜单

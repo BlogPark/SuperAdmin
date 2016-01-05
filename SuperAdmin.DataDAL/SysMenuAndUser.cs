@@ -134,6 +134,52 @@ ORDER BY b.SortIndex ASC";
             return list;
         }
         /// <summary>
+        /// 根据ID查询菜单
+        /// </summary>
+        /// <returns></returns>
+        public List<SysAdminMenuModel> GetSysMenuByIds(string idstr)
+        {
+            List<SysAdminMenuModel> list = new List<SysAdminMenuModel>();
+            string sqltxt = @"SELECT ID,
+      MenuName,
+      FatherID,
+      MenuAlt,
+      FatherName,
+      LinkUrl,
+      MenuStatus,
+      SortIndex,
+      MenuType,
+      ControllerName,
+      ActionName,
+      AreaName,
+      MenuIcon
+  FROM dbo.SysAdminMenu With(nolock)
+   WHERE id IN (" + idstr + ")";
+            DataTable dt = helper.Query(sqltxt).Tables[0];
+            if (dt != null && dt.Rows.Count > 0)
+            {
+                foreach (DataRow item in dt.Rows)
+                {
+                    SysAdminMenuModel model = new SysAdminMenuModel();
+                    model.ActionName = item["ActionName"].ToString();
+                    model.AreaName = item["AreaName"].ToString();
+                    model.ControllerName = item["ControllerName"].ToString();
+                    model.FatherID = string.IsNullOrWhiteSpace(item["FatherID"].ToString()) ? 0 : int.Parse(item["FatherID"].ToString());
+                    model.FatherName = item["FatherName"].ToString();
+                    model.ID = int.Parse(item["ID"].ToString());
+                    model.LinkUrl = item["LinkUrl"].ToString();
+                    model.MenuAlt = item["MenuAlt"].ToString();
+                    model.MenuName = item["MenuName"].ToString();
+                    model.MenuStatus = int.Parse(item["MenuStatus"].ToString());
+                    model.MenuType = int.Parse(item["MenuType"].ToString());
+                    model.SortIndex = string.IsNullOrWhiteSpace(item["SortIndex"].ToString()) ? 0 : int.Parse(item["SortIndex"].ToString());
+                    model.MenuIcon = item["MenuIcon"].ToString();
+                    list.Add(model);
+                }
+            }
+            return list;
+        }
+        /// <summary>
         /// 查询所有菜单
         /// </summary>
         /// <returns></returns>
@@ -399,7 +445,7 @@ FROM    dbo.SysAdminGrouprMenu A WITH ( NOLOCK )
             SqlParameter[] paramter = { 
                                       new SqlParameter("@gid",gid)
                                       };
-            DataTable dt = helper.Query(sqltxt,paramter).Tables[0];
+            DataTable dt = helper.Query(sqltxt, paramter).Tables[0];
             foreach (DataRow item in dt.Rows)
             {
                 SysAdminMenuModel model = new SysAdminMenuModel();
@@ -454,8 +500,8 @@ FROM    dbo.SysAdminGrouprMenu A WITH ( NOLOCK )
 FROM    dbo.SysAdminGrouprMenu A WITH ( NOLOCK )
         INNER JOIN dbo.SysAdminMenu B WITH ( NOLOCK ) ON A.MID = B.ID
   where GID=@gid";
-            SqlParameter[] paramter = {new SqlParameter("@gid",gid) };
-            DataTable dt = helper.Query(sqltxt,paramter).Tables[0];
+            SqlParameter[] paramter = { new SqlParameter("@gid", gid) };
+            DataTable dt = helper.Query(sqltxt, paramter).Tables[0];
             foreach (DataRow item in dt.Rows)
             {
                 SysAdminGrouprMenuModel model = new SysAdminGrouprMenuModel();
@@ -505,8 +551,8 @@ FROM    dbo.SysAdminGrouprMenu A WITH ( NOLOCK )
         ) AS ISHave
 FROM    dbo.SysAdminMenu A 
 WHERE A.MenuStatus=1 ";
-            SqlParameter[] paramter = { new SqlParameter("@gid",gid)};
-            DataTable dt = helper.Query(sqltxt,paramter).Tables[0];
+            SqlParameter[] paramter = { new SqlParameter("@gid", gid) };
+            DataTable dt = helper.Query(sqltxt, paramter).Tables[0];
             foreach (DataRow item in dt.Rows)
             {
                 SysAdminMenuModel model = new SysAdminMenuModel();
@@ -526,7 +572,96 @@ WHERE A.MenuStatus=1 ";
                 model.IsHave = item["ISHave"].ToString();
                 list.Add(model);
             }
-           return list;
+            return list;
+        }
+        /// <summary>
+        /// 插入和修改菜单权限
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
+        public int AddUserGroupPermission(SysAdminGrouprMenuModel model)
+        {
+            int rowcount = 0;
+            string sqltxt = @"IF NOT EXISTS ( SELECT  1
+                FROM    dbo.SysAdminGrouprMenu
+                WHERE   GID = @GID
+                        AND MID = @id )
+    BEGIN
+        INSERT  INTO dbo.SysAdminGrouprMenu
+                ( GID ,
+                  GName ,
+                  MID ,
+                  MName ,
+                  MType ,
+                  PermissionType ,
+                  AddTime ,
+                  IsEdit
+                )
+                SELECT  @GID ,
+                        @GName ,
+                        ID ,
+                        MenuName ,
+                        MenuType ,
+                        @PermissionType ,
+                        GETDATE() ,
+                        CASE @GID
+                          WHEN 1 THEN 0
+                          ELSE 1
+                        END AS IsEdit
+                FROM    dbo.SysAdminMenu WITH ( NOLOCK )
+                WHERE   ID = @id
+    END";
+            SqlParameter[] paramter = { 
+                                      new SqlParameter("@GID",model.GID),
+                                      new SqlParameter("@GName",model.GName),
+                                      new SqlParameter("@PermissionType",model.PermissionType),
+                                      new SqlParameter("@id",model.MID),
+                                      };
+            rowcount = helper.ExecuteSql(sqltxt,paramter);
+            return rowcount;
+        }
+        /// <summary>
+        /// 根据用户组ID得到组信息
+        /// </summary>
+        /// <param name="gid"></param>
+        /// <returns></returns>
+        public SysAdminUserGroupModel GetUserGroupInfoByID(int gid)
+        {
+            SysAdminUserGroupModel model = null;
+            string sqltxt = @"SELECT  ID ,
+        GroupName ,
+        GroupAlt ,
+        GroupStatus ,
+        Addtime
+FROM    dbo.SysAdminUserGroup WITH(NOLOCK)
+WHERE ID=@id";
+            SqlParameter[] paramter={new SqlParameter("@id",gid)};
+            DataTable dt = helper.Query(sqltxt,paramter).Tables[0];
+            if (dt != null && dt.Rows.Count > 0)
+            {
+                model = new SysAdminUserGroupModel();
+                model.ID = int.Parse(dt.Rows[0]["ID"].ToString());
+                model.GroupName = dt.Rows[0]["GroupName"].ToString();
+                model.GroupStatus = int.Parse(dt.Rows[0]["GroupStatus"].ToString());
+                model.GroupAlt = dt.Rows[0]["GroupAlt"].ToString();
+                model.Addtime = DateTime.Parse(dt.Rows[0]["Addtime"].ToString());
+            }
+            return model;
+        }
+        /// <summary>
+        /// 更改用户组菜单权限
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
+        public int UpdatePermissionByID(SysAdminGrouprMenuModel model)
+        {
+            int rowcount = 0;
+            string sqltxt = @" UPDATE dbo.SysAdminGrouprMenu WITH(ROWLOCK)
+  SET PermissionType=@type
+  WHERE ID=@id";
+            SqlParameter[] paramter = { new SqlParameter("@type",model.PermissionType),new SqlParameter("@id",model.ID) };
+            rowcount = helper.ExecuteSql(sqltxt,paramter);
+            return rowcount;
         }
     }
 }

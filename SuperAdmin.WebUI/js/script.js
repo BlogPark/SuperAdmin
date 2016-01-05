@@ -3218,9 +3218,9 @@ var App = function () {
                 handleProgress(); //Function to display progress bars
                 handleKnobs();	//Function to display knobs
             }
-
+            if (App.isPage("treeview")) {
             handleTree();	//Function to handle tree display (treeview)
-           
+            }
             if (App.isPage("forms")) {
             handleTypeahead();	//Function to display autocomplete
             handleAutosize(); //Function to handle textarea autosize

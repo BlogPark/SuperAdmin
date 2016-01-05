@@ -29,7 +29,6 @@ namespace SuperAdmin.DataBLL
         {
             return dal.GetUserAttributeMenu(user);
         }
-
         /// <summary>
         /// 查询所有菜单
         /// </summary>
@@ -64,7 +63,6 @@ namespace SuperAdmin.DataBLL
         {
             return dal.AddAndUpdateAdminGroup(model);
         }
-
         /// <summary>
         /// 得到所有用户组权限
         /// </summary>
@@ -73,7 +71,6 @@ namespace SuperAdmin.DataBLL
         {
             return dal.GetAllUserMenu();
         }
-
         /// <summary>
         ///查询用户组没权限的菜单 
         /// </summary>
@@ -98,6 +95,42 @@ namespace SuperAdmin.DataBLL
         public List<SysAdminMenuModel> GetAllMenuWithPermission(int gid)
         {
             return dal.GetAllMenuWithPermission(gid);
+        }
+        /// <summary>
+        /// 根据ID查询菜单
+        /// </summary>
+        /// <returns></returns>
+        public List<SysAdminMenuModel> GetSysMenuByIds(string idstr)
+        {
+            return dal.GetSysMenuByIds(idstr);
+        }
+        /// <summary>
+        /// 插入和修改菜单权限
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
+        public int AddUserGroupPermission(SysAdminGrouprMenuModel model)
+        {
+            return dal.AddUserGroupPermission(model);
+        }
+        /// <summary>
+        /// 根据用户组ID得到组信息
+        /// </summary>
+        /// <param name="gid"></param>
+        /// <returns></returns>
+        public SysAdminUserGroupModel GetUserGroupInfoByID(int gid)
+        {
+            return dal.GetUserGroupInfoByID(gid);
+        }
+
+        /// <summary>
+        /// 更改用户组菜单权限
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
+        public int UpdatePermissionByID(SysAdminGrouprMenuModel model)
+        {
+            return dal.UpdatePermissionByID(model);
         }
     }
 }

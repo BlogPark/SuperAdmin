@@ -27,9 +27,24 @@ namespace SuperAdmin.WebUI.Areas.AdminMenu.Models
         [DataMember]
         public List<SysAdminMenuModel> ButtonMenuLists { get; set; }
         /// <summary>
-        /// 所有权限菜单
+        /// 当前赋值用户组信息
         /// </summary>
         [DataMember]
-        public List<SysAdminGrouprMenuModel> AllPermissionMenu { get; set; }
+        public  SysAdminUserGroupModel UserGroup { get; set; }
+        /// <summary>
+        ///  新增菜单信息和权限值字符串
+        /// </summary>
+        [DataMember]
+        public string MenuListstr { get; set; }
+        /// <summary>
+        /// 组ID
+        /// </summary>
+        [DataMember]
+        public int gid { get; set; }
+        /// <summary>
+        /// 组名称
+        /// </summary>
+        [DataMember]
+        public string gname { get; set; }
     }
 }

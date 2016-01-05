@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using SuperAdmin.DataBLL;
 using SuperAdmin.WebUI.Models;
 
 namespace SuperAdmin.WebUI.Controllers
@@ -11,7 +12,7 @@ namespace SuperAdmin.WebUI.Controllers
     {
         //首页公共项目组件
         // GET: /IndexPub/
-
+        private SysMenuAndUserBll bll = new SysMenuAndUserBll();
         public ActionResult Index()
         {
             return View();
@@ -24,8 +25,10 @@ namespace SuperAdmin.WebUI.Controllers
         public ActionResult Menu()
         {
             SessionLoginModel model = Session[AppContext.SESSION_LOGIN_NAME] as SessionLoginModel;
+            string idstr = "";
+            idstr =string.Join(",", model.UserMenus.Where(p=>p.MenuType==1).Select(p => p.FatherID).Distinct());            
             MenuViewModel models = new MenuViewModel();
-            models.firstlist = model.UserMenus.Where(p => p.FatherID == 0).ToList();
+            models.firstlist = bll.GetSysMenuByIds(idstr.TrimEnd(',')) ;
             models.sublist = model.UserMenus.Where(p=>p.FatherID!=0).ToList();
             return View(models);
         }

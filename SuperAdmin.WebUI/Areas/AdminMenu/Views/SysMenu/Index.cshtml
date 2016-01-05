@@ -219,6 +219,7 @@
 @section myscript{
     <script type="text/javascript">
         $(function () {
+                App.init(); //Initialise plugins and elements
             $("#fathermenu").change(function () {
                 var changetext = $("#fathermenu").find("option:selected").text();
                 var changeval = $("#fathermenu").val();

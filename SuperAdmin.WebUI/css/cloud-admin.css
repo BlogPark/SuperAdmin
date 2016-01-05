@@ -1362,7 +1362,7 @@ th {
 }
 .table {
   width: 100%;
-  margin-bottom: 20px;
+  margin-bottom: 8px;
 }
 .table > thead > tr > th,
 .table > tbody > tr > th,
@@ -4649,7 +4649,7 @@ a.list-group-item.active:focus .list-group-item-text {
   box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
 }
 .panel-body {
-  padding: 8px;
+  padding: 0px 15px 15px 15px;
 }
 .panel-body:before,
 .panel-body:after {
