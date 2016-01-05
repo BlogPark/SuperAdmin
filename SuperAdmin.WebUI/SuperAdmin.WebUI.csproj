@@ -115,6 +115,8 @@
     <Compile Include="Areas\AdminMenu\Models\SysAdminGroupViewModel.cs" />
     <Compile Include="Areas\AdminMenu\Models\SysMenuIndexViewModel.cs" />
     <Compile Include="Areas\AdminMenu\Models\SysUserMenuViewModel.cs" />
+    <Compile Include="Areas\SysSetting\Controllers\SettingsController.cs" />
+    <Compile Include="Areas\SysSetting\SysSettingAreaRegistration.cs" />
     <Compile Include="Controllers\AppContext.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\IndexPubController.cs" />
@@ -1175,6 +1177,8 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Areas\AdminMenu\Views\Shared\" />
+    <Folder Include="Areas\SysSetting\Models\" />
+    <Folder Include="Areas\SysSetting\Views\Shared\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
@@ -1339,6 +1343,12 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Areas\AdminMenu\Views\SysMenu\AddPermissions.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\SysSetting\Views\Web.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\SysSetting\Views\Settings\AdminUser.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
