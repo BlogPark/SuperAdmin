@@ -88,5 +88,10 @@ namespace SuperAdmin.datamodel
         /// </summary>
         [DataMember]
         public string LoginResult { get; set; }
+        /// <summary>
+        /// 状态名称
+        /// </summary>
+        [DataMember]
+        public string UserStatusName { get; set; }
     }
 }

@@ -42,6 +42,7 @@
     <Compile Include="Class1.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SysMenuAndUserBll.cs" />
+    <Compile Include="SystemSettingsBll.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\SuperAdmin.Common\SuperAdmin.Common.csproj">
