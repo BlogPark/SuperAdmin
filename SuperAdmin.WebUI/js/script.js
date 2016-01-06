@@ -3202,6 +3202,7 @@ var App = function () {
             if (App.isPage("widgets_box")) {
                 handleBoxSortable(); //Function to handle Box sortables
             }
+            
             if (App.isPage("elements")) {
                 handleBootbox(); //Function to display Date Timepicker
                 handleMagicSuggest(); //Function to display autosuggest
