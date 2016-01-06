@@ -140,6 +140,8 @@ ORDER BY b.SortIndex ASC";
         public List<SysAdminMenuModel> GetSysMenuByIds(string idstr)
         {
             List<SysAdminMenuModel> list = new List<SysAdminMenuModel>();
+            if (string.IsNullOrWhiteSpace(idstr))
+            { return list; }
             string sqltxt = @"SELECT ID,
       MenuName,
       FatherID,

@@ -116,6 +116,7 @@
     <Compile Include="Areas\AdminMenu\Models\SysMenuIndexViewModel.cs" />
     <Compile Include="Areas\AdminMenu\Models\SysUserMenuViewModel.cs" />
     <Compile Include="Areas\SysSetting\Controllers\SettingsController.cs" />
+    <Compile Include="Areas\SysSetting\Models\AdminUserViewModel.cs" />
     <Compile Include="Areas\SysSetting\SysSettingAreaRegistration.cs" />
     <Compile Include="Controllers\AppContext.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -1177,7 +1178,6 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Areas\AdminMenu\Views\Shared\" />
-    <Folder Include="Areas\SysSetting\Models\" />
     <Folder Include="Areas\SysSetting\Views\Shared\" />
   </ItemGroup>
   <ItemGroup>

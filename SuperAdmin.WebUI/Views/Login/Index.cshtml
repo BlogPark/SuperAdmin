@@ -66,10 +66,14 @@
                                 </div>
                                 <div class="form-actions">
                                     @if (!string.IsNullOrWhiteSpace(Model.loginresult))
-                                    {  @Html.LabelFor(m => m.loginresult)}
+                                    {  
+                                        <div class="center">
+                                            <strong class="text-danger">@Model.loginresult</strong>
+                                        </div>
+                                    }
                                     <button type="submit" class="btn btn-danger" onclick="document.getElementsByTagName('form')[0].submit();return false;">登   录</button>
                                 </div>
-                                @Html.HiddenFor(m=>m.returnurl)
+                                @Html.HiddenFor(m => m.returnurl)
                             }
                         </div>
                     </div>

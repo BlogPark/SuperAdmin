@@ -176,12 +176,9 @@ SET     UserName = @UserName ,
         UserEmail = @UserEmail ,
         TruethName = @TruethName ,
         UserPhone = @UserPhone ,
-        Question = @Question ,
-        Answer = @Answer ,
         GID = @GID ,
         GName = @GName ,
-        LoginName = @LoginName ,
-        HeaderImg = @HeaderImg
+        LoginName = @LoginName 
 WHERE   ID = @id";
             SqlParameter[] paramter = { 
                                       new SqlParameter("@UserName",model.UserName),
@@ -190,12 +187,9 @@ WHERE   ID = @id";
                                       new SqlParameter("@UserEmail",model.UserEmail),
                                       new SqlParameter("@TruethName",model.TruethName),
                                       new SqlParameter("@UserPhone",model.UserPhone),
-                                      new SqlParameter("@Question",model.Question),
-                                      new SqlParameter("@Answer",model.Answer),
                                       new SqlParameter("@GID",model.GID),
                                       new SqlParameter("@GName",model.GName),
                                       new SqlParameter("@LoginName",model.LoginName),
-                                      new SqlParameter("@HeaderImg",model.HeaderImg),
                                       new SqlParameter("@id",model.ID)
                                       };
             rowcount = helper.ExecuteSql(sqltxt, paramter);
