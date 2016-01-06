@@ -73,7 +73,7 @@
                                 </label>
                                 @Html.HiddenFor(m => m.User.UserStatus)
                             </div>
-                        </div>        
+                        </div>
                     }
                 </div>
             </div>
@@ -156,7 +156,7 @@
                                 </label>
                                 @Html.HiddenFor(m => m.UpdateUser.UserStatus)
                             </div>
-                        </div>        
+                        </div>
                     }
                 </div>
             </div>
@@ -256,9 +256,9 @@
     </div>
 </div>
 @section scriptfiles{
-
-    }
-
+    <!-- BOOTBOX -->
+    <script type="text/javascript" src="@Url.Content("/js/bootbox/bootbox.min.js")"></script>
+}
 
 @section myscript{
     <script type="text/javascript">
@@ -314,9 +314,13 @@
                 $("#updusergroup option[value=" + groupid + "]").attr("selected", true);;
             }
         }
-        function deluser(id)
-        {
-            bootbox.confirm("Are you sure?", function (result) { alert(result); });
+        function deluser(id) {
+            bootbox.confirm("确定要禁用此用户?", function (result) {
+                if (result)
+                {
+                    alert(result);
+                }
+            });
         }
     </script>
 }
