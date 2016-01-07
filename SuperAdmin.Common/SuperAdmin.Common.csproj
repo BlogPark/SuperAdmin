@@ -65,6 +65,7 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       <DependentUpon>SuperWebSite.mdf</DependentUpon>
     </Content>
+    <Content Include="Database\SystemAd.sql" />
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include=".NETFramework,Version=v4.5">
