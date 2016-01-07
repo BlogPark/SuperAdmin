@@ -52,7 +52,56 @@ namespace SuperAdmin.WebUI.Areas.SysSetting.Controllers
             }
             return RedirectToAction("AdminUser", "Settings", new { area = "SysSetting" });
         }
-
-
+        [HttpPost]
+        public JsonResult DelAdminUser(int id)
+        {
+            int rowcount = bll.DelSysAdminUser(id);
+            if (rowcount > 0)
+            {
+                return Json("1");
+            }
+            else
+            {
+                return Json("0");
+            }
+        }
+        /// <summary>
+        /// 系统配置项
+        /// </summary>
+        /// <returns></returns>
+        public ActionResult SysConfigs()
+        {
+            SysConfigsViewModel model = new SysConfigsViewModel();
+            model.Allconfigs = bll.GetAllConfigs();
+            model.FatherConfigs = bll.GetFirstConfigs();
+            return View(model);
+        }
+        [HttpPost]
+        public ActionResult AddSysConfigs(SysAdminConfigsModel AConfig)
+        {
+            if (AConfig != null)
+            {
+                int rowcount = bll.AddConfigInfo(AConfig);
+            }
+            return RedirectToAction("SysConfigs", "Settings", new { area = "SysSetting" });
+        }
+         [HttpPost]
+        public ActionResult UpdateConfigs(SysAdminConfigsModel UConfig)
+        {
+            if (UConfig != null)
+            {
+                int rowcount = bll.UpdateConfigs(UConfig);
+            }
+            return RedirectToAction("SysConfigs", "Settings", new { area = "SysSetting" });
+        }
+         [HttpPost]
+        public ActionResult DelConfigs(int id)
+        {
+            int rowcount = bll.DelConfig(id);
+            if (rowcount > 0)
+                return Json("1");
+            else
+                return Json("0");
+        }
     }
 }

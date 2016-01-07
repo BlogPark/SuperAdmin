@@ -21,7 +21,7 @@ namespace SuperAdmin.DataDAL
         /// <returns></returns>
         public List<SysAdminUserModel> GetAllSysAdminUser()
         {
-            List<SysAdminUserModel> list =new List<SysAdminUserModel>();
+            List<SysAdminUserModel> list = new List<SysAdminUserModel>();
             string sqltxt = @"SELECT  ID ,
         UserName ,
         UserPwd ,
@@ -89,8 +89,8 @@ FROM    dbo.SysAdminUser WITH ( NOLOCK )";
         END AS UserStatusName
 FROM    dbo.SysAdminUser WITH ( NOLOCK )
 WHERE ID=@id";
-            SqlParameter[] paramter = { new SqlParameter("@id",userid)};
-            DataTable dt = helper.Query(sqltxt,paramter).Tables[0];
+            SqlParameter[] paramter = { new SqlParameter("@id", userid) };
+            DataTable dt = helper.Query(sqltxt, paramter).Tables[0];
             if (dt != null && dt.Rows.Count > 0)
             {
                 model.Answer = dt.Rows[0]["Answer"].ToString();
@@ -159,7 +159,7 @@ VALUES  ( @UserName ,
                                       new SqlParameter("@LoginName",model.LoginName),
                                       new SqlParameter("@HeaderImg",model.HeaderImg)
                                       };
-            rowcount = helper.ExecuteSql(sqltxt,paramter);
+            rowcount = helper.ExecuteSql(sqltxt, paramter);
             return rowcount;
         }
         /// <summary>
@@ -195,7 +195,6 @@ WHERE   ID = @id";
             rowcount = helper.ExecuteSql(sqltxt, paramter);
             return rowcount;
         }
-
         /// <summary>
         /// 禁用系统用户
         /// </summary>
@@ -213,5 +212,205 @@ WHERE   ID = @id";
             rowcount = helper.ExecuteSql(sqltxt, paramter);
             return rowcount;
         }
+
+        #region 系统配置表设置
+        /// <summary>
+        /// 得到所有的系统配置
+        /// </summary>
+        /// <returns></returns>
+        public List<SysAdminConfigsModel> GetAllConfigs()
+        {
+            List<SysAdminConfigsModel> list = new List<SysAdminConfigsModel>();
+            string sqltxt = @"SELECT  ID ,
+        ConfigName ,
+        ConfigFID ,
+        ConfigValue ,
+        ConfigRemark ,
+        AddTime ,
+        ConfigStatus ,
+        CASE ConfigStatus
+          WHEN 1 THEN '启用'
+          ELSE '禁用'
+        END AS ConfigStatusName
+FROM    dbo.SysAdminConfigs WITH(NOLOCK)";
+            DataTable dt = helper.Query(sqltxt).Tables[0];
+            foreach (DataRow item in dt.Rows)
+            {
+                SysAdminConfigsModel model = new SysAdminConfigsModel();
+                model.AddTime = DateTime.Parse(item["AddTime"].ToString());
+                model.ConfigFID = int.Parse(item["ConfigFID"].ToString());
+                model.ConfigName = item["ConfigName"].ToString();
+                model.ConfigRemark = item["ConfigRemark"].ToString();
+                model.ConfigStatus = int.Parse(item["ConfigStatus"].ToString());
+                model.ConfigStatusName = item["ConfigStatusName"].ToString();
+                model.ConfigValue = item["ConfigValue"].ToString();
+                model.ID = int.Parse(item["ID"].ToString());
+                list.Add(model);
+            }
+            return list;
+        }
+        /// <summary>
+        /// 插入配置信息
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
+        public int AddConfigInfo(SysAdminConfigsModel model)
+        {
+            int rowcount = 0;
+            string sqltxt = @"INSERT  INTO dbo.SysAdminConfigs
+        ( ConfigName ,
+          ConfigFID ,
+          ConfigValue ,
+          ConfigRemark ,
+          AddTime ,
+          ConfigStatus
+        )
+VALUES  ( @ConfigName ,
+          @ConfigFID ,
+          @ConfigValue ,
+          @ConfigRemark ,
+          GETDATE() ,
+          @ConfigStatus
+        )";
+            SqlParameter[] paramter ={
+                                    new SqlParameter("@ConfigName",model.ConfigName),
+                                    new SqlParameter("@ConfigFID",model.ConfigFID),
+                                    new SqlParameter("@ConfigValue",model.ConfigValue),
+                                    new SqlParameter("@ConfigRemark",model.ConfigRemark),
+                                    new SqlParameter("@ConfigStatus",model.ConfigStatus)
+                                    };
+            rowcount = helper.ExecuteSql(sqltxt, paramter);
+            return rowcount;
+        }
+        /// <summary>
+        /// 根据ID得到配置信息
+        /// </summary>
+        /// <param name="ids"></param>
+        /// <returns></returns>
+        public List<SysAdminConfigsModel> GetConfigsByIDs(string ids)
+        {
+            List<SysAdminConfigsModel> list = new List<SysAdminConfigsModel>();
+            string sqltxt = @"SELECT  ID ,
+        ConfigName ,
+        ConfigFID ,
+        ConfigValue ,
+        ConfigRemark ,
+        AddTime ,
+        ConfigStatus ,
+        CASE ConfigStatus
+          WHEN 1 THEN '启用'
+          ELSE '禁用'
+        END AS ConfigStatusName
+FROM    dbo.SysAdminConfigs WITH(NOLOCK)
+WHERE ID IN ("+ids+")";
+            DataTable dt = helper.Query(sqltxt).Tables[0];
+            foreach (DataRow item in dt.Rows)
+            {
+                SysAdminConfigsModel model = new SysAdminConfigsModel();
+                model.AddTime = DateTime.Parse(item["AddTime"].ToString());
+                model.ConfigFID = int.Parse(item["ConfigFID"].ToString());
+                model.ConfigName = item["ConfigName"].ToString();
+                model.ConfigRemark = item["ConfigRemark"].ToString();
+                model.ConfigStatus = int.Parse(item["ConfigStatus"].ToString());
+                model.ConfigStatusName = item["ConfigStatusName"].ToString();
+                model.ConfigValue = item["ConfigValue"].ToString();
+                model.ID = int.Parse(item["ID"].ToString());
+                list.Add(model);
+            }
+            return list;
+        }
+        /// <summary>
+        /// 修改配置信息
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
+        public int UpdateConfigs(SysAdminConfigsModel model)
+        {
+            int rowcount = 0;
+            string sqltxt = @"UPDATE  dbo.SysAdminConfigs
+SET     ConfigName = @ConfigName ,
+        ConfigFID = @ConfigFID ,
+        ConfigValue = @ConfigValue ,
+        ConfigRemark = @ConfigRemark ,
+        ConfigStatus = @ConfigStatus
+WHERE   ID = @id";
+            SqlParameter[] paramter ={
+                                    new SqlParameter("@ConfigName",model.ConfigName),
+                                    new SqlParameter("@ConfigFID",model.ConfigFID),
+                                    new SqlParameter("@ConfigValue",model.ConfigValue),
+                                    new SqlParameter("@ConfigRemark",model.ConfigRemark),
+                                    new SqlParameter("@ConfigStatus",model.ConfigStatus),
+                                    new SqlParameter("@id",model.ID)
+                                    };
+            rowcount = helper.ExecuteSql(sqltxt, paramter);
+            return rowcount;
+        }
+        /// <summary>
+        /// 得到顶级配置项目
+        /// </summary>
+        /// <returns></returns>
+        public List<SysAdminConfigsModel> GetFirstConfigs()
+        {
+            List<SysAdminConfigsModel> list = new List<SysAdminConfigsModel>();
+            string sqltxt = @"SELECT  ID ,
+        ConfigName ,
+        ConfigFID ,
+        ConfigValue ,
+        ConfigRemark ,
+        AddTime ,
+        ConfigStatus ,
+        CASE ConfigStatus
+          WHEN 1 THEN '启用'
+          ELSE '禁用'
+        END AS ConfigStatusName
+FROM    dbo.SysAdminConfigs WITH(NOLOCK)
+WHERE ConfigFID=0 ";
+            DataTable dt = helper.Query(sqltxt).Tables[0];
+            foreach (DataRow item in dt.Rows)
+            {
+                SysAdminConfigsModel model = new SysAdminConfigsModel();
+                model.AddTime = DateTime.Parse(item["AddTime"].ToString());
+                model.ConfigFID = int.Parse(item["ConfigFID"].ToString());
+                model.ConfigName = item["ConfigName"].ToString();
+                model.ConfigRemark = item["ConfigRemark"].ToString();
+                model.ConfigStatus = int.Parse(item["ConfigStatus"].ToString());
+                model.ConfigStatusName = item["ConfigStatusName"].ToString();
+                model.ConfigValue = item["ConfigValue"].ToString();
+                model.ID = int.Parse(item["ID"].ToString());
+                list.Add(model);
+            }
+            return list;
+        }
+        /// <summary>
+        /// 禁用配置项
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public int DelConfig(int id)
+        {
+            int rowcount = 0;
+            string sqltxt = @"IF EXISTS ( SELECT  1
+            FROM    dbo.SysAdminConfigs
+            WHERE   id = @id
+                    AND ConfigFID = 0 )
+    BEGIN
+        UPDATE  dbo.SysAdminConfigs
+        SET     ConfigStatus = 0
+        WHERE   id = @id
+    END
+ELSE
+    BEGIN
+        UPDATE  dbo.SysAdminConfigs
+        SET     ConfigFID = 0
+        WHERE   ConfigFID = @id
+        UPDATE  dbo.SysAdminConfigs
+        SET     ConfigStatus = 0
+        WHERE   id = @id
+    END";
+            SqlParameter[] paramter = { new SqlParameter("@id",id)};
+            rowcount = helper.ExecuteSql(sqltxt,paramter);
+            return rowcount;
+        }
+        #endregion
     }
 }

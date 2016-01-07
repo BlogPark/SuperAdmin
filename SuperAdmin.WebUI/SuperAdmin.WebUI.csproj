@@ -117,6 +117,7 @@
     <Compile Include="Areas\AdminMenu\Models\SysUserMenuViewModel.cs" />
     <Compile Include="Areas\SysSetting\Controllers\SettingsController.cs" />
     <Compile Include="Areas\SysSetting\Models\AdminUserViewModel.cs" />
+    <Compile Include="Areas\SysSetting\Models\SysConfigsViewModel.cs" />
     <Compile Include="Areas\SysSetting\SysSettingAreaRegistration.cs" />
     <Compile Include="Controllers\AppContext.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -1349,6 +1350,9 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Areas\SysSetting\Views\Settings\AdminUser.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\SysSetting\Views\Settings\SysConfigs.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

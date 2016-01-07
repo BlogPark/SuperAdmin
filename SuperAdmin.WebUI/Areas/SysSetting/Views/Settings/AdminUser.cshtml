@@ -316,9 +316,28 @@
         }
         function deluser(id) {
             bootbox.confirm("确定要禁用此用户?", function (result) {
-                if (result)
-                {
-                    alert(result);
+                if (result) {
+                    $.ajax({
+                        url: '@Url.Action("DelAdminUser", "Settings", new { area = "SysSetting" })',
+                        datatype: 'json',
+                        async: false,
+                        type: 'POST',
+                        data: { 'id': id },
+                        success: function (data) {
+                            if (data == "1") {
+                                var dtr = $("#tr" + id).children('td');
+                                if (dtr) {
+                                    dtr.eq(8).attr("name", "0");
+                                    dtr.eq(8).html("禁用");
+                                }
+                                bootbox.alert("操作成功");
+                                setTimeout(function () {
+                                    $(".bootbox").modal("hide");
+                                }, 2000);
+                            }
+                            else { bootbox.alert("操作失败"); }
+                        }
+                    });
                 }
             });
         }
