@@ -1,0 +1,52 @@
+﻿@using SuperAdmin.datamodel
+@{
+    Layout = "~/Views/_Layout.cshtml";
+}
+<div class="container">
+    <div class="row">
+        <div id="content" class="col-lg-12">
+            <!-- PAGE HEADER-->
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="page-header">
+                        <!-- BREADCRUMBS -->
+                        <ul class="breadcrumb">
+                            <li>
+                                <i class="fa fa-home"></i>
+                                <a href="index.html">Home</a>
+                            </li>
+                            <li>
+                                <a href="#">广告设置</a>
+                            </li>
+                            <li>广告管理</li>
+                        </ul>
+                        <!-- /BREADCRUMBS -->
+                        <div class="clearfix">
+                            <h3 class="content-title pull-left">广告信息</h3>
+                        </div>
+                        <div class="description"></div>
+                    </div>
+                </div>
+            </div>
+            <!-- /PAGE HEADER -->
+            <div class="row">
+                <div class="col-sm-11">
+                    <div class="btn-group hidden-xs pull-right invoice-btn-group">
+                        <p class="btn-toolbar">
+                            <a class="btn btn-primary" data-toggle="modal" href="#box-config1" id="addnew"><i class="fa fa-plus"></i>&nbsp;添加广告</a>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@section myscript{
+    <script type="text/javascript">
+        $(function () {
+            App.init(); //Initialise plugins and elements
+        });
+    </script>
+}
