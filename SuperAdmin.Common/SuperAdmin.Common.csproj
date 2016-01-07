@@ -66,6 +66,9 @@
       <DependentUpon>SuperWebSite.mdf</DependentUpon>
     </Content>
     <Content Include="Database\SystemAd.sql" />
+    <Content Include="Database\SystemAdPosition.sql" />
+    <Content Include="Database\SystemAdSchedule.sql" />
+    <Content Include="Database\SystemAdSite.sql" />
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include=".NETFramework,Version=v4.5">

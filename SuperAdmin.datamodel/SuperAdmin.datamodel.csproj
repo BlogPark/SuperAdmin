@@ -46,6 +46,9 @@
     <Compile Include="SysAdminMenuModel.cs" />
     <Compile Include="SysAdminUserGroupModel.cs" />
     <Compile Include="SysAdminUserModel.cs" />
+    <Compile Include="SystemAdModel.cs" />
+    <Compile Include="SystemAdPositionModel.cs" />
+    <Compile Include="SystemAdScheduleModel.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

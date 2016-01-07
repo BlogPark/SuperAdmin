@@ -100,4 +100,27 @@ namespace SuperAdmin.datamodel
         [DataMember]
         public string AddUserName { get; set; }
     }
+    /// <summary>
+    /// 系统站点
+    /// </summary>
+    [Serializable]
+    [DataContract]
+    public class SystemAdSiteModel 
+    {
+        /// <summary>
+        /// 站点Id
+        /// </summary>       
+        [DataMember]
+        public int ID { get; set; }
+        /// <summary>
+        /// 站点名称
+        /// </summary>       
+        [DataMember]
+        public string AdSiteName { get; set; }
+        /// <summary>
+        /// 状态值（0 禁用 1 启用）
+        /// </summary>       
+        [DataMember]
+        public int AdSiteState { get; set; }
+    }
 }
