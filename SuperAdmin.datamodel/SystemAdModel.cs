@@ -70,7 +70,7 @@ namespace SuperAdmin.datamodel
         [DataMember]
         public string AdRemark { get; set; }
         /// <summary>
-        /// 广告区状态
+        /// 广告区状态(0 禁用 1 启用)
         /// </summary>       
         [DataMember]
         public int AdStatus { get; set; }
