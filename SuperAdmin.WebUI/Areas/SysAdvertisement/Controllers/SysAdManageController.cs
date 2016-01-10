@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using SuperAdmin.WebUI.Areas.SysAdvertisement.Models;
+using SuperAdmin.DataBLL;
+using SuperAdmin.datamodel;
 
 namespace SuperAdmin.WebUI.Areas.SysAdvertisement.Controllers
 {
@@ -10,7 +13,7 @@ namespace SuperAdmin.WebUI.Areas.SysAdvertisement.Controllers
     {
         //
         // GET: /SysAdvertisement/SysAdManage/
-
+        private SysAdManagerBll bll = new SysAdManagerBll();
         public ActionResult Index()
         {
             return View();
@@ -21,7 +24,11 @@ namespace SuperAdmin.WebUI.Areas.SysAdvertisement.Controllers
         /// <returns></returns>
         public ActionResult SysAdInfo()
         {
-            return View();
+            SystemAdInfoViewModel model = new SystemAdInfoViewModel();
+            model.Adlists = bll.GetAllSystemAd();
+            model.AddAdinfo=new SystemAdModel();
+            model.UpdAdinfo = new SystemAdModel();
+            return View(model);
         }
     }
 }

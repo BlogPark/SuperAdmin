@@ -116,6 +116,7 @@
     <Compile Include="Areas\AdminMenu\Models\SysMenuIndexViewModel.cs" />
     <Compile Include="Areas\AdminMenu\Models\SysUserMenuViewModel.cs" />
     <Compile Include="Areas\SysAdvertisement\Controllers\SysAdManageController.cs" />
+    <Compile Include="Areas\SysAdvertisement\Models\SystemAdInfoViewModel.cs" />
     <Compile Include="Areas\SysAdvertisement\SysAdvertisementAreaRegistration.cs" />
     <Compile Include="Areas\SysSetting\Controllers\SettingsController.cs" />
     <Compile Include="Areas\SysSetting\Models\AdminUserViewModel.cs" />
@@ -1181,7 +1182,6 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Areas\AdminMenu\Views\Shared\" />
-    <Folder Include="Areas\SysAdvertisement\Models\" />
     <Folder Include="Areas\SysAdvertisement\Views\Shared\" />
     <Folder Include="Areas\SysSetting\Views\Shared\" />
   </ItemGroup>

@@ -99,6 +99,11 @@ namespace SuperAdmin.datamodel
         /// </summary>       
         [DataMember]
         public string AddUserName { get; set; }
+        /// <summary>
+        /// 状态名称
+        /// </summary>
+        [DataMember]
+        public string AdStatusName { get;set;}
     }
     /// <summary>
     /// 系统站点
