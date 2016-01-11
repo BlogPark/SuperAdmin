@@ -21,7 +21,6 @@ namespace SuperAdmin.WebUI.Controllers
         /// 首页左侧菜单
         /// </summary>
         /// <returns></returns>
-
         public ActionResult Menu()
         {
             SessionLoginModel model = Session[AppContext.SESSION_LOGIN_NAME] as SessionLoginModel;
@@ -72,5 +71,41 @@ namespace SuperAdmin.WebUI.Controllers
             return RedirectToAction("Index", "Login", new { returnurl = "" });
         }
 
+        /// <summary>
+        /// 异步上传图片接口
+        /// 增加对宽度和比例的限制
+        /// 比例限制在 参数的上下0.5范围内浮动，不在此范围的为不合格
+        /// </summary>
+        /// <returns></returns>
+        [HttpPost]
+        public ActionResult AjaxUploadArticlePices(HttpContext  context)
+        {
+            //string state = "fail";  //状态
+      
+
+            ////上传配置
+            //int size = 2048;           //文件大小限制,单位MB                  //文件大小限制，单位MB 
+
+            //var fi = file;
+            HttpPostedFileBase uploadFile = Request.Files[0];
+
+            string url = "";        //网络路径
+            //string picpath = "";    //相对路径
+            //int width = 0;          //宽度
+            //int height = 0;         //高度
+            //string articlePicStr = "";
+            //var uploadImage = BaseUpLoad.LocalUpLoadForSavejpg(uploadFile, path, filetype, out articlePicStr, size, true, true);
+            //if (uploadImage != null && uploadImage.State == "success" && uploadImage.Image.Count > 0)
+            //{
+            //    state = "SUCCESS";
+            //    string imageUrl = uploadImage.Image[0].Path;
+            //    picpath = "/media" + imageUrl;
+            //    url = AppConf.dna_picUrl.TrimEnd('/') + picpath;
+            //    width = uploadImage.Image[0].Width;
+            //    height = uploadImage.Image[0].Height;
+            //}
+            //return Json(new { state = state, url = url, picpath = picpath, width = width, height = height });
+            return Json("1");
+        }
     }
 }
