@@ -43,7 +43,7 @@
                 <div class="panel-body">          
                              
                     <div class="form-group">
-                    <input id="file-4" type="file" class="file" multiple data-min-file-count="1" data-upload-url="#">
+                    <input id="file-4" type="file" class="file" multiple data-min-file-count="1" data-upload-url="/IndexPub/AjaxUploadArticlePices">
                 </div>
 
                     <div class="row" id="tabdiv">
@@ -108,7 +108,7 @@
             App.init(); //Initialise plugins and elements
             $("#file-4").fileinput({
                 //uploadExtraData: {kvId: '10'},
-                uploadUrl: '/IndexPub/AjaxUploadArticlePices', // you must set a valid URL here else you will get an error
+                // uploadUrl: '/IndexPub/AjaxUploadArticlePices', you must set a valid URL here else you will get an error
                 allowedFileExtensions: ['jpg', 'png', 'gif'],
                 showUpload: true,
                 showCaption: false,
