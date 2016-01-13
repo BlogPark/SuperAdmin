@@ -114,7 +114,10 @@
                 showCaption: false,
                 showRemove: false,
                 showPreview: true,
-                showAjaxErrorDetails: false
+                showAjaxErrorDetails: false,
+                slugCallback: function (filename) {
+                    alert(filename);
+                }
             });
             $("#file-4").on('fileselect', function (event, n, l) {
                 //alert('File Selected. Name: ' + l + ', Num: ' + n);
