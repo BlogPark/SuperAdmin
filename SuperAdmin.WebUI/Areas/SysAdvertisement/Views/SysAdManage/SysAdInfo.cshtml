@@ -40,11 +40,11 @@
                 </div>
             </div>
             <div class="panel panel-default">
-                <div class="panel-body">          
-                             
+                <div class="panel-body">
+
                     <div class="form-group">
-                    <input id="file-4" type="file" class="file" multiple data-min-file-count="1" data-upload-url="/IndexPub/AjaxUploadArticlePices">
-                </div>
+                        <input id="file-4" name="kartik-file-4[]" type="file" class="file-loading">
+                    </div>
 
                     <div class="row" id="tabdiv">
                         <table class="table table-striped table-bordered" id="menutab">
@@ -96,29 +96,26 @@
 }
 @section scriptfiles{
     <!-- FILE UPLOAD -->
-    <script type="text/javascript" src="@Url.Content("/js/bootstrap-fileinput/bootstrap.min.js")"></script>
-     <!-- FILE UPLOAD -->
     <script type="text/javascript" src="@Url.Content("/js/bootstrap-fileinput/fileinput.js")"></script>
-     <!-- FILE UPLOAD -->
+    <!-- FILE UPLOAD -->
     <script type="text/javascript" src="@Url.Content("/js/bootstrap-fileinput/fileinput_locale_zh.js")"></script>
 }
 @section myscript{
     <script type="text/javascript">
+        $("#file-4").fileinput({
+            //uploadExtraData: {kvId: '10'},
+            uploadUrl: "@Url.Action("AjaxUploadArticlePices", "IndexPub", new { area = "" })", 
+            uploadAsync: false,
+            minFileCount: 1,
+            maxFileCount: 1,
+            overwriteInitial: false,
+            initialPreview: "",
+            initialPreviewConfig: "",
+            uploadExtraData: ""
+        });
         $(function () {
             App.init(); //Initialise plugins and elements
-            $("#file-4").fileinput({
-                //uploadExtraData: {kvId: '10'},
-                // uploadUrl: '/IndexPub/AjaxUploadArticlePices', you must set a valid URL here else you will get an error
-                allowedFileExtensions: ['jpg', 'png', 'gif'],
-                showUpload: true,
-                showCaption: false,
-                showRemove: false,
-                showPreview: true,
-                showAjaxErrorDetails: false,
-                slugCallback: function (filename) {
-                    alert(filename);
-                }
-            });
+
             $("#file-4").on('fileselect', function (event, n, l) {
                 //alert('File Selected. Name: ' + l + ', Num: ' + n);
             });

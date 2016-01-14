@@ -1326,6 +1326,10 @@
     <Content Include="Views\Login\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\SuperAdmin.Common\SuperAdmin.Common.csproj">
+      <Project>{dd01c697-76ef-49e1-9d9a-a9f3d70be507}</Project>
+      <Name>SuperAdmin.Common</Name>
+    </ProjectReference>
     <ProjectReference Include="..\SuperAdmin.DataBLL\SuperAdmin.DataBLL.csproj">
       <Project>{04802566-5764-46b1-8842-b5b1b0ee5f49}</Project>
       <Name>SuperAdmin.DataBLL</Name>

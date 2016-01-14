@@ -5,6 +5,8 @@ using System.Web;
 using System.Web.Mvc;
 using SuperAdmin.DataBLL;
 using SuperAdmin.WebUI.Models;
+using SuperAdmin.Common;
+using SuperAdmin.datamodel;
 
 namespace SuperAdmin.WebUI.Controllers
 {
@@ -77,7 +79,7 @@ namespace SuperAdmin.WebUI.Controllers
         /// 比例限制在 参数的上下0.5范围内浮动，不在此范围的为不合格
         /// </summary>
         /// <returns></returns>
-
+        [HttpPost]
         public ActionResult AjaxUploadArticlePices()
         {
             //string state = "fail";  //状态
@@ -85,16 +87,17 @@ namespace SuperAdmin.WebUI.Controllers
 
             ////上传配置
             //int size = 2048;           //文件大小限制,单位MB                  //文件大小限制，单位MB 
-
+            UploadFileModel model = new UploadFileModel();
             //var fi = file;
-            var uploadFile = Request.Files[0];
-            if (uploadFile == null)
+            if (Request.Files.Count > 0)
             {
-                return Json("0");
+                return Json("", "text/html");
             }
             else
             {
-                return Json("1");
+                model.error = "errorerrorerrorerror";
+                model.errorkeys = new List<string> { "0" };
+                return Json(model,"text/html");
             }
             //string url = "";        //网络路径
             //string picpath = "";    //相对路径

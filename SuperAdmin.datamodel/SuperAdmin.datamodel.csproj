@@ -49,6 +49,7 @@
     <Compile Include="SystemAdModel.cs" />
     <Compile Include="SystemAdPositionModel.cs" />
     <Compile Include="SystemAdScheduleModel.cs" />
+    <Compile Include="UploadFileModel.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
