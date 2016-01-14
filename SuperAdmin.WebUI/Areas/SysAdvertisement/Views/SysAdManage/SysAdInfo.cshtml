@@ -113,15 +113,16 @@
             initialPreviewConfig: "",
             uploadExtraData: ""
         });
+        $("#file-4").on("fileuploaded", function (event, data, previewId, index) {
+                alert(data);
+            });
         $(function () {
             App.init(); //Initialise plugins and elements
 
             $("#file-4").on('fileselect', function (event, n, l) {
                 //alert('File Selected. Name: ' + l + ', Num: ' + n);
             });
-            $("#file-4").on("fileuploaded", function (event, data, previewId, index) {
-                alert(data);
-            });
+          
         });
     </script>
 }
