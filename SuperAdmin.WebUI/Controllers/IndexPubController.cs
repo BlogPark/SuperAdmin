@@ -80,25 +80,31 @@ namespace SuperAdmin.WebUI.Controllers
         /// </summary>
         /// <returns></returns>
         [HttpPost]
-        public ActionResult AjaxUploadArticlePices()
+        public JsonResult AjaxUploadArticlePices()
         {
             //string state = "fail";  //状态
-      
 
+            int c = Request.Files.Count;
             ////上传配置
             //int size = 2048;           //文件大小限制,单位MB                  //文件大小限制，单位MB 
-            UploadFileModel model = new UploadFileModel();
+            string msg = "/Areas/Admin/Content/images/actives/1.jpg";
+          
             //var fi = file;
-            if (Request.Files.Count > 0)
-            {
-                return Json("", "text/html");
-            }
-            else
-            {
-                model.error = "errorerrorerrorerror";
-                model.errorkeys = new List<string> { "0" };
-                return Json(model,"text/html");
-            }
+            //if (Request.Files.Count > 0)
+            //{
+            //    //return Json(new { status = "1" }, "text/html");
+            //    //return Content("ssssssssss"); 
+            //    ViewBag.msg = "ssssssssssssssssss";
+            //    return Json("1");
+            //}
+            //else
+            //{
+           
+                //return Json(new { status = "-1" }, "text/html");
+            //    //return Content("eeeeeeee");
+            //    ViewBag.msg = "eeeeeeeeeeeeeeeeeee";
+            //    return Json("0");
+            //}
             //string url = "";        //网络路径
             //string picpath = "";    //相对路径
             //int width = 0;          //宽度
@@ -114,7 +120,7 @@ namespace SuperAdmin.WebUI.Controllers
             //    width = uploadImage.Image[0].Width;
             //    height = uploadImage.Image[0].Height;
             //}
-            //return Json(new { state = state, url = url, picpath = picpath, width = width, height = height });
+            return Json(new { result = "success" });
            
         }
     }

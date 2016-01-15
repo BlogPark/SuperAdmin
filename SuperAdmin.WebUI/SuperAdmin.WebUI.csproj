@@ -323,6 +323,7 @@
     <Content Include="js\bootstrap-fileinput\fileinput.css" />
     <Content Include="js\bootstrap-fileinput\fileinput.js" />
     <Content Include="js\bootstrap-fileinput\fileinput_locale_zh.js" />
+    <Content Include="js\bootstrap-fileinput\jquery-form.js" />
     <Content Include="js\bootstrap-fileupload\bootstrap-fileupload.min.css" />
     <Content Include="js\bootstrap-fileupload\bootstrap-fileupload.min.js" />
     <Content Include="js\bootstrap-inputmask\bootstrap-inputmask.min.js" />
