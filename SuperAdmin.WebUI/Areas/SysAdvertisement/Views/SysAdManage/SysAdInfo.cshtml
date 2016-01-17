@@ -42,30 +42,8 @@
             <div class="panel panel-default">
                 <div class="panel-body">
 
-                    <div class="form-group">
-
-                        <input id="file-0a" class="file" type="file" data-min-file-count="1" data-upload-url="@Url.Action("AjaxUploadArticlePices", "IndexPub", new { area = "" })">
-                        <br>
-                        <button type="button" class="btn btn-primary" id="uploadbtn">Submit</button>
-
-                    </div>
-                    <div class="form-group">
-
-                        <form enctype="multipart/form-data" id="uploadForm" name="uploadForm">
-
-                            <div id="uploadFileDiv" style="width: 60%;">
-
-                                <input id="pdFile" name="file" type="file">
-
-                                <div id="fileError" class="help-block"></div>
-
-                                <br />
-                             
-                            </div>
-
-                        </form>
-
-                    </div>
+                   @Html.Action("AjaxUploadArticlePices", "IndexPub", new { area = "" })
+                  
                     <div class="row" id="tabdiv">
                         <table class="table table-striped table-bordered" id="menutab">
                             <thead>
@@ -128,33 +106,7 @@
             showCancel: false,
             dropZoneEnabled: false
         });
-        $("#pdFile").fileinput({
 
-            showPreview: false,
-
-            allowedFileExtensions: ["jpg", "png", "bpmn", "bpmn20.xml"],
-
-            elErrorContainer: "#fileError",
-
-            browseClass: "btn btn-success",
-
-            browseLabel: "查找文件",
-
-            browseIcon: '<i ></i>',
-
-            removeClass: "btn btn-danger",
-
-            removeLabel: "删除",
-
-            removeIcon: '<i ></i>',
-
-            uploadClass: "btn btn-info",
-
-            uploadLabel: "部署",
-
-            uploadIcon: '<i ></i>',
-
-        });
         $(function () {
             App.init(); //Initialise plugins and elements
             $("#uploadbtn").click(function () {
@@ -162,39 +114,9 @@
                 $("#file-0a").fileinput('upload');
                 return false;
             });
-           
 
-                $("#uploadForm").submit(function (event) {
 
-                    var formData = new FormData(Form['uploadForm']);
+        });
 
-                    event.preventDefault();
-                    $.ajax({
-
-                        url: '@Url.Action("AjaxUploadArticlePices", "IndexPub", new { area = "" })',
-
-                        type: 'POST',
-
-                        data: formData,
-
-                        contentType: false,
-
-                        processData: false,
-                        dataType:'json',
-                        success: function (data) {
-
-                            alert(data.result );
-                        },
-
-                        error: function (errortext) {
-                            alert(errortext);
-
-                        }
-
-                    });
-
-                });
-            });
-       
     </script>
 }

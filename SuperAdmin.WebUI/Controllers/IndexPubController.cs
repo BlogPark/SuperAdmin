@@ -7,6 +7,7 @@ using SuperAdmin.DataBLL;
 using SuperAdmin.WebUI.Models;
 using SuperAdmin.Common;
 using SuperAdmin.datamodel;
+using System.IO;
 
 namespace SuperAdmin.WebUI.Controllers
 {
@@ -27,10 +28,10 @@ namespace SuperAdmin.WebUI.Controllers
         {
             SessionLoginModel model = Session[AppContext.SESSION_LOGIN_NAME] as SessionLoginModel;
             string idstr = "";
-            idstr =string.Join(",", model.UserMenus.Where(p=>p.MenuType==1).Select(p => p.FatherID).Distinct());            
+            idstr = string.Join(",", model.UserMenus.Where(p => p.MenuType == 1).Select(p => p.FatherID).Distinct());
             MenuViewModel models = new MenuViewModel();
-            models.firstlist = bll.GetSysMenuByIds(idstr.TrimEnd(',')) ;
-            models.sublist = model.UserMenus.Where(p=>p.FatherID!=0).ToList();
+            models.firstlist = bll.GetSysMenuByIds(idstr.TrimEnd(','));
+            models.sublist = model.UserMenus.Where(p => p.FatherID != 0).ToList();
             return View(models);
         }
         /// <summary>
@@ -72,7 +73,12 @@ namespace SuperAdmin.WebUI.Controllers
             Session.Clear();// Session[AppContext.SESSION_LOGIN_NAME] = null;
             return RedirectToAction("Index", "Login", new { returnurl = "" });
         }
-
+        [HttpGet]
+        public ActionResult AjaxUploadArticlePices()
+        {
+            FileUploadViewModel model = new FileUploadViewModel();
+            return View(model);
+        }
         /// <summary>
         /// 异步上传图片接口
         /// 增加对宽度和比例的限制
@@ -80,7 +86,7 @@ namespace SuperAdmin.WebUI.Controllers
         /// </summary>
         /// <returns></returns>
         [HttpPost]
-        public JsonResult AjaxUploadArticlePices()
+        public ActionResult AjaxUploadArticlePices(FileUploadViewModel model)
         {
             //string state = "fail";  //状态
 
@@ -88,7 +94,13 @@ namespace SuperAdmin.WebUI.Controllers
             ////上传配置
             //int size = 2048;           //文件大小限制,单位MB                  //文件大小限制，单位MB 
             string msg = "/Areas/Admin/Content/images/actives/1.jpg";
-          
+
+            using (MemoryStream uploadedFile = new MemoryStream())
+            {
+                model.File.InputStream.CopyTo(uploadedFile);
+                //uploadService.UploadFile(uploadedFile, model.File.ContentType)
+                //return View();
+            }
             //var fi = file;
             //if (Request.Files.Count > 0)
             //{
@@ -99,8 +111,8 @@ namespace SuperAdmin.WebUI.Controllers
             //}
             //else
             //{
-           
-                //return Json(new { status = "-1" }, "text/html");
+
+            //return Json(new { status = "-1" }, "text/html");
             //    //return Content("eeeeeeee");
             //    ViewBag.msg = "eeeeeeeeeeeeeeeeeee";
             //    return Json("0");
@@ -120,8 +132,14 @@ namespace SuperAdmin.WebUI.Controllers
             //    width = uploadImage.Image[0].Width;
             //    height = uploadImage.Image[0].Height;
             //}
-            return Json(new { result = "success" });
-           
+            //return Json(new { result = "success" });
+         
+            //return Content(msg, "application/json");
+            model.Height = 10;
+            model.Width = 100;
+            model.FilePath = "sssssssssssss";
+            return View(model);
+
         }
     }
 }

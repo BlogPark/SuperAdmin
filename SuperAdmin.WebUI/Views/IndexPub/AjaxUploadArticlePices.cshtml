@@ -1,0 +1,17 @@
+﻿@model SuperAdmin.WebUI.Models.FileUploadViewModel
+<div class="form-group">
+    <form id="uploadform" role="form" method="post" enctype="multipart/form-data" >
+        @Html.TextBoxFor(m => m.File, new { type = "file", @class = "file" })
+        <br>
+        <button type="submit" class="btn btn-primary" id="uploadbtn1" >提交</button>
+        @Html.HiddenFor(m => m.FilePath)
+        @Html.HiddenFor(m => m.Width)
+        @Html.HiddenFor(m => m.Height)
+       </form>
+</div>
+<script type="text/javascript">
+    $("#uploadbtn1").click(function () {
+        $("#uploadform").submit();
+        alert(1);
+    });
+</script>

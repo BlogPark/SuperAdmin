@@ -1339,6 +1339,7 @@
                 }, 100);
             };
             fnError = function (jqXHR, textStatus, errorThrown) {
+                alert(3);
                 var errMsg = self.parseError(jqXHR, errorThrown, (allFiles ? files[i].name : null));
                 setIndicator('indicatorError', 'indicatorErrorTitle');
                 params = $.extend(params, self.getOutData(jqXHR));
@@ -1441,6 +1442,7 @@
                 self.clearFileInput();
             };
             fnError = function (jqXHR, textStatus, errorThrown) {
+                alert(1);
                 var outData = self.getOutData(jqXHR), errMsg = self.parseError(jqXHR, errorThrown);
                 self.showUploadError(errMsg, outData, 'filebatchuploaderror');
                 self.uploadFileCount = total - 1;
@@ -1500,6 +1502,7 @@
                 self.clearFileInput();
             };
             fnError = function (jqXHR, textStatus, errorThrown) {
+                alert(2);
                 var outData = self.getOutData(jqXHR), errMsg = self.parseError(jqXHR, errorThrown);
                 params.data = outData;
                 self.showUploadError(errMsg, outData, 'filebatchuploaderror');
