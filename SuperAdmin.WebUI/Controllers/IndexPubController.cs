@@ -8,6 +8,8 @@ using SuperAdmin.WebUI.Models;
 using SuperAdmin.Common;
 using SuperAdmin.datamodel;
 using System.IO;
+using System.Runtime.Serialization.Json;
+using System.Text;
 
 namespace SuperAdmin.WebUI.Controllers
 {
@@ -73,12 +75,12 @@ namespace SuperAdmin.WebUI.Controllers
             Session.Clear();// Session[AppContext.SESSION_LOGIN_NAME] = null;
             return RedirectToAction("Index", "Login", new { returnurl = "" });
         }
-        [HttpGet]
-        public ActionResult AjaxUploadArticlePices()
-        {
-            FileUploadViewModel model = new FileUploadViewModel();
-            return View(model);
-        }
+        //[HttpGet]
+        //public ActionResult AjaxUploadArticlePices()
+        //{
+        //    FileUploadViewModel model = new FileUploadViewModel();
+        //    return PartialView(model);
+        //}
         /// <summary>
         /// 异步上传图片接口
         /// 增加对宽度和比例的限制
@@ -86,7 +88,7 @@ namespace SuperAdmin.WebUI.Controllers
         /// </summary>
         /// <returns></returns>
         [HttpPost]
-        public ActionResult AjaxUploadArticlePices(FileUploadViewModel model)
+        public ActionResult AjaxUploadArticlePices()
         {
             //string state = "fail";  //状态
 
@@ -95,50 +97,23 @@ namespace SuperAdmin.WebUI.Controllers
             //int size = 2048;           //文件大小限制,单位MB                  //文件大小限制，单位MB 
             string msg = "/Areas/Admin/Content/images/actives/1.jpg";
 
-            using (MemoryStream uploadedFile = new MemoryStream())
-            {
-                model.File.InputStream.CopyTo(uploadedFile);
-                //uploadService.UploadFile(uploadedFile, model.File.ContentType)
-                //return View();
-            }
-            //var fi = file;
-            //if (Request.Files.Count > 0)
-            //{
-            //    //return Json(new { status = "1" }, "text/html");
-            //    //return Content("ssssssssss"); 
-            //    ViewBag.msg = "ssssssssssssssssss";
-            //    return Json("1");
-            //}
-            //else
-            //{
 
-            //return Json(new { status = "-1" }, "text/html");
-            //    //return Content("eeeeeeee");
-            //    ViewBag.msg = "eeeeeeeeeeeeeeeeeee";
-            //    return Json("0");
-            //}
-            //string url = "";        //网络路径
-            //string picpath = "";    //相对路径
-            //int width = 0;          //宽度
-            //int height = 0;         //高度
-            //string articlePicStr = "";
-            //var uploadImage = BaseUpLoad.LocalUpLoadForSavejpg(uploadFile, path, filetype, out articlePicStr, size, true, true);
-            //if (uploadImage != null && uploadImage.State == "success" && uploadImage.Image.Count > 0)
-            //{
-            //    state = "SUCCESS";
-            //    string imageUrl = uploadImage.Image[0].Path;
-            //    picpath = "/media" + imageUrl;
-            //    url = AppConf.dna_picUrl.TrimEnd('/') + picpath;
-            //    width = uploadImage.Image[0].Width;
-            //    height = uploadImage.Image[0].Height;
-            //}
-            //return Json(new { result = "success" });
-         
-            //return Content(msg, "application/json");
-            model.Height = 10;
-            model.Width = 100;
-            model.FilePath = "sssssssssssss";
-            return View(model);
+            return Json(new { filename="ssssss"});
+        }
+        public static string JsonSerializer<T>(T t)
+        {
+
+            DataContractJsonSerializer ser = new DataContractJsonSerializer(typeof(T));
+
+            MemoryStream ms = new MemoryStream();
+
+            ser.WriteObject(ms, t);
+
+            string jsonString = Encoding.UTF8.GetString(ms.ToArray());
+
+            ms.Close();
+
+            return jsonString;
 
         }
     }

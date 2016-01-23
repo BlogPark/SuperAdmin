@@ -1,0 +1,72 @@
+﻿@model SuperAdmin.WebUI.Areas.SysAdvertisement.Models.AddNewSysAdViewModel
+@{
+    ViewBag.Title = "添加系统广告";
+    Layout = "~/Views/_Layout.cshtml";
+}
+<div class="container">
+    <div class="row">
+        <div id="content" class="col-lg-12">
+            <!-- PAGE HEADER-->
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="page-header">
+                        <!-- BREADCRUMBS -->
+                        <ul class="breadcrumb">
+                            <li>
+                                <i class="fa fa-home"></i>
+                                <a href="index.html">Home</a>
+                            </li>
+                            <li>
+                                <a href="#">广告设置</a>
+                            </li>
+                            <li>添加广告</li>
+                        </ul>
+                        <!-- /BREADCRUMBS -->
+                        <div class="clearfix">
+                            <h3 class="content-title pull-left">添加广告</h3>
+                        </div>
+                        <div class="description"></div>
+                    </div>
+                </div>
+            </div>            
+            <div class="panel panel-default">
+                <div class="panel-body">
+
+                    <form id="uploadform" role="form" method="post" enctype="multipart/form-data">
+                        @Html.TextBoxFor(m => m.File, new { @type="file",@class="file"})
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@section mycss{
+    <!-- FILE UPLOAD -->
+    <link rel="stylesheet" type="text/css" href="@Url.Content("/js/bootstrap-fileinput/fileinput.css")" />
+}
+@section scriptfiles{
+    <script type="text/javascript" src="@Url.Content("/js/bootstrap-fileinput/jquery-form.js")"></script>
+    <!-- FILE UPLOAD -->
+    <script type="text/javascript" src="@Url.Content("/js/bootstrap-fileinput/fileinput.js")"></script>
+    <!-- FILE UPLOAD -->
+    <script type="text/javascript" src="@Url.Content("/js/bootstrap-fileinput/fileinput_locale_zh.js")"></script>
+}
+@section myscript{
+    <script type="text/javascript">
+        $("#input-id").fileinput({
+            showUpload: true,
+            showCaption: true,
+            uploadUrl: "@Url.Action("AjaxUploadArticlePices", "IndexPub", new { area=""})",
+            showRemove: false,
+            showCancel: false,
+            dropZoneEnabled: false
+        }).on('fileuploaded', function (event, data, previewId, index) {
+            alert(data.response.filename);
+        });
+        $(function () {
+            App.init(); //Initialise plugins and elements
+
+        });
+
+    </script>
+}

@@ -30,5 +30,14 @@ namespace SuperAdmin.WebUI.Areas.SysAdvertisement.Controllers
             model.UpdAdinfo = new SystemAdModel();
             return View(model);
         }
+        /// <summary>
+        /// 添加系统广告
+        /// </summary>
+        /// <returns></returns>
+        public ActionResult AddSysAd()
+        {
+            AddNewSysAdViewModel model = new AddNewSysAdViewModel();
+            return View(model);
+        }
     }
 }

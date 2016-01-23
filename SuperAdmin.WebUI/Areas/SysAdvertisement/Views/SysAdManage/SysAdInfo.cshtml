@@ -34,16 +34,13 @@
                 <div class="col-sm-11">
                     <div class="btn-group hidden-xs pull-right invoice-btn-group">
                         <p class="btn-toolbar">
-                            <a class="btn btn-primary" data-toggle="modal" href="#box-config1" id="addnew"><i class="fa fa-plus"></i>&nbsp;添加广告</a>
+                            <a class="btn btn-primary" data-toggle="modal" href="@Url.Action("AddSysAd", "SysAdManage", new { area = "SysAdvertisement" })" id="addnew" ><i class="fa fa-plus"></i>&nbsp;添加广告</a>
                         </p>
                     </div>
                 </div>
             </div>
             <div class="panel panel-default">
                 <div class="panel-body">
-
-                   @Html.Action("AjaxUploadArticlePices", "IndexPub", new { area = "" })
-                  
                     <div class="row" id="tabdiv">
                         <table class="table table-striped table-bordered" id="menutab">
                             <thead>
@@ -88,35 +85,12 @@
         </div>
     </div>
 </div>
-@section mycss{
-    <!-- FILE UPLOAD -->
-    <link rel="stylesheet" type="text/css" href="@Url.Content("/js/bootstrap-fileinput/fileinput.css")" />
-}
-@section scriptfiles{
-    <!-- FILE UPLOAD -->
-    <script type="text/javascript" src="@Url.Content("/js/bootstrap-fileinput/fileinput.js")"></script>
-    <!-- FILE UPLOAD -->
-    <script type="text/javascript" src="@Url.Content("/js/bootstrap-fileinput/fileinput_locale_zh.js")"></script>
-}
-@section myscript{
-    <script type="text/javascript">
-        $("#file-0a").fileinput({
-            showUpload: false,
-            showRemove: false,
-            showCancel: false,
-            dropZoneEnabled: false
-        });
 
+@section myscript{
+    <script type="text/javascript">      
         $(function () {
             App.init(); //Initialise plugins and elements
-            $("#uploadbtn").click(function () {
-
-                $("#file-0a").fileinput('upload');
-                return false;
-            });
-
 
         });
-
     </script>
 }

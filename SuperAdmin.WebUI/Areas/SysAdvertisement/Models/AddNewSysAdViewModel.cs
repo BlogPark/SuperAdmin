@@ -5,24 +5,14 @@ using System.Linq;
 using System.Runtime.Serialization;
 using System.Web;
 
-namespace SuperAdmin.WebUI.Models
+namespace SuperAdmin.WebUI.Areas.SysAdvertisement.Models
 {
     [Serializable]
     [DataContract]
-    public class FileUploadViewModel
+    public class AddNewSysAdViewModel
     {
         [DataMember]
-        [Required]        
+        [Required]
         public HttpPostedFileBase File { get; set; }
-
-        [DataMember]
-        public string FilePath { get; set; }
-
-        [DataMember]
-        public int Width { get; set; }
-
-        [DataMember]
-        public int Height { get; set; }
-
     }
 }

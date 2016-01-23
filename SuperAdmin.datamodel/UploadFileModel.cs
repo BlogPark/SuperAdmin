@@ -21,6 +21,9 @@ namespace SuperAdmin.datamodel
         public List<InitialPreviewConfig> initialPreviewConfig { get; set; }
         [DataMember]
         public bool append { get; set; }
+
+        [DataMember]
+        public string filename { get; set; }
     }
     [Serializable]
     [DataContract]
