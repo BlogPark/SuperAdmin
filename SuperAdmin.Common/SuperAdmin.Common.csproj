@@ -59,7 +59,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Class1.cs" />
-    <Compile Include="JsonserializeClass.cs" />
+    <Compile Include="JsonHelper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -75,6 +75,7 @@
     <Content Include="Database\SystemAdSchedule.sql" />
     <Content Include="Database\SystemAdSite.sql" />
     <Content Include="lib\Newtonsoft.Json.dll" />
+    <Content Include="lib\System.Json.dll" />
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include=".NETFramework,Version=v4.5">

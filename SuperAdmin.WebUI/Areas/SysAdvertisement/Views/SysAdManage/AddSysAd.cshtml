@@ -32,8 +32,8 @@
             <div class="panel panel-default">
                 <div class="panel-body">
 
-                    <form id="uploadform" role="form" method="post" enctype="multipart/form-data">
-                        @Html.TextBoxFor(m => m.File, new { @type="file",@class="file"})
+                    <form id="uploadform" role="form" method="post" enctype="multipart/form-data" target="_self">
+                      <input type="file" class="file" id="loadfile" />
                     </form>
                 </div>
             </div>
@@ -45,7 +45,6 @@
     <link rel="stylesheet" type="text/css" href="@Url.Content("/js/bootstrap-fileinput/fileinput.css")" />
 }
 @section scriptfiles{
-    <script type="text/javascript" src="@Url.Content("/js/bootstrap-fileinput/jquery-form.js")"></script>
     <!-- FILE UPLOAD -->
     <script type="text/javascript" src="@Url.Content("/js/bootstrap-fileinput/fileinput.js")"></script>
     <!-- FILE UPLOAD -->
@@ -53,7 +52,7 @@
 }
 @section myscript{
     <script type="text/javascript">
-        $("#input-id").fileinput({
+        $("#loadfile").fileinput({
             showUpload: true,
             showCaption: true,
             uploadUrl: "@Url.Action("AjaxUploadArticlePices", "IndexPub", new { area=""})",
@@ -64,8 +63,7 @@
             alert(data.response.filename);
         });
         $(function () {
-            App.init(); //Initialise plugins and elements
-
+            App.init(); //Initialise plugins and elements          
         });
 
     </script>

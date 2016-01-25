@@ -7,10 +7,8 @@ using SuperAdmin.DataBLL;
 using SuperAdmin.WebUI.Models;
 using SuperAdmin.Common;
 using SuperAdmin.datamodel;
-using System.IO;
-using System.Runtime.Serialization.Json;
-using System.Text;
-
+using System.Json;
+using Newtonsoft.Json;
 namespace SuperAdmin.WebUI.Controllers
 {
     public class IndexPubController : Controller
@@ -75,12 +73,7 @@ namespace SuperAdmin.WebUI.Controllers
             Session.Clear();// Session[AppContext.SESSION_LOGIN_NAME] = null;
             return RedirectToAction("Index", "Login", new { returnurl = "" });
         }
-        //[HttpGet]
-        //public ActionResult AjaxUploadArticlePices()
-        //{
-        //    FileUploadViewModel model = new FileUploadViewModel();
-        //    return PartialView(model);
-        //}
+      
         /// <summary>
         /// 异步上传图片接口
         /// 增加对宽度和比例的限制
@@ -88,33 +81,18 @@ namespace SuperAdmin.WebUI.Controllers
         /// </summary>
         /// <returns></returns>
         [HttpPost]
-        public ActionResult AjaxUploadArticlePices()
+        public object AjaxUploadArticlePices()
         {
             //string state = "fail";  //状态
 
             int c = Request.Files.Count;
             ////上传配置
             //int size = 2048;           //文件大小限制,单位MB                  //文件大小限制，单位MB 
-            string msg = "/Areas/Admin/Content/images/actives/1.jpg";
-
-
-            return Json(new { filename="ssssss"});
+            string jsonstr = JsonHelper.SerializeObject(new { Success = "ssss" });
+            JsonObject obj = new JsonObject();
+            obj["filename"] = "sss";
+            return new {status=1 };
         }
-        public static string JsonSerializer<T>(T t)
-        {
-
-            DataContractJsonSerializer ser = new DataContractJsonSerializer(typeof(T));
-
-            MemoryStream ms = new MemoryStream();
-
-            ser.WriteObject(ms, t);
-
-            string jsonString = Encoding.UTF8.GetString(ms.ToArray());
-
-            ms.Close();
-
-            return jsonString;
-
-        }
+      
     }
 }
