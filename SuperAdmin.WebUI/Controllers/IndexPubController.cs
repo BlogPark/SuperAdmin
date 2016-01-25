@@ -80,18 +80,14 @@ namespace SuperAdmin.WebUI.Controllers
         /// 比例限制在 参数的上下0.5范围内浮动，不在此范围的为不合格
         /// </summary>
         /// <returns></returns>
-        [HttpPost]
-        public object AjaxUploadArticlePices()
+ 
+        public ActionResult AjaxUploadArticlePices()
         {
             //string state = "fail";  //状态
 
             int c = Request.Files.Count;
-            ////上传配置
-            //int size = 2048;           //文件大小限制,单位MB                  //文件大小限制，单位MB 
-            string jsonstr = JsonHelper.SerializeObject(new { Success = "ssss" });
-            JsonObject obj = new JsonObject();
-            obj["filename"] = "sss";
-            return new {status=1 };
+
+            return Content("{}", "application/json");
         }
       
     }

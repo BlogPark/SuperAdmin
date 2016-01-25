@@ -327,6 +327,8 @@
     <Content Include="js\bootstrap-fileinput\bootstrap.min.js" />
     <Content Include="js\bootstrap-fileinput\fileinput.css" />
     <Content Include="js\bootstrap-fileinput\fileinput.js" />
+    <Content Include="js\bootstrap-fileinput\fileinput.min.js" />
+    <Content Include="js\bootstrap-fileinput\fileinput1.js" />
     <Content Include="js\bootstrap-fileinput\fileinput_locale_zh.js" />
     <Content Include="js\bootstrap-fileinput\jquery-form.js" />
     <Content Include="js\bootstrap-fileupload\bootstrap-fileupload.min.css" />
