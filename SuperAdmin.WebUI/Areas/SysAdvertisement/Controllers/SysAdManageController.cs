@@ -37,6 +37,7 @@ namespace SuperAdmin.WebUI.Areas.SysAdvertisement.Controllers
         public ActionResult AddSysAd()
         {
             AddNewSysAdViewModel model = new AddNewSysAdViewModel();
+            model.syssite = bll.GetAllSysSites();
             return View(model);
         }
     }

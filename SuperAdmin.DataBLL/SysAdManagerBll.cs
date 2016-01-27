@@ -14,6 +14,14 @@ namespace SuperAdmin.DataBLL
     public class SysAdManagerBll
     {
         private SysAdManager dal = new SysAdManager();
+        /// <summary>
+        /// 得到系统所有的平台信息
+        /// </summary>
+        /// <returns></returns>
+        public List<SystemAdSiteModel> GetAllSysSites()
+        {
+            return dal.GetAllSysSites();
+        }
         #region 系统广告内容
         /// <summary>
         /// 查询所有的广告内容

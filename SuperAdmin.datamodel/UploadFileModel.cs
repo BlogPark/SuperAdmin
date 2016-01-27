@@ -11,33 +11,45 @@ namespace SuperAdmin.datamodel
     [DataContract]
     public class UploadFileModel
     {
+        /// <summary>
+        /// 上传状态
+        /// </summary>
         [DataMember]
-        public string error { get; set; }
+        public string status { get; set; }
+        /// <summary>
+        /// 上传信息
+        /// </summary>
         [DataMember]
-        public List<string> errorkeys { get; set; }
+        public string message { get; set; }
+        /// <summary>
+        /// 文件宽度
+        /// </summary>
         [DataMember]
-        public List<string> initialPreview { get; set; }
+        public int width { get; set; }
+        /// <summary>
+        /// 文件高度
+        /// </summary>
         [DataMember]
-        public List<InitialPreviewConfig> initialPreviewConfig { get; set; }
-        [DataMember]
-        public bool append { get; set; }
-
+        public int height { get; set; }
+        /// <summary>
+        /// 文件名称
+        /// </summary>
         [DataMember]
         public string filename { get; set; }
-    }
-    [Serializable]
-    [DataContract]
-    public class InitialPreviewConfig
-    {
+        /// <summary>
+        /// 文件的物理地址
+        /// </summary>
         [DataMember]
-        public string caption { get; set; }
+        public string filepath { get; set; }
+        /// <summary>
+        /// 文件的网络地址
+        /// </summary>
         [DataMember]
-        public string width { get; set; }
+        public string fileurlpath { get; set; }
+        /// <summary>
+        /// 文件大小
+        /// </summary>
         [DataMember]
-        public string url { get; set; }
-        [DataMember]
-        public string key { get; set; }
-        [DataMember]
-        public string extra { get; set; }
+        public float filesize { get; set; }
     }
 }

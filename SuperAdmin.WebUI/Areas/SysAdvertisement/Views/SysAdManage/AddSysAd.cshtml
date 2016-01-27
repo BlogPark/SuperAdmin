@@ -28,42 +28,224 @@
                         <div class="description"></div>
                     </div>
                 </div>
-            </div>            
-            <div class="panel panel-default">
-                <div class="panel-body">
-
-                    <form id="uploadform" role="form" method="post" enctype="multipart/form-data" target="_self">
-                      <input type="file" class="file" id="loadfile" />
-                    </form>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="box">
+                        <div class="box-body big">
+                            @using (Html.BeginForm("", "", new { area = "" }, FormMethod.Post, new { @id = "form1", @class = "form-horizontal", @role = "form" }))
+                            { 
+                                <div class="form-group">
+                                    <label class="col-sm-3 control-label">广告标题</label>
+                                    <div class="col-sm-8">
+                                        @Html.TextBoxFor(m => m.sysad.AdTitle, new { @placeholder = "广告标题", @class = "form-control" })
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-sm-3 control-label">广告类型</label>
+                                    <div class="col-sm-8">
+                                        <label class="radio-inline  col-sm-2">
+                                            <div class="radio  col-sm-1">
+                                                <span class="">
+                                                    <input type="radio" value="1" name="optionsRadios2" checked></span>
+                                            </div>
+                                            图片广告
+                                        </label>
+                                        <label class="radio-inline  col-sm-2">
+                                            <div class="radio  col-sm-1">
+                                                <span class="checked">
+                                                    <input type="radio" value="2" name="optionsRadios2"></span>
+                                            </div>
+                                            图文广告
+                                        </label>
+                                        @Html.HiddenFor(m => m.sysad.AdType)
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-sm-3 control-label">所属平台</label>
+                                    <div class="col-sm-4">
+                                        <select class="form-control" id="sitelist">
+                                            @foreach (var item in Model.syssite)
+                                            {
+                                                <option value="@item.ID">@item.AdSiteName</option>
+                                            }
+                                        </select>
+                                        @Html.HiddenFor(m => m.sysad.AdSiteID)
+                                        @Html.HiddenFor(m => m.sysad.AdSiteName)
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-sm-3 control-label">区域宽度</label>
+                                    <div class="col-sm-2">
+                                        <div class="input-group">
+                                            @Html.TextBoxFor(m => m.sysad.AdWidth, new { @class = "form-control" })
+                                            <span class="input-group-addon">px</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-sm-3 control-label">区域高度</label>
+                                    <div class="col-sm-2">
+                                        <div class="input-group">
+                                            @Html.TextBoxFor(m => m.sysad.AdHeight, new { @class = "form-control" })
+                                            <span class="input-group-addon">px</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-sm-3 control-label">广告描述</label>
+                                    <div class="col-sm-8">
+                                        @Html.TextAreaFor(m => m.sysad.AdSummary, new { @class = "form-control", @rows = "3" })
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-sm-3 control-label">链接地址</label>
+                                    <div class="col-sm-8">
+                                        @Html.TextBoxFor(m => m.sysad.AdLinkUrl, new { @placeholder = "链接地址", @class = "form-control" })
+                                    </div>
+                                </div>                               
+                                <div class="form-group">
+                                    <label class="col-sm-3 control-label">广告图片</label>
+                                    <div class="col-sm-8">
+                                        <div class="row">
+                                            <div class="col-lg-4">
+                                                <img id="adpic" height="180" width="200" src="/img/fileupload-default.jpg" class="pull-left">
+                                            </div>
+                                            <div class="col-lg-6">
+                                                <span class="btn btn-lg btn-warning fileinput-button pull-buttom">
+                                                    <i class="icon-plus icon-white"></i>
+                                                    <span>&nbsp;上传文件&nbsp;</span>
+                                                    <input id="fileupload" type="file" name="files[]" data-url="@Url.Action("UploadFiles", "Home", new { area = "" })" >
+                                                    @Html.HiddenFor(m => m.sysad.AdPic)
+                                                </span>
+                                                <p id="erradpic" class="text-danger">asdasdas</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-sm-3 control-label">背景图片</label>
+                                    <div class="col-sm-8">
+                                        <div class="row">
+                                            <div class="col-lg-4">
+                                                <img id="adbackpic" height="180" width="200" src="/img/fileupload-default.jpg" class="pull-left">
+                                            </div>
+                                            <div class="col-lg-6">
+                                                <span class="btn btn-lg btn-warning fileinput-button pull-buttom">
+                                                    <i class="icon-plus icon-white"></i>
+                                                    <span>&nbsp;上传文件&nbsp;</span>
+                                                    <input id="fileupload1" type="file" name="files[]" data-url="@Url.Action("UploadFiles", "Home", new { area = "" })" >
+                                                    @Html.HiddenFor(m => m.sysad.AdBackgroundPic)
+                                                </span>
+                                                <p id="erradbackpic" class="text-danger">asdasdas</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-sm-3 control-label">区域代码</label>
+                                    <div class="col-sm-8">
+                                        @Html.TextAreaFor(m => m.sysad.AdSourceCode, new { @class = "form-control", @rows = "3" })
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-sm-3 control-label">备注信息</label>
+                                    <div class="col-sm-8">
+                                        @Html.TextAreaFor(m => m.sysad.AdRemark, new { @class = "form-control", @rows = "3" })
+                                    </div>
+                                </div>          
+                                <div class="modal-footer center">
+                                    <button type="button" class="btn btn-lg btn-default" data-dismiss="modal">取 消</button>
+                                    <button type="button" class="btn btn-lg btn-primary" onclick="javascript: document.getElementById('form1').submit(); return false;">保  存</button>
+                                </div>                 
+                            }
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 </div>
 @section mycss{
-    <!-- FILE UPLOAD -->
-    <link rel="stylesheet" type="text/css" href="@Url.Content("/js/bootstrap-fileinput/fileinput.css")" />
+    <link rel="stylesheet" href="@Url.Content("/js/jquery-upload/css/jquery.fileupload.css")">
+    <link rel="stylesheet" href="@Url.Content("/js/jquery-upload/css/jquery.fileupload-ui.css")">
 }
 @section scriptfiles{
-    <!-- FILE UPLOAD -->
-    <script type="text/javascript" src="@Url.Content("/js/bootstrap-fileinput/fileinput.js")"></script>
-    <!-- FILE UPLOAD -->
-    <script type="text/javascript" src="@Url.Content("/js/bootstrap-fileinput/fileinput_locale_zh.js")"></script>
+    <!-- The basic File Upload plugin -->
+    <script src="@Url.Content("/js/jquery-upload/js/vendor/jquery.ui.widget.js")"></script>
+    <script src="@Url.Content("/js/jquery-upload/js/jquery.iframe-transport.js")"></script>
+    <script src="@Url.Content("/js/jquery-upload/js/jquery.fileupload.js")"></script>
 }
 @section myscript{
     <script type="text/javascript">
-        $("#loadfile").fileinput({
-            showUpload: true,
-            showCaption: true,
-            uploadUrl: "@Url.Action("AjaxUploadArticlePices", "IndexPub", new { area=""})",
-            showRemove: false,
-            showCancel: false,
-            dropZoneEnabled: false
-        }).on('fileuploaded', function (event, data, previewId, index) {
-            alert(data.response.filename);
-        });
         $(function () {
-            App.init(); //Initialise plugins and elements          
+            App.init(); //Initialise plugins and elements      
+            $("#sysad_AdType").val($("input:radio:checked").val());
+            $("#sysad_AdSiteID").val($("#sitelist").find("option:selected").val());
+            $("#sysad_AdSiteName").val($("#sitelist").find("option:selected").text());
+            $("#erradpic").hide();
+            $("#erradbackpic").hide();
+            @*@Url.Action("UploadFiles", "Home", new { area = "" })"*@
+            $("#fileupload").fileupload({
+                dataType: 'json',
+                type: "POST",
+                singleFileUploads: true,
+                autoUpload: true,
+                done: function (e, data) {
+                    var path=data.result.path;
+                    var urlpath=data.result.urlpath;
+                    var ustatus=data.result.status;
+                    var msg=data.result.meg;
+                    if(ustatus)
+                    {
+                        $("#erradpic").hide();
+                        $("#adpic").attr("src",urlpath);
+                        $("#sysad_AdPic").val(path);
+                    }
+                    else{
+                        $("#erradpic").show();
+                    $("#erradpic").html(msg);
+                    }
+                }
+            });
+            $("#fileupload1").fileupload({
+                dataType: 'json',
+                type: "POST",
+                singleFileUploads: true,
+                autoUpload: true,
+                done: function (e, data) {
+                      var path=data.result.path;
+                    var urlpath=data.result.urlpath;
+                    var ustatus=data.result.status;
+                    var msg=data.result.meg;
+                    if(ustatus)
+                    {
+                        $("#erradbackpic").hide();
+                        $("#adbackpic").attr("src",urlpath);
+                        $("#sysad_AdBackgroundPic").val(path);
+                    }
+                    else{
+                        $("#erradbackpic").show();
+                    $("#erradbackpic").html(msg);
+                    }
+                }
+            });
+            $("input:radio").change(function () {
+                var id = $(this).val();
+                if (id == '0')
+                {
+                    $("#sysad_AdType").val(id);
+                }
+                else
+                {
+                    $("#sysad_AdType").val(id);
+                }
+            });
+            $("#sitelist").change(function () {
+                var gids = $("#sitelist").val();
+                $("#sysad_AdSiteID").val(gids);
+                $("#sysad_AdSiteName").val($(this).find("option:selected").text());
+            });
         });
 
     </script>

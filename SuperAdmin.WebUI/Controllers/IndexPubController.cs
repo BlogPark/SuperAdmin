@@ -9,6 +9,8 @@ using SuperAdmin.Common;
 using SuperAdmin.datamodel;
 using System.Json;
 using Newtonsoft.Json;
+using System.IO;
+using System.Web.Script.Serialization;
 namespace SuperAdmin.WebUI.Controllers
 {
     public class IndexPubController : Controller
@@ -73,22 +75,6 @@ namespace SuperAdmin.WebUI.Controllers
             Session.Clear();// Session[AppContext.SESSION_LOGIN_NAME] = null;
             return RedirectToAction("Index", "Login", new { returnurl = "" });
         }
-      
-        /// <summary>
-        /// 异步上传图片接口
-        /// 增加对宽度和比例的限制
-        /// 比例限制在 参数的上下0.5范围内浮动，不在此范围的为不合格
-        /// </summary>
-        /// <returns></returns>
- 
-        public ActionResult AjaxUploadArticlePices()
-        {
-            //string state = "fail";  //状态
 
-            int c = Request.Files.Count;
-
-            return Content("{}", "application/json");
-        }
-      
     }
 }

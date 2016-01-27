@@ -15,6 +15,19 @@ namespace SuperAdmin.DataDAL
     public class SysAdManager
     {
         DbHelperSQL helper = new DbHelperSQL();
+        /// <summary>
+        /// 得到系统所有的平台信息
+        /// </summary>
+        /// <returns></returns>
+        public List<SystemAdSiteModel> GetAllSysSites()
+        {
+            List<SystemAdSiteModel> list = new List<SystemAdSiteModel>();
+            list.Add(new SystemAdSiteModel { AdSiteName="PC端",ID=1,AdSiteState=1});
+            list.Add(new SystemAdSiteModel { AdSiteName = "Ipad", ID = 2, AdSiteState = 1 });
+            list.Add(new SystemAdSiteModel { AdSiteName = "移动端", ID = 3, AdSiteState = 1 });
+            return list;
+        }
+
         #region 系统广告
         /// <summary>
         /// 查询所有的广告内容
