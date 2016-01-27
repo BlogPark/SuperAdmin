@@ -40,5 +40,17 @@ namespace SuperAdmin.WebUI.Areas.SysAdvertisement.Controllers
             model.syssite = bll.GetAllSysSites();
             return View(model);
         }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
+        [HttpPost]
+        public ActionResult AddSysAd(AddNewSysAdViewModel model)
+        {
+            SystemAdModel s = model.sysad;
+            
+            return View();
+        }
     }
 }

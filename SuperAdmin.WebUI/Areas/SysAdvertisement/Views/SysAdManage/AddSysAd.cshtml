@@ -33,8 +33,8 @@
                 <div class="col-md-12">
                     <div class="box">
                         <div class="box-body big">
-                            @using (Html.BeginForm("", "", new { area = "" }, FormMethod.Post, new { @id = "form1", @class = "form-horizontal", @role = "form" }))
-                            { 
+                            @using (Html.BeginForm("AddSysAd", "SysAdManage", new { area = "SysAdvertisement" }, FormMethod.Post, new { @id = "form1", @class = "form-horizontal", @role = "form" }))
+                            {
                                 <div class="form-group">
                                     <label class="col-sm-3 control-label">广告标题</label>
                                     <div class="col-sm-8">
@@ -47,14 +47,16 @@
                                         <label class="radio-inline  col-sm-2">
                                             <div class="radio  col-sm-1">
                                                 <span class="">
-                                                    <input type="radio" value="1" name="optionsRadios2" checked></span>
+                                                    <input type="radio" value="1" name="optionsRadios2" checked>
+                                                </span>
                                             </div>
                                             图片广告
                                         </label>
                                         <label class="radio-inline  col-sm-2">
                                             <div class="radio  col-sm-1">
                                                 <span class="checked">
-                                                    <input type="radio" value="2" name="optionsRadios2"></span>
+                                                    <input type="radio" value="2" name="optionsRadios2">
+                                                </span>
                                             </div>
                                             图文广告
                                         </label>
@@ -103,7 +105,7 @@
                                     <div class="col-sm-8">
                                         @Html.TextBoxFor(m => m.sysad.AdLinkUrl, new { @placeholder = "链接地址", @class = "form-control" })
                                     </div>
-                                </div>                               
+                                </div>
                                 <div class="form-group">
                                     <label class="col-sm-3 control-label">广告图片</label>
                                     <div class="col-sm-8">
@@ -115,7 +117,7 @@
                                                 <span class="btn btn-lg btn-warning fileinput-button pull-buttom">
                                                     <i class="icon-plus icon-white"></i>
                                                     <span>&nbsp;上传文件&nbsp;</span>
-                                                    <input id="fileupload" type="file" name="files[]" data-url="@Url.Action("UploadFiles", "Home", new { area = "" })" >
+                                                    <input id="fileupload" type="file" name="files[]" data-url="@Url.Action("UploadFiles", "Home", new { area = "" })">
                                                     @Html.HiddenFor(m => m.sysad.AdPic)
                                                 </span>
                                                 <p id="erradpic" class="text-danger">asdasdas</p>
@@ -134,7 +136,7 @@
                                                 <span class="btn btn-lg btn-warning fileinput-button pull-buttom">
                                                     <i class="icon-plus icon-white"></i>
                                                     <span>&nbsp;上传文件&nbsp;</span>
-                                                    <input id="fileupload1" type="file" name="files[]" data-url="@Url.Action("UploadFiles", "Home", new { area = "" })" >
+                                                    <input id="fileupload1" type="file" name="files[]" data-url="@Url.Action("UploadFiles", "Home", new { area = "" })">
                                                     @Html.HiddenFor(m => m.sysad.AdBackgroundPic)
                                                 </span>
                                                 <p id="erradbackpic" class="text-danger">asdasdas</p>
@@ -153,11 +155,11 @@
                                     <div class="col-sm-8">
                                         @Html.TextAreaFor(m => m.sysad.AdRemark, new { @class = "form-control", @rows = "3" })
                                     </div>
-                                </div>          
+                                </div>
                                 <div class="modal-footer center">
                                     <button type="button" class="btn btn-lg btn-default" data-dismiss="modal">取 消</button>
                                     <button type="button" class="btn btn-lg btn-primary" onclick="javascript: document.getElementById('form1').submit(); return false;">保  存</button>
-                                </div>                 
+                                </div>
                             }
                         </div>
                     </div>
@@ -179,7 +181,7 @@
 @section myscript{
     <script type="text/javascript">
         $(function () {
-            App.init(); //Initialise plugins and elements      
+            App.init(); //Initialise plugins and elements
             $("#sysad_AdType").val($("input:radio:checked").val());
             $("#sysad_AdSiteID").val($("#sitelist").find("option:selected").val());
             $("#sysad_AdSiteName").val($("#sitelist").find("option:selected").text());
@@ -192,19 +194,18 @@
                 singleFileUploads: true,
                 autoUpload: true,
                 done: function (e, data) {
-                    var path=data.result.path;
-                    var urlpath=data.result.urlpath;
-                    var ustatus=data.result.status;
-                    var msg=data.result.meg;
-                    if(ustatus)
-                    {
+                    var path = data.result.path;
+                    var urlpath = data.result.urlpath;
+                    var ustatus = data.result.status;
+                    var msg = data.result.meg;
+                    if (ustatus) {
                         $("#erradpic").hide();
-                        $("#adpic").attr("src",urlpath);
+                        $("#adpic").attr("src", urlpath);
                         $("#sysad_AdPic").val(path);
                     }
-                    else{
+                    else {
                         $("#erradpic").show();
-                    $("#erradpic").html(msg);
+                        $("#erradpic").html(msg);
                     }
                 }
             });
@@ -214,30 +215,27 @@
                 singleFileUploads: true,
                 autoUpload: true,
                 done: function (e, data) {
-                      var path=data.result.path;
-                    var urlpath=data.result.urlpath;
-                    var ustatus=data.result.status;
-                    var msg=data.result.meg;
-                    if(ustatus)
-                    {
+                    var path = data.result.path;
+                    var urlpath = data.result.urlpath;
+                    var ustatus = data.result.status;
+                    var msg = data.result.meg;
+                    if (ustatus) {
                         $("#erradbackpic").hide();
-                        $("#adbackpic").attr("src",urlpath);
+                        $("#adbackpic").attr("src", urlpath);
                         $("#sysad_AdBackgroundPic").val(path);
                     }
-                    else{
+                    else {
                         $("#erradbackpic").show();
-                    $("#erradbackpic").html(msg);
+                        $("#erradbackpic").html(msg);
                     }
                 }
             });
             $("input:radio").change(function () {
                 var id = $(this).val();
-                if (id == '0')
-                {
+                if (id == '0') {
                     $("#sysad_AdType").val(id);
                 }
-                else
-                {
+                else {
                     $("#sysad_AdType").val(id);
                 }
             });
