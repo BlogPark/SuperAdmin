@@ -22,9 +22,19 @@ namespace SuperAdmin.DataDAL
         public List<SystemAdSiteModel> GetAllSysSites()
         {
             List<SystemAdSiteModel> list = new List<SystemAdSiteModel>();
-            list.Add(new SystemAdSiteModel { AdSiteName="PC端",ID=1,AdSiteState=1});
-            list.Add(new SystemAdSiteModel { AdSiteName = "Ipad", ID = 2, AdSiteState = 1 });
-            list.Add(new SystemAdSiteModel { AdSiteName = "移动端", ID = 3, AdSiteState = 1 });
+            string sqltxt = @"SELECT  ID ,
+        AdSiteName ,
+        AdSiteState
+FROM    dbo.SystemAdSite";
+            DataTable dt = helper.Query(sqltxt).Tables[0];
+            foreach (DataRow item in dt.Rows)
+            {
+                SystemAdSiteModel model = new SystemAdSiteModel();
+                model.AdSiteName = item["AdSiteName"].ToString();
+                model.AdSiteState = int.Parse(item["AdSiteState"].ToString());
+                model.ID = int.Parse(item["ID"].ToString());
+                list.Add(model);
+            }
             return list;
         }
 
@@ -114,7 +124,7 @@ FROM  dbo.SystemAd WITH(NOLOCK)";
           WHEN 1 THEN '启用'
         END AS AdStatusName
 FROM    dbo.SystemAd
-WHERE   ID IN (" + ids+" )";
+WHERE   ID IN (" + ids + " )";
             DataTable dt = helper.Query(sqltxt).Tables[0];
             foreach (DataRow item in dt.Rows)
             {
@@ -172,17 +182,17 @@ WHERE   ID IN (" + ids+" )";
         END AS AdStatusName
 FROM    dbo.SystemAd
 WHERE   ID = @id";
-            SqlParameter[] paramter = { new SqlParameter("@id",ID)};
-            DataTable dt = helper.Query(sqltxt,paramter).Tables[0];
+            SqlParameter[] paramter = { new SqlParameter("@id", ID) };
+            DataTable dt = helper.Query(sqltxt, paramter).Tables[0];
             if (dt.Rows.Count > 0)
             {
                 model.AdAddTime = DateTime.Parse(dt.Rows[0]["AdAddTime"].ToString());
-                model.AdBackgroundPic = dt.Rows[0]["AdBackgroundPic"].ToString();
+                model.AdBackgroundPic = string.IsNullOrWhiteSpace(dt.Rows[0]["AdBackgroundPic"].ToString()) ? "" : appcontent.Imgdomain + dt.Rows[0]["AdBackgroundPic"].ToString();
                 model.AddUserID = int.Parse(dt.Rows[0]["AddUserID"].ToString());
                 model.AddUserName = dt.Rows[0]["AddUserName"].ToString();
                 model.AdHeight = int.Parse(dt.Rows[0]["AdHeight"].ToString());
                 model.AdLinkUrl = dt.Rows[0]["AdLinkUrl"].ToString();
-                model.AdPic = dt.Rows[0]["AdPic"].ToString();
+                model.AdPic = string.IsNullOrWhiteSpace(dt.Rows[0]["AdPic"].ToString()) ? "" : appcontent.Imgdomain + dt.Rows[0]["AdPic"].ToString();
                 model.AdRemark = dt.Rows[0]["AdRemark"].ToString();
                 model.AdSiteID = int.Parse(dt.Rows[0]["AdSiteID"].ToString());
                 model.AdSiteName = dt.Rows[0]["AdSiteName"].ToString();
@@ -257,7 +267,7 @@ VALUES  ( @AdTitle ,
                                       new SqlParameter("@AddUserID",model.AddUserID),
                                       new SqlParameter("@AddUserName",model.AddUserName)
                                       };
-            rowcount = helper.ExecuteSql(sqltxt,paramter);
+            rowcount = helper.ExecuteSql(sqltxt, paramter);
             return rowcount;
         }
         /// <summary>
@@ -292,8 +302,8 @@ WHERE   id = @id";
                                           new SqlParameter("@AdWidth",model.AdWidth),
                                           new SqlParameter("@AdHeight",model.AdHeight),
                                           new SqlParameter("@AdSummary",model.AdSummary),
-                                          new SqlParameter("@AdPic",model.AdPic),
-                                          new SqlParameter("@AdBackgroundPic",model.AdBackgroundPic),
+                                          new SqlParameter("@AdPic",model.AdPic.Replace(appcontent.Imgdomain,"")),
+                                          new SqlParameter("@AdBackgroundPic",model.AdBackgroundPic.Replace(appcontent.Imgdomain,"")),
                                           new SqlParameter("@AdLinkUrl",model.AdLinkUrl),
                                           new SqlParameter("@AdSourceCode",model.AdSourceCode),
                                           new SqlParameter("@AdRemark",model.AdRemark),
@@ -303,7 +313,7 @@ WHERE   id = @id";
                                           new SqlParameter("@AddUserID",model.AddUserID),
                                           new SqlParameter("@AddUserName",model.AddUserName)
                                     };
-            rowcount = helper.ExecuteSql(sqltxt,paramter);
+            rowcount = helper.ExecuteSql(sqltxt, paramter);
             return rowcount;
         }
         /// <summary>
@@ -315,16 +325,52 @@ WHERE   id = @id";
         {
             int rowcount = 0;
             string sqltxt = @"UPDATE  dbo.SystemAd
-SET     AdStatus = 0
+SET     AdStatus = CASE AdStatus
+                     WHEN 0 THEN 1
+                     WHEN 1 THEN 0
+                   END
 WHERE   id = @id";
-            SqlParameter[] paramter = { new SqlParameter("@id",id)};
-            rowcount = helper.ExecuteSql(sqltxt,paramter);
+            SqlParameter[] paramter = { new SqlParameter("@id", id) };
+            rowcount = helper.ExecuteSql(sqltxt, paramter);
             return rowcount;
         }
         #endregion
 
         #region 系统广告位置
-
+        /// <summary>
+        /// 得到所有的广告位置
+        /// </summary>
+        /// <param name="isneeduse">是否只读取激活的信息</param>
+        /// <returns></returns>
+        public List<SystemAdPositionModel> GetAllAdPosition(bool isneeduse=false)
+        {
+            List<SystemAdPositionModel> list = new List<SystemAdPositionModel>();
+            string sqltxt = @"SELECT  ID ,
+        PName ,
+        AdSiteID ,
+        AdSiteName ,
+        PWidth ,
+        PHeight ,
+        PType
+FROM    dbo.SystemAdPosition";
+            if (isneeduse)
+            { sqltxt += " WHERE PStatus=1 "; }
+            DataTable dt = helper.Query(sqltxt).Tables[0];
+            foreach (DataRow item in dt.Rows)
+            {
+                SystemAdPositionModel model = new SystemAdPositionModel();
+                model.AdSiteID = int.Parse(item["AdSiteID"].ToString());
+                model.AdSiteName = item["AdSiteName"].ToString();
+                model.ID = int.Parse(item["ID"].ToString());
+                model.PHeight = int.Parse(item["PHeight"].ToString());
+                model.PName = item["PName"].ToString();
+                model.PStatus = int.Parse(item["PStatus"].ToString()); ;
+                model.PType = int.Parse(item["PType"].ToString());
+                model.PWidth = int.Parse(item["PWidth"].ToString());
+                list.Add(model);
+            }
+            return list;
+        }
         #endregion
 
         #region 系统广告排期

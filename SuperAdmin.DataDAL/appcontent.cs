@@ -1,16 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Web;
+using System.Text;
+using System.Threading.Tasks;
 
-namespace SuperAdmin.WebUI.Controllers
+namespace SuperAdmin.DataDAL
 {
-    public class AppContext
+    public class appcontent
     {
-        /// <summary>
-        /// 存储用户信息的session名称
-        /// </summary>
-        public static readonly string SESSION_LOGIN_NAME = "SESSION_LOGIN_NAME";
         /// <summary>
         /// 图片上传路径
         /// </summary>

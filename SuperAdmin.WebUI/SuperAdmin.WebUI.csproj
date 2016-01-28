@@ -121,6 +121,7 @@
     <Compile Include="Areas\SysAdvertisement\Controllers\SysAdManageController.cs" />
     <Compile Include="Areas\SysAdvertisement\Models\AddNewSysAdViewModel.cs" />
     <Compile Include="Areas\SysAdvertisement\Models\SystemAdInfoViewModel.cs" />
+    <Compile Include="Areas\SysAdvertisement\Models\UpdateAdViewModel.cs" />
     <Compile Include="Areas\SysAdvertisement\SysAdvertisementAreaRegistration.cs" />
     <Compile Include="Areas\SysSetting\Controllers\SettingsController.cs" />
     <Compile Include="Areas\SysSetting\Models\AdminUserViewModel.cs" />
@@ -265,7 +266,10 @@
     <Content Include="img\gallery\img\1.jpg" />
     <Content Include="img\gritter\buy.png" />
     <Content Include="img\gritter\cloud.png" />
+    <Content Include="img\gritter\error.png" />
     <Content Include="img\gritter\settings.png" />
+    <Content Include="img\gritter\success.jpg" />
+    <Content Include="img\gritter\waring.png" />
     <Content Include="img\headshot.png" />
     <Content Include="img\inbox\1.jpg" />
     <Content Include="img\inbox\2.jpg" />
@@ -1377,6 +1381,9 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Areas\SysAdvertisement\Views\SysAdManage\AddSysAd.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\SysAdvertisement\Views\SysAdManage\UpdateAdInfo.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

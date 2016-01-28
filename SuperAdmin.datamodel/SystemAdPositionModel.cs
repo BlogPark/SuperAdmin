@@ -49,5 +49,10 @@ namespace SuperAdmin.datamodel
         /// </summary>       
         [DataMember]
         public int PType { get; set; }
+        /// <summary>
+        /// 状态值（1 激活 0 禁用）
+        /// </summary>
+        [DataMember]
+        public int PStatus { get; set; }
     }
 }
