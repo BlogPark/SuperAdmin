@@ -267,6 +267,8 @@
     <script type="text/javascript">
         $(function () {
             App.init(); //Initialise plugins and elements
+            $("#addposition_AdSiteID").val($("#addsite").val());
+            $("#addposition_AdSiteName").val($("#addsite").find("option:checked").text());
             $("#addsite").change(function () {
                 var id = $(this).val();
                 var text = $("#addsite").find("option:checked").text();
@@ -277,7 +279,7 @@
                 var id = $(this).val();
                 var text = $("#updsite").find("option:checked").text();
                 $("#updateposition_AdSiteID").val(id);
-                $("#addposition_AdSiteName").val(text);
+                $("#updateposition_AdSiteName").val(text);
             });
             $("input:radio[name=optionsRadios1]").change(function () {
                 var id = $(this).val();
