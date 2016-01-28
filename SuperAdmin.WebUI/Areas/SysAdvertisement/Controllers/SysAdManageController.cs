@@ -32,6 +32,7 @@ namespace SuperAdmin.WebUI.Areas.SysAdvertisement.Controllers
             model.UpdAdinfo = new SystemAdModel();
             return View(model);
         }
+        #region 系统广告信息
         /// <summary>
         /// 添加系统广告
         /// </summary>
@@ -116,5 +117,57 @@ namespace SuperAdmin.WebUI.Areas.SysAdvertisement.Controllers
             }
             return Json("0");
         }
+        #endregion
+
+        /// <summary>
+        /// 系统广告位置
+        /// </summary>
+        /// <returns></returns>
+        public ActionResult SysAdPosition()
+        {
+            SysAdPositionViewModel model = new SysAdPositionViewModel();
+            model.syssite = bll.GetAllSysSites();
+            model.positions = bll.GetAllAdPosition();
+            return View(model);
+        }
+        #region 系统广告位置
+        [HttpPost]
+        public ActionResult AddPosition(SystemAdPositionModel addposition)
+        {
+            if (addposition != null)
+            {
+                addposition.PStatus = 1;
+                int rowcount = bll.AddSysAdPosition(addposition);
+            }
+            return RedirectToAction("SysAdPosition", "SysAdManage", new { area = "SysAdvertisement" });
+        }
+        [HttpPost]
+        public ActionResult UpdatePosition(SystemAdPositionModel updateposition)
+        {
+            if (updateposition != null)
+            {
+                updateposition.AdSiteName = updateposition.AdSiteName.Replace("\r", "").Replace("\n", "").Trim();
+                int rowcount = bll.UpdateSysAdPosition(updateposition);
+            }
+            return RedirectToAction("SysAdPosition", "SysAdManage", new { area = "SysAdvertisement" });
+        }
+        [HttpPost]
+        public ActionResult DeletePosition(int pid)
+        {
+            if (pid > 0)
+            {
+                int rowcount = bll.UpdateAdPositionStatus(pid,0);
+                if (rowcount > 0)
+                {
+                    return Json("1");
+                }
+                else
+                {
+                    return Json("0");
+                }
+            }
+            return View("0");
+        }
+        #endregion
     }
 }

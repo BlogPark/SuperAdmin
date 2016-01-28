@@ -342,7 +342,7 @@ WHERE   id = @id";
         /// </summary>
         /// <param name="isneeduse">是否只读取激活的信息</param>
         /// <returns></returns>
-        public List<SystemAdPositionModel> GetAllAdPosition(bool isneeduse=false)
+        public List<SystemAdPositionModel> GetAllAdPosition(bool isneeduse = false)
         {
             List<SystemAdPositionModel> list = new List<SystemAdPositionModel>();
             string sqltxt = @"SELECT  ID ,
@@ -351,7 +351,7 @@ WHERE   id = @id";
         AdSiteName ,
         PWidth ,
         PHeight ,
-        PType
+        PType,PStatus
 FROM    dbo.SystemAdPosition";
             if (isneeduse)
             { sqltxt += " WHERE PStatus=1 "; }
@@ -370,6 +370,123 @@ FROM    dbo.SystemAdPosition";
                 list.Add(model);
             }
             return list;
+        }
+        /// <summary>
+        /// 添加一个广告位置
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
+        public int AddSysAdPosition(SystemAdPositionModel model)
+        {
+            int rowcount = 0;
+            string sqltxt = @"INSERT  INTO  dbo.SystemAdPosition
+        ( PName ,
+          AdSiteID ,
+          AdSiteName ,
+          PWidth ,
+          PHeight ,
+          PType ,
+          PStatus
+        )
+VALUES  ( @PName ,
+          @AdSiteID ,
+          @AdSiteName ,
+          @PWidth ,
+          @PHeight ,
+          @PType ,
+          @PStatus
+        )";
+            SqlParameter[] paramter = { 
+                                      new SqlParameter("@PName",model.PName),
+                                      new SqlParameter("@AdSiteID",model.AdSiteID),
+                                      new SqlParameter("@AdSiteName",model.AdSiteName),
+                                      new SqlParameter("@PWidth",model.PWidth),
+                                      new SqlParameter("@PHeight",model.PHeight),
+                                      new SqlParameter("@PType",model.PType),
+                                      new SqlParameter("@PStatus",model.PStatus)
+                                      };
+            rowcount = helper.ExecuteSql(sqltxt, paramter);
+            return rowcount;
+        }
+        /// <summary>
+        /// 添加一个广告位置
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
+        public int UpdateSysAdPosition(SystemAdPositionModel model)
+        {
+            int rowcount = 0;
+            string sqltxt = @"UPDATE  dbo.SystemAdPosition
+SET     PName = @PName ,
+        AdSiteID = @AdSiteID ,
+        AdSiteName = @AdSiteName ,
+        PWidth = @PWidth ,
+        PHeight = @PHeight ,
+        PType = @PType 
+WHERE   ID = @ID";
+            SqlParameter[] paramter = { 
+                                      new SqlParameter("@PName",model.PName),
+                                      new SqlParameter("@AdSiteID",model.AdSiteID),
+                                      new SqlParameter("@AdSiteName",model.AdSiteName),
+                                      new SqlParameter("@PWidth",model.PWidth),
+                                      new SqlParameter("@PHeight",model.PHeight),
+                                      new SqlParameter("@PType",model.PType),
+                                      new SqlParameter("@ID",model.ID)
+                                      };
+            rowcount = helper.ExecuteSql(sqltxt, paramter);
+            return rowcount;
+        }
+        /// <summary>
+        /// 更改广告位置状态值
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="status"></param>
+        /// <returns></returns>
+        public int UpdateAdPositionStatus(int id, int status)
+        {
+            int rowcount = 0;
+            string sqltxt = @"UPDATE  dbo.SystemAdPosition
+SET      PStatus = @PStatus
+WHERE   ID = @ID";
+            SqlParameter[] paramter = {                                     
+                                      new SqlParameter("@PStatus",status),
+                                      new SqlParameter("@ID",id)
+                                      };
+            rowcount = helper.ExecuteSql(sqltxt, paramter);
+            return rowcount;
+        }
+        /// <summary>
+        /// 根据信息得到一条单独信息
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public SystemAdPositionModel GetSinglePositionByID(int id)
+        {
+            SystemAdPositionModel model = new SystemAdPositionModel();
+            string sqltxt = @"SELECT  ID ,
+        PName ,
+        AdSiteID ,
+        AdSiteName ,
+        PWidth ,
+        PHeight ,
+        PType ,
+        PStatus
+FROM    dbo.SystemAdPosition
+WHERE   id = @id ";
+            SqlParameter[] paramter = { new SqlParameter("@id",id)};
+            DataTable dt = helper.Query(sqltxt,paramter).Tables[0];
+            if (dt.Rows.Count > 0)
+            {
+                model.AdSiteID = int.Parse(dt.Rows[0]["AdSiteID"].ToString());
+                model.AdSiteName = dt.Rows[0]["AdSiteName"].ToString();
+                model.ID = int.Parse(dt.Rows[0]["ID"].ToString());
+                model.PHeight = int.Parse(dt.Rows[0]["PHeight"].ToString());
+                model.PName = dt.Rows[0]["PName"].ToString();
+                model.PStatus = int.Parse(dt.Rows[0]["PStatus"].ToString());
+                model.PType = int.Parse(dt.Rows[0]["PType"].ToString());
+                model.PWidth = int.Parse(dt.Rows[0]["PWidth"].ToString());
+            }
+            return model;
         }
         #endregion
 

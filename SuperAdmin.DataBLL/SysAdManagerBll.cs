@@ -77,5 +77,54 @@ namespace SuperAdmin.DataBLL
             return dal.DeleteSystemAd(id);
         }
         #endregion
+
+        #region 系统广告位置
+        /// <summary>
+        /// 得到所有的广告位置
+        /// </summary>
+        /// <param name="isneeduse">是否只读取激活的信息</param>
+        /// <returns></returns>
+        public List<SystemAdPositionModel> GetAllAdPosition(bool isneeduse = false)
+        {
+            return dal.GetAllAdPosition(isneeduse);
+        }
+         /// <summary>
+        /// 添加一个广告位置
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
+        public int AddSysAdPosition(SystemAdPositionModel model)
+        {
+            return dal.AddSysAdPosition(model);
+        }
+        /// <summary>
+        /// 添加一个广告位置
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
+        public int UpdateSysAdPosition(SystemAdPositionModel model)
+        {
+            return dal.UpdateSysAdPosition(model);
+        }
+        /// <summary>
+        /// 更改广告位置状态值
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="status"></param>
+        /// <returns></returns>
+        public int UpdateAdPositionStatus(int id, int status)
+        {
+            return dal.UpdateAdPositionStatus(id,status);
+        }
+        /// <summary>
+        /// 根据信息得到一条单独信息
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public SystemAdPositionModel GetSinglePositionByID(int id)
+        {
+            return dal.GetSinglePositionByID(id);
+        }
+        #endregion
     }
 }
