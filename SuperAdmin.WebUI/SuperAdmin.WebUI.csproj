@@ -121,6 +121,7 @@
     <Compile Include="Areas\SysAdvertisement\Controllers\SysAdManageController.cs" />
     <Compile Include="Areas\SysAdvertisement\Models\AddNewSysAdViewModel.cs" />
     <Compile Include="Areas\SysAdvertisement\Models\SysAdPositionViewModel.cs" />
+    <Compile Include="Areas\SysAdvertisement\Models\SysAdScheduleViewModel.cs" />
     <Compile Include="Areas\SysAdvertisement\Models\SystemAdInfoViewModel.cs" />
     <Compile Include="Areas\SysAdvertisement\Models\UpdateAdViewModel.cs" />
     <Compile Include="Areas\SysAdvertisement\SysAdvertisementAreaRegistration.cs" />

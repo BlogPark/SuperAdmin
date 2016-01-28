@@ -169,5 +169,13 @@ namespace SuperAdmin.WebUI.Areas.SysAdvertisement.Controllers
             return View("0");
         }
         #endregion
+
+        public ActionResult SysAdSchedule()
+        {
+            return View();
+        }
+        #region 系统广告排期设置
+
+        #endregion
     }
 }
