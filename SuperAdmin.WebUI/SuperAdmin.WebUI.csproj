@@ -120,10 +120,12 @@
     <Compile Include="Areas\AdminMenu\Models\SysUserMenuViewModel.cs" />
     <Compile Include="Areas\SysAdvertisement\Controllers\SysAdManageController.cs" />
     <Compile Include="Areas\SysAdvertisement\Models\AddNewSysAdViewModel.cs" />
+    <Compile Include="Areas\SysAdvertisement\Models\NewScheduleViewModel.cs" />
     <Compile Include="Areas\SysAdvertisement\Models\SysAdPositionViewModel.cs" />
     <Compile Include="Areas\SysAdvertisement\Models\SysAdScheduleViewModel.cs" />
     <Compile Include="Areas\SysAdvertisement\Models\SystemAdInfoViewModel.cs" />
     <Compile Include="Areas\SysAdvertisement\Models\UpdateAdViewModel.cs" />
+    <Compile Include="Areas\SysAdvertisement\Models\UpdScheduleViewModel.cs" />
     <Compile Include="Areas\SysAdvertisement\SysAdvertisementAreaRegistration.cs" />
     <Compile Include="Areas\SysSetting\Controllers\SettingsController.cs" />
     <Compile Include="Areas\SysSetting\Models\AdminUserViewModel.cs" />
@@ -321,18 +323,9 @@
     <Content Include="js\blueimp\javascript-loadimg\load-image.min.js" />
     <Content Include="js\blueimp\javascript-template\tmpl.min.js" />
     <Content Include="js\bootbox\bootbox.min.js" />
-    <Content Include="js\bootstrap-daterangepicker\daterangepicker-bs3.css" />
-    <Content Include="js\bootstrap-daterangepicker\daterangepicker.min.js" />
-    <Content Include="js\bootstrap-daterangepicker\moment.min.js" />
-    <Content Include="js\bootstrap-fileinput\bootstrap.min.js" />
-    <Content Include="js\bootstrap-fileinput\fileinput.css" />
-    <Content Include="js\bootstrap-fileinput\fileinput.js" />
-    <Content Include="js\bootstrap-fileinput\fileinput.min.js" />
-    <Content Include="js\bootstrap-fileinput\fileinput1.js" />
-    <Content Include="js\bootstrap-fileinput\fileinput_locale_zh.js" />
-    <Content Include="js\bootstrap-fileinput\jquery-form.js" />
-    <Content Include="js\bootstrap-fileupload\bootstrap-fileupload.min.css" />
-    <Content Include="js\bootstrap-fileupload\bootstrap-fileupload.min.js" />
+    <Content Include="js\bootstrap-daterangepicker\bootstrap-datetimepicker.css" />
+    <Content Include="js\bootstrap-daterangepicker\bootstrap-datetimepicker.js" />
+    <Content Include="js\bootstrap-daterangepicker\locales\bootstrap-datetimepicker.zh-CN.js" />
     <Content Include="js\bootstrap-inputmask\bootstrap-inputmask.min.js" />
     <Content Include="js\bootstrap-markdown\css\bootstrap-markdown.min.css" />
     <Content Include="js\bootstrap-markdown\js\bootstrap-markdown.js" />
@@ -1392,6 +1385,9 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Areas\SysAdvertisement\Views\SysAdManage\SysAdSchedule.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\SysAdvertisement\Views\SysAdManage\AddSysSchedule.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

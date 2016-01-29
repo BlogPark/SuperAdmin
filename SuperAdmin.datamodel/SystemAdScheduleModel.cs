@@ -14,6 +14,7 @@ namespace SuperAdmin.datamodel
     [DataContract]
     public class SystemAdScheduleModel
     {
+        #region 原表字段
         /// <summary>
         /// ID
         /// </summary>       
@@ -89,5 +90,49 @@ namespace SuperAdmin.datamodel
         /// </summary>       
         [DataMember]
         public string AddUserName { get; set; }
+        /// <summary>
+        /// 客户姓名
+        /// </summary>
+        [DataMember]
+        public string ClientName { get; set; }
+        /// <summary>
+        /// 客户邮箱
+        /// </summary>
+        [DataMember]
+        public string ClientEmail { get; set; }
+        /// <summary>
+        /// 客户联系方式
+        /// </summary>
+        [DataMember]
+        public string ClientPhone { get; set; }
+        /// <summary>
+        /// 状态（0 未审核 1 已审核 2 已作废）
+        /// </summary>
+        [DataMember]
+        public int SeStatus { get; set; } 
+        #endregion
+
+        #region 扩展字段
+        /// <summary>
+        /// 状态名称
+        /// </summary>
+        [DataMember]
+        public string SeStatusName { get; set; }
+        /// <summary>
+        /// 平台名称
+        /// </summary>
+        [DataMember]
+        public string SiteName { get; set; }
+        /// <summary>
+        /// 位置名称
+        /// </summary>
+        [DataMember]
+        public string PositionName { get; set; }
+        /// <summary>
+        /// 广告标题
+        /// </summary>
+        [DataMember]
+        public string AdTitle { get; set; }
+        #endregion
     }
 }

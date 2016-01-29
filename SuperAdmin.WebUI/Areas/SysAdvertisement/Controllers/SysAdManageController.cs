@@ -172,10 +172,37 @@ namespace SuperAdmin.WebUI.Areas.SysAdvertisement.Controllers
 
         public ActionResult SysAdSchedule()
         {
-            return View();
+            SysAdScheduleViewModel model = new SysAdScheduleViewModel();
+            model.schedules = bll.GetAllSchedule();
+            return View(model);
         }
         #region 系统广告排期设置
-
+        public ActionResult AddSysSchedule()
+        {
+            NewScheduleViewModel model = new NewScheduleViewModel();
+            model.sites = bll.GetAllSysSites();
+            return View(model);
+        }
+        [HttpPost]
+        public ActionResult AddSysSchedule(NewScheduleViewModel model)
+        {
+            return View(model);
+        }
+        public ActionResult UpdateSysSchedule()
+        {
+            UpdScheduleViewModel model = new UpdScheduleViewModel();
+            return View();
+        }
+        [HttpPost]
+        public ActionResult UpdateSysSchedule(UpdScheduleViewModel model)
+        {
+            return View(model);
+        }
+        [HttpPost]
+        public ActionResult delesysschedule(int sid)
+        {
+            return Json("1");
+        }
         #endregion
     }
 }

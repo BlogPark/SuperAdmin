@@ -1,0 +1,214 @@
+﻿@model SuperAdmin.WebUI.Areas.SysAdvertisement.Models.NewScheduleViewModel
+@{
+    Layout = "~/Views/_Layout.cshtml";
+}
+<div class="container">
+    <div class="row">
+        <div id="content" class="col-lg-12">
+            <!-- PAGE HEADER-->
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="page-header">
+                        <!-- BREADCRUMBS -->
+                        <ul class="breadcrumb">
+                            <li>
+                                <i class="fa fa-home"></i>
+                                <a href="index.html">Home</a>
+                            </li>
+                            <li>
+                                <a href="#">广告设置</a>
+                            </li>
+                            <li>添加广告排期</li>
+                        </ul>
+                        <!-- /BREADCRUMBS -->
+                        <div class="clearfix">
+                            <h3 class="content-title pull-left">添加广告排期</h3>
+                        </div>
+                        <div class="description"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    @using (Html.BeginForm("AddSysSchedule", "SysAdManage", new { area = "SysAdvertisement" }, FormMethod.Post, new { @id = "form1", @class = "form-horizontal", @role = "form" }))
+                    {
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">排期标题</label>
+                            <div class="col-sm-8">
+                                <input class="form-control" type="text" placeholder="排期标题" />
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">所属平台</label>
+                            <div class="col-sm-8">
+                                <select class="form-control" id="sitelist">
+                                            @foreach (var item in Model.sites)
+                                            {
+                                                <option value="@item.ID">@item.AdSiteName</option>
+                                            }
+                                        </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">广告位置</label>
+                            <div class="col-sm-8">
+                                <input class="form-control" type="text" placeholder="文本框" />
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">广告内容</label>
+                            <div class="col-sm-8">
+                                <input class="form-control" type="text" placeholder="文本框" />
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">开始时间</label>
+                            <div class="col-sm-4">
+                                <div class="input-group">
+                                    <input type="text" class="form-control" readonly id="datetimepicker" data-date-format="yyyy-mm-dd hh:ii">
+                                    <span class="input-group-addon">
+                                        <i class="fa fa-calendar"></i>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">结束时间</label>
+                            <div class="col-sm-4">
+                                <div class="input-group">
+                                    <input type="text" class="form-control" readonly id="datetimepicker1" data-date-format="yyyy-mm-dd hh:ii">
+                                    <span class="input-group-addon">
+                                        <i class="fa fa-calendar"></i>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">客户姓名</label>
+                            <div class="col-sm-8">
+                                <input class="form-control" type="text" placeholder="文本框" />
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">客户邮箱</label>
+                            <div class="col-sm-8">
+                                <input class="form-control" type="text" placeholder="文本框" />
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">客户手机</label>
+                            <div class="col-sm-8">
+                                <input class="form-control" type="text" placeholder="文本框" />
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">区域名称</label>
+                            <div class="col-sm-8">
+                                <input class="form-control" type="text" placeholder="文本框" />
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">控制器名称</label>
+                            <div class="col-sm-8">
+                                <input class="form-control" type="text" placeholder="文本框" />
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">Action名称</label>
+                            <div class="col-sm-8">
+                                <input class="form-control" type="text" placeholder="文本框" />
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">间隔数</label>
+                            <div class="col-sm-8">
+                                <input class="form-control" type="text" placeholder="文本框" />
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">特殊标注</label>
+                            <div class="col-sm-8">
+                                <input class="form-control" type="text" placeholder="文本框" />
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label"></label>
+                            <div class="col-sm-9">
+                                <div class="box">
+                                    <div class="box-title">
+                                        <h4><i class="fa fa-plus"></i>更多扩展信息</h4>
+                                        <div class="tools">
+                                            <a class="expand" href="javascript:;">
+                                                <i class="fa fa-chevron-down"></i>
+                                            </a>
+                                        </div>
+                                    </div>
+                                    <div style="display: none" class="box-body">
+                                        <div class="form-group">
+                                            <label class="col-sm-3 control-label">区域名称</label>
+                                            <div class="col-sm-8">
+                                                <input class="form-control" type="text" placeholder="文本框" />
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-sm-3 control-label">控制器名称</label>
+                                            <div class="col-sm-8">
+                                                <input class="form-control" type="text" placeholder="文本框" />
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-sm-3 control-label">Action名称</label>
+                                            <div class="col-sm-8">
+                                                <input class="form-control" type="text" placeholder="文本框" />
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-sm-3 control-label">间隔数</label>
+                                            <div class="col-sm-8">
+                                                <input class="form-control" type="text" placeholder="文本框" />
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-sm-3 control-label">特殊标注</label>
+                                            <div class="col-sm-8">
+                                                <input class="form-control" type="text" placeholder="文本框" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer center">
+                            <a class="btn btn-lg btn-default" href="@Url.Action("SysAdInfo", "SysAdManage", new { area = "SysAdvertisement" })">取 消</a>
+                            <button type="button" class="btn btn-lg btn-primary" onclick="javascript: document.getElementById('form1').submit(); return false;">保  存</button>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@section mycss{
+    <link rel="stylesheet" href="@Url.Content("/js/bootstrap-daterangepicker/bootstrap-datetimepicker.css")">
+}
+@section scriptfiles{
+    <script src="@Url.Content("/js/bootstrap-daterangepicker/bootstrap-datetimepicker.js")"></script>
+    <script src="@Url.Content("/js/bootstrap-daterangepicker/locales/bootstrap-datetimepicker.zh-CN.js")"></script>
+}
+@section myscript{
+    <script type="text/javascript">
+        $(function () {
+            App.init(); //Initialise plugins and elements
+            $("#datetimepicker").datetimepicker({
+                language: 'zh-CN'
+            });
+            $("#datetimepicker1").datetimepicker({
+                language: 'zh-CN'
+            });
+
+            $("#sitelist").change(function () {
+                
+            });
+        });
+    </script>
+}

@@ -40,6 +40,15 @@ namespace SuperAdmin.DataBLL
         {
             return dal.GetSystemAdByID(ids);
         }
+         /// <summary>
+        /// 根据多条件列表查询
+        /// </summary>
+        /// <param name="ids"></param>
+        /// <returns></returns>
+        public List<SystemAdModel> GetSystemAdByWhereStr(SystemAdModel where)
+        {
+            return dal.GetSystemAdByWhereStr(where);
+        }
         /// <summary>
         /// 根据ID查询广告信息
         /// </summary>
@@ -89,6 +98,15 @@ namespace SuperAdmin.DataBLL
             return dal.GetAllAdPosition(isneeduse);
         }
          /// <summary>
+        /// 得到符合条件的所有的广告位置
+        /// </summary>
+        /// <param name="where">条件信息</param>
+        /// <returns></returns>
+        public List<SystemAdPositionModel> GetAllAdPositionByWhereStr(SystemAdPositionModel where)
+        {
+            return dal.GetAllAdPositionByWhereStr(where);
+        }
+         /// <summary>
         /// 添加一个广告位置
         /// </summary>
         /// <param name="model"></param>
@@ -124,6 +142,55 @@ namespace SuperAdmin.DataBLL
         public SystemAdPositionModel GetSinglePositionByID(int id)
         {
             return dal.GetSinglePositionByID(id);
+        }
+        #endregion
+
+        #region 系统广告排期
+        /// <summary>
+        /// 得到所有的广告排期信息
+        /// </summary>
+        /// <param name="isused">是否只需要激活的</param>
+        /// <returns></returns>
+        public List<SystemAdScheduleModel> GetAllSchedule(bool isused = false)
+        {
+            return dal.GetAllSchedule(isused);
+        }
+         /// <summary>
+        /// 根据ID得到排期详细信息
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public SystemAdScheduleModel GetSingleScheduleByID(int id)
+        {
+            return dal.GetSingleScheduleByID(id);
+        }
+         /// <summary>
+        /// 添加排期信息
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
+        public int AddSchedule(SystemAdScheduleModel model)
+        {
+            return dal.AddSchedule(model);
+        }
+        /// <summary>
+        /// 修改排期信息
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
+        public int UpdateSchedule(SystemAdScheduleModel model)
+        {
+            return dal.UpdateSchedule(model);
+        }
+        /// <summary>
+        /// 更改排期状态
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="status"></param>
+        /// <returns></returns>
+        public int UpdateScheduleStatus(int id, int status)
+        {
+            return UpdateScheduleStatus(id,status);
         }
         #endregion
     }
