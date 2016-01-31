@@ -58,7 +58,7 @@
                         <div class="form-group">
                             <label class="col-sm-3 control-label">广告内容</label>
                             <div class="col-sm-8">
-                                <input class="form-control" type="text" placeholder="文本框" />
+                                <div id="magicsuggest"></div>
                             </div>
                         </div>
                         <div class="form-group">
@@ -100,37 +100,7 @@
                             <div class="col-sm-8">
                                 <input class="form-control" type="text" placeholder="文本框" />
                             </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="col-sm-3 control-label">区域名称</label>
-                            <div class="col-sm-8">
-                                <input class="form-control" type="text" placeholder="文本框" />
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="col-sm-3 control-label">控制器名称</label>
-                            <div class="col-sm-8">
-                                <input class="form-control" type="text" placeholder="文本框" />
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="col-sm-3 control-label">Action名称</label>
-                            <div class="col-sm-8">
-                                <input class="form-control" type="text" placeholder="文本框" />
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="col-sm-3 control-label">间隔数</label>
-                            <div class="col-sm-8">
-                                <input class="form-control" type="text" placeholder="文本框" />
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="col-sm-3 control-label">特殊标注</label>
-                            <div class="col-sm-8">
-                                <input class="form-control" type="text" placeholder="文本框" />
-                            </div>
-                        </div>
+                        </div>                        
                         <div class="form-group">
                             <label class="col-sm-2 control-label"></label>
                             <div class="col-sm-9">
@@ -190,10 +160,12 @@
 </div>
 @section mycss{
     <link rel="stylesheet" href="@Url.Content("/js/bootstrap-daterangepicker/bootstrap-datetimepicker.css")">
+    <link rel="stylesheet" href="@Url.Content("/js/magic-suggest/magicsuggest-min.css")">
 }
 @section scriptfiles{
     <script src="@Url.Content("/js/bootstrap-daterangepicker/bootstrap-datetimepicker.js")"></script>
     <script src="@Url.Content("/js/bootstrap-daterangepicker/locales/bootstrap-datetimepicker.zh-CN.js")"></script>
+    <script src="@Url.Content("/js/magic-suggest/magicsuggest-min.js")"></script>
 }
 @section myscript{
     <script type="text/javascript">
@@ -207,7 +179,22 @@
             });
 
             $("#sitelist").change(function () {
-                
+                alert($(this).val());
+            });
+
+            $("#magicsuggest").magicSuggest({
+                autoSelect: true,
+                data: '@Url.Action("GetJsonSysAd", "SysAdManage", new { area = "SysAdvertisement" })',
+                dataUrlParams: { 'siteid': $("#sitelist").val() },
+                displayField: 'AdTitle',
+                method: 'post',
+                maxSelection: 1,
+                resultAsString: true,
+                noSuggestionText: '无匹配项',
+                sortOrder: 'ID',
+                sortDir:'desc',
+                maxSelectionRenderer: function () { }
+
             });
         });
     </script>

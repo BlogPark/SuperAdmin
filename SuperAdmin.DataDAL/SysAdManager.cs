@@ -184,7 +184,7 @@ FROM    dbo.SystemAd
 WHERE  AdStatus=1 ";
             if (where.AdSiteID != 0)
             {
-                sqltxt += @" AND AdSiteID='"+where+"'";
+                sqltxt += @" AND AdSiteID='" + where.AdSiteID + "'";
             }
             DataTable dt = helper.Query(sqltxt).Tables[0];
             foreach (DataRow item in dt.Rows)
@@ -363,8 +363,8 @@ WHERE   id = @id";
                                           new SqlParameter("@AdWidth",model.AdWidth),
                                           new SqlParameter("@AdHeight",model.AdHeight),
                                           new SqlParameter("@AdSummary",model.AdSummary),
-                                          new SqlParameter("@AdPic",model.AdPic.Replace(appcontent.Imgdomain,"")),
-                                          new SqlParameter("@AdBackgroundPic",model.AdBackgroundPic.Replace(appcontent.Imgdomain,"")),
+                                          new SqlParameter("@AdPic",model.AdPic!=null?model.AdPic.Replace(appcontent.Imgdomain,""):""),
+                                          new SqlParameter("@AdBackgroundPic",model.AdBackgroundPic!=null?model.AdBackgroundPic.Replace(appcontent.Imgdomain,""):""),
                                           new SqlParameter("@AdLinkUrl",model.AdLinkUrl),
                                           new SqlParameter("@AdSourceCode",model.AdSourceCode),
                                           new SqlParameter("@AdRemark",model.AdRemark),

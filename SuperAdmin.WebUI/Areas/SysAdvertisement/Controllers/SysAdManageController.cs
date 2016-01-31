@@ -204,5 +204,20 @@ namespace SuperAdmin.WebUI.Areas.SysAdvertisement.Controllers
             return Json("1");
         }
         #endregion
+        [HttpPost]
+        public ActionResult GetJsonSysAd(int siteid)
+        {
+            SystemAdModel model = new SystemAdModel();
+            model.AdSiteID = siteid;
+            List<SystemAdModel> list = bll.GetSystemAdByWhereStr(model);
+            return Json(list);
+        }
+        public ActionResult GetJsonSysPosition(int siteid)
+        {
+            SystemAdPositionModel model = new SystemAdPositionModel();
+            model.AdSiteID = siteid;
+            List<SystemAdPositionModel> list = bll.GetAllAdPositionByWhereStr(model);
+            return Json(list);
+        }
     }
 }
