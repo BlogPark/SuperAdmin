@@ -2,7 +2,8 @@
 @{
     Layout = "~/Views/_Layout.cshtml";
 }
-<div class="container">
+
+ <div  class="container">
     <div class="row">
         <div id="content" class="col-lg-12">
             <!-- PAGE HEADER-->
@@ -35,7 +36,7 @@
                         <div class="form-group">
                             <label class="col-sm-3 control-label">排期标题</label>
                             <div class="col-sm-8">
-                                <input class="form-control" type="text" placeholder="排期标题" />
+                                @Html.TextBoxFor(m => m.addmodel.ScheduleName, new { @placeholder="排期标题",@class="form-control"})
                             </div>
                         </div>
                         <div class="form-group">
@@ -47,25 +48,28 @@
                                                 <option value="@item.ID">@item.AdSiteName</option>
                                             }
                                         </select>
+                                @Html.HiddenFor(m=>m.addmodel.AdSiteID)
                             </div>
                         </div>
                         <div class="form-group">
                             <label class="col-sm-3 control-label">广告位置</label>
-                            <div class="col-sm-8">
-                                <input class="form-control" type="text" placeholder="文本框" />
+                            <div class="col-sm-4">
+                                <div id="magicsuggest1"></div>
+                                @Html.HiddenFor(m=>m.addmodel.AdPID)
                             </div>
                         </div>
                         <div class="form-group">
                             <label class="col-sm-3 control-label">广告内容</label>
-                            <div class="col-sm-8">
+                            <div class="col-sm-4">
                                 <div id="magicsuggest"></div>
+                                @Html.HiddenFor(m=>m.addmodel.AdID)
                             </div>
                         </div>
                         <div class="form-group">
                             <label class="col-sm-3 control-label">开始时间</label>
                             <div class="col-sm-4">
                                 <div class="input-group">
-                                    <input type="text" class="form-control" readonly id="datetimepicker" data-date-format="yyyy-mm-dd hh:ii">
+                                    @Html.TextBoxFor(m => m.addmodel.StarTime, new { @class="form-control",@readonly="true"})
                                     <span class="input-group-addon">
                                         <i class="fa fa-calendar"></i>
                                     </span>
@@ -76,7 +80,7 @@
                             <label class="col-sm-3 control-label">结束时间</label>
                             <div class="col-sm-4">
                                 <div class="input-group">
-                                    <input type="text" class="form-control" readonly id="datetimepicker1" data-date-format="yyyy-mm-dd hh:ii">
+                                    @Html.TextBoxFor(m => m.addmodel.EndTime, new { @class="form-control",@readonly="true"})
                                     <span class="input-group-addon">
                                         <i class="fa fa-calendar"></i>
                                     </span>
@@ -86,19 +90,19 @@
                         <div class="form-group">
                             <label class="col-sm-3 control-label">客户姓名</label>
                             <div class="col-sm-8">
-                                <input class="form-control" type="text" placeholder="文本框" />
+                                @Html.TextBoxFor(m => m.addmodel.ClientName, new { @placeholder="客户姓名",@class="form-control"})
                             </div>
                         </div>
                         <div class="form-group">
                             <label class="col-sm-3 control-label">客户邮箱</label>
                             <div class="col-sm-8">
-                                <input class="form-control" type="text" placeholder="文本框" />
+                                @Html.TextBoxFor(m => m.addmodel.ClientEmail, new { @placeholder="客户邮箱",@class="form-control"})
                             </div>
                         </div>
                         <div class="form-group">
                             <label class="col-sm-3 control-label">客户手机</label>
                             <div class="col-sm-8">
-                                <input class="form-control" type="text" placeholder="文本框" />
+                                @Html.TextBoxFor(m => m.addmodel.ClientPhone, new { @placeholder="客户手机",@class="form-control"})
                             </div>
                         </div>                        
                         <div class="form-group">
@@ -117,31 +121,31 @@
                                         <div class="form-group">
                                             <label class="col-sm-3 control-label">区域名称</label>
                                             <div class="col-sm-8">
-                                                <input class="form-control" type="text" placeholder="文本框" />
+                                                @Html.TextBoxFor(m => m.addmodel.AreaName, new { @placeholder="区域名称",@class="form-control"})
                                             </div>
                                         </div>
                                         <div class="form-group">
                                             <label class="col-sm-3 control-label">控制器名称</label>
                                             <div class="col-sm-8">
-                                                <input class="form-control" type="text" placeholder="文本框" />
+                                                @Html.TextBoxFor(m => m.addmodel.ControllerName, new { @placeholder="控制器名称",@class="form-control"})
                                             </div>
                                         </div>
                                         <div class="form-group">
                                             <label class="col-sm-3 control-label">Action名称</label>
                                             <div class="col-sm-8">
-                                                <input class="form-control" type="text" placeholder="文本框" />
+                                                @Html.TextBoxFor(m => m.addmodel.ActionName, new { @placeholder="Action名称",@class="form-control"})
                                             </div>
                                         </div>
                                         <div class="form-group">
                                             <label class="col-sm-3 control-label">间隔数</label>
                                             <div class="col-sm-8">
-                                                <input class="form-control" type="text" placeholder="文本框" />
+                                                @Html.TextBoxFor(m => m.addmodel.IntervalNum, new { @placeholder="间隔数",@class="form-control"})
                                             </div>
                                         </div>
                                         <div class="form-group">
                                             <label class="col-sm-3 control-label">特殊标注</label>
                                             <div class="col-sm-8">
-                                                <input class="form-control" type="text" placeholder="文本框" />
+                                                @Html.TextBoxFor(m => m.addmodel.GivenID, new { @placeholder="特殊标注",@class="form-control"})
                                             </div>
                                         </div>
                                     </div>
@@ -150,7 +154,7 @@
                         </div>
                         <div class="modal-footer center">
                             <a class="btn btn-lg btn-default" href="@Url.Action("SysAdInfo", "SysAdManage", new { area = "SysAdvertisement" })">取 消</a>
-                            <button type="button" class="btn btn-lg btn-primary" onclick="javascript: document.getElementById('form1').submit(); return false;">保  存</button>
+                            <button type="button" class="btn btn-lg btn-primary" onclick="checkform()">保  存</button>
                         </div>
                     }
                 </div>
@@ -158,6 +162,7 @@
         </div>
     </div>
 </div>
+
 @section mycss{
     <link rel="stylesheet" href="@Url.Content("/js/bootstrap-daterangepicker/bootstrap-datetimepicker.css")">
     <link rel="stylesheet" href="@Url.Content("/js/magic-suggest/magicsuggest-min.css")">
@@ -171,31 +176,92 @@
     <script type="text/javascript">
         $(function () {
             App.init(); //Initialise plugins and elements
-            $("#datetimepicker").datetimepicker({
-                language: 'zh-CN'
+
+            $("#addmodel_StarTime").datetimepicker({
+                language: 'zh-CN',
+                format: 'yyyy-mm-dd hh:ii'
             });
-            $("#datetimepicker1").datetimepicker({
-                language: 'zh-CN'
+            $("#addmodel_EndTime").datetimepicker({
+                language: 'zh-CN',
+                format: 'yyyy-mm-dd hh:ii'
             });
 
             $("#sitelist").change(function () {
-                alert($(this).val());
+                $.ajax({
+                    url: '@Url.Action("GetJsonSysAd", "SysAdManage", new { area = "SysAdvertisement" })',
+                    data: { 'siteid': $("#sitelist").val() },
+                    dataType: 'json',
+                    type: 'POST',
+                    async: false,
+                    success: function (data) {
+                        $("#magicsuggest").magicSuggest().setData(data);
+                    }
+                });
+                $.ajax({
+                    url: '@Url.Action("GetJsonSysPosition", "SysAdManage", new { area = "SysAdvertisement" })',
+                    data: { 'siteid': $("#sitelist").val() },
+                    dataType: 'json',
+                    type: 'POST',
+                    async: false,
+                    success: function (data) {
+                        $("#magicsuggest1").magicSuggest().setData(data);
+                    }
+                });
             });
-
             $("#magicsuggest").magicSuggest({
-                autoSelect: true,
-                data: '@Url.Action("GetJsonSysAd", "SysAdManage", new { area = "SysAdvertisement" })',
-                dataUrlParams: { 'siteid': $("#sitelist").val() },
                 displayField: 'AdTitle',
-                method: 'post',
-                maxSelection: 1,
+                allowFreeEntries:false,
+                placeholder: '',
                 resultAsString: true,
+                required: true,
+                useZebraStyle: true,
+                maxSelection:1,
                 noSuggestionText: '无匹配项',
                 sortOrder: 'ID',
-                sortDir:'desc',
-                maxSelectionRenderer: function () { }
-
+                sortDir: 'desc',
+                selectionchange: function (e, cb, s) {
+                    alert('1');
+                }
+            });
+            $("#magicsuggest1").magicSuggest({
+                displayField: 'PName',
+                allowFreeEntries: false,
+                placeholder: '',
+                resultAsString: true,
+                required: true,
+                useZebraStyle: true,
+                maxSelection: 1,
+                noSuggestionText: '无匹配项',
+                sortOrder: 'ID',
+                sortDir: 'desc'
+            });
+            $.ajax({
+                url: '@Url.Action("GetJsonSysAd", "SysAdManage", new { area = "SysAdvertisement" })',
+                data: { 'siteid': $("#sitelist").val() },
+                dataType: 'json',
+                type: 'POST',
+                async: false,
+                success: function (data) {
+                    $("#magicsuggest").magicSuggest().setData(data);
+                }
+            });
+            $.ajax({
+                url: '@Url.Action("GetJsonSysPosition", "SysAdManage", new { area = "SysAdvertisement" })',
+                data: { 'siteid': $("#sitelist").val() },
+                dataType: 'json',
+                type: 'POST',
+                async: false,
+                success: function (data) {
+                    $("#magicsuggest1").magicSuggest().setData(data);
+                }
             });
         });
+        function checkform()
+        {
+            var addatas = $("#magicsuggest").magicSuggest().getSelection();
+            var positiondatas = $("#magicsuggest1").magicSuggest().getSelection();
+            document.getElementById('form1').submit();
+            return false;
+        }
     </script>
 }

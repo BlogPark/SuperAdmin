@@ -212,6 +212,7 @@ namespace SuperAdmin.WebUI.Areas.SysAdvertisement.Controllers
             List<SystemAdModel> list = bll.GetSystemAdByWhereStr(model);
             return Json(list);
         }
+        [HttpPost]
         public ActionResult GetJsonSysPosition(int siteid)
         {
             SystemAdPositionModel model = new SystemAdPositionModel();

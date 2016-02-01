@@ -156,6 +156,7 @@
     <Content Include="bootstrap-dist\fonts\glyphicons-halflings-regular.svg" />
     <Content Include="bootstrap-dist\js\bootstrap.js" />
     <Content Include="bootstrap-dist\js\bootstrap.min.js" />
+    <Content Include="bootstrap-dist\js\npm.js" />
     <Content Include="css\animatecss\animate.min.css" />
     <Content Include="css\cloud-admin.css" />
     <Content Include="css\cloud-admin.min.css" />
@@ -1388,6 +1389,11 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Areas\SysAdvertisement\Views\SysAdManage\AddSysSchedule.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="bootstrap-dist\css\bootstrap-theme.css.map" />
+    <Content Include="bootstrap-dist\css\bootstrap.css.map" />
+    <Content Include="bootstrap-dist\fonts\glyphicons-halflings-regular.woff2" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
