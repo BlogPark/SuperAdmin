@@ -112,6 +112,9 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Areas\AdminArea\AdminAreaAreaRegistration.cs" />
+    <Compile Include="Areas\AdminArea\Controllers\MemberOperaController.cs" />
+    <Compile Include="Areas\AdminArea\Models\MemberViewModel.cs" />
     <Compile Include="Areas\AdminMenu\AdminMenuAreaRegistration.cs" />
     <Compile Include="Areas\AdminMenu\Controllers\SysMenuController.cs" />
     <Compile Include="Areas\AdminMenu\Models\AddPermissionsViewModel.cs" />
@@ -1188,6 +1191,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Areas\AdminArea\Views\Shared\" />
     <Folder Include="Areas\AdminMenu\Views\Shared\" />
     <Folder Include="Areas\SysAdvertisement\Views\Shared\" />
     <Folder Include="Areas\SysSetting\Views\Shared\" />
@@ -1394,6 +1398,15 @@
     <Content Include="bootstrap-dist\css\bootstrap-theme.css.map" />
     <Content Include="bootstrap-dist\css\bootstrap.css.map" />
     <Content Include="bootstrap-dist\fonts\glyphicons-halflings-regular.woff2" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\SysAdvertisement\Views\SysAdManage\UpdateSysSchedule.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\AdminArea\Views\Web.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\AdminArea\Views\MemberOpera\Index.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

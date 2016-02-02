@@ -190,7 +190,7 @@ namespace SuperAdmin.DataBLL
         /// <returns></returns>
         public int UpdateScheduleStatus(int id, int status)
         {
-            return UpdateScheduleStatus(id,status);
+            return dal.UpdateScheduleStatus(id,status);
         }
         #endregion
     }

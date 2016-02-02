@@ -177,6 +177,10 @@ namespace SuperAdmin.WebUI.Areas.SysAdvertisement.Controllers
             return View(model);
         }
         #region 系统广告排期设置
+        /// <summary>
+        /// 添加页面
+        /// </summary>
+        /// <returns></returns>
         public ActionResult AddSysSchedule()
         {
             NewScheduleViewModel model = new NewScheduleViewModel();
@@ -186,22 +190,50 @@ namespace SuperAdmin.WebUI.Areas.SysAdvertisement.Controllers
         [HttpPost]
         public ActionResult AddSysSchedule(NewScheduleViewModel model)
         {
-            return View(model);
+            SessionLoginModel user = Session[AppContext.SESSION_LOGIN_NAME] as SessionLoginModel;
+            SystemAdScheduleModel modes = model.addmodel;
+            if (modes != null)
+            {
+                modes.AddUserID = user.User.ID;
+                modes.AddUserName = user.User.UserName;
+                int rowcount = bll.AddSchedule(modes);
+            }
+            return RedirectToAction("SysAdSchedule", "SysAdManage", new { area = "SysAdvertisement" });
         }
-        public ActionResult UpdateSysSchedule()
+        /// <summary>
+        /// 修改页面
+        /// </summary>
+        /// <param name="sid"></param>
+        /// <returns></returns>
+        public ActionResult UpdateSysSchedule(int sid)
         {
             UpdScheduleViewModel model = new UpdScheduleViewModel();
-            return View();
+            model.sites = bll.GetAllSysSites();
+            model.updmodel = bll.GetSingleScheduleByID(sid);
+            return View(model);
         }
         [HttpPost]
         public ActionResult UpdateSysSchedule(UpdScheduleViewModel model)
         {
-            return View(model);
+            if (model.updmodel != null)
+            {
+                int rowcount = bll.UpdateSchedule(model.updmodel);
+            }
+            return RedirectToAction("SysAdSchedule", "SysAdManage", new { area = "SysAdvertisement" });
         }
         [HttpPost]
         public ActionResult delesysschedule(int sid)
         {
-            return Json("1");
+            if(sid>0)
+            {
+                int rowcount = bll.UpdateScheduleStatus(sid, 0);
+                if (rowcount > 0)
+                {
+                    return Json("1");
+                }
+                else { return Json("0"); }
+            }
+            return Json("0");
         }
         #endregion
         [HttpPost]
