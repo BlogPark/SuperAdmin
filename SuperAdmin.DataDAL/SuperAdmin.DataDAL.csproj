@@ -43,6 +43,7 @@
   <ItemGroup>
     <Compile Include="AdminConfigs.cs" />
     <Compile Include="appcontent.cs" />
+    <Compile Include="ArticleOperate.cs" />
     <Compile Include="DbHelperSQL.cs" />
     <Compile Include="MemberOpera.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

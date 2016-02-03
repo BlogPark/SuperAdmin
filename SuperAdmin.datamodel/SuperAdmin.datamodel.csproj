@@ -40,6 +40,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ArtCategoryModel.cs" />
+    <Compile Include="ArticlesModel.cs" />
     <Compile Include="MemberInfoModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SysAdminConfigsModel.cs" />
