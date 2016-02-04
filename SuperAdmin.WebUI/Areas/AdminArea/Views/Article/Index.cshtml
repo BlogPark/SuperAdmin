@@ -97,23 +97,23 @@
         $(function () {
             App.init(); //Initialise plugins and elements
         });
-        function checkart(sid) {
+        function checkart(aid) {
             $.ajax({
-                url: '@Url.Action("", "", new { area = "" })',
+                url: '@Url.Action("CheckArticle", "Article", new { area = "AdminArea" })',
                 dataType: 'Json',
-                data: { 'sid': sid },
+                data: { 'aid': aid },
                 type: 'POST',
                 success: function (data) {
                     var str = ''; var img = '';
                     if (data == '1') {
-                        var id = $("#tr" + sid + " td:nth-child(8)").attr("name");
+                        var id = $("#tr" + aid + " td:nth-child(8)").attr("name");
                         if (id == '0') {
-                            $("#tr" + sid + " td:nth-child(8)").attr("name", "1");
-                            $("#tr" + sid + " td:nth-child(8)").html("启用");
+                            $("#tr" + aid + " td:nth-child(8)").attr("name", "1");
+                            $("#tr" + aid + " td:nth-child(8)").html("启用");
                         }
                         else {
-                            $("#tr" + sid + " td:nth-child(8)").attr("name", "0");
-                            $("#tr" + sid + " td:nth-child(8)").html("已作废");
+                            $("#tr" + aid + " td:nth-child(8)").attr("name", "0");
+                            $("#tr" + aid + " td:nth-child(8)").html("已作废");
                         }
                         str = "操作成功！";
                         img = '/img/gritter/success.jpg';
@@ -148,23 +148,23 @@
                 }
             });
         }
-        function delart(sid) {
+        function delart(aid) {
             $.ajax({
-                url: '@Url.Action("", "", new { area = "" })',
+                url: '@Url.Action("DelArticle", "Article", new { area = "AdminArea" })',
                 dataType: 'Json',
-                data: { 'sid': sid },
+                data: { 'aid': aid, 'reason': '' },
                 type: 'POST',
                 success: function (data) {
                     var str = ''; var img = '';
                     if (data == '1') {
-                        var id = $("#tr" + sid + " td:nth-child(8)").attr("name");
+                        var id = $("#tr" + aid + " td:nth-child(8)").attr("name");
                         if (id == '0') {
-                            $("#tr" + sid + " td:nth-child(8)").attr("name", "1");
-                            $("#tr" + sid + " td:nth-child(8)").html("启用");
+                            $("#tr" + aid + " td:nth-child(8)").attr("name", "1");
+                            $("#tr" + aid + " td:nth-child(8)").html("启用");
                         }
                         else {
-                            $("#tr" + sid + " td:nth-child(8)").attr("name", "0");
-                            $("#tr" + sid + " td:nth-child(8)").html("已作废");
+                            $("#tr" + aid + " td:nth-child(8)").attr("name", "0");
+                            $("#tr" + aid + " td:nth-child(8)").html("已作废");
                         }
                         str = "操作成功！";
                         img = '/img/gritter/success.jpg';

@@ -1,0 +1,247 @@
+﻿@model SuperAdmin.WebUI.Areas.AdminArea.Models.WebModuleViewModel
+@{
+    Layout = "~/Views/_Layout.cshtml";
+}
+<!-- SAMPLE BOX CONFIGURATION MODAL FORM-->
+<div class="bootbox modal fade in" id="box-config1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content modal-form">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title">添加模块</h4>
+            </div>
+            <div class="modal-body">
+                <div class="bootbox-body">
+                    @using (Html.BeginForm("AddModule", "FrontSetting", new { area = "AdminArea" }, FormMethod.Post, new { @role = "form", @class = "form-horizontal", @id = "form1" }))
+                    {
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">模块名称：</label>
+                            <div class="col-sm-7">
+                                @Html.TextBoxFor(m => m.addmodel.ModuleName, new { @class = "form-control", @placeholder = "模块名称" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">模块描述：</label>
+                            <div class="col-sm-7">
+                                @Html.TextBoxFor(m => m.addmodel.ModuleDescription, new { @class = "form-control", @placeholder = "模块描述" })
+                            </div>
+                        </div>        
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">模块宽度：</label>
+                            <div class="col-sm-7">
+                                @Html.TextBoxFor(m => m.addmodel.ModuleWidth, new { @class = "form-control", @placeholder = "模块宽度" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">模块高度：</label>
+                            <div class="col-sm-7">
+                                @Html.TextBoxFor(m => m.addmodel.ModuleHeight, new { @class = "form-control", @placeholder = "模块高度" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">菜单状态：</label>
+                            <div class="col-sm-7">
+                                <label class="radio-inline">
+                                    <input type="radio" class="uniform" name="optionsRadios1" value="1" checked>
+                                    启用
+                                </label>
+                                <label class="radio-inline">
+                                    <input type="radio" class="uniform" name="optionsRadios1" value="0">
+                                    禁用
+                                </label>
+                                @Html.HiddenFor(m => m.addmodel.ModuleStatus)
+                            </div>
+                        </div>                      
+                    }
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" onclick="javascript: document.getElementById('form1').submit(); return false;">Save changes</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- /SAMPLE BOX CONFIGURATION MODAL FORM-->
+<!-- SAMPLE BOX CONFIGURATION MODAL FORM-->
+<div class="bootbox modal fade in" id="box-config" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content modal-form">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title">修改模块信息</h4>
+            </div>
+            <div class="modal-body">
+                <div class="bootbox-body">
+                    @using (Html.BeginForm("UpdModule", "FrontSetting", new { area = "AdminArea" }, FormMethod.Post, new { @role = "form", @class = "form-horizontal", @id = "form2" }))
+                    {
+                        @Html.HiddenFor(m => m.updatemodel.ID)
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">模块名称：</label>
+                            <div class="col-sm-7">
+                                @Html.TextBoxFor(m => m.updatemodel.ModuleName, new { @class = "form-control", @placeholder = "模块名称" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">模块描述：</label>
+                            <div class="col-sm-7">
+                                @Html.TextBoxFor(m => m.updatemodel.ModuleDescription, new { @class = "form-control", @placeholder = "模块描述" })
+                            </div>
+                        </div>                                
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">模块宽度：</label>
+                            <div class="col-sm-7">
+                                @Html.TextBoxFor(m => m.updatemodel.ModuleWidth, new { @class = "form-control", @placeholder = "模块宽度" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">模块高度：</label>
+                            <div class="col-sm-7">
+                                @Html.TextBoxFor(m => m.updatemodel.ModuleHeight, new { @class = "form-control", @placeholder = "模块高度" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">模块状态：</label>
+                            <div class="col-sm-7">
+                                <label class="radio-inline">
+                                    <input type="radio" class="uniform" name="optionsRadios2" value="1" checked>
+                                    启用
+                                </label>
+                                <label class="radio-inline">
+                                    <input type="radio" class="uniform" name="optionsRadios2" value="0">
+                                    禁用
+                                </label>
+                                @Html.HiddenFor(m => m.updatemodel.ModuleStatus)
+                            </div>
+                        </div>             
+                    }
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" onclick="javascript: document.getElementById('form2').submit(); return false;">Save changes</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- /SAMPLE BOX CONFIGURATION MODAL FORM-->
+<div class="container">
+    <div class="row">
+        <div id="content" class="col-lg-12">
+            <!-- PAGE HEADER-->
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="page-header">
+                        <!-- BREADCRUMBS -->
+                        <ul class="breadcrumb">
+                            <li>
+                                <i class="fa fa-home"></i>
+                                <a href="index.html">Home</a>
+                            </li>
+                            <li>
+                                <a href="#">网站基础信息管理</a>
+                            </li>
+                            <li>网站模块管理</li>
+                        </ul>
+                        <!-- /BREADCRUMBS -->
+                        <div class="clearfix">
+                            <h3 class="content-title pull-left">网站模块管理</h3>
+                        </div>
+                        <div class="description"></div>
+                    </div>
+                </div>
+            </div>
+            <!-- /PAGE HEADER -->
+            <div class="row">
+                <div class="col-sm-11">
+                    <div class="btn-group hidden-xs pull-right invoice-btn-group">
+                        <p class="btn-toolbar">
+                            <a class="btn btn-primary" data-toggle="modal" href="#box-config1" id="addnew"><i class="fa fa-plus"></i>添加新模块</a>
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <div class="row" id="tabdiv">
+                        <table class="table table-striped table-bordered" id="menutab">
+                            <thead>
+                                <tr>
+                                    <th>模块编号</th>
+                                    <th>模块名称</th>                                    
+                                    <th>模块宽度</th>
+                                    <th>模块高度</th>
+                                    <th>模块描述</th>
+                                    <th>模块状态</th>
+                                    <th>编  辑</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var item in Model.list)
+                                {
+                                    <tr id="tr@(item.ID)">
+                                        <td>@item.ID</td>
+                                        <td>@item.ModuleName</td>
+                                        <td>@item.ModuleWidth</td>
+                                        <td>@item.ModuleHeight</td>
+                                        <td>@item.ModuleDescription</td>
+                                        <td name="@item.ModuleStatus">
+                                            <lable class="tip-bottom" data-original-title="@(item.ModuleStatus == 0 ? "禁用" : "启用")">@item.ModuleStatus</lable>
+                                        </td>
+                                        <td>
+                                            <p class="btn-toolbar">
+                                                <a class="btn btn-warning" data-toggle="modal" href="#box-config" onclick="updatemassage(@item.ID)">修改</a>
+                                            </p>
+                                        </td>
+                                    </tr>
+                                }
+
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+@section myscript{
+    <script type="text/javascript">
+        $(function () {
+            App.init(); //Initialise plugins and elements
+            
+            $("#addmodel_ModuleStatus").val($("input:radio[name=optionsRadios1]:checked").val());
+            $("input:radio[name=optionsRadios1]").change(function () {
+                var raval = $("input:radio[name=optionsRadios1]:checked").val();
+                $("#addmodel_ModuleStatus").val(raval);
+            });
+            $("#updatemodel_ModuleStatus").val($("input:radio[name=optionsRadios2]:checked").val());
+            $("input:radio[name=optionsRadios2]").change(function () {
+                var raval = $("input:radio[name=optionsRadios2]:checked").val();
+                $("#updatemodel_ModuleStatus").val(raval);
+            });            
+        });
+        function updatemassage(id) {
+            var dtr = $("#tr" + id).children('td');
+            if (dtr) {
+                var id = dtr.eq(0).html();
+                var name = dtr.eq(1).html();
+                var mwidth = dtr.eq(2).html();
+                var mheight = dtr.eq(3).html();
+                var malt = dtr.eq(4).html();
+                var mstatus = dtr.eq(5).attr("name");
+                $("#updatemodel_ID").val(id);
+                $("#updatemodel_ModuleName").val(name);
+                $("#updatemodel_ModuleDescription").val(malt);
+                $("#updatemodel_ModuleWidth").val(mwidth);
+                $("#updatemodel_ModuleHeight").val(mheight);
+                $("#updatemodel_ModuleStatus").val(mstatus);
+                $("input:radio[name=optionsRadios2][value=" + mstatus + "]").attr("checked", true);
+            }
+        }
+    </script>
+}
+

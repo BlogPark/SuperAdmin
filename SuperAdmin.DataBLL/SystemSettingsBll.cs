@@ -108,5 +108,109 @@ namespace SuperAdmin.DataBLL
         public int DelConfig(int id)
         { return dal.DelConfig(id); }
         #endregion
+
+        #region 网站前端基础配置
+        /// <summary>
+        /// 得到网站基本信息
+        /// </summary>
+        /// <returns></returns>
+        public WebSettingsModel GetWebSetting()
+        {
+            return dal.GetWebSetting();
+        }
+        /// <summary>
+        /// 修改网站基本信息
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
+        public int UpdateWebSetting(WebSettingsModel model)
+        {
+            return dal.UpdateWebSetting(model);
+        }
+        #endregion
+
+        #region 网站前端模块设置
+        /// <summary>
+        /// 得到所有的模块
+        /// </summary>
+        /// <returns></returns>
+        public List<WebModuleModel> GetAllWebModules()
+        {
+            return dal.GetAllWebModules();
+        }
+        /// <summary>
+        /// 根据ID得到模块信息
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public WebModuleModel GetWebModuleByID(int id)
+        {
+            return dal.GetWebModuleByID(id);
+        }
+        /// <summary>
+        /// 添加模块
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
+        public int AddWebModule(WebModuleModel model)
+        {
+            return dal.AddWebModule(model);
+        }
+        /// <summary>
+        /// 修改数据
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
+        public int UpdateWebModule(WebModuleModel model)
+        {
+            return dal.UpdateWebModule(model);
+        }
+        #endregion
+
+        #region 网站前端菜单设置
+        /// <summary>
+        /// 添加菜单
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
+        public int AddWebMenu(WebMenusModel model)
+        {
+            return dal.AddWebMenu(model);
+        }
+        /// <summary>
+        /// 更改菜单
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
+        public int UpdateWebMenu(WebMenusModel model)
+        {
+            return dal.UpdateWebMenu(model);
+        }
+        /// <summary>
+        /// 根据ID得到菜单信息
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public WebMenusModel GetWebMenuByID(int id)
+        {
+            return dal.GetWebMenuByID(id);
+        }
+        /// <summary>
+        /// 得到全部的菜单
+        /// </summary>
+        /// <returns></returns>
+        public List<WebMenusModel> GetAllWebMenusList()
+        {
+            return dal.GetAllWebMenusList();
+        }
+        /// <summary>
+        /// 得到所有的顶级菜单
+        /// </summary>
+        /// <returns></returns>
+        public List<WebMenusModel> GetAllFirstWebMenu()
+        {
+            return dal.GetAllFirstWebMenu();
+        }
+        #endregion
     }
 }

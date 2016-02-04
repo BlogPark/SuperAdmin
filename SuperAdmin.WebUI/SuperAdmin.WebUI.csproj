@@ -115,9 +115,13 @@
   <ItemGroup>
     <Compile Include="Areas\AdminArea\AdminAreaAreaRegistration.cs" />
     <Compile Include="Areas\AdminArea\Controllers\ArticleController.cs" />
+    <Compile Include="Areas\AdminArea\Controllers\FrontSettingController.cs" />
     <Compile Include="Areas\AdminArea\Controllers\MemberOperaController.cs" />
     <Compile Include="Areas\AdminArea\Models\ArticleIndexViewModel.cs" />
     <Compile Include="Areas\AdminArea\Models\MemberViewModel.cs" />
+    <Compile Include="Areas\AdminArea\Models\WebMenuViewModel.cs" />
+    <Compile Include="Areas\AdminArea\Models\WebModuleViewModel.cs" />
+    <Compile Include="Areas\AdminArea\Models\WebSettingViewModel.cs" />
     <Compile Include="Areas\AdminMenu\AdminMenuAreaRegistration.cs" />
     <Compile Include="Areas\AdminMenu\Controllers\SysMenuController.cs" />
     <Compile Include="Areas\AdminMenu\Models\AddPermissionsViewModel.cs" />
@@ -1704,6 +1708,15 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Areas\AdminArea\Views\Article\Index.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\AdminArea\Views\FrontSetting\BaseData.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\AdminArea\Views\FrontSetting\WebMenu.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\AdminArea\Views\FrontSetting\WebModules.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
