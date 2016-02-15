@@ -46,6 +46,7 @@
     <Compile Include="SysAdManagerBll.cs" />
     <Compile Include="SysMenuAndUserBll.cs" />
     <Compile Include="SystemSettingsBll.cs" />
+    <Compile Include="WebNewsBll.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\SuperAdmin.Common\SuperAdmin.Common.csproj">

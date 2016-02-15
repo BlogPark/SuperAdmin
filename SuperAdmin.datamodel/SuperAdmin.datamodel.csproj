@@ -55,6 +55,7 @@
     <Compile Include="UploadFileModel.cs" />
     <Compile Include="WebMenusModel.cs" />
     <Compile Include="WebModuleModel.cs" />
+    <Compile Include="WebNewsModel.cs" />
     <Compile Include="WebSettingsModel.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

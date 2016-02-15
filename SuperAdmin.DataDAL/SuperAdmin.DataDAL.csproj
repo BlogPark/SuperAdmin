@@ -50,6 +50,7 @@
     <Compile Include="SysAdManager.cs" />
     <Compile Include="SysMenuAndUser.cs" />
     <Compile Include="SystemSettings.cs" />
+    <Compile Include="WebNewsDal.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\SuperAdmin.datamodel\SuperAdmin.datamodel.csproj">
