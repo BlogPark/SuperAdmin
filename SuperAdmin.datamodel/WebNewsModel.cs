@@ -11,6 +11,7 @@ namespace SuperAdmin.datamodel
     [DataContract]
     public class WebNewsModel
     {
+        #region 原表字段
         /// <summary>
         /// 主键ID
         /// </summary>       
@@ -27,7 +28,7 @@ namespace SuperAdmin.datamodel
         [DataMember]
         public string NContent { get; set; }
         /// <summary>
-        /// 状态(0 新建 1 已发布)
+        /// 状态(0 新建 1 已发布 2 已删除)
         /// </summary>       
         [DataMember]
         public int NStatus { get; set; }
@@ -45,6 +46,14 @@ namespace SuperAdmin.datamodel
         /// 添加时间
         /// </summary>       
         [DataMember]
-        public DateTime NAddTime { get; set; }
+        public DateTime NAddTime { get; set; } 
+        #endregion
+        #region 扩展字段
+        /// <summary>
+        /// 状态名称
+        /// </summary>
+        [DataMember]
+        public string StatusName { get; set; }
+        #endregion
     }
 }

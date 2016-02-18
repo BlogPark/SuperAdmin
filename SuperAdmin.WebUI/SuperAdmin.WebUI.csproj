@@ -117,10 +117,12 @@
     <Compile Include="Areas\AdminArea\Controllers\ArticleController.cs" />
     <Compile Include="Areas\AdminArea\Controllers\FrontSettingController.cs" />
     <Compile Include="Areas\AdminArea\Controllers\MemberOperaController.cs" />
+    <Compile Include="Areas\AdminArea\Controllers\WebNewsController.cs" />
     <Compile Include="Areas\AdminArea\Models\ArticleIndexViewModel.cs" />
     <Compile Include="Areas\AdminArea\Models\MemberViewModel.cs" />
     <Compile Include="Areas\AdminArea\Models\WebMenuViewModel.cs" />
     <Compile Include="Areas\AdminArea\Models\WebModuleViewModel.cs" />
+    <Compile Include="Areas\AdminArea\Models\WebNewsIndexViewModel.cs" />
     <Compile Include="Areas\AdminArea\Models\WebSettingViewModel.cs" />
     <Compile Include="Areas\AdminMenu\AdminMenuAreaRegistration.cs" />
     <Compile Include="Areas\AdminMenu\Controllers\SysMenuController.cs" />
@@ -1717,6 +1719,9 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Areas\AdminArea\Views\FrontSetting\WebModules.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\AdminArea\Views\WebNews\Index.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

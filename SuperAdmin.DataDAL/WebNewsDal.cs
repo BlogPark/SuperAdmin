@@ -57,7 +57,6 @@ namespace SuperAdmin.DataDAL
         {
             StringBuilder strSql = new StringBuilder();
             strSql.Append("update WebNews set ");
-
             strSql.Append(" NTitle = @NTitle , ");
             strSql.Append(" NContent = @NContent , ");
             strSql.Append(" NStatus = @NStatus");
@@ -141,8 +140,11 @@ namespace SuperAdmin.DataDAL
         NStatus ,
         NAddUser ,
         NAddUserName ,
-        NAddTime
-FROM    SuperWebSite.dbo.WebNews WITH(NOLOCK)";
+        NAddTime,
+       CASE  NStatus WHEN 1 THEN '已发布'  WHEN 0 THEN '新建' WHEN 2 THEN '已删除'END AS StatusName
+FROM    SuperWebSite.dbo.WebNews WITH(NOLOCK)
+ORDER BY ID DESC
+";
             DataTable dt = helper.Query(sqltxt).Tables[0];
             List<WebNewsModel> list = new List<WebNewsModel>();
             foreach (DataRow item in dt.Rows)
@@ -155,9 +157,40 @@ FROM    SuperWebSite.dbo.WebNews WITH(NOLOCK)";
                 model.NContent = item["NContent"].ToString();
                 model.NStatus = int.Parse(item["NStatus"].ToString());
                 model.NTitle = item["NTitle"].ToString();
+                model.StatusName = item["StatusName"].ToString();
                 list.Add(model);
             }
             return list;
+        }
+        /// <summary>
+        /// 更新一条信息的状态
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="status"></param>
+        /// <returns></returns>
+        public bool UpdateWebnewsStatus(int id,int status)
+        {
+            StringBuilder strSql = new StringBuilder();
+            strSql.Append("update WebNews set ");
+            strSql.Append(" NStatus = @NStatus");
+            strSql.Append(" where ID=@ID ");
+
+            SqlParameter[] parameters = {
+			            new SqlParameter("@ID", SqlDbType.Int,4) ,              
+                        new SqlParameter("@NStatus", SqlDbType.Int,4)   
+            };
+
+            parameters[0].Value =id;
+            parameters[1].Value = status;
+            int rows = helper.ExecuteSql(strSql.ToString(), parameters);
+            if (rows > 0)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
     }
 }

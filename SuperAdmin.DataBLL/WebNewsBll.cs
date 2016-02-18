@@ -41,7 +41,17 @@ namespace SuperAdmin.DataBLL
         /// <returns></returns>
         public List<WebNewsModel> GetAllModelList()
         {
-            return GetAllModelList();
+            return dal.GetAllModelList();
+        }
+        /// <summary>
+        /// 更新一条信息的状态
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="status"></param>
+        /// <returns></returns>
+        public bool UpdateWebnewsStatus(int id, int status)
+        {
+            return dal.UpdateWebnewsStatus(id,status);
         }
     }
 }
