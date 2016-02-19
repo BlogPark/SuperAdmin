@@ -58,7 +58,14 @@ namespace SuperAdmin.WebUI.Controllers
         /// <returns></returns>
         public ActionResult Message()
         {
-            return View();
+            SessionLoginModel user = Session[AppContext.SESSION_LOGIN_NAME] as SessionLoginModel;
+            partMessageViewModel model = new partMessageViewModel();
+            AdminSiteNewsBll bll = new AdminSiteNewsBll();
+            List<AdminSiteNewsModel> list = bll.GetTop3ModelListByUserID(user.User.ID);
+            model.newmsglist = list.Where(m => m.SStatus == 1).ToList();
+            model.newcount = model.newmsglist.Count;
+            model.oldmsglist = list.Where(m => m.SStatus == 2).ToList();
+            return View(model);
         }
         /// <summary>
         /// 管理员信息
