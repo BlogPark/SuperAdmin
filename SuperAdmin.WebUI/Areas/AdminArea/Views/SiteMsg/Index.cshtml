@@ -1,0 +1,281 @@
+﻿@{
+    Layout = "~/Views/_Layout.cshtml";
+}
+
+<div class="container">
+    <div class="row">
+        <div id="content" class="col-lg-12">
+            <!-- PAGE HEADER-->
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="page-header">
+                        <!-- BREADCRUMBS -->
+                        <ul class="breadcrumb">
+                            <li>
+                                <i class="fa fa-home"></i>
+                                <a href="index.html">Home</a>
+                            </li>
+                            <li>
+                                <a href="#">新闻管理</a>
+                            </li>
+                            <li>网站新闻</li>
+                        </ul>
+                        <!-- /BREADCRUMBS -->
+                        <div class="clearfix">
+                            <h3 class="content-title pull-left">网站新闻</h3>
+                        </div>
+                        <div class="description"></div>
+                    </div>
+                </div>
+            </div>
+            <!-- /PAGE HEADER -->
+            <div class="row">
+                <div class="col-sm-11">
+                    <div class="btn-group hidden-xs pull-left invoice-btn-group">
+                        <p class="btn-toolbar">
+                            <a class="btn btn-danger" data-toggle="modal" href="#box-config" id="addnew"><i class="fa fa-plus"></i>&nbsp;发送消息</a>
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <div class="row" id="tabdiv">
+                        <table class="table table-hover">
+                            <thead>
+                                <tr>
+                                    <th colspan="2">
+                                        <input type="checkbox" class="uniform">
+                                        @*<a class="btn btn-light-grey" href="#"><i class="fa fa-refresh fa-lg"></i></a>*@
+                                    </th>
+                                    <th colspan="2">
+                                        <div class="btn-group pull-right">
+                                            <button class="btn btn-light-grey dropdown-toggle" data-toggle="dropdown">
+                                                更多
+							<i class="fa fa-caret-down"></i>
+                                            </button>
+                                            <ul class="dropdown-menu context" role="menu">
+                                                <li><a href="#"><i class="fa fa-pencil"></i>&nbsp;标记</a></li>
+                                                <li><a href="#"><i class="fa fa-ban"></i>&nbsp;回复</a></li>
+                                                <li><a href="#"><i class="fa fa-trash-o"></i>&nbsp;删除</a></li>
+                                            </ul>
+                                        </div>
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr class="new">
+                                    <td class="width-10">
+                                        <input type="checkbox" class="uniform">
+                                    </td>
+
+                                    <td class="viewEmail  hidden-xs">Fametaxi Inc.</td>
+                                    <td class="viewEmail  width-20"><span class="label label-success">New</span> Design document approved</td>
+                                    <td class="viewEmail  text-right">08:20 PM</td>
+                                </tr>
+                                <tr class="new">
+                                    <td class="width-10">
+                                        <input type="checkbox" class="uniform">
+                                    </td>
+
+                                    <td class="viewEmail hidden-xs">Steve Jobs</td>
+                                    <td class="viewEmail width-20"><span class="label label-success">New</span> Please buy our new iPhone</td>
+                                    <td class="viewEmail text-right">Oct 18</td>
+                                </tr>
+                                <tr class="new">
+                                    <td class="width-10">
+                                        <input type="checkbox" class="uniform">
+                                    </td>
+
+                                    <td class="viewEmail hidden-xs">VMWare Billdesk</td>
+                                    <td class="viewEmail width-20">Billing information for the month of August</td>
+                                    <td class="viewEmail text-right">Oct 03</td>
+                                </tr>
+                                <tr>
+                                    <td class="width-10">
+                                        <input type="checkbox" class="uniform">
+                                    </td>
+
+                                    <td class="viewEmail hidden-xs">Facebook</td>
+                                    <td class="viewEmail width-20">John Doe, Liz have upcoming birthdays</td>
+                                    <td class="viewEmail text-right">Sep 14</td>
+                                </tr>
+                                <tr>
+                                    <td class="width-10">
+                                        <input type="checkbox" class="uniform">
+                                    </td>
+
+                                    <td class="viewEmail hidden-xs">LinkedIn</td>
+                                    <td class="viewEmail width-20"><span class="label label-danger">Respond</span> Consetetur sadipscing elitry</td>
+                                    <td class="viewEmail text-right">Sep 15</td>
+                                </tr>
+                                <tr>
+                                    <td class="width-10">
+                                        <input type="checkbox" class="uniform">
+                                    </td>
+
+                                    <td class="viewEmail hidden-xs">Jane Doe</td>
+                                    <td class="viewEmail width-20">Dolor sit amet, consectetuer adipiscing</td>
+                                    <td class="viewEmail text-right">Aug 14</td>
+                                </tr>
+                                <tr>
+                                    <td class="width-10">
+                                        <input type="checkbox" class="uniform">
+                                    </td>
+
+                                    <td class="viewEmail hidden-xs">John Doe</td>
+                                    <td class="viewEmail width-20"><span class="label label-warning">Read Later</span> Consetetur sadipscing elitry</td>
+                                    <td class="viewEmail text-right">Aug 15</td>
+                                </tr>
+                                <tr>
+                                    <td class="width-10">
+                                        <input type="checkbox" class="uniform">
+                                    </td>
+
+                                    <td class="viewEmail hidden-xs">LinkedIn</td>
+                                    <td class="viewEmail viewEmail width-20">Sed diam nonumy eirmod tempor invidu</td>
+                                    <td class="viewEmail text-right">Aug 14</td>
+                                </tr>
+                                <tr>
+                                    <td class="width-10">
+                                        <input type="checkbox" class="uniform">
+                                    </td>
+
+                                    <td class="viewEmail hidden-xs">Jane Doe</td>
+                                    <td class="viewEmail viewEmail width-20">Consetetur sadipscing elitry</td>
+                                    <td class="viewEmail text-right">July 15</td>
+                                </tr>
+                                <tr>
+                                    <td class="width-10">
+                                        <input type="checkbox" class="uniform">
+                                    </td>
+
+                                    <td class="viewEmail hidden-xs">Facebook</td>
+                                    <td class="viewEmail viewEmail width-20"><span class="label label-warning">Read Later</span> Sed diam nonumy eirmod tempor invidu</td>
+                                    <td class="viewEmail text-right">July 14</td>
+                                </tr>
+                                <tr>
+                                    <td class="width-10">
+                                        <input type="checkbox" class="uniform">
+                                    </td>
+
+                                    <td class="viewEmail hidden-xs">John Doe</td>
+                                    <td class="viewEmail width-20">Consetetur sadipscing elitry</td>
+                                    <td class="viewEmail text-right">June 15</td>
+                                </tr>
+                                <tr>
+                                    <td class="width-10">
+                                        <input type="checkbox" class="uniform">
+                                    </td>
+
+                                    <td class="hidden-xs">LinkedIn</td>
+                                    <td class="viewEmail width-20">Sed diam nonumy eirmod tempor invidu</td>
+                                    <td class="viewEmail text-right">June 14</td>
+                                </tr>
+                                <tr>
+                                    <td class="width-10">
+                                        <input type="checkbox" class="uniform">
+                                    </td>
+
+                                    <td class="viewEmail hidden-xs">Twitter</td>
+                                    <td class="viewEmail width-20">Consetetur sadipscing elitry</td>
+                                    <td class="viewEmail text-right">April 15</td>
+                                </tr>
+                                <tr>
+                                    <td class="width-10">
+                                        <input type="checkbox" class="uniform">
+                                    </td>
+
+                                    <td class="hidden-xs">Facebook</td>
+                                    <td class="viewEmail viewEmail width-20"><span class="label label-info">To Do</span> Sed diam nonumy eirmod tempor invidu</td>
+                                    <td class="viewEmail text-right">April 14</td>
+                                </tr>
+                                <tr>
+                                    <td class="width-10">
+                                        <input type="checkbox" class="uniform">
+                                    </td>
+
+                                    <td class="viewEmail hidden-xs">Max Doe</td>
+                                    <td class="viewEmail width-20"><span class="label label-info">To Do</span> Consetetur sadipscing elitry</td>
+                                    <td class="viewEmail text-right">April 15</td>
+                                </tr>
+                                <tr>
+                                    <td class="width-10">
+                                        <input type="checkbox" class="uniform">
+                                    </td>
+
+                                    <td class="viewEmail hidden-xs">Dribbble</td>
+                                    <td class="viewEmail width-20">Sed diam nonumy eirmod tempor invidu</td>
+                                    <td class="viewEmail text-right">April 14</td>
+                                </tr>
+                                <tr>
+                                    <td class="width-10">
+                                        <input type="checkbox" class="uniform">
+                                    </td>
+
+                                    <td class="viewEmail hidden-xs">Barack Obama</td>
+                                    <td class="viewEmail width-20">Consetetur sadipscing elitry</td>
+                                    <td class="viewEmail text-right">March 15</td>
+                                </tr>
+                                <tr>
+                                    <td class="width-10">
+                                        <input type="checkbox" class="uniform">
+                                    </td>
+
+                                    <td class="viewEmail hidden-xs">Facebook</td>
+                                    <td class="viewEmail viewEmail width-20"><span class="label label-info">To Do</span> Sed diam nonumy eirmod tempor invidu</td>
+                                    <td class="viewEmail text-right">March 14</td>
+                                </tr>
+                                <tr>
+                                    <td class="width-10">
+                                        <input type="checkbox" class="uniform">
+                                    </td>
+                                    <td class="viewEmail hidden-xs">John Doe</td>
+                                    <td class="viewEmail width-20">Consetetur sadipscing elitry</td>
+                                    <td class="viewEmail text-right">March 15</td>
+                                </tr>
+                            </tbody>
+                            <thead>
+                                <tr>
+                                    <th colspan="2"></th>
+                                    <th class="emailPager" colspan="2">
+                                        <span class="emailPagerCount">1-30 of 1343</span>
+                                        <a class="btn btn-sm btn-light-grey"><i class="fa fa-angle-left"></i></a>
+                                        <a class="btn btn-sm btn-light-grey"><i class="fa fa-angle-right"></i></a>
+                                    </th>
+                                </tr>
+                            </thead>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@section mycss{
+    <!-- SELECT2 -->
+    <link rel="stylesheet" type="text/css" href="@Url.Content("/js/select2/select2.min.css")" />
+    <!-- UNIFORM -->
+    <link rel="stylesheet" type="text/css" href="@Url.Content("/js/uniform/css/uniform.default.min.css")"/>
+}
+@section scriptfiles{
+    <!-- TYPEHEAD -->
+    <script type="text/javascript" src="/js/typeahead/typeahead.min.js"></script>
+    <!-- AUTOSIZE -->
+    <script type="text/javascript" src="/js/autosize/jquery.autosize.min.js"></script>
+    <!-- COUNTABLE -->
+    <script type="text/javascript" src="/js/countable/jquery.simplyCountable.min.js"></script>
+    <!-- SELECT2 -->
+    <script type="text/javascript" src="@Url.Content("/js/select2/select2.min.js")"></script>
+    <!-- UNIFORM -->
+    <script type="text/javascript" src="@Url.Content("/js/uniform/jquery.uniform.min.js")"></script>
+}
+@section myscript{
+    <script type="text/javascript">
+        $(function () {
+            App.setPage("forms");
+            App.init(); //Initialise plugins and elements
+        });
+    </script>
+}
