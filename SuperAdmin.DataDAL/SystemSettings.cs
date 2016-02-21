@@ -38,7 +38,7 @@ namespace SuperAdmin.DataDAL
         CASE UserStatus
           WHEN 1 THEN '活动'
           ELSE '禁用'
-        END AS UserStatusName
+        END AS UserStatusName,PinYin,FirstPinYin
 FROM    dbo.SysAdminUser WITH ( NOLOCK )";
             DataTable dt = helper.Query(sqltxt).Tables[0];
             foreach (DataRow item in dt.Rows)
@@ -58,6 +58,8 @@ FROM    dbo.SysAdminUser WITH ( NOLOCK )";
                 model.UserPwd = item["UserPwd"].ToString();
                 model.UserStatus = int.Parse(item["UserStatus"].ToString());
                 model.UserStatusName = item["UserStatusName"].ToString();
+                model.PinYin = item["PinYin"].ToString();
+                model.FirstPinYin = item["FirstPinYin"].ToString();
                 list.Add(model);
             }
             return list;
@@ -130,7 +132,9 @@ WHERE ID=@id";
           GID ,
           GName ,
           LoginName ,
-          HeaderImg
+          HeaderImg,
+          PinYin,
+          FirstPinYin
         )
 VALUES  ( @UserName ,
           @UserPwd ,
@@ -143,7 +147,9 @@ VALUES  ( @UserName ,
           @GID ,
           @GName ,
           @LoginName ,
-          @HeaderImg
+          @HeaderImg,
+          @PinYin,
+          @FirstPinYin
         )";
             SqlParameter[] paramter = { 
                                       new SqlParameter("@UserName",model.UserName),
@@ -157,7 +163,9 @@ VALUES  ( @UserName ,
                                       new SqlParameter("@GID",model.GID),
                                       new SqlParameter("@GName",model.GName),
                                       new SqlParameter("@LoginName",model.LoginName),
-                                      new SqlParameter("@HeaderImg",model.HeaderImg)
+                                      new SqlParameter("@HeaderImg",model.HeaderImg),
+                                      new SqlParameter("@PinYin",model.PinYin),
+                                      new SqlParameter("@FirstPinYin",model.FirstPinYin)
                                       };
             rowcount = helper.ExecuteSql(sqltxt, paramter);
             return rowcount;
@@ -178,7 +186,9 @@ SET     UserName = @UserName ,
         UserPhone = @UserPhone ,
         GID = @GID ,
         GName = @GName ,
-        LoginName = @LoginName 
+        LoginName = @LoginName ,
+        PinYin=@PinYin,
+        FirstPinYin=@FirstPinYin
 WHERE   ID = @id";
             SqlParameter[] paramter = { 
                                       new SqlParameter("@UserName",model.UserName),
@@ -190,7 +200,9 @@ WHERE   ID = @id";
                                       new SqlParameter("@GID",model.GID),
                                       new SqlParameter("@GName",model.GName),
                                       new SqlParameter("@LoginName",model.LoginName),
-                                      new SqlParameter("@id",model.ID)
+                                      new SqlParameter("@id",model.ID),
+                                      new SqlParameter("@FirstPinYin",model.FirstPinYin),
+                                      new SqlParameter("@PinYin",model.PinYin)
                                       };
             rowcount = helper.ExecuteSql(sqltxt, paramter);
             return rowcount;

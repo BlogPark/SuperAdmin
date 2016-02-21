@@ -81,6 +81,16 @@ namespace SuperAdmin.datamodel
         /// </summary>
         [DataMember]
         public string HeaderImg { get; set; }
+        /// <summary>
+        /// 用户名拼音
+        /// </summary>
+        [DataMember]
+        public string PinYin { get; set; }
+        /// <summary>
+        /// 用户名拼音首字母
+        /// </summary>
+        [DataMember]
+        public string FirstPinYin { get; set; }
         #endregion
 
         /// <summary>

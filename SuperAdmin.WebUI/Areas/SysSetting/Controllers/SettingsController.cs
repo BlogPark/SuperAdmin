@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using SuperAdmin.Common;
 using SuperAdmin.DataBLL;
 using SuperAdmin.datamodel;
 using SuperAdmin.WebUI.Areas.SysSetting.Models;
@@ -38,6 +39,9 @@ namespace SuperAdmin.WebUI.Areas.SysSetting.Controllers
                 User.HeaderImg = "/img/avatars/avatar3.jpg";
                 User.UserPwd = "0000";
                 User.GName = User.GName.Trim();
+                string pinyin = PinYinConverter.Get(User.UserName.Trim());
+                User.PinYin = pinyin;
+                User.FirstPinYin = string.IsNullOrWhiteSpace(pinyin) ? "A" : pinyin.Substring(0,1);
                 int rowcount = bll.AddNewSysAdminUser(User);
             }
             return RedirectToAction("AdminUser", "Settings", new { area = "SysSetting" });
@@ -48,6 +52,9 @@ namespace SuperAdmin.WebUI.Areas.SysSetting.Controllers
             if (UpdateUser != null)
             {
                 UpdateUser.GName = UpdateUser.GName.Trim();
+                string pinyin = PinYinConverter.Get(UpdateUser.UserName.Trim());
+                UpdateUser.PinYin = pinyin;
+                UpdateUser.FirstPinYin = string.IsNullOrWhiteSpace(pinyin) ? "A" : pinyin.Substring(0, 1);
                 int rowcount = bll.UpdateSysAdminUser(UpdateUser);
             }
             return RedirectToAction("AdminUser", "Settings", new { area = "SysSetting" });
