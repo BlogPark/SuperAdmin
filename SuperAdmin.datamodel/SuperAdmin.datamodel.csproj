@@ -50,6 +50,7 @@
     <Compile Include="SysAdminMenuModel.cs" />
     <Compile Include="SysAdminUserGroupModel.cs" />
     <Compile Include="SysAdminUserModel.cs" />
+    <Compile Include="SysNoticeMessageModel.cs" />
     <Compile Include="SystemAdModel.cs" />
     <Compile Include="SystemAdPositionModel.cs" />
     <Compile Include="SystemAdScheduleModel.cs" />
