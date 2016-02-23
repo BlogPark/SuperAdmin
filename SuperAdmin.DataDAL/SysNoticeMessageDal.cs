@@ -186,7 +186,7 @@ namespace SuperAdmin.DataDAL
         public List<SysNoticeMessageModel> GetAllSysNotice()
         {
             StringBuilder strSql = new StringBuilder();
-            strSql.Append("select ID, NoticeStatus, NoticeTitle, NoticeType, LaunchPeopleID, LaunchPeopleName, NoticeContent, CreateTime, LoseTime, Sort, case NoticeStatus when 1 then '发布' when 0  then '已删除' end as NoticeStatusName");
+            strSql.Append("select ID, NoticeStatus, NoticeTitle, NoticeType, LaunchPeopleID, LaunchPeopleName, NoticeContent, CreateTime, LoseTime, Sort, case NoticeStatus when 1 then '已发布' when 0  then '已删除' end as NoticeStatusName");
             strSql.Append("  from SysNoticeMessage ");
             List<SysNoticeMessageModel> list = new List<SysNoticeMessageModel>();
             DataSet ds = helper.Query(strSql.ToString());

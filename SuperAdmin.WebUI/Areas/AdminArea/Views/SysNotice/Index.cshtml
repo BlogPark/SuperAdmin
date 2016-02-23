@@ -12,7 +12,7 @@
             </div>
             <div class="modal-body">
                 <div class="bootbox-body">
-                    @using (Html.BeginForm("addnews", "WebNews", new { area = "AdminArea" }, FormMethod.Post, new { @role = "form", @class = "form-horizontal", @id = "form2" }))
+                    @using (Html.BeginForm("addnotice", "SysNotice", new { area = "AdminArea" }, FormMethod.Post, new { @role = "form", @class = "form-horizontal", @id = "form1" }))
                     {                       
                         <div class="form-group">
                             <label class="col-sm-3 control-label">公告标题：</label>
@@ -44,7 +44,7 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
-                <button type="button" class="btn btn-primary" onclick="publishnews()">发  布</button>
+                <button type="button" class="btn btn-primary" onclick="publishnotices()">发  布</button>
             </div>
         </div>
     </div>
@@ -114,7 +114,7 @@
                                         <td>@item.CreateTime</td>
                                         <td>
                                             <p class="btn-toolbar">
-                                                <a class="btn btn-warning" onclick="deltewebnews(@item.ID)">撤 销</a>
+                                                <a class="btn btn-warning" onclick="deltenotices(@item.ID)">撤 销</a>
                                             </p>
                                         </td>
                                     </tr>
@@ -144,22 +144,31 @@
                 toolbars: [['source', '|', 'bold', 'italic', 'underline', 'fontborder', 'strikethrough', 'superscript', 'subscript', '|', 'fontsize', '|', 'directionalityltr', 'directionalityrtl', 'indent', '|', 'justifyleft', 'justifycenter', 'justifyright', 'justifyjustify', '|', 'simpleupload']]
         , zIndex: 0, initialFrameHeight: 500
             }, null, true));
+            $("input:radio[name=optionsRadios1]").change(function () {
+                var raval = $("input:radio[name=optionsRadios1]:checked").val();
+                $("#addmodel_NoticeType").val(raval);
+            });
+            $("#addnew").click(function () {
+                $("#addmodel_NoticeType").val(1);
+                $("input:radio[name=optionsRadios1][value=1]").attr("checked", true);
+                document.getElementById('form1').reset();
+            });
         });
-        function publishnews() {
-            $("#addmodel_NContent").val(UE.getEditor('newseditor').getContent());
-            document.getElementById('form2').submit();
+        function publishnotices() {
+            $("#addmodel_NoticeContent").val(UE.getEditor('newseditor').getContent());
+            document.getElementById('form1').submit();
             return false;
         }
-        function deltewebnews(id) {
+        function deltenotices(id) {
             $.ajax({
-                url: '@Url.Action("delete", "WebNews", new { area = "AdminArea" })',
+                url: '@Url.Action("delenotice", "SysNotice", new { area = "AdminArea" })',
                 dataType: 'Json',
                 data: { 'id': id },
                 type: 'POST',
                 success: function (data) {
                     var str = ''; var img = '';
                     if (data == '1') {
-                        $("#tr" + id + " td:nth-child(4)").attr("name", "2");
+                        $("#tr" + id + " td:nth-child(4)").attr("name", "0");
                         $("#tr" + id + " td:nth-child(4)").html("已删除");
                         str = "操作成功！";
                         img = '/img/gritter/success.jpg';

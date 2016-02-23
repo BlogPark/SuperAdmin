@@ -8,6 +8,7 @@ using SuperAdmin.DataBLL;
 using SuperAdmin.datamodel;
 using SuperAdmin.WebUI.Models;
 using SuperAdmin.WebUI.Controllers;
+using SuperAdmin.Common;
 namespace SuperAdmin.WebUI.Areas.AdminArea.Controllers
 {
     public class WebNewsController : Controller
@@ -17,6 +18,8 @@ namespace SuperAdmin.WebUI.Areas.AdminArea.Controllers
         WebNewsBll bll = new WebNewsBll();
         public ActionResult Index()
         {
+            WebSplitWords sp = new WebSplitWords();
+            string ss = sp.DisplaySegment("张成航");
             WebNewsIndexViewModel model = new WebNewsIndexViewModel();
             model.list = bll.GetAllModelList();
             return View(model);
