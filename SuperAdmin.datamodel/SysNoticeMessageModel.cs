@@ -11,6 +11,7 @@ namespace SuperAdmin.datamodel
     [DataContract]
     public class SysNoticeMessageModel
     {
+        #region 原表字段
         /// <summary>
         /// ID
         /// </summary>       
@@ -61,5 +62,11 @@ namespace SuperAdmin.datamodel
         /// </summary>       
         [DataMember]
         public int NoticeStatus { get; set; }
+        #endregion
+        /// <summary>
+        /// 状态名称
+        /// </summary>
+        [DataMember]
+        public string NoticeStatusName { get; set; }
     }
 }
