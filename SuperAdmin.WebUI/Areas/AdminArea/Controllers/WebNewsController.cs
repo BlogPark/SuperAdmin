@@ -19,7 +19,7 @@ namespace SuperAdmin.WebUI.Areas.AdminArea.Controllers
         public ActionResult Index()
         {
             WebSplitWords sp = new WebSplitWords();
-            string ss = sp.DisplaySegment("张成航");
+            string ss = sp.DoSegmentToJsonstr("安稳中国张成航");
             WebNewsIndexViewModel model = new WebNewsIndexViewModel();
             model.list = bll.GetAllModelList();
             return View(model);

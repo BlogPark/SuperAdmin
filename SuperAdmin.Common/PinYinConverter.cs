@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace SuperAdmin.Common
 {
+    /// <summary>
+    /// 汉字转拼音操作类
+    /// </summary>
     public class PinYinConverter
     {
 

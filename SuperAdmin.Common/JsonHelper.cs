@@ -8,6 +8,9 @@ using Newtonsoft.Json;
 
 namespace SuperAdmin.Common
 {
+    /// <summary>
+    /// Json序列化/反序列化
+    /// </summary>
     public class JsonHelper
     {
         /// <summary>

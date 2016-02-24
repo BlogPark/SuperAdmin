@@ -7,6 +7,9 @@ using System.Threading.Tasks;
 
 namespace System
 {
+    /// <summary>
+    /// 系统扩展方法类
+    /// </summary>
     public static class sysstaticclass
     {
         /// <summary>

@@ -8,6 +8,9 @@ using SuperAdmin.datamodel;
 
 namespace SuperAdmin.Common
 {
+    /// <summary>
+    /// 上传图片辅助类
+    /// </summary>
     public class UploadHelper
     {
         public static UploadFileModel LocalUpLoadForSingle(System.Web.HttpPostedFileBase uploadFile, string filepath, string[] filetype, int maxSize = 300, string newfilename = "")
