@@ -55,6 +55,7 @@
     <Compile Include="SystemAdPositionModel.cs" />
     <Compile Include="SystemAdScheduleModel.cs" />
     <Compile Include="UploadFileModel.cs" />
+    <Compile Include="WebfaqMsgModel.cs" />
     <Compile Include="WebMenusModel.cs" />
     <Compile Include="WebModuleModel.cs" />
     <Compile Include="WebNewsModel.cs" />

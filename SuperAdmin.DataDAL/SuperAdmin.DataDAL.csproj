@@ -52,6 +52,7 @@
     <Compile Include="SysMenuAndUser.cs" />
     <Compile Include="SysNoticeMessageDal.cs" />
     <Compile Include="SystemSettings.cs" />
+    <Compile Include="WebfaqMsgDal.cs" />
     <Compile Include="WebNewsDal.cs" />
   </ItemGroup>
   <ItemGroup>

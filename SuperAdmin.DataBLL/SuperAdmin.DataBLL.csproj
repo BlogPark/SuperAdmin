@@ -48,6 +48,7 @@
     <Compile Include="SysMenuAndUserBll.cs" />
     <Compile Include="SysNoticeMessageBll.cs" />
     <Compile Include="SystemSettingsBll.cs" />
+    <Compile Include="WebfaqMsgBll.cs" />
     <Compile Include="WebNewsBll.cs" />
   </ItemGroup>
   <ItemGroup>
