@@ -66,29 +66,26 @@ namespace SuperAdmin.DataDAL
             strSql.Append("update WebfaqMsg set ");
             strSql.Append(" FTitle = @FTitle , ");
             strSql.Append(" FAnswerContent = @FAnswerContent , ");
-            strSql.Append(" FStatus = @FStatus , ");
             strSql.Append(" FAnswerId = @FAnswerId , ");
             strSql.Append(" FAnswerName = @FAnswerName , ");
             strSql.Append(" FAnswerTime = @FAnswerTime  ");
             strSql.Append(" where ID=@ID ");
 
             SqlParameter[] parameters = {
-			            new SqlParameter("@ID", SqlDbType.Int,4) ,            
-                        new SqlParameter("@FTitle", SqlDbType.NVarChar,500) ,            
-                        new SqlParameter("@FAnswerContent", SqlDbType.NVarChar,-1) ,            
-                        new SqlParameter("@FStatus", SqlDbType.Int,4) ,            
-                        new SqlParameter("@FAnswerId", SqlDbType.Int,4) ,            
-                        new SqlParameter("@FAnswerName", SqlDbType.NVarChar,30) ,            
+			            new SqlParameter("@ID", SqlDbType.Int) ,            
+                        new SqlParameter("@FTitle", SqlDbType.NVarChar) ,            
+                        new SqlParameter("@FAnswerContent", SqlDbType.NVarChar) ,   
+                        new SqlParameter("@FAnswerId", SqlDbType.Int) ,            
+                        new SqlParameter("@FAnswerName", SqlDbType.NVarChar) ,            
                         new SqlParameter("@FAnswerTime", SqlDbType.DateTime)             
               
             };
             parameters[0].Value = model.ID;
             parameters[1].Value = model.FTitle;
             parameters[2].Value = model.FAnswerContent;
-            parameters[3].Value = model.FStatus;
-            parameters[4].Value = model.FAnswerId;
-            parameters[5].Value = model.FAnswerName;
-            parameters[6].Value = model.FAnswerTime;
+            parameters[3].Value = model.FAnswerId;
+            parameters[4].Value = model.FAnswerName;
+            parameters[5].Value = model.FAnswerTime;
             int rows = helper.ExecuteSql(strSql.ToString(), parameters);
             if (rows > 0)
             {
@@ -179,7 +176,7 @@ namespace SuperAdmin.DataDAL
         {
 
             StringBuilder strSql = new StringBuilder();
-            strSql.Append("select ID, FTitle, FAnswerContent, FStatus, FAnswerId, FAnswerName, FAnswerTime  ");
+            strSql.Append("select ID, FTitle, FAnswerContent, FStatus, FAnswerId, FAnswerName, FAnswerTime,case FStatus when 1 then '已发布' else '已删除' end as FStatusName ");
             strSql.Append("  from WebfaqMsg ");
             strSql.Append(" order by ID desc");
 
@@ -209,6 +206,8 @@ namespace SuperAdmin.DataDAL
                     {
                         model.FAnswerTime = DateTime.Parse(item["FAnswerTime"].ToString());
                     }
+                    model.FStatusName = item["FStatusName"].ToString();
+                    list.Add(model);
                 }
             }
             return list;
