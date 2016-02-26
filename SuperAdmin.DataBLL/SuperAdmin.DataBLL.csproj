@@ -43,6 +43,9 @@
     <Compile Include="ArticleOperateBll.cs" />
     <Compile Include="Class1.cs" />
     <Compile Include="MemberOperaBll.cs" />
+    <Compile Include="ProductCategoryBll.cs" />
+    <Compile Include="ProductInfoBll.cs" />
+    <Compile Include="ProductSpecBll.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SysAdManagerBll.cs" />
     <Compile Include="SysMenuAndUserBll.cs" />

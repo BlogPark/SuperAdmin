@@ -117,6 +117,7 @@
     <Compile Include="Areas\AdminArea\Controllers\ArticleController.cs" />
     <Compile Include="Areas\AdminArea\Controllers\FrontSettingController.cs" />
     <Compile Include="Areas\AdminArea\Controllers\MemberOperaController.cs" />
+    <Compile Include="Areas\AdminArea\Controllers\ProductController.cs" />
     <Compile Include="Areas\AdminArea\Controllers\SiteMsgController.cs" />
     <Compile Include="Areas\AdminArea\Controllers\SysNoticeController.cs" />
     <Compile Include="Areas\AdminArea\Controllers\webfaqController.cs" />
@@ -124,6 +125,9 @@
     <Compile Include="Areas\AdminArea\Models\ArticleIndexViewModel.cs" />
     <Compile Include="Areas\AdminArea\Models\MemberViewModel.cs" />
     <Compile Include="Areas\AdminArea\Models\NewViewPagViewModel.cs" />
+    <Compile Include="Areas\AdminArea\Models\productcategoryViewModel.cs" />
+    <Compile Include="Areas\AdminArea\Models\ProductIndexViewModel.cs" />
+    <Compile Include="Areas\AdminArea\Models\productspecViewModel.cs" />
     <Compile Include="Areas\AdminArea\Models\sendmsgViewModel.cs" />
     <Compile Include="Areas\AdminArea\Models\SiteMsgIndexViewModel.cs" />
     <Compile Include="Areas\AdminArea\Models\SysnoticeIndexViewModel.cs" />
@@ -1748,6 +1752,18 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Areas\AdminArea\Views\webfaq\Index.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\AdminArea\Views\Product\Index.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\AdminArea\Views\Product\productspec.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\AdminArea\Views\Product\productcategory.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\AdminArea\Views\Product\AddProduct.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
