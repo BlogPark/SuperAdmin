@@ -174,8 +174,10 @@
                     var msg = data.result.meg;
                     if (ustatus) {
                         $("#erradpic").hide();
-                        //$("#adpic").attr("src", urlpath);
-                        //$("#settings_WebLogo").val(path);
+                        $("#adpic").attr("src", urlpath);
+                        $("#article_ArtPic").val(path);
+                        $("#article_ArtPicHeight").val(data.result.imgheight);
+                        $("#article_ArtPicWidth").val(data.result.imgwidth)
                     }
                     else {
                         $("#erradpic").show();
@@ -195,8 +197,8 @@
                 $("#article_ArtCID").val(changeval);
                 $("#article_ArtCName").val(changetext);
             });
-            $("#article_ArtType").val($("#catelist").val());
-            $("#article_ArtTypeName").val($("#catelist").find("option:selected").text());
+            $("#article_ArtType").val($("#typelist").val());
+            $("#article_ArtTypeName").val($("#typelist").find("option:selected").text());
             $("#typelist").change(function () {
                 var changetext = $("#typelist").find("option:selected").text();
                 var changeval = $("#typelist").val();
@@ -225,5 +227,9 @@
                 $("#article_ArtContent").val(ue.getContent());
             });
         });
+        function checkform()
+        {
+            document.getElementById("form1").submit();
+        }
     </script>
 }

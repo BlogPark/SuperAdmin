@@ -162,9 +162,9 @@ WHERE   ID = @id";
         {
             StringBuilder strSql = new StringBuilder();
             strSql.Append("insert into Articles(");
-            strSql.Append("ArtTags,ArtPublishTime,ArtStatus,ArtType,ArtFavoriteCount,ArtCommentCount,ArtHitCount,ArtIsAlbum,ArtAlbumJson,ArtOuterchain,ArtTitle,ArtFrom,ArtFromUrl,AntitrialReasons,CheckUserID,CheckUserName,CheckTime,AddTime,ArtCID,ArtCName,ArtIsTop,MemberID,ArtUserTags,MemberName,ArtPic,ArtPicWidth,ArtPicHeight,ArtSummary,ArtContent");
+            strSql.Append("ArtTags,ArtPublishTime,ArtStatus,ArtType,ArtFavoriteCount,ArtCommentCount,ArtHitCount,ArtIsAlbum,ArtAlbumJson,ArtOuterchain,ArtTitle,ArtFrom,ArtFromUrl,AntitrialReasons,AddTime,ArtCID,ArtCName,ArtIsTop,MemberID,ArtUserTags,MemberName,ArtPic,ArtPicWidth,ArtPicHeight,ArtSummary,ArtContent");
             strSql.Append(") values (");
-            strSql.Append("@ArtTags,@ArtPublishTime,@ArtStatus,@ArtType,@ArtFavoriteCount,@ArtCommentCount,@ArtHitCount,@ArtIsAlbum,@ArtAlbumJson,@ArtOuterchain,@ArtTitle,@ArtFrom,@ArtFromUrl,@AntitrialReasons,@CheckUserID,@CheckUserName,@CheckTime,@AddTime,@ArtCID,@ArtCName,@ArtIsTop,@MemberID,@ArtUserTags,@MemberName,@ArtPic,@ArtPicWidth,@ArtPicHeight,@ArtSummary,@ArtContent");
+            strSql.Append("@ArtTags,@ArtPublishTime,@ArtStatus,@ArtType,@ArtFavoriteCount,@ArtCommentCount,@ArtHitCount,@ArtIsAlbum,@ArtAlbumJson,@ArtOuterchain,@ArtTitle,@ArtFrom,@ArtFromUrl,@AntitrialReasons,@AddTime,@ArtCID,@ArtCName,@ArtIsTop,@MemberID,@ArtUserTags,@MemberName,@ArtPic,@ArtPicWidth,@ArtPicHeight,@ArtSummary,@ArtContent");
             strSql.Append(") ");
             strSql.Append(";select @@IDENTITY");
             SqlParameter[] parameters = {
@@ -181,10 +181,7 @@ WHERE   ID = @id";
                         new SqlParameter("@ArtTitle", SqlDbType.NVarChar) ,            
                         new SqlParameter("@ArtFrom", SqlDbType.NVarChar) ,            
                         new SqlParameter("@ArtFromUrl", SqlDbType.NVarChar) ,            
-                        new SqlParameter("@AntitrialReasons", SqlDbType.NVarChar) ,            
-                        new SqlParameter("@CheckUserID", SqlDbType.Int) ,            
-                        new SqlParameter("@CheckUserName", SqlDbType.NVarChar) ,            
-                        new SqlParameter("@CheckTime", SqlDbType.DateTime) ,            
+                        new SqlParameter("@AntitrialReasons", SqlDbType.NVarChar) ,      
                         new SqlParameter("@AddTime", SqlDbType.DateTime) ,            
                         new SqlParameter("@ArtCID", SqlDbType.Int) ,            
                         new SqlParameter("@ArtCName", SqlDbType.NVarChar) ,            
@@ -212,21 +209,18 @@ WHERE   ID = @id";
             parameters[11].Value = model.ArtFrom;
             parameters[12].Value = model.ArtFromUrl;
             parameters[13].Value = model.AntitrialReasons;
-            parameters[14].Value = model.CheckUserID;
-            parameters[15].Value = model.CheckUserName;
-            parameters[16].Value = model.CheckTime;
-            parameters[17].Value = model.AddTime;
-            parameters[18].Value = model.ArtCID;
-            parameters[19].Value = model.ArtCName;
-            parameters[20].Value = model.ArtIsTop;
-            parameters[21].Value = model.MemberID;
-            parameters[22].Value = model.ArtUserTags;
-            parameters[23].Value = model.MemberName;
-            parameters[24].Value = model.ArtPic;
-            parameters[25].Value = model.ArtPicWidth;
-            parameters[26].Value = model.ArtPicHeight;
-            parameters[27].Value = model.ArtSummary;
-            parameters[28].Value = model.ArtContent;
+            parameters[14].Value = model.AddTime;
+            parameters[15].Value = model.ArtCID;
+            parameters[16].Value = model.ArtCName;
+            parameters[17].Value = model.ArtIsTop;
+            parameters[18].Value = model.MemberID;
+            parameters[19].Value = model.ArtUserTags;
+            parameters[20].Value = model.MemberName;
+            parameters[21].Value = model.ArtPic;
+            parameters[22].Value = model.ArtPicWidth;
+            parameters[23].Value = model.ArtPicHeight;
+            parameters[24].Value = model.ArtSummary;
+            parameters[25].Value = model.ArtContent;
             object obj = helper.GetSingle(strSql.ToString(), parameters);
             if (obj == null)
             {
