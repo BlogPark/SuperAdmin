@@ -40,6 +40,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AdminSiteNewsBll.cs" />
+    <Compile Include="ArtCategoryBll.cs" />
     <Compile Include="ArticleOperateBll.cs" />
     <Compile Include="Class1.cs" />
     <Compile Include="MemberOperaBll.cs" />

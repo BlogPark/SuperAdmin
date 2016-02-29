@@ -25,7 +25,11 @@ namespace SuperAdmin.Common
             _Options = PanGu.Setting.PanGuSettings.Config.MatchOptions.Clone();
             _Parameters = PanGu.Setting.PanGuSettings.Config.Parameters.Clone();
         }
-
+        /// <summary>
+        /// 得到分词结果的字符串
+        /// </summary>
+        /// <param name="inputText"></param>
+        /// <returns></returns>
         public string DisplaySegment(string inputText)
         {
             try
@@ -43,7 +47,11 @@ namespace SuperAdmin.Common
             catch { }
             return "";
         }
-
+        /// <summary>
+        /// 分词得到Json字符串
+        /// </summary>
+        /// <param name="inputText"></param>
+        /// <returns></returns>
         public string DoSegmentToJsonstr(string inputText)
         {
             string jsonstr = "";

@@ -51,6 +51,20 @@ namespace SuperAdmin.DataBLL
         {
             return dal.AntiTrialArticle(model);
         }
+        /// <summary>
+        /// 增加一条数据
+        /// </summary>
+        public int AddArticle(ArticlesModel model)
+        {
+            return dal.AddArticle(model);
+        }
+        /// <summary>
+        /// 更新一条文章信息
+        /// </summary>
+        public bool UpdateArticle(ArticlesModel model) 
+        {
+            return dal.UpdateArticle(model);
+        }
         #endregion
     }
 }

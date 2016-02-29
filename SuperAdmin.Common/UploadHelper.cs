@@ -5,6 +5,7 @@ using System.Drawing.Drawing2D;
 using System.Drawing.Imaging;
 using System.IO;
 using System.Linq;
+using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 using SuperAdmin.datamodel;
@@ -286,6 +287,217 @@ namespace SuperAdmin.Common
             return path;
         }
 
+        /// <summary>
+        /// 网络下载文件并保存(对外)
+        /// </summary>
+        /// <param name="remotePath">网络路径</param>
+        /// <param name="filepath">保存路径</param>
+        /// <param name="filetype">扩展名string[] filetype = { ".gif", ".png", ".jpg", ".jpeg", ".bmp" };</param>
+        /// <param name="maxSize">最大多少kb(默认3000kb)</param>
+        /// <param name="maxCompress">超过多少压缩</param>
+        /// <param name="compressVal">压缩比例（默认85）</param>
+        /// <param name="maxWdef">宽度超过默认值，自动裁剪成默认宽度</param>
+        /// <returns></returns>
+        public static UploadFileModel UploadForUrl(string remotePath, string filepath, string[] filetype, int maxSize = 3000, int maxCompress = 300, long compressVal = 85L, int maxWdef = 800)
+        {
+            //判断路径是否为空
+            if (string.IsNullOrEmpty(remotePath) || string.IsNullOrEmpty(filepath))
+                return new UploadFileModel (){ status = "fail", message = "上传路径为空"};
+            string currentType = "";
+            bool verify = VerifyRemotePath(remotePath, filetype, out currentType);
+            if (!verify)
+                return new UploadFileModel() { status = "fail", message = "图片格式错误或者路径不包含http://" };
+            string savePath = filepath.TrimEnd('/').TrimEnd('\\') + "/articles" + "/" + CreateFolder(DateTime.Now) + "/";
+            //判断保持路径是否存在
+            if (!Directory.Exists(savePath))
+                Directory.CreateDirectory(savePath);
+            else
+            {
+                string newSavePath = CreateChildDir(savePath);
+                if (newSavePath != savePath)
+                {
+                    Directory.CreateDirectory(newSavePath);
+                    savePath = newSavePath;
+                }
+            }
+            string filename = savePath + CreateImageFileName() + currentType;
+            string name = CreateImageFileName() + currentType;
+            float fileSize = 0;
+            UploadFileModel uploadInfo = null;
+            try
+            {
+                WebRequest request = WebRequest.Create(remotePath);
+                request.Timeout = 5000;
+                HttpWebResponse response = (HttpWebResponse)request.GetResponse();
+                Stream dataStream = response.GetResponseStream();
+                fileSize = response.ContentLength <= 0 ? 0 : response.ContentLength / 1024;
+                //大小验证
+                if (fileSize > maxSize || fileSize <= 1)
+                    return new UploadFileModel() { status = "fail", message = "图片不能超过" + maxSize + "kb,且不能小于1kb" };
+
+                System.Drawing.Image img = System.Drawing.Image.FromStream(dataStream);
+
+                if (img.Width > maxWdef)
+                {
+                    img.Save(string.Format("{0}.{1}", filename, "big.jpg"), GetImageFormat(currentType));
+                    img = CutImgAuto(img, maxWdef);
+                }
+
+                if (fileSize > maxCompress)
+                {
+                    img.Save(string.Format("{0}.{1}", filename, "Original.jpg"), GetImageFormat(currentType));
+                    ImageCodecInfo codecInfo;
+                    EncoderParameters param;
+                    EncoderJpeg(out codecInfo, out param, compressVal);
+                    img.Save(filename, codecInfo, param);
+                }
+                else
+                {
+                    img.Save(filename, GetImageFormat(currentType));
+                }
+                string path = filename.Replace(filepath.TrimEnd('/').TrimEnd('\\'), "");
+                uploadInfo = new UploadFileModel();
+                uploadInfo.status = "success";
+                uploadInfo.message = "上传成功";
+                uploadInfo.filename = name;
+                uploadInfo.filepath = path;
+                uploadInfo.filesize = fileSize;
+                uploadInfo.width = img.Width;
+                uploadInfo.height = img.Height;              
+                //释放资源
+                dataStream.Close();
+                response.Close();
+                request.Abort();
+                img.Dispose();
+            }
+            catch (Exception ex)
+            {
+                return new UploadFileModel() { status = "fail", message = " 传图片发生异常："+ex.ToString() };
+            }
+            return uploadInfo;
+        }
+        /// <summary>
+        /// 判定传入的网络路径是否有效
+        /// </summary>
+        /// <param name="remotePath">网络路径</param>
+        /// <param name="filetype">扩展名集合
+        /// <example>
+        /// string[] filetype = { ".gif", ".png", ".jpg", ".jpeg", ".bmp" };  
+        /// </example></param>
+        /// <param name="currentType">返回扩展名</param>
+        /// <param name="closeHttpWebResponse">是否关闭HttpWebResponse对象</param>
+        /// <returns></returns>
+        private static bool VerifyRemotePath(string remotePath, string[] filetype, out string currentType)
+        {
+            currentType = "";
+            try
+            {
+                //校验网络路径是不是http://开始
+                if (remotePath.Substring(0, 7) != "http://")
+                    return false;
+                //格式验证
+                int temp = remotePath.LastIndexOf('.');
+                currentType = remotePath.Substring(temp).ToLower();
+                if (Array.IndexOf(filetype, currentType) == -1)
+                    return false;
+            }
+            catch
+            {
+                return false;
+            }
+            currentType = ".jpg";
+            return true;
+        }
+        /// <summary>网页版等比缩放,以宽为准</summary>
+        /// <param name="img">源图Image</param>
+        /// <param name="newW">新宽</param>
+        /// <returns>System.Drawing.Image对象</returns>
+        public static System.Drawing.Image CutImgAuto(System.Drawing.Image img, int newW)
+        {
+            if (img == null) { return null; }
+            int x = 0, originalW = img.Width, originalH = img.Height, height = 0;
+            if (newW >= originalW)
+            {
+                x = (newW - originalW) / 2;
+                height = originalH;
+            }
+            else if (newW < originalW)
+            {
+                originalH = originalH * newW / originalW; originalW = newW;
+                height = originalH;
+            }
+
+            //生成新图片的宽或者高大于原图片的宽或者高则不生成
+            if (height > img.Height || newW > img.Width)
+                return null;
+
+            try
+            {
+                System.Drawing.Image newImg = new Bitmap(newW, height);
+                using (Graphics g = Graphics.FromImage(newImg))
+                {
+                    g.CompositingQuality = CompositingQuality.HighQuality;
+                    g.InterpolationMode = InterpolationMode.HighQualityBicubic;
+                    g.SmoothingMode = SmoothingMode.HighQuality;
+                    g.Clear(System.Drawing.ColorTranslator.FromHtml("#FFFFFF"));
+                    g.DrawImage(img, new Rectangle(x, 0, originalW + 1, originalH + 1), new Rectangle(1, 1, img.Width, img.Height), GraphicsUnit.Pixel);
+                    g.Dispose();
+                }
+                return newImg;
+            }
+            catch
+            {
+                return null;
+            }
+        }
+        /// <summary>
+        /// 获取文件扩展名属性
+        /// </summary>
+        /// <param name="ext"></param>
+        /// <returns></returns>
+        private static System.Drawing.Imaging.ImageFormat GetImageFormat(string ext)
+        {
+            System.Drawing.Imaging.ImageFormat imageFormat = null;
+            switch (ext.ToLower())
+            {
+                case ".jpg":
+                    imageFormat = System.Drawing.Imaging.ImageFormat.Jpeg;
+                    break;
+                case ".png":
+                    imageFormat = System.Drawing.Imaging.ImageFormat.Png;
+                    break;
+                case ".gif":
+                    imageFormat = System.Drawing.Imaging.ImageFormat.Gif;
+                    break;
+                case ".bmp":
+                    imageFormat = System.Drawing.Imaging.ImageFormat.Bmp;
+                    break;
+                case ".icon":
+                    imageFormat = System.Drawing.Imaging.ImageFormat.Icon;
+                    break;
+                default:
+                    imageFormat = System.Drawing.Imaging.ImageFormat.Jpeg;
+                    break;
+            }
+            return imageFormat;
+        }
+        /// <summary>
+        /// EncoderParameter参数获取
+        /// </summary>
+        /// <param name="imageCodecInfo"></param>
+        /// <param name="encoderParameters"></param>
+        /// <param name="encoderVal">建议30-40(指定的数值越低，压缩越高，因此图像的质量越低,值为0时，图像的质量最差)</param>
+        private static void EncoderJpeg(out ImageCodecInfo imageCodecInfo, out EncoderParameters encoderParameters, long encoderVal = 70)
+        {
+            EncoderParameter myEncoderParameter;
+            //请注意这里的myImageCodecInfo声名..可以修改为更通用的.看后面 
+            imageCodecInfo = ImageCodecInfo.GetImageEncoders().SingleOrDefault(m => m.MimeType.Equals("image/jpeg"));
+            encoderParameters = new EncoderParameters(1);
+            //在这里设置图片的质量等级为90L. 
+            //myEncoderParameter = new EncoderParameter(System.Drawing.Imaging.Encoder.Compression, encoderVal);
+            myEncoderParameter = new EncoderParameter(System.Drawing.Imaging.Encoder.Quality, encoderVal);
+            encoderParameters.Param[0] = myEncoderParameter;//将构建出来的EncoderParameter类赋给EncoderParameters数组 
+        }
         #region 生成路径节点信息
         /// <summary>
         /// 生成文件夹

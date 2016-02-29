@@ -46,5 +46,10 @@ namespace SuperAdmin.datamodel
         [DataMember]
         public DateTime AddTime { get; set; } 
         #endregion
+        /// <summary>
+        /// 状态名称
+        /// </summary>
+        [DataMember]
+        public string CStatusName { get; set; }
     }
 }

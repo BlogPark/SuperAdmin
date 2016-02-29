@@ -122,6 +122,8 @@
     <Compile Include="Areas\AdminArea\Controllers\SysNoticeController.cs" />
     <Compile Include="Areas\AdminArea\Controllers\webfaqController.cs" />
     <Compile Include="Areas\AdminArea\Controllers\WebNewsController.cs" />
+    <Compile Include="Areas\AdminArea\Models\AddArticleViewModel.cs" />
+    <Compile Include="Areas\AdminArea\Models\ArticleCategoryViewModel.cs" />
     <Compile Include="Areas\AdminArea\Models\ArticleIndexViewModel.cs" />
     <Compile Include="Areas\AdminArea\Models\MemberViewModel.cs" />
     <Compile Include="Areas\AdminArea\Models\NewViewPagViewModel.cs" />
@@ -1764,6 +1766,9 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Areas\AdminArea\Views\Product\AddProduct.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\AdminArea\Views\Article\ArticleCategory.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

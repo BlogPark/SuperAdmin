@@ -149,7 +149,22 @@ namespace SuperAdmin.datamodel
         /// 分类名称
         /// </summary>       
         [DataMember]
-        public string ArtCName { get; set; } 
+        public string ArtCName { get; set; }
+        /// <summary>
+        /// 用户关键词
+        /// </summary>
+        [DataMember]
+        public string ArtUserTags { get; set; }
+        /// <summary>
+        /// 是否图集
+        /// </summary>
+        [DataMember]
+        public int ArtIsAlbum { get; set; }
+        /// <summary>
+        /// 是否置顶
+        /// </summary>
+        [DataMember]
+        public int ArtIsTop { get; set; }
         #endregion
 
         #region 扩展字段

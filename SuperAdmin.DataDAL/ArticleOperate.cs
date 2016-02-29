@@ -154,6 +154,199 @@ WHERE   ID = @id";
             rowcount = helper.ExecuteSql(sqltxt, paramter);
             return rowcount;
         }
+
+        /// <summary>
+        /// 增加一条数据
+        /// </summary>
+        public int AddArticle(ArticlesModel model)
+        {
+            StringBuilder strSql = new StringBuilder();
+            strSql.Append("insert into Articles(");
+            strSql.Append("ArtTags,ArtPublishTime,ArtStatus,ArtType,ArtFavoriteCount,ArtCommentCount,ArtHitCount,ArtIsAlbum,ArtAlbumJson,ArtOuterchain,ArtTitle,ArtFrom,ArtFromUrl,AntitrialReasons,CheckUserID,CheckUserName,CheckTime,AddTime,ArtCID,ArtCName,ArtIsTop,MemberID,ArtUserTags,MemberName,ArtPic,ArtPicWidth,ArtPicHeight,ArtSummary,ArtContent");
+            strSql.Append(") values (");
+            strSql.Append("@ArtTags,@ArtPublishTime,@ArtStatus,@ArtType,@ArtFavoriteCount,@ArtCommentCount,@ArtHitCount,@ArtIsAlbum,@ArtAlbumJson,@ArtOuterchain,@ArtTitle,@ArtFrom,@ArtFromUrl,@AntitrialReasons,@CheckUserID,@CheckUserName,@CheckTime,@AddTime,@ArtCID,@ArtCName,@ArtIsTop,@MemberID,@ArtUserTags,@MemberName,@ArtPic,@ArtPicWidth,@ArtPicHeight,@ArtSummary,@ArtContent");
+            strSql.Append(") ");
+            strSql.Append(";select @@IDENTITY");
+            SqlParameter[] parameters = {
+			            new SqlParameter("@ArtTags", SqlDbType.NVarChar) ,            
+                        new SqlParameter("@ArtPublishTime", SqlDbType.DateTime) ,            
+                        new SqlParameter("@ArtStatus", SqlDbType.Int) ,            
+                        new SqlParameter("@ArtType", SqlDbType.Int) ,            
+                        new SqlParameter("@ArtFavoriteCount", SqlDbType.Int) ,            
+                        new SqlParameter("@ArtCommentCount", SqlDbType.Int) ,            
+                        new SqlParameter("@ArtHitCount", SqlDbType.Int) ,            
+                        new SqlParameter("@ArtIsAlbum", SqlDbType.Int) ,            
+                        new SqlParameter("@ArtAlbumJson", SqlDbType.NVarChar) ,            
+                        new SqlParameter("@ArtOuterchain", SqlDbType.NVarChar) ,            
+                        new SqlParameter("@ArtTitle", SqlDbType.NVarChar) ,            
+                        new SqlParameter("@ArtFrom", SqlDbType.NVarChar) ,            
+                        new SqlParameter("@ArtFromUrl", SqlDbType.NVarChar) ,            
+                        new SqlParameter("@AntitrialReasons", SqlDbType.NVarChar) ,            
+                        new SqlParameter("@CheckUserID", SqlDbType.Int) ,            
+                        new SqlParameter("@CheckUserName", SqlDbType.NVarChar) ,            
+                        new SqlParameter("@CheckTime", SqlDbType.DateTime) ,            
+                        new SqlParameter("@AddTime", SqlDbType.DateTime) ,            
+                        new SqlParameter("@ArtCID", SqlDbType.Int) ,            
+                        new SqlParameter("@ArtCName", SqlDbType.NVarChar) ,            
+                        new SqlParameter("@ArtIsTop", SqlDbType.Int) ,            
+                        new SqlParameter("@MemberID", SqlDbType.Int) ,            
+                        new SqlParameter("@ArtUserTags", SqlDbType.NVarChar) ,            
+                        new SqlParameter("@MemberName", SqlDbType.NVarChar) ,            
+                        new SqlParameter("@ArtPic", SqlDbType.NVarChar) ,            
+                        new SqlParameter("@ArtPicWidth", SqlDbType.Int) ,            
+                        new SqlParameter("@ArtPicHeight", SqlDbType.Int) ,            
+                        new SqlParameter("@ArtSummary", SqlDbType.NVarChar) ,            
+                        new SqlParameter("@ArtContent", SqlDbType.NVarChar)       
+            };
+            parameters[0].Value = model.ArtTags;
+            parameters[1].Value = model.ArtPublishTime;
+            parameters[2].Value = model.ArtStatus;
+            parameters[3].Value = model.ArtType;
+            parameters[4].Value = model.ArtFavoriteCount;
+            parameters[5].Value = model.ArtCommentCount;
+            parameters[6].Value = model.ArtHitCount;
+            parameters[7].Value = model.ArtIsAlbum;
+            parameters[8].Value = model.ArtAlbumJson;
+            parameters[9].Value = model.ArtOuterchain;
+            parameters[10].Value = model.ArtTitle;
+            parameters[11].Value = model.ArtFrom;
+            parameters[12].Value = model.ArtFromUrl;
+            parameters[13].Value = model.AntitrialReasons;
+            parameters[14].Value = model.CheckUserID;
+            parameters[15].Value = model.CheckUserName;
+            parameters[16].Value = model.CheckTime;
+            parameters[17].Value = model.AddTime;
+            parameters[18].Value = model.ArtCID;
+            parameters[19].Value = model.ArtCName;
+            parameters[20].Value = model.ArtIsTop;
+            parameters[21].Value = model.MemberID;
+            parameters[22].Value = model.ArtUserTags;
+            parameters[23].Value = model.MemberName;
+            parameters[24].Value = model.ArtPic;
+            parameters[25].Value = model.ArtPicWidth;
+            parameters[26].Value = model.ArtPicHeight;
+            parameters[27].Value = model.ArtSummary;
+            parameters[28].Value = model.ArtContent;
+            object obj = helper.GetSingle(strSql.ToString(), parameters);
+            if (obj == null)
+            {
+                return 0;
+            }
+            else
+            {
+                return Convert.ToInt32(obj);
+            }
+        }
+        /// <summary>
+        /// 更新一条文章信息
+        /// </summary>
+        public bool UpdateArticle(ArticlesModel model)
+        {
+            StringBuilder strSql = new StringBuilder();
+            strSql.Append("update Articles set ");
+            strSql.Append(" ArtTags = @ArtTags , ");
+            strSql.Append(" ArtPublishTime = @ArtPublishTime , ");
+            strSql.Append(" ArtStatus = @ArtStatus , ");
+            strSql.Append(" ArtType = @ArtType , ");
+            strSql.Append(" ArtFavoriteCount = @ArtFavoriteCount , ");
+            strSql.Append(" ArtCommentCount = @ArtCommentCount , ");
+            strSql.Append(" ArtHitCount = @ArtHitCount , ");
+            strSql.Append(" ArtIsAlbum = @ArtIsAlbum , ");
+            strSql.Append(" ArtAlbumJson = @ArtAlbumJson , ");
+            strSql.Append(" ArtOuterchain = @ArtOuterchain , ");
+            strSql.Append(" ArtTitle = @ArtTitle , ");
+            strSql.Append(" ArtFrom = @ArtFrom , ");
+            strSql.Append(" ArtFromUrl = @ArtFromUrl , ");
+            strSql.Append(" AntitrialReasons = @AntitrialReasons , ");
+            strSql.Append(" CheckUserID = @CheckUserID , ");
+            strSql.Append(" CheckUserName = @CheckUserName , ");
+            strSql.Append(" CheckTime = @CheckTime , ");
+            strSql.Append(" AddTime = @AddTime , ");
+            strSql.Append(" ArtCID = @ArtCID , ");
+            strSql.Append(" ArtCName = @ArtCName , ");
+            strSql.Append(" ArtIsTop = @ArtIsTop , ");
+            strSql.Append(" MemberID = @MemberID , ");
+            strSql.Append(" ArtUserTags = @ArtUserTags , ");
+            strSql.Append(" MemberName = @MemberName , ");
+            strSql.Append(" ArtPic = @ArtPic , ");
+            strSql.Append(" ArtPicWidth = @ArtPicWidth , ");
+            strSql.Append(" ArtPicHeight = @ArtPicHeight , ");
+            strSql.Append(" ArtSummary = @ArtSummary , ");
+            strSql.Append(" ArtContent = @ArtContent  ");
+            strSql.Append(" where ID=@ID ");
+
+            SqlParameter[] parameters = {
+			            new SqlParameter("@ID", SqlDbType.Int) ,            
+                        new SqlParameter("@ArtTags", SqlDbType.NVarChar) ,            
+                        new SqlParameter("@ArtPublishTime", SqlDbType.DateTime) ,            
+                        new SqlParameter("@ArtStatus", SqlDbType.Int) ,            
+                        new SqlParameter("@ArtType", SqlDbType.Int) ,            
+                        new SqlParameter("@ArtFavoriteCount", SqlDbType.Int) ,            
+                        new SqlParameter("@ArtCommentCount", SqlDbType.Int) ,            
+                        new SqlParameter("@ArtHitCount", SqlDbType.Int) ,            
+                        new SqlParameter("@ArtIsAlbum", SqlDbType.Int) ,            
+                        new SqlParameter("@ArtAlbumJson", SqlDbType.NVarChar) ,            
+                        new SqlParameter("@ArtOuterchain", SqlDbType.NVarChar) ,            
+                        new SqlParameter("@ArtTitle", SqlDbType.NVarChar) ,            
+                        new SqlParameter("@ArtFrom", SqlDbType.NVarChar) ,            
+                        new SqlParameter("@ArtFromUrl", SqlDbType.NVarChar) ,            
+                        new SqlParameter("@AntitrialReasons", SqlDbType.NVarChar) ,            
+                        new SqlParameter("@CheckUserID", SqlDbType.Int) ,            
+                        new SqlParameter("@CheckUserName", SqlDbType.NVarChar) ,            
+                        new SqlParameter("@CheckTime", SqlDbType.DateTime) ,            
+                        new SqlParameter("@AddTime", SqlDbType.DateTime) ,            
+                        new SqlParameter("@ArtCID", SqlDbType.Int) ,            
+                        new SqlParameter("@ArtCName", SqlDbType.NVarChar) ,            
+                        new SqlParameter("@ArtIsTop", SqlDbType.Int) ,            
+                        new SqlParameter("@MemberID", SqlDbType.Int) ,            
+                        new SqlParameter("@ArtUserTags", SqlDbType.NVarChar) ,            
+                        new SqlParameter("@MemberName", SqlDbType.NVarChar) ,            
+                        new SqlParameter("@ArtPic", SqlDbType.NVarChar) ,            
+                        new SqlParameter("@ArtPicWidth", SqlDbType.Int) ,            
+                        new SqlParameter("@ArtPicHeight", SqlDbType.Int) ,            
+                        new SqlParameter("@ArtSummary", SqlDbType.NVarChar) ,            
+                        new SqlParameter("@ArtContent", SqlDbType.NVarChar)       
+            };
+            parameters[0].Value = model.ID;
+            parameters[1].Value = model.ArtTags;
+            parameters[2].Value = model.ArtPublishTime;
+            parameters[3].Value = model.ArtStatus;
+            parameters[4].Value = model.ArtType;
+            parameters[5].Value = model.ArtFavoriteCount;
+            parameters[6].Value = model.ArtCommentCount;
+            parameters[7].Value = model.ArtHitCount;
+            parameters[8].Value = model.ArtIsAlbum;
+            parameters[9].Value = model.ArtAlbumJson;
+            parameters[10].Value = model.ArtOuterchain;
+            parameters[11].Value = model.ArtTitle;
+            parameters[12].Value = model.ArtFrom;
+            parameters[13].Value = model.ArtFromUrl;
+            parameters[14].Value = model.AntitrialReasons;
+            parameters[15].Value = model.CheckUserID;
+            parameters[16].Value = model.CheckUserName;
+            parameters[17].Value = model.CheckTime;
+            parameters[18].Value = model.AddTime;
+            parameters[19].Value = model.ArtCID;
+            parameters[20].Value = model.ArtCName;
+            parameters[21].Value = model.ArtIsTop;
+            parameters[22].Value = model.MemberID;
+            parameters[23].Value = model.ArtUserTags;
+            parameters[24].Value = model.MemberName;
+            parameters[25].Value = model.ArtPic;
+            parameters[26].Value = model.ArtPicWidth;
+            parameters[27].Value = model.ArtPicHeight;
+            parameters[28].Value = model.ArtSummary;
+            parameters[29].Value = model.ArtContent;
+            int rows = helper.ExecuteSql(strSql.ToString(), parameters);
+            if (rows > 0)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
         #endregion
     }
 }

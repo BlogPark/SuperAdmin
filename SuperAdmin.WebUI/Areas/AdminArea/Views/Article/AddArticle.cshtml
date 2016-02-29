@@ -1,4 +1,5 @@
-﻿@{
+﻿@model SuperAdmin.WebUI.Areas.AdminArea.Models.AddArticleViewModel
+@{
     Layout = "~/Views/_Layout.cshtml";
 }
 <div class="container">
@@ -34,58 +35,74 @@
                         <div class="form-group">
                             <label class="col-sm-3 control-label">文章标题</label>
                             <div class="col-sm-7">
-                                <input type="text" placeholder="文本框" class="form-control" />
+                                @Html.TextBoxFor(m => m.article.ArtTitle, new { @placeholder = "文章标题", @class = "form-control" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">文章类型</label>
+                            <div class="col-sm-6">
+                                <select class="form-control" id="typelist">
+                                    @foreach (var item in Model.typelist)
+                                    {
+                                        <option value="@item.Key">@item.Value</option>
+                                    }
+                                </select>
+                                @Html.HiddenFor(m => m.article.ArtType)
+                                @Html.HiddenFor(m => m.article.ArtTypeName)
                             </div>
                         </div>
 
                         <div class="form-group">
-                            <label class="col-sm-3 control-label">文章类型</label>
-                            <div class="col-sm-6">
-                                <select class="form-control" id="sitelist">
-                                    <option value="1">1</option>
-                                    <option value="2">2</option>
-                                    <option value="3">3</option>
-                                    <option value="4">4</option>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="form-group">
                             <label class="col-sm-3 control-label">文章类别</label>
                             <div class="col-sm-6">
-                                <select class="form-control" id="typelist">
-                                    <option value="1">1</option>
-                                    <option value="2">2</option>
-                                    <option value="3">3</option>
-                                    <option value="4">4</option>
+                                <select class="form-control" id="catelist">
+                                    @foreach (var item in Model.categorylist)
+                                    {
+                                        <option value="@item.ID">@item.CName</option>
+                                    }
                                 </select>
+                                @Html.HiddenFor(m => m.article.ArtCID)
+                                @Html.HiddenFor(m => m.article.ArtCName)
                             </div>
                         </div>
                         <div class="form-group">
-                            <label class="col-sm-3 control-label">文章引文</label>
+                            <label class="col-sm-3 control-label">文章摘要</label>
                             <div class="col-sm-7">
-                                <textarea rows="3" placeholder="文本框" class="form-control"></textarea>
+                                @Html.TextAreaFor(m => m.article.ArtSummary, new { @rows = "3", @placeholder = "文章摘要", @class = "form-control" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">文章关键词</label>
+                            <div class="col-sm-7">
+                                @Html.TextBoxFor(m => m.article.ArtUserTags, new { @placeholder = "文章关键词，请用逗号(,)隔开", @class = "form-control" })
                             </div>
                         </div>
                         <div class="form-group">
                             <label class="col-sm-3 control-label">文章主图</label>
                             <div class="col-sm-7">
-                                    <div class="col-lg-5">
-                                        <img id="adpic" height="120" width="200" src="/img/fileupload-default.jpg" class="pull-left">
-                                    </div>
-                                    <div class="col-lg-6">
-                                        <span class="btn btn-lg btn-warning fileinput-button pull-buttom">
-                                            <i class="icon-plus icon-white"></i>
-                                            <span>&nbsp;上传图片&nbsp;</span>
-                                            <input id="fileupload" type="file" name="files[]" data-url="@Url.Action("UploadSuitFiles", "Home", new { area = "" })">
-                                        </span>
-                                        <p id="erradpic" class="text-danger"></p>
-                                    </div>
+                                <div class="col-lg-5">
+                                    <img id="adpic" height="120" width="200" src="/img/fileupload-default.jpg" class="pull-left">
+                                </div>
+                                <div class="col-lg-6">
+                                    <span class="btn btn-lg btn-warning fileinput-button pull-buttom">
+                                        <i class="icon-plus icon-white"></i>
+                                        <span>&nbsp;上传图片&nbsp;</span>
+                                        <input id="fileupload" type="file" name="files[]" data-url="@Url.Action("UploadSuitFiles", "Home", new { area = "" })">
+                                    </span>
+                                    <p id="erradpic" class="text-danger"></p>
+                                </div>
+                                @Html.HiddenFor(m => m.article.ArtPic)
+                                @Html.HiddenFor(m => m.article.ArtPicHeight)
+                                @Html.HiddenFor(m => m.article.ArtPicWidth)
                             </div>
                         </div>
                         <div class="form-group">
                             <label class="col-sm-3 control-label">文章内容</label>
                             <div class="col-sm-7">
                                 <script type="text/plain" id="articleeditor"></script>
+                                @Html.HiddenFor(m => m.article.ArtContent)
+                                @Html.HiddenFor(m => m.article.ArtUserTags)
+                                @Html.HiddenFor(m => m.article.ArtTags)
                             </div>
                         </div>       
                         <div class="form-group">
@@ -102,33 +119,15 @@
                                     </div>
                                     <div style="display: none" class="box-body">
                                         <div class="form-group">
-                                            <label class="col-sm-2 control-label">文本框</label>
-                                            <div class="col-sm-8">
-                                                <input type="text" placeholder="文本框" class="form-control" />
+                                            <label class="col-sm-2 control-label">来源站点</label>
+                                            <div class="col-sm-9">
+                                                @Html.TextBoxFor(m => m.article.ArtFrom, new { @placeholder = "来源站点", @class = "form-control" })
                                             </div>
                                         </div>
                                         <div class="form-group">
-                                            <label class="col-sm-2 control-label">文本框</label>
-                                            <div class="col-sm-8">
-                                                <input type="text" placeholder="文本框" class="form-control" />
-                                            </div>
-                                        </div>
-                                        <div class="form-group">
-                                            <label class="col-sm-2 control-label">文本框</label>
-                                            <div class="col-sm-8">
-                                                <input type="text" placeholder="文本框" class="form-control" />
-                                            </div>
-                                        </div>
-                                        <div class="form-group">
-                                            <label class="col-sm-2 control-label">文本框</label>
-                                            <div class="col-sm-8">
-                                                <input type="text" placeholder="文本框" class="form-control" />
-                                            </div>
-                                        </div>
-                                        <div class="form-group">
-                                            <label class="col-sm-2 control-label">文本框</label>
-                                            <div class="col-sm-8">
-                                                <input type="text" placeholder="文本框" class="form-control" />
+                                            <label class="col-sm-2 control-label">来源URL</label>
+                                            <div class="col-sm-9">
+                                                @Html.TextBoxFor(m => m.article.ArtFromUrl, new { @placeholder = "来源URL", @class = "form-control" })
                                             </div>
                                         </div>
                                     </div>
@@ -188,6 +187,43 @@
                 toolbars: [['source', '|', 'bold', 'italic', 'underline', 'fontborder', 'strikethrough', 'superscript', 'subscript', '|', 'fontsize', '|', 'directionalityltr', 'directionalityrtl', 'indent', '|', 'justifyleft', 'justifycenter', 'justifyright', 'justifyjustify', '|', 'simpleupload']]
         , zIndex: 0, initialFrameHeight: 640
             }, null, true));
+            $("#article_ArtCID").val($("#catelist").val());
+            $("#article_ArtCName").val($("#catelist").find("option:selected").text());
+            $("#catelist").change(function () {
+                var changetext = $("#catelist").find("option:selected").text();
+                var changeval = $("#catelist").val();
+                $("#article_ArtCID").val(changeval);
+                $("#article_ArtCName").val(changetext);
+            });
+            $("#article_ArtType").val($("#catelist").val());
+            $("#article_ArtTypeName").val($("#catelist").find("option:selected").text());
+            $("#typelist").change(function () {
+                var changetext = $("#typelist").find("option:selected").text();
+                var changeval = $("#typelist").val();
+                $("#article_ArtType").val(changeval);
+                $("#article_ArtTypeName").val(changetext);
+            });
+            ue.addListener("contentChange", function (type, mode) {
+                $.ajax({
+                    url: "@Url.Action("spliteword", "Article", new { area = "AdminArea" })",
+                    datatype: "json",
+                    type: "POST",
+                    data: { "title": $("#article_ArtTitle").val(), "tcontent": ue.getContentTxt() },
+                    success: function (data) {
+                        var result = eval('(' + data + ')');
+                        var tagsrt = '';
+                        $.each(result.TextTags, function (i, item) {
+                            tagsrt = tagsrt + item.tagId + ',' + item.tagName + '|';
+                        });
+                        $("#article_ArtTags").val(tagsrt);
+                    },
+                    error: function (XMLHttpRequest, textStatus, errorThrown) {
+                        alert(textStatus);
+                        alert(errorThrown);
+                    }
+                });
+                $("#article_ArtContent").val(ue.getContent());
+            });
         });
     </script>
 }
