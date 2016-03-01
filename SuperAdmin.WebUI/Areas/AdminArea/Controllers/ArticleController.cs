@@ -19,6 +19,7 @@ namespace SuperAdmin.WebUI.Areas.AdminArea.Controllers
         // GET: /AdminArea/Article/
         ArticleOperateBll bll = new ArticleOperateBll();
         ArtCategoryBll catebll = new ArtCategoryBll();
+        WebSplitWords sp = new WebSplitWords();
         public ActionResult Index()
         {
             // string content = "<p><img alt='英国演员Henry Cavill出席第88届奥斯卡颁奖典礼'  src='http://www.yoka.com/dna/pics/ba1dabb9/2/d359b35a5e19e1ee5a1.jpg'><i>英国演员Henry Cavill出席第88届奥斯卡颁奖典礼</i> </p>";
@@ -220,13 +221,13 @@ namespace SuperAdmin.WebUI.Areas.AdminArea.Controllers
         /// <param name="content"></param>
         /// <returns></returns>
         [HttpPost]
-        public ActionResult spliteword(string content)
+        public ActionResult spliteword(string title,string content)
         {
             string result = "";
-            if (!string.IsNullOrWhiteSpace(content))
+            string newcontent = title + " " + content;
+            if (!string.IsNullOrWhiteSpace(newcontent))
             {
-                WebSplitWords sp = new WebSplitWords();
-                result = sp.DoSegmentToJsonstr(content);
+                result = sp.DoSegmentToJsonstr(newcontent);
             }
             return Json(result);
         }

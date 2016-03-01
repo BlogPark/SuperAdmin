@@ -195,7 +195,7 @@ WHERE   ID = @id";
                         new SqlParameter("@ArtSummary", SqlDbType.NVarChar) ,            
                         new SqlParameter("@ArtContent", SqlDbType.NVarChar)       
             };
-            parameters[0].Value = model.ArtTags;
+            parameters[0].Value = model.ArtUserTags;//model.ArtTags;//在没有建设好关键词库之前  先记入用户自己填写的关键词
             parameters[1].Value = model.ArtPublishTime;
             parameters[2].Value = model.ArtStatus;
             parameters[3].Value = model.ArtType;

@@ -207,29 +207,24 @@
             });
             ue.addListener("contentChange", function (type, mode) {
                 $.ajax({
-                    url: "@Url.Action("spliteword", "Article", new { area = "AdminArea" })",
-                    datatype: "json",
-                    type: "POST",
-                    data: { "title": $("#article_ArtTitle").val(), "tcontent": ue.getContentTxt() },
+                    url: '@Url.Action("spliteword", "Article", new { area = "AdminArea" })',
+                    dataType: 'Json',
+                    data: { "title": $("#article_ArtTitle").val(), "content": ue.getContentTxt() },
+                    type: 'POST',
                     success: function (data) {
-                        var result = eval('(' + data + ')');
+                        var result =eval("("+  data+")") ;
                         var tagsrt = '';
-                        $.each(result.TextTags, function (i, item) {
-                            tagsrt = tagsrt + item.tagId + ',' + item.tagName + '|';
+                        $.each(result, function (i, item) {
+                            tagsrt = tagsrt + item.tagId + '|' + item.tagName + ',';
                         });
                         $("#article_ArtTags").val(tagsrt);
-                    },
-                    error: function (XMLHttpRequest, textStatus, errorThrown) {
-                        alert(textStatus);
-                        alert(errorThrown);
                     }
                 });
                 $("#article_ArtContent").val(ue.getContent());
             });
         });
-        function checkform()
-        {
-            document.getElementById("form1").submit();
-        }
+            function checkform() {
+                document.getElementById("form1").submit();
+            }
     </script>
 }
