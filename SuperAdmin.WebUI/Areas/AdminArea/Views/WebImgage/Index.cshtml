@@ -1,0 +1,168 @@
+﻿@model SuperAdmin.WebUI.Areas.AdminArea.Models.WebImgageIndexViewModel
+@{
+    Layout = "~/Views/_Layout.cshtml";
+}
+<!-- SAMPLE BOX CONFIGURATION MODAL FORM-->
+<div class="bootbox modal fade in" id="box-config" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content modal-form">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title">添加新图片</h4>
+            </div>
+            <div class="modal-body">
+                <div class="bootbox-body">
+                    @using (Html.BeginForm("", "", new { area = "AdminArea" }, FormMethod.Post, new { @role = "form", @class = "form-horizontal", @id = "form2" }))
+                    {                       
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">图片标题：</label>
+                            <div class="col-sm-9">
+                                @Html.TextBoxFor(m => m.addmodel.PicName, new { @class = "form-control", @placeholder = "新闻标题" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">新闻内容：</label>
+                            <div class="col-sm-9">
+                                <script type="text/plain" id="newseditor"></script>
+                            </div>
+                        </div>
+                        @Html.HiddenFor(m => m.addmodel.NContent)
+                    }
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                <button type="button" class="btn btn-primary" onclick="publishnews()">发  布</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- /SAMPLE BOX CONFIGURATION MODAL FORM-->
+<div class="container">
+    <div class="row">
+        <div id="content" class="col-lg-12">
+            <!-- PAGE HEADER-->
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="page-header">
+                        <!-- BREADCRUMBS -->
+                        <ul class="breadcrumb">
+                            <li>
+                                <i class="fa fa-home"></i>
+                                <a href="index.html">Home</a>
+                            </li>
+                            <li>
+                                <a href="#">图册管理</a>
+                            </li>
+                            <li>图片管理</li>
+                        </ul>
+                        <!-- /BREADCRUMBS -->
+                        <div class="clearfix">
+                            <h3 class="content-title pull-left">图片管理</h3>
+                        </div>
+                        <div class="description"></div>
+                    </div>
+                </div>
+            </div>
+            <!-- /PAGE HEADER -->
+            <div class="row">
+                <div class="col-sm-11">
+                    <div class="btn-group hidden-xs pull-right invoice-btn-group">
+                        <p class="btn-toolbar">
+                            <a class="btn btn-primary" data-toggle="modal" href="#" id="addnew"><i class="fa fa-search"></i>&nbsp;查询条件预留</a>
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="panel panel-default">
+                    <div class="panel-body">
+                        <div class="row" id="tabdiv">
+                            <table class="table table-striped table-bordered" id="menutab">
+                                <thead>
+                                    <tr>
+                                        <th>图片标题</th>
+                                        <th>图片分类</th>
+                                        <th>图片标签</th>
+                                        <th>图片宽度</th>
+                                        <th>图片高度</th>
+                                        <th>图片地址</th>
+                                        <th>图片状态</th>
+                                        <th>预  览</th>
+                                        <th>编  辑</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var item in Model.list)
+                                    {
+                                        <tr id="tr@(item.ID)">
+                                            <td>@item.PicName</td>
+                                            <td name="@item.PicCateID">@item.PicCateName</td>
+                                            <td>@item.PicTags</td>
+                                            <td>@item.PicWidth</td>
+                                            <td>@item.PicHeight</td>
+                                            <td>@item.PicUrl</td>
+                                            <td>@item.PicStatus</td>
+                                            <td>
+                                                <div class="col-md-1 category_2 item">
+                                                    <div class="filter-content">
+                                                        <img src="@item.PicUrl" alt="" class="img-responsive" />
+                                                        <div class="hover-content">
+                                                            <a class="btn btn-warning hover-link colorbox-button" href="@item.PicUrl" title="@item.PicName">
+                                                                <i class="fa fa-search-plus fa-1x"></i>
+                                                            </a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <p class="btn-toolbar">
+                                                    <a class="btn btn-warning" onclick="deltewebnews(@item.ID)">删 除</a>
+                                                </p>
+                                            </td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- /CONTENT-->
+    </div>
+</div>
+
+@section mycss{
+    <!-- ANIMATE -->
+    <link rel="stylesheet" type="text/css" href="@Url.Content("/css/animatecss/animate.min.css")" />
+    <!-- COLORBOX -->
+    <link rel="stylesheet" type="text/css" href="@Url.Content("/js/colorbox/colorbox.min.css")" />
+    <link rel="stylesheet" href="@Url.Content("/js/gritter/css/jquery.gritter.css")">
+}
+@section scriptfiles{
+    <!-- BLOCK UI -->
+    <script type="text/javascript" src="@Url.Content("/js/jQuery-BlockUI/jquery.blockUI.min.js")"></script>
+    <!-- COLORBOX -->
+    <script type="text/javascript" src="@Url.Content("/js/colorbox/jquery.colorbox.min.js")"></script>
+    <script src="@Url.Content("/js/gritter/js/jquery.gritter.min.js")"></script>
+}
+@section myscript{
+    <script type="text/javascript">
+        $(function () {
+            App.init(); //Initialise plugins and elements
+            $('.filter-content').hover(function () {
+                var hoverContent = $(this).children('.hover-content');
+                hoverContent.removeClass('fadeOut').addClass('animated fadeIn').show();
+            }, function () {
+                var hoverContent = $(this).children('.hover-content');
+                hoverContent.removeClass('fadeIn').addClass('fadeOut');
+            });
+            $('.colorbox-button').colorbox({ rel: 'colorbox-button', maxWidth: '95%', maxHeight: '95%' });
+
+        });
+        function copytext(str) {
+            clip.setText(str); // 设置要复制的文本。
+        }
+    </script>
+}

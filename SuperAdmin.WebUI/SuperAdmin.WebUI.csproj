@@ -121,6 +121,7 @@
     <Compile Include="Areas\AdminArea\Controllers\SiteMsgController.cs" />
     <Compile Include="Areas\AdminArea\Controllers\SysNoticeController.cs" />
     <Compile Include="Areas\AdminArea\Controllers\webfaqController.cs" />
+    <Compile Include="Areas\AdminArea\Controllers\WebImgageController.cs" />
     <Compile Include="Areas\AdminArea\Controllers\WebNewsController.cs" />
     <Compile Include="Areas\AdminArea\Models\AddArticleViewModel.cs" />
     <Compile Include="Areas\AdminArea\Models\ArticleCategoryViewModel.cs" />
@@ -134,6 +135,7 @@
     <Compile Include="Areas\AdminArea\Models\SiteMsgIndexViewModel.cs" />
     <Compile Include="Areas\AdminArea\Models\SysnoticeIndexViewModel.cs" />
     <Compile Include="Areas\AdminArea\Models\webfaqindexViewModel.cs" />
+    <Compile Include="Areas\AdminArea\Models\WebImgageIndexViewModel.cs" />
     <Compile Include="Areas\AdminArea\Models\WebMenuViewModel.cs" />
     <Compile Include="Areas\AdminArea\Models\WebModuleViewModel.cs" />
     <Compile Include="Areas\AdminArea\Models\WebNewsIndexViewModel.cs" />
@@ -1769,6 +1771,9 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Areas\AdminArea\Views\Article\ArticleCategory.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\AdminArea\Views\WebImgage\Index.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

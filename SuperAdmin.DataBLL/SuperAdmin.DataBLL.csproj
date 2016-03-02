@@ -54,6 +54,7 @@
     <Compile Include="SystemSettingsBll.cs" />
     <Compile Include="WebfaqMsgBll.cs" />
     <Compile Include="WebNewsBll.cs" />
+    <Compile Include="WebSiteImageBll.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\SuperAdmin.Common\SuperAdmin.Common.csproj">
