@@ -92,6 +92,18 @@
                                 @Html.TextBoxFor(m => m.addmenu.SortIndex, new { @class = "form-control", @placeholder = "排序编号" })
                             </div>
                         </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">引用图片：</label>
+                            <div class="col-sm-7">
+                                @Html.TextBoxFor(m => m.addmenu.QuoteImage, new { @class = "form-control", @placeholder = "引用图片" })
+                            </div>
+                        </div>
+                         <div class="form-group">
+                            <label class="col-sm-3 control-label">引用文字：</label>
+                            <div class="col-sm-7">
+                                @Html.TextBoxFor(m => m.addmenu.QuoteText, new { @class = "form-control", @placeholder = "引用文字" })
+                            </div>
+                        </div>
                     }
                 </div>
             </div>
@@ -194,6 +206,18 @@
                                 @Html.TextBoxFor(m => m.updatemenu.SortIndex, new { @class = "form-control", @placeholder = "排序编号" })
                             </div>
                         </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">引用图片：</label>
+                            <div class="col-sm-7">
+                                @Html.TextBoxFor(m => m.updatemenu.QuoteImage, new { @class = "form-control", @placeholder = "引用图片" })
+                            </div>
+                        </div>
+                         <div class="form-group">
+                            <label class="col-sm-3 control-label">引用文字：</label>
+                            <div class="col-sm-7">
+                                @Html.TextBoxFor(m => m.updatemenu.QuoteText, new { @class = "form-control", @placeholder = "引用文字" })
+                            </div>
+                        </div>
                     }
                 </div>
             </div>
@@ -250,8 +274,8 @@
                                 <tr>
                                     <th>菜单编号</th>
                                     <th>菜单名称</th>
-                                    <th>上级ID</th>
-                                    <th>上级菜单名称</th>
+                                    <th style="display:none">上级ID</th>
+                                    <th>上级菜单</th>
                                     <th>菜单描述</th>
                                     <th>菜单链接</th>
                                     <th>菜单状态</th>
@@ -260,6 +284,8 @@
                                     <th>控制器名称</th>
                                     <th>Action名称</th>
                                     <th>菜单Icon</th>
+                                    <th>引用图片</th>
+                                    <th>引用文字</th>
                                     <th>编  辑</th>
                                 </tr>
                             </thead>
@@ -269,7 +295,7 @@
                                     <tr id="tr@(item.ID)">
                                         <td>@item.ID</td>
                                         <td>@item.MenuName</td>
-                                        <td>@item.FatherID</td>
+                                        <td  style="display:none">@item.FatherID</td>
                                         <td>@item.FatherName</td>
                                         <td>@item.MenuAlt</td>
                                         <td>@item.LinkUrl</td>
@@ -281,6 +307,8 @@
                                         <td>@item.ControllerName</td>
                                         <td>@item.ActionName</td>
                                         <td>@item.MenuIcon</td>
+                                        <td name="@item.QuoteImage">@if(!string.IsNullOrWhiteSpace(item.QuoteImage)){<img src="@item.QuoteImage" alt="" class="img-responsive"  style="width:120px"/>} </td>
+                                        <td>@item.QuoteText</td>
                                         <td>
                                             <p class="btn-toolbar">
                                                 <a class="btn btn-warning" data-toggle="modal" href="#box-config1" onclick="updatemassage(@item.ID)">修改</a>
@@ -343,6 +371,8 @@
                 var menucon = dtr.eq(9).html();
                 var menuaction = dtr.eq(10).html();
                 var menuicon = dtr.eq(11).html();
+                var qimage = dtr.eq(12).attr("name");
+                var qtext = dtr.eq(13).html();
                 $("#updatemenu_ID").val(menuid);
                 $("#updatemenu_MenuName").val(menuname);
                 $("#updatemenu_MenuAlt").val(menualt);
@@ -355,6 +385,8 @@
                 $("#updatemenu_ActionName").val(menuaction);
                 $("#updatemenu_MenuIcon").val(menuicon);
                 $("#updatemenu_SortIndex").val(menusort);
+                $("#updatemenu_QuoteImage").val(qimage);
+                $("#updatemenu_QuoteText").val(qtext);
                 $("#fathermenu1 option[value=" + menufaid + "]").attr("selected", true);
                 $("input:radio[name=optionsRadios2][value=" + menustatus + "]").attr("checked", true);
             }

@@ -25,6 +25,13 @@ namespace SuperAdmin.DataBLL
         {
             return dal.UpdateWebSiteImage(model);
         }
+         /// <summary>
+        /// 更新一条数据
+        /// </summary>
+        public bool UpdateWebSiteImageStatus(int id, int status)
+        {
+            return dal.UpdateWebSiteImageStatus(id,status);
+        }
         /// <summary>
         /// 得到一个对象实体
         /// </summary>

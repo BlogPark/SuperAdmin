@@ -107,6 +107,14 @@ namespace SuperAdmin.DataBLL
         /// <returns></returns>
         public int DelConfig(int id)
         { return dal.DelConfig(id); }
+
+        /// <summary>
+        /// 得到一个对象实体
+        /// </summary>
+        public SysAdminConfigsModel GetSingleSysAdminConfigsModel(int ID)
+        {
+            return dal.GetSingleSysAdminConfigsModel(ID);
+        }
         #endregion
 
         #region 网站前端基础配置
@@ -165,6 +173,15 @@ namespace SuperAdmin.DataBLL
         {
             return dal.UpdateWebModule(model);
         }
+        /// <summary>
+        /// 根据名称查找网站模块
+        /// </summary>
+        /// <param name="name"></param>
+        /// <returns></returns>
+        public WebModuleModel GetSingleWebModulesByName(string name)
+        {
+            return dal.GetSingleWebModulesByName(name);
+        }
         #endregion
 
         #region 网站前端菜单设置
@@ -199,9 +216,9 @@ namespace SuperAdmin.DataBLL
         /// 得到全部的菜单
         /// </summary>
         /// <returns></returns>
-        public List<WebMenusModel> GetAllWebMenusList()
+        public List<WebMenusModel> GetAllWebMenusList(int isuse = 0)
         {
-            return dal.GetAllWebMenusList();
+            return dal.GetAllWebMenusList(isuse);
         }
         /// <summary>
         /// 得到所有的顶级菜单

@@ -146,7 +146,7 @@ namespace SuperAdmin.DataDAL
                     model.AddUserID = int.Parse(ds.Tables[0].Rows[0]["AddUserID"].ToString());
                 }
                 model.AddUserName = ds.Tables[0].Rows[0]["AddUserName"].ToString();
-
+                model.PicUrlStr = appcontent.Imgdomain + ds.Tables[0].Rows[0]["PicUrl"].ToString();
                 return model;
             }
             else
@@ -160,7 +160,7 @@ namespace SuperAdmin.DataDAL
         public List<WebSiteImageModel> GetAllModel()
         {
             StringBuilder strSql = new StringBuilder();
-            strSql.Append("select ID, AddTime, PicCateID, PicCateName, PicName, PicTags, PicUrl, PicWidth, PicHeight, PicStatus, AddUserID, AddUserName  ");
+            strSql.Append("select ID, AddTime, PicCateID, PicCateName, PicName, PicTags, PicUrl, PicWidth, PicHeight, PicStatus, AddUserID, AddUserName ,case PicStatus when 1 then '激活' else '已删除' end as PicStatusName ");
             strSql.Append("  from WebSiteImage ");
             DataSet ds = helper.Query(strSql.ToString());
             List<WebSiteImageModel> list = new List<WebSiteImageModel>();
@@ -201,7 +201,9 @@ namespace SuperAdmin.DataDAL
                     {
                         model.AddUserID = int.Parse(item["AddUserID"].ToString());
                     }
+                    model.PicUrlStr = appcontent.Imgdomain + item["PicUrl"].ToString();
                     model.AddUserName = item["AddUserName"].ToString();
+                    model.PicStatusName = item["PicStatusName"].ToString();
                     list.Add(model);
                 }
             }
@@ -209,7 +211,34 @@ namespace SuperAdmin.DataDAL
         }
 
         /// <summary>
-        /// 得到文章类别对象实体
+        /// 更新一条数据
+        /// </summary>
+        public bool UpdateWebSiteImageStatus(int id,int status)
+        {
+            StringBuilder strSql = new StringBuilder();
+            strSql.Append("update WebSiteImage set ");
+            strSql.Append(" PicStatus = @PicStatus");
+            strSql.Append(" where ID=@ID ");
+
+            SqlParameter[] parameters = {
+			            new SqlParameter("@ID", SqlDbType.Int,4) ,    
+                        new SqlParameter("@PicStatus", SqlDbType.Int,4)        
+            };
+            parameters[0].Value = id;
+            parameters[1].Value = status;
+            int rows = helper.ExecuteSql(strSql.ToString(), parameters);
+            if (rows > 0)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+        /// <summary>
+        /// 得到图片类别对象实体
         /// </summary>
         public List<PicCategoryModel> GetPicCategoryModel()
         {

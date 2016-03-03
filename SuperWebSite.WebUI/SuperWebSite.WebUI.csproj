@@ -43,6 +43,7 @@
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -108,10 +109,15 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Areas\Article\ArticleAreaRegistration.cs" />
+    <Compile Include="Areas\Article\Controllers\ArticlesController.cs" />
+    <Compile Include="Controllers\DivisionAreaController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\PageArticleIntroViewModel.cs" />
+    <Compile Include="Models\PageNavViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -413,7 +419,8 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Models\" />
+    <Folder Include="Areas\Article\Models\" />
+    <Folder Include="Areas\Article\Views\Shared\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
@@ -472,6 +479,32 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Home\Index.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\DivisionArea\PageTop.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\DivisionArea\PageNav.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\SuperAdmin.Common\SuperAdmin.Common.csproj">
+      <Project>{dd01c697-76ef-49e1-9d9a-a9f3d70be507}</Project>
+      <Name>SuperAdmin.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SuperAdmin.DataBLL\SuperAdmin.DataBLL.csproj">
+      <Project>{04802566-5764-46b1-8842-b5b1b0ee5f49}</Project>
+      <Name>SuperAdmin.DataBLL</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SuperAdmin.datamodel\SuperAdmin.datamodel.csproj">
+      <Project>{fe798d72-93be-42c6-9685-14877a154e6a}</Project>
+      <Name>SuperAdmin.datamodel</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\DivisionArea\PageArticleIntro.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\Article\Views\Web.config" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

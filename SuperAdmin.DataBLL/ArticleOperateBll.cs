@@ -66,5 +66,28 @@ namespace SuperAdmin.DataBLL
             return dal.UpdateArticle(model);
         }
         #endregion
+
+        /// <summary>
+        /// 查询文章信息（分页）
+        /// </summary>
+        /// <param name="wheremodel">查询条件</param>
+        /// <param name="pageindex">页索引</param>
+        /// <param name="pagesize">页容量</param>
+        /// <param name="totalrowCount">总数</param>
+        /// <param name="pageCount">总页数</param>
+        /// <returns></returns>
+        public List<ArticlesModel> GetArticleDataBypage(ArticlesModel wheremodel, int pageindex, int pagesize, out int totalrowCount, out int pageCount)
+        {
+            return dal.GetArticleDataBypage(wheremodel,pageindex,pagesize,out totalrowCount,out pageCount);
+        }
+
+        /// <summary>
+        /// 根据ID列表得到所需文章列表
+        /// </summary>
+        /// <returns></returns>
+        public List<ArticlesModel> GetAllArticlesbyids(string ids)
+        {
+            return dal.GetAllArticlesbyids(ids);
+        }
     }
 }

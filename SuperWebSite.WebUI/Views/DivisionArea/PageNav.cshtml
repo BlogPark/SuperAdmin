@@ -1,0 +1,126 @@
+﻿@model SuperWebSite.WebUI.Models.PageNavViewModel
+<header class="header fixed clearfix">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-3">
+                <!-- header-left start -->
+                <!-- ================ -->
+                <div class="header-left clearfix">
+                    <!-- logo -->
+                    <div class="logo">
+                        <a href="@Url.Action("Index", "Home", new { area = "" })">
+                            <img id="logo" src="@Model.webbasedata.WebLogo" alt="iDea"></a>
+                    </div>
+                    <!-- name-and-slogan -->
+                    <div class="site-slogan">
+                        @Model.webbasedata.WebDescription
+                    </div>
+                </div>
+                <!-- header-left end -->
+            </div>
+            @if (Model.IsShowMainMav)
+            { 
+                <div class="col-md-9">
+                    <!-- header-right start -->
+                    <!-- ================ -->
+                    <div class="header-right clearfix">
+                        <!-- main-navigation start -->
+                        <!-- ================ -->
+                        <div class="main-navigation animated">
+                            <!-- navbar start -->
+                            <!-- ================ -->
+                            <nav class="navbar navbar-default" role="navigation">
+                                <div class="container-fluid">
+                                    <!-- Toggle get grouped for better mobile display -->
+                                    <div class="navbar-header">
+                                        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-collapse-1">
+                                            <span class="sr-only">Toggle navigation</span>
+                                            <span class="icon-bar"></span>
+                                            <span class="icon-bar"></span>
+                                            <span class="icon-bar"></span>
+                                        </button>
+                                    </div>
+                                    <!-- Collect the nav links, forms, and other content for toggling -->
+                                    <div class="collapse navbar-collapse" id="navbar-collapse-1">
+                                        <ul class="nav navbar-nav navbar-right">
+                                            @foreach (var item in Model.webfirstmenus)
+                                            {
+                                                var sublist = Model.websubmenus.Where(m => m.FatherID == item.ID).ToList();
+                                                if (sublist.Count > 0)
+                                                {
+                                                    if (!string.IsNullOrWhiteSpace(item.QuoteImage))
+                                                    {
+                                                        int colnum = sublist.Count % 4 == 0 ? sublist.Count / 4 : (int)sublist.Count / 4 + 1;
+                                                        int num = 12 % colnum == 0 ? 12 / colnum : (int)12 / colnum + 1;
+                                                        int k = 0;                                          
+                                                <li class="dropdown mega-menu">
+                                                    <a href="@Url.Action(item.ActionName, item.ControllerName, new { area = item.AreaName })" class="dropdown-toggle" data-toggle="dropdown">@item.MenuName</a>
+                                                    <ul class="dropdown-menu">
+                                                        <li>
+                                                            <div class="row">
+                                                                <div class="col-lg-4 col-md-3 hidden-sm">
+                                                                    @if (!string.IsNullOrWhiteSpace(item.QuoteText))
+                                                                    {
+                                                                        <p>@item.QuoteText</p>
+                                                                    }
+                                                                    <img src="@item.QuoteImage" alt="@item.MenuName">
+                                                                </div>
+                                                                <div class="col-lg-8 col-md-9">
+                                                                    <h4>@item.MenuName</h4>
+                                                                    <div class="row">
+                                                                        @for (int i = 1; i < colnum + 1; i++)
+                                                                        {
+                                                                            <div class="@("col-sm-" + num)">
+                                                                                <div class="divider"></div>
+                                                                                <ul class="menu">
+                                                                                    @for (int j = k; j < k + 4; j++)
+                                                                                    {
+                                                                                        if (j > (sublist.Count - 1))
+                                                                                        { break; }
+                                                                                        <li><a href="@Url.Action(sublist[j].ActionName, sublist[j].ControllerName, new { area = sublist[j].AreaName })"><i class="icon-right-open"></i>@sublist[j].MenuName</a></li>
+                                                                                    }
+                                                                                </ul>
+                                                                            </div>
+                                                                                    k = k + 4;
+                                                                        }
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </li>
+                                                    </ul>
+                                                </li>
+                                                    }
+                                                    else
+                                                    { 
+                                                <li class="dropdown">
+                                                    <a href="@Url.Action(item.ActionName, item.ControllerName, new { area = item.AreaName })" class="dropdown-toggle" data-toggle="dropdown">@item.MenuName</a>
+                                                    <ul class="dropdown-menu">
+                                                        @foreach (var subitem in sublist)
+                                                        {
+                                                            <li><a href="@Url.Action(subitem.ActionName, subitem.ControllerName, new { area = subitem.AreaName })">@subitem.MenuName</a></li>
+                                                        }
+                                                    </ul>
+                                                </li>
+                                                    }
+                                                }
+                                                else
+                                                {
+                                                <li>
+                                                    <a href="@Url.Action(item.ActionName, item.ControllerName, new { area = item.AreaName })" class="dropdown-toggle" data-toggle="dropdown">@item.MenuName</a>
+                                                </li>
+                                                }
+                                            }
+                                        </ul>
+                                    </div>
+                                </div>
+                            </nav>
+                            <!-- navbar end -->
+                        </div>
+                        <!-- main-navigation end -->
+                    </div>
+                    <!-- header-right end -->
+                </div>
+            }
+        </div>
+    </div>
+</header>

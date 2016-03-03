@@ -43,6 +43,7 @@
     <Compile Include="ArtCategoryBll.cs" />
     <Compile Include="ArticleOperateBll.cs" />
     <Compile Include="Class1.cs" />
+    <Compile Include="FDivisionAreaBll.cs" />
     <Compile Include="MemberOperaBll.cs" />
     <Compile Include="ProductCategoryBll.cs" />
     <Compile Include="ProductInfoBll.cs" />

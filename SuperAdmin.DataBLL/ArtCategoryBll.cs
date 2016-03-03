@@ -35,9 +35,9 @@ namespace SuperAdmin.DataBLL
         /// <summary>
         /// 得到全部对象实体
         /// </summary>
-        public List<ArtCategoryModel> GetALLModel()
+        public List<ArtCategoryModel> GetALLModel(int isuse = 0)
         {
-            return dal.GetALLModel();
+            return dal.GetALLModel(isuse);
         }
     }
 }

@@ -174,10 +174,20 @@ namespace SuperAdmin.datamodel
         [DataMember]
         public string ArtStatusName { get; set; }
         /// <summary>
-        /// 文章状态
+        /// 类型名称
         /// </summary>
         [DataMember]
         public string ArtTypeName { get; set; }
+        /// <summary>
+        /// 开始时间
+        /// </summary>
+        [DataMember]
+        public DateTime? StarTime { get; set; }
+        /// <summary>
+        /// 结束时间
+        /// </summary>
+        [DataMember]
+        public DateTime? EndTime { get; set; }
         #endregion
     }
 }

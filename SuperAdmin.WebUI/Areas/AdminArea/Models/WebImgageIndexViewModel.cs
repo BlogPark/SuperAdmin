@@ -17,5 +17,7 @@ namespace SuperAdmin.WebUI.Areas.AdminArea.Models
         public WebSiteImageModel addmodel { get; set; }
         [DataMember]
         public WebSiteImageModel updmodel { get; set; }
+        [DataMember]
+        public List<PicCategoryModel> categories { get; set; }
     }
 }

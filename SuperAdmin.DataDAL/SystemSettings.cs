@@ -423,6 +423,52 @@ ELSE
             rowcount = helper.ExecuteSql(sqltxt, paramter);
             return rowcount;
         }
+
+        /// <summary>
+        /// 得到一个对象实体
+        /// </summary>
+        public SysAdminConfigsModel GetSingleSysAdminConfigsModel(int ID)
+        {
+            StringBuilder strSql = new StringBuilder();
+            strSql.Append("select ID, ConfigName, ConfigFID, ConfigValue, ConfigRemark, AddTime, ConfigStatus  ");
+            strSql.Append("  from SysAdminConfigs ");
+            strSql.Append(" where ID=@ID");
+            SqlParameter[] parameters = {
+					new SqlParameter("@ID", SqlDbType.Int)
+			};
+            parameters[0].Value = ID;
+            SysAdminConfigsModel model = new SysAdminConfigsModel();
+            DataSet ds = helper.Query(strSql.ToString(), parameters);
+
+            if (ds.Tables[0].Rows.Count > 0)
+            {
+                if (ds.Tables[0].Rows[0]["ID"].ToString() != "")
+                {
+                    model.ID = int.Parse(ds.Tables[0].Rows[0]["ID"].ToString());
+                }
+                model.ConfigName = ds.Tables[0].Rows[0]["ConfigName"].ToString();
+                if (ds.Tables[0].Rows[0]["ConfigFID"].ToString() != "")
+                {
+                    model.ConfigFID = int.Parse(ds.Tables[0].Rows[0]["ConfigFID"].ToString());
+                }
+                model.ConfigValue = ds.Tables[0].Rows[0]["ConfigValue"].ToString();
+                model.ConfigRemark = ds.Tables[0].Rows[0]["ConfigRemark"].ToString();
+                if (ds.Tables[0].Rows[0]["AddTime"].ToString() != "")
+                {
+                    model.AddTime = DateTime.Parse(ds.Tables[0].Rows[0]["AddTime"].ToString());
+                }
+                if (ds.Tables[0].Rows[0]["ConfigStatus"].ToString() != "")
+                {
+                    model.ConfigStatus = int.Parse(ds.Tables[0].Rows[0]["ConfigStatus"].ToString());
+                }
+
+                return model;
+            }
+            else
+            {
+                return null;
+            }
+        }
         #endregion
 
         #region 网站前端基础配置
@@ -538,6 +584,61 @@ WHERE   ID = 1";
                 list.Add(model);
             }
             return list;
+        }
+        /// <summary>
+        /// 根据名称查找模块信息
+        /// </summary>
+        /// <returns></returns>
+        public WebModuleModel GetSingleWebModulesByName(string name)
+        {
+            StringBuilder strSql = new StringBuilder();
+            strSql.Append("select ID, ModuleName, ModuleDescription, ModuleWidth, ModuleHeight, ModuleStatus, AddUserID, AddUserName, AddTime  ");
+            strSql.Append("  from WebModule ");
+            strSql.Append(" where ModuleName=@ModuleName");
+            SqlParameter[] parameters = {
+					new SqlParameter("@ModuleName", SqlDbType.NVarChar)
+			};
+            parameters[0].Value = name;
+
+
+            WebModuleModel model = new WebModuleModel();
+            DataSet ds = helper.Query(strSql.ToString(), parameters);
+
+            if (ds.Tables[0].Rows.Count > 0)
+            {
+                if (ds.Tables[0].Rows[0]["ID"].ToString() != "")
+                {
+                    model.ID = int.Parse(ds.Tables[0].Rows[0]["ID"].ToString());
+                }
+                model.ModuleName = ds.Tables[0].Rows[0]["ModuleName"].ToString();
+                model.ModuleDescription = ds.Tables[0].Rows[0]["ModuleDescription"].ToString();
+                if (ds.Tables[0].Rows[0]["ModuleWidth"].ToString() != "")
+                {
+                    model.ModuleWidth = int.Parse(ds.Tables[0].Rows[0]["ModuleWidth"].ToString());
+                }
+                if (ds.Tables[0].Rows[0]["ModuleHeight"].ToString() != "")
+                {
+                    model.ModuleHeight = int.Parse(ds.Tables[0].Rows[0]["ModuleHeight"].ToString());
+                }
+                if (ds.Tables[0].Rows[0]["ModuleStatus"].ToString() != "")
+                {
+                    model.ModuleStatus = int.Parse(ds.Tables[0].Rows[0]["ModuleStatus"].ToString());
+                }
+                if (ds.Tables[0].Rows[0]["AddUserID"].ToString() != "")
+                {
+                    model.AddUserID = int.Parse(ds.Tables[0].Rows[0]["AddUserID"].ToString());
+                }
+                model.AddUserName = ds.Tables[0].Rows[0]["AddUserName"].ToString();
+                if (ds.Tables[0].Rows[0]["AddTime"].ToString() != "")
+                {
+                    model.AddTime = DateTime.Parse(ds.Tables[0].Rows[0]["AddTime"].ToString());
+                }
+                return model;
+            }
+            else
+            {
+                return null;
+            }
         }
         /// <summary>
         /// 根据ID得到模块信息
@@ -674,9 +775,9 @@ WHERE   ID = 1";
         {
             StringBuilder strSql = new StringBuilder();
             strSql.Append("insert into WebMenus(");
-            strSql.Append("AreaName,AddUserID,AddUserName,AddTime,MenuIcon,MenuName,FatherID,FatherName,MenuAlt,LinkUrl,MenuStatus,SortIndex,ControllerName,ActionName");
+            strSql.Append("AreaName,AddUserID,AddUserName,AddTime,MenuIcon,MenuName,FatherID,FatherName,MenuAlt,LinkUrl,MenuStatus,SortIndex,ControllerName,ActionName,QuoteImage,QuoteText ");
             strSql.Append(") values (");
-            strSql.Append("@AreaName,@AddUserID,@AddUserName,GETDATE(),@MenuIcon,@MenuName,@FatherID,@FatherName,@MenuAlt,@LinkUrl,@MenuStatus,@SortIndex,@ControllerName,@ActionName");
+            strSql.Append("@AreaName,@AddUserID,@AddUserName,GETDATE(),@MenuIcon,@MenuName,@FatherID,@FatherName,@MenuAlt,@LinkUrl,@MenuStatus,@SortIndex,@ControllerName,@ActionName,@QuoteImage,@QuoteText ");
             strSql.Append(") ");
             SqlParameter[] parameters = {
 			            new SqlParameter("@AreaName", SqlDbType.NVarChar,50) ,            
@@ -691,7 +792,9 @@ WHERE   ID = 1";
                         new SqlParameter("@SortIndex", SqlDbType.Int,4) ,            
                         new SqlParameter("@ControllerName", SqlDbType.NVarChar,50) ,            
                         new SqlParameter("@ActionName", SqlDbType.NVarChar,50) ,            
-               new SqlParameter("@FatherName", SqlDbType.NVarChar,50)      
+                        new SqlParameter("@FatherName", SqlDbType.NVarChar,50)  ,  
+                        new SqlParameter("@QuoteImage", SqlDbType.NVarChar)  ,   
+                        new SqlParameter("@QuoteText ", SqlDbType.NVarChar)     
             };
 
             parameters[0].Value = model.AreaName;
@@ -707,6 +810,8 @@ WHERE   ID = 1";
             parameters[10].Value = model.ControllerName;
             parameters[11].Value = model.ActionName;
             parameters[12].Value = model.FatherName;
+            parameters[13].Value = model.QuoteImage;
+            parameters[14].Value = model.QuoteText;
             int rowcount = helper.ExecuteSql(strSql.ToString(), parameters);
             return rowcount;
         }
@@ -731,6 +836,8 @@ WHERE   ID = 1";
             strSql.Append(" SortIndex = @SortIndex , ");
             strSql.Append(" ControllerName = @ControllerName , ");
             strSql.Append(" ActionName = @ActionName  ");
+            strSql.Append(" QuoteImage = @QuoteImage  ");
+            strSql.Append(" QuoteText = @QuoteText  ");
             strSql.Append(" where ID=@ID ");
 
             SqlParameter[] parameters = {
@@ -745,7 +852,9 @@ WHERE   ID = 1";
                         new SqlParameter("@SortIndex", SqlDbType.Int,4) ,            
                         new SqlParameter("@ControllerName", SqlDbType.NVarChar,50) ,            
                         new SqlParameter("@ActionName", SqlDbType.NVarChar,50) ,            
-              new SqlParameter("@FatherName", SqlDbType.NVarChar,50)
+              new SqlParameter("@FatherName", SqlDbType.NVarChar,50),
+              new SqlParameter("@QuoteImage", SqlDbType.NVarChar),
+              new SqlParameter("@QuoteText", SqlDbType.NVarChar)
             };
 
             parameters[0].Value = model.ID;
@@ -760,6 +869,8 @@ WHERE   ID = 1";
             parameters[9].Value = model.ControllerName;
             parameters[10].Value = model.ActionName;
             parameters[11].Value = model.FatherName;
+            parameters[12].Value = model.QuoteImage;
+            parameters[13].Value = model.QuoteText;
             int rows = helper.ExecuteSql(strSql.ToString(), parameters);
             return rows;
         }
@@ -771,7 +882,7 @@ WHERE   ID = 1";
         public WebMenusModel GetWebMenuByID(int id)
         {
             StringBuilder strSql = new StringBuilder();
-            strSql.Append("select ID, AreaName, AddUserID, AddUserName, AddTime, MenuIcon, MenuName, FatherID,FatherName, MenuAlt, LinkUrl, MenuStatus, SortIndex, ControllerName, ActionName  ");
+            strSql.Append("select ID, AreaName, AddUserID, AddUserName, AddTime, MenuIcon, MenuName, FatherID,FatherName, MenuAlt, LinkUrl, MenuStatus, SortIndex, ControllerName, ActionName,QuoteImage,QuoteText   ");
             strSql.Append("  from WebMenus ");
             strSql.Append(" where ID=@ID");
             SqlParameter[] parameters = {
@@ -818,7 +929,8 @@ WHERE   ID = 1";
                 }
                 model.ControllerName = ds.Tables[0].Rows[0]["ControllerName"].ToString();
                 model.ActionName = ds.Tables[0].Rows[0]["ActionName"].ToString();
-
+                model.QuoteText = ds.Tables[0].Rows[0]["QuoteText"].ToString();
+                model.QuoteImage = ds.Tables[0].Rows[0]["QuoteImage"].ToString();
                 return model;
             }
             else
@@ -830,12 +942,16 @@ WHERE   ID = 1";
         /// 得到全部的菜单
         /// </summary>
         /// <returns></returns>
-        public List<WebMenusModel> GetAllWebMenusList()
+        public List<WebMenusModel> GetAllWebMenusList(int isuse=0)
         {
             List<WebMenusModel> list = new List<WebMenusModel>();
             StringBuilder strSql = new StringBuilder();
-            strSql.Append("select ID, AreaName, AddUserID, AddUserName, AddTime, MenuIcon, MenuName, FatherID,FatherName, MenuAlt, LinkUrl, MenuStatus, SortIndex, ControllerName, ActionName  ");
+            strSql.Append("select ID, AreaName, AddUserID, AddUserName, AddTime, MenuIcon, MenuName, FatherID,FatherName, MenuAlt, LinkUrl, MenuStatus, SortIndex, ControllerName, ActionName ,QuoteImage,QuoteText ");
             strSql.Append("  from WebMenus ");
+            if (isuse == 1)
+            {
+                strSql.Append("  WHERE  MenuStatus=1");
+            }
             DataTable dt = helper.Query(strSql.ToString()).Tables[0];
             foreach (DataRow item in dt.Rows)
             {
@@ -855,6 +971,8 @@ WHERE   ID = 1";
                 model.MenuName = item["MenuName"].ToString();
                 model.MenuStatus = int.Parse(item["MenuStatus"].ToString());
                 model.SortIndex = int.Parse(item["SortIndex"].ToString());
+                model.QuoteText = item["QuoteText"].ToString();
+                model.QuoteImage = item["QuoteImage"].ToString();
                 list.Add(model);
             }
             return list;
@@ -867,7 +985,7 @@ WHERE   ID = 1";
         {
             List<WebMenusModel> list = new List<WebMenusModel>();
             StringBuilder strSql = new StringBuilder();
-            strSql.Append("select ID, AreaName, AddUserID, AddUserName, AddTime, MenuIcon, MenuName, FatherID,FatherName, MenuAlt, LinkUrl, MenuStatus, SortIndex, ControllerName, ActionName  ");
+            strSql.Append("select ID, AreaName, AddUserID, AddUserName, AddTime, MenuIcon, MenuName, FatherID,FatherName, MenuAlt, LinkUrl, MenuStatus, SortIndex, ControllerName, ActionName ,QuoteImage,QuoteText  ");
             strSql.Append("  from WebMenus ");
             strSql.Append(" where FatherID=0 and  MenuStatus=1 ");
             DataTable dt = helper.Query(strSql.ToString()).Tables[0];
@@ -889,6 +1007,8 @@ WHERE   ID = 1";
                 model.MenuName = item["MenuName"].ToString();
                 model.MenuStatus = int.Parse(item["MenuStatus"].ToString());
                 model.SortIndex = int.Parse(item["SortIndex"].ToString());
+                model.QuoteText = item["QuoteText"].ToString();
+                model.QuoteImage = item["QuoteImage"].ToString();
                 list.Add(model);
             }
             return list;

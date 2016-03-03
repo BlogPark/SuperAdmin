@@ -12,26 +12,147 @@
             </div>
             <div class="modal-body">
                 <div class="bootbox-body">
-                    @using (Html.BeginForm("", "", new { area = "AdminArea" }, FormMethod.Post, new { @role = "form", @class = "form-horizontal", @id = "form2" }))
+                    @using (Html.BeginForm("AddPic", "WebImgage", new { area = "AdminArea" }, FormMethod.Post, new { @role = "form", @class = "form-horizontal", @id = "form2" }))
                     {                       
                         <div class="form-group">
                             <label class="col-sm-3 control-label">图片标题：</label>
-                            <div class="col-sm-9">
-                                @Html.TextBoxFor(m => m.addmodel.PicName, new { @class = "form-control", @placeholder = "新闻标题" })
+                            <div class="col-sm-6">
+                                @Html.TextBoxFor(m => m.addmodel.PicName, new { @class = "form-control", @placeholder = "图片标题" })
                             </div>
                         </div>
                         <div class="form-group">
-                            <label class="col-sm-3 control-label">新闻内容：</label>
-                            <div class="col-sm-9">
-                                <script type="text/plain" id="newseditor"></script>
+                            <label class="col-sm-3 control-label">图片类别</label>
+                            <div class="col-sm-4">
+                                <select class="form-control" id="catelist">
+                                    @foreach (var item in Model.categories)
+                                    {
+
+                                        <option value="@item.ID">@item.PiccName</option>
+                                    }
+                                </select>
+                                @Html.HiddenFor(m => m.addmodel.PicCateID)
+                                @Html.HiddenFor(m => m.addmodel.PicCateName)
                             </div>
                         </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">图片关键词：</label>
+                            <div class="col-sm-6">
+                                @Html.TextBoxFor(m => m.addmodel.PicTags, new { @class = "form-control", @placeholder = "图片关键词" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">文章主图</label>
+                            <div class="col-sm-9">
+                                <div class="col-sm-5">
+                                    <img id="adpic" height="120" width="120" src="/img/fileupload-default.jpg" class="pull-left">
+                                </div>
+                                <div class="col-sm-6">
+                                    <span class="btn btn-lg btn-warning fileinput-button pull-buttom">
+                                        <i class="icon-plus icon-white"></i>
+                                        <span>&nbsp;上传图片&nbsp;</span>
+                                        <input id="fileupload" type="file" name="files[]" data-url="@Url.Action("UploadFiles", "Home", new { area = "" })">
+                                    </span>
+                                    <p id="erradpic" class="text-danger"></p>
+                                </div>
+                                @Html.HiddenFor(m => m.addmodel.PicUrl)
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">图片宽度：</label>
+                            <div class="col-sm-3">
+                                @Html.TextBoxFor(m => m.addmodel.PicWidth, new { @class = "form-control", @placeholder = "图片宽度", @readonly = "true" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">图片高度：</label>
+                            <div class="col-sm-3">
+                                @Html.TextBoxFor(m => m.addmodel.PicHeight, new { @class = "form-control", @placeholder = "图片高度", @readonly = "true" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">图片状态：</label>
+                            <div class="col-sm-7">
+                                <label class="radio-inline">
+                                    <input type="radio" class="uniform" name="optionsRadios1" value="1" checked>
+                                    启用
+                                </label>
+                                <label class="radio-inline">
+                                    <input type="radio" class="uniform" name="optionsRadios1" value="0">
+                                    禁用
+                                </label>
+                                @Html.HiddenFor(m => m.addmodel.PicStatus)
+                            </div>
+                        </div>  
                     }
                 </div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
-                <button type="button" class="btn btn-primary" onclick="publishnews()">发  布</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">取 消</button>
+                <button type="button" class="btn btn-primary" onclick="javascript:document.getElementById('form2').submit(); return false;">添  加</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- /SAMPLE BOX CONFIGURATION MODAL FORM-->
+<!-- SAMPLE BOX CONFIGURATION MODAL FORM-->
+<div class="bootbox modal fade in" id="box-config1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content modal-form">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title">修改图片信息</h4>
+            </div>
+            <div class="modal-body">
+                <div class="bootbox-body">
+                    @using (Html.BeginForm("Updpic", "WebImgage", new { area = "AdminArea" }, FormMethod.Post, new { @role = "form", @class = "form-horizontal", @id = "form1" }))
+                    {                     
+                        @Html.HiddenFor(m => m.updmodel.ID)  
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">图片标题：</label>
+                            <div class="col-sm-6">
+                                @Html.TextBoxFor(m => m.updmodel.PicName, new { @class = "form-control", @placeholder = "图片标题" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">图片类别</label>
+                            <div class="col-sm-4">
+                                <select class="form-control" id="updcatelist">
+                                    @foreach (var item in Model.categories)
+                                    {
+
+                                        <option value="@item.ID">@item.PiccName</option>
+                                    }
+                                </select>
+                                @Html.HiddenFor(m => m.updmodel.PicCateID)
+                                @Html.HiddenFor(m => m.updmodel.PicCateName)
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">图片关键词：</label>
+                            <div class="col-sm-6">
+                                @Html.TextBoxFor(m => m.updmodel.PicTags, new { @class = "form-control", @placeholder = "图片关键词" })
+                            </div>
+                        </div>                       
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">图片状态：</label>
+                            <div class="col-sm-7">
+                                <label class="radio-inline">
+                                    <input type="radio" class="uniform" name="optionsRadios2" value="1" checked>
+                                    启用
+                                </label>
+                                <label class="radio-inline">
+                                    <input type="radio" class="uniform" name="optionsRadios2" value="0">
+                                    禁用
+                                </label>
+                                @Html.HiddenFor(m => m.updmodel.PicStatus)
+                            </div>
+                        </div>  
+                    }
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">取 消</button>
+                <button type="button" class="btn btn-primary" onclick="javascript:document.getElementById('form1').submit(); return false;">修 改</button>
             </div>
         </div>
     </div>
@@ -68,7 +189,8 @@
                 <div class="col-sm-11">
                     <div class="btn-group hidden-xs pull-right invoice-btn-group">
                         <p class="btn-toolbar">
-                            <a class="btn btn-primary" data-toggle="modal" href="#" id="addnew"><i class="fa fa-search"></i>&nbsp;查询条件预留</a>
+                            <a class="btn btn-primary" data-toggle="modal" href="#" ><i class="fa fa-search"></i>&nbsp;查询条件预留</a>
+                              <a class="btn btn-primary" data-toggle="modal" href="#box-config" id="addnew"><i class="fa fa-plus"></i>添加图片</a>
                         </p>
                     </div>
                 </div>
@@ -100,23 +222,15 @@
                                             <td>@item.PicTags</td>
                                             <td>@item.PicWidth</td>
                                             <td>@item.PicHeight</td>
-                                            <td>@item.PicUrl</td>
-                                            <td>@item.PicStatus</td>
-                                            <td>
-                                                <div class="col-md-1 category_2 item">
-                                                    <div class="filter-content">
-                                                        <img src="@item.PicUrl" alt="" class="img-responsive" />
-                                                        <div class="hover-content">
-                                                            <a class="btn btn-warning hover-link colorbox-button" href="@item.PicUrl" title="@item.PicName">
-                                                                <i class="fa fa-search-plus fa-1x"></i>
-                                                            </a>
-                                                        </div>
-                                                    </div>
-                                                </div>
+                                            <td>@item.PicUrlStr</td>
+                                            <td name="@item.PicStatus">@item.PicStatusName</td>
+                                            <td>                  
+                                                        <img src="@item.PicUrlStr" alt="" class="img-responsive"  style="width:150px"/>   
                                             </td>
                                             <td>
                                                 <p class="btn-toolbar">
-                                                    <a class="btn btn-warning" onclick="deltewebnews(@item.ID)">删 除</a>
+                                                    <a class="btn btn-warning" data-toggle="modal" href="#box-config1"  onclick="updwebimage(@item.ID)">修 改</a>
+                                                    <a class="btn btn-warning" onclick="deltewebimage(@item.ID)">删 除</a>
                                                 </p>
                                             </td>
                                         </tr>
@@ -133,17 +247,14 @@
 </div>
 
 @section mycss{
-    <!-- ANIMATE -->
-    <link rel="stylesheet" type="text/css" href="@Url.Content("/css/animatecss/animate.min.css")" />
-    <!-- COLORBOX -->
-    <link rel="stylesheet" type="text/css" href="@Url.Content("/js/colorbox/colorbox.min.css")" />
     <link rel="stylesheet" href="@Url.Content("/js/gritter/css/jquery.gritter.css")">
+     <link rel="stylesheet" href="@Url.Content("/js/jquery-upload/css/jquery.fileupload.css")">
+    <link rel="stylesheet" href="@Url.Content("/js/jquery-upload/css/jquery.fileupload-ui.css")">
 }
 @section scriptfiles{
-    <!-- BLOCK UI -->
-    <script type="text/javascript" src="@Url.Content("/js/jQuery-BlockUI/jquery.blockUI.min.js")"></script>
-    <!-- COLORBOX -->
-    <script type="text/javascript" src="@Url.Content("/js/colorbox/jquery.colorbox.min.js")"></script>
+     <script src="@Url.Content("/js/jquery-upload/js/vendor/jquery.ui.widget.js")"></script>
+    <script src="@Url.Content("/js/jquery-upload/js/jquery.iframe-transport.js")"></script>
+    <script src="@Url.Content("/js/jquery-upload/js/jquery.fileupload.js")"></script>
     <script src="@Url.Content("/js/gritter/js/jquery.gritter.min.js")"></script>
 }
 @section myscript{
@@ -158,10 +269,109 @@
                 hoverContent.removeClass('fadeIn').addClass('fadeOut');
             });
             $('.colorbox-button').colorbox({ rel: 'colorbox-button', maxWidth: '95%', maxHeight: '95%' });
-
+            $("#erradpic").hide();
+            $("#fileupload").fileupload({
+                dataType: 'json',
+                type: "POST",
+                singleFileUploads: true,
+                autoUpload: true,
+                done: function (e, data) {
+                    var path = data.result.path;
+                    var urlpath = data.result.urlpath;
+                    var ustatus = data.result.status;
+                    var msg = data.result.meg;
+                    if (ustatus) {
+                        $("#erradpic").hide();
+                        $("#adpic").attr("src", urlpath);
+                        $("#addmodel_PicUrl").val(path);
+                        $("#addmodel_PicHeight").val(data.result.imgheight);
+                        $("#addmodel_PicWidth").val(data.result.imgwidth)
+                    }
+                    else {
+                        $("#erradpic").show();
+                        $("#erradpic").html(msg);
+                    }
+                }
+            });
+            $("#addmodel_PicCateID").val($("#catelist").val());
+            $("#addmodel_PicCateName").val($("#catelist").find("option:selected").text());
+            $("#catelist").change(function () {
+                var changetext = $("#catelist").find("option:selected").text();
+                var changeval = $("#catelist").val();
+                $("#addmodel_PicCateID").val(changeval);
+                $("#addmodel_PicCateName").val(changetext);
+            });
+            $("#addmodel_PicStatus").val($("input:radio[name=optionsRadios1]:checked").val());
+            $("input:radio[name=optionsRadios1]").change(function () {
+                var raval = $("input:radio[name=optionsRadios1]:checked").val();
+                $("#addmodel_PicStatus").val(raval);
+            });
+            $("input:radio[name=optionsRadios2]").change(function () {
+                var raval = $("input:radio[name=optionsRadios2]:checked").val();
+                $("#updmodel_PicStatus").val(raval);
+            });
         });
-        function copytext(str) {
-            clip.setText(str); // 设置要复制的文本。
+        function updwebimage(id) {
+            var dtr = $("#tr" + id).children('td');
+            if (dtr) {
+                var title = dtr.eq(0).html();
+                var cateid = dtr.eq(1).attr("name");
+                var catename = dtr.eq(1).html();
+                var tag = dtr.eq(2).html();
+                var statusid = dtr.eq(6).attr("name");
+                $("#updmodel_ID").val(id);
+                $("#updmodel_PicName").val(title);
+                $("#updmodel_PicCateID").val(cateid);
+                $("#updmodel_PicCateName").val(catename);
+                $("#updmodel_PicTags").val(tag);
+                $("#updmodel_PicStatus").val(statusid);
+                $("input:radio[name=optionsRadios2][value=" + statusid + "]").prop("checked", true);
+                $("#updcatelist option[value=" + cateid + "]").attr("selected", true);
+            }
+        }
+        function deltewebimage(id) {
+            $.ajax({
+                url: '@Url.Action("delete", "WebImgage", new { area = "AdminArea" })',
+                dataType: 'Json',
+                data: { 'id': id },
+                type: 'POST',
+                success: function (data) {
+                    var str = ''; var img = '';
+                    if (data == '1') {
+                        $("#tr" + id + " td:nth-child(7)").attr("name", "0");
+                        $("#tr" + id + " td:nth-child(7)").html("已删除");
+                        str = "操作成功！";
+                        img = '/img/gritter/success.jpg';
+                    }
+                    else {
+                        str = "操作失败！";
+                        img = '/img/gritter/error.png';
+                    }
+                    setTimeout(function () {
+                        var unique_id = $.gritter.add({
+                            // (string | mandatory) the heading of the notification
+                            title: str,
+                            // (string | mandatory) the text inside the notification
+                            text: '',
+                            // (string | optional) the image to display on the left
+                            image: img,
+                            // (bool | optional) if you want it to fade out on its own or just sit there
+                            sticky: true,
+                            // (int | optional) the time you want it to be alive for before fading out
+                            time: '',
+                            // (string | optional) the class name you want to apply to that specific message
+                            class_name: 'my-sticky-class'
+                        });
+                        // You can have it return a unique id, this can be used to manually remove it later using
+                        setTimeout(function () {
+                            $.gritter.remove(unique_id, {
+                                fade: true,
+                                speed: 'slow'
+                            });
+                        }, 3000);
+                    }, 0);
+                }
+            });
         }
     </script>
 }

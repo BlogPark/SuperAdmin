@@ -123,7 +123,7 @@ namespace SuperAdmin.DataDAL
             StringBuilder strSql = new StringBuilder();
             strSql.Append("select ID, CName, CStatus, AddUserID, AddUserName, AddTime,case CStatus when 1 then '激活' when 0 then '禁用' end as CStatusName  ");
             strSql.Append("  from ArtCategory ");
-            if (isuse==0)
+            if (isuse==1)
             {
                 strSql.Append(" where CStatus=1 ");
             }

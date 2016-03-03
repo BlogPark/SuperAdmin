@@ -9,8 +9,9 @@ namespace SuperAdmin.datamodel
 {
     [Serializable]
     [DataContract]
-    public  class WebSiteImageModel
+    public class WebSiteImageModel
     {
+        #region 原始字段
         /// <summary>
         /// 主键自增
         /// </summary>       
@@ -70,6 +71,20 @@ namespace SuperAdmin.datamodel
         /// 分类名称
         /// </summary>       
         [DataMember]
-        public string PicCateName { get; set; }
+        public string PicCateName { get; set; } 
+        #endregion
+
+        #region 扩展字段
+        /// <summary>
+        /// 状态名称
+        /// </summary>
+        [DataMember]
+        public string PicStatusName { get; set; }
+        /// <summary>
+        /// 带域名图片地址
+        /// </summary>
+        [DataMember]
+        public string PicUrlStr { get; set; }
+        #endregion
     }
 }

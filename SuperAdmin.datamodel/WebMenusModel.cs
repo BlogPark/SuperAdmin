@@ -86,5 +86,15 @@ namespace SuperAdmin.datamodel
         /// </summary>       
         [DataMember]
         public string MenuIcon { get; set; }
+        /// <summary>
+        /// 引用图片
+        /// </summary>       
+        [DataMember]
+        public string QuoteImage { get; set; }
+        /// <summary>
+        /// 引用文字
+        /// </summary>       
+        [DataMember]
+        public string QuoteText { get; set; }
     }
 }

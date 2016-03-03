@@ -1,0 +1,22 @@
+﻿@model SuperWebSite.WebUI.Models.PageArticleIntroViewModel
+
+@if (Model.IsVisible)
+{
+    int k = 0;
+    string classstr=Model.Count>6?"col-md-1":"col-md-2";
+    <div class="page-intro">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    @foreach (var item in Model.Categories)
+                    {
+                        if (k > 11)
+                            break;
+                         <div class="@classstr"><span><a href="#">@item.Value</a></span></div>
+                        k++;
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+}

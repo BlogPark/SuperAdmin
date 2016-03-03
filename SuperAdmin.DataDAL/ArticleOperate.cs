@@ -154,7 +154,6 @@ WHERE   ID = @id";
             rowcount = helper.ExecuteSql(sqltxt, paramter);
             return rowcount;
         }
-
         /// <summary>
         /// 增加一条数据
         /// </summary>
@@ -342,5 +341,152 @@ WHERE   ID = @id";
             }
         }
         #endregion
+
+        /// <summary>
+        /// 查询文章信息（分页）
+        /// </summary>
+        /// <param name="wheremodel">查询条件</param>
+        /// <param name="pageindex">页索引</param>
+        /// <param name="pagesize">页容量</param>
+        /// <param name="totalrowCount">总数</param>
+        /// <param name="pageCount">总页数</param>
+        /// <returns></returns>
+        public List<ArticlesModel> GetArticleDataBypage(ArticlesModel wheremodel, int pageindex, int pagesize, out int totalrowCount, out int pageCount)
+        {
+            List<ArticlesModel> list = new List<ArticlesModel>();
+            totalrowCount = 0;
+            pageCount = 0;
+            var totalrowcountpram = new SqlParameter("@totalrowcount", System.Data.SqlDbType.Int);
+            totalrowcountpram.Direction = System.Data.ParameterDirection.Output;
+            var pageCountParam = new SqlParameter("@pageCount", System.Data.SqlDbType.Int);
+            pageCountParam.Direction = System.Data.ParameterDirection.Output;
+            SqlParameter[] paramter = new[] { 
+            new SqlParameter("@pageindex",pageindex),
+            new SqlParameter("@pagesize",pagesize),
+            new SqlParameter("@starttime",wheremodel.StarTime),
+            new SqlParameter("@endtime",wheremodel.EndTime),
+            new SqlParameter("@statusnum",wheremodel.ArtStatus),
+             new SqlParameter("@aid",wheremodel.ID),
+            new SqlParameter("@arttitle",wheremodel.ArtTitle),
+            new SqlParameter("@memberID",wheremodel.MemberID),
+            new SqlParameter("@arttypeid",wheremodel.ArtType),
+            new SqlParameter("@artcid",wheremodel.ArtCID),
+            totalrowcountpram,
+            pageCountParam
+            };
+            DataSet ds = helper.RunProcedureDataSet("SeleArticleByPage", paramter);
+            if (ds != null && ds.Tables.Count > 0)
+            {
+                int statusVal = 0;
+                DataTable dt = ds.Tables[0];
+                foreach (DataRow item in dt.Rows)
+                {
+                    statusVal = Convert.ToInt32(item["tStatus"]);
+                    list.Add(new ArticlesModel
+                    {
+                        ID = Convert.ToInt32(item["ID"]),
+                        MemberID = Convert.ToInt32(item["MemberID"]),
+                        ArtTitle = Convert.ToString(item["ArtTitle"]),
+                        MemberName = Convert.ToString(item["MemberName"]),
+                        ArtPic = Convert.ToString(item["ArtPic"]),
+                        ArtPicWidth = Convert.ToInt32(item["ArtPicWidth"]),
+                        ArtPicHeight = Convert.ToInt32(item["ArtPicHeight"]),
+                        ArtSummary = Convert.ToString(item["ArtSummary"]),
+                        ArtContent = Convert.ToString(item["ArtContent"]),
+                        ArtTags = Convert.ToString(item["ArtTags"]),
+                        ArtPublishTime = Convert.ToDateTime(item["ArtPublishTime"]),
+                        ArtType = Convert.ToInt32(item["ArtType"]),
+                        ArtFavoriteCount = Convert.ToInt32(item["ArtFavoriteCount"]),
+                        ArtCommentCount = Convert.ToInt32(item["ArtCommentCount"]),
+                        ArtHitCount = Convert.ToInt32(item["ArtHitCount"]),
+                        ArtFrom = Convert.ToString(item["ArtFrom"]),
+                        ArtFromUrl = Convert.ToString(item["ArtFromUrl"]),
+                        ArtOuterchain = Convert.ToString(item["ArtOuterchain"]),
+                        AntitrialReasons = Convert.ToString(item["AntitrialReasons"]),
+                        CheckUserID = Convert.ToInt32(item["CheckUserID"]),
+                        CheckUserName = Convert.ToString(item["CheckUserName"]),
+                        ArtCID = Convert.ToInt32(item["ArtCID"]),
+                        ArtCName = Convert.ToString(item["ArtCName"]),
+                        ArtIsTop = Convert.ToInt32(item["ArtIsTop"]),
+                        ArtUserTags = Convert.ToString(item["ArtUserTags"]),
+                        ArtTypeName = Convert.ToString(item["TypeName"])
+                    });
+                }
+            }
+            totalrowCount = Convert.ToInt32(totalrowcountpram.Value);
+            pageCount = Convert.ToInt32(pageCountParam.Value);
+            return list;
+        }
+
+        /// <summary>
+        /// 根据ID列表得到所需文章列表
+        /// </summary>
+        /// <returns></returns>
+        public List<ArticlesModel> GetAllArticlesbyids(string ids)
+        {
+            List<ArticlesModel> list = new List<ArticlesModel>();
+            string sqltxt = @"SELECT  ID ,
+        ArtTitle ,
+        MemberID ,
+        MemberName ,
+        ArtPic ,
+        ArtPicWidth ,
+        ArtPicHeight ,
+        ArtSummary ,
+        ArtContent ,
+        ArtTags ,
+        ArtPublishTime ,
+        ArtType ,
+        ArtFavoriteCount ,
+        ArtCommentCount ,
+        ArtHitCount ,
+        ArtIsAlbum ,
+        ArtOuterchain ,
+        ArtFrom ,
+        ArtFromUrl ,
+        AntitrialReasons ,
+        CheckUserID ,
+        CheckUserName ,
+        CheckTime ,
+        AddTime ,
+        ArtCID ,
+        ArtCName ,
+        ArtIsTop ,
+        ArtUserTags,
+        CASE ArtStatus
+          WHEN 10 THEN '待审核'
+          WHEN 20 THEN '已审核'
+          WHEN 30 THEN '已删除'
+        END AS ArtStatusName ,
+        CASE ArtType
+          WHEN 1 THEN '原创文章'
+          WHEN 2 THEN '原创图集'
+          WHEN 3 THEN '广告软文'
+          WHEN 4 THEN '引用文章'
+          WHEN 5 THEN '引用图集'
+        END AS ArtTypeName 
+FROM    dbo.Articles
+where ArtStatus=20 and ID In (" +ids.TrimEnd(',')+")";
+            DataTable dt = helper.Query(sqltxt).Tables[0];
+            foreach (DataRow item in dt.Rows)
+            {
+                ArticlesModel model = new ArticlesModel();
+                model.ID = int.Parse(item["ID"].ToString());
+                model.ArtTitle = item["ArtTitle"].ToString();
+                model.MemberID = int.Parse(item["MemberID"].ToString());
+                model.MemberName = item["MemberName"].ToString();
+                model.ArtPublishTime = DateTime.Parse(item["ArtPublishTime"].ToString());
+                model.ArtStatus = int.Parse(item["ArtStatus"].ToString());
+                model.ArtStatusName = item["ArtStatusName"].ToString();
+                model.ArtType = int.Parse(item["ArtType"].ToString());
+                model.ArtTypeName = item["ArtTypeName"].ToString();
+                model.AddTime = DateTime.Parse(item["AddTime"].ToString());
+                model.ArtCID = int.Parse(item["ArtCID"].ToString());
+                model.ArtCName = item["ArtCName"].ToString();
+                model.ArtContent = item["ArtContent"].ToString();
+                list.Add(model);
+            }
+            return list;
+        }
     }
 }

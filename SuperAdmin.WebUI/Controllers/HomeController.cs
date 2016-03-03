@@ -22,7 +22,10 @@ namespace SuperAdmin.WebUI.Controllers
         {
             return View();
         }
-
+        /// <summary>
+        /// 上传图片
+        /// </summary>
+        /// <returns></returns>
         [HttpPost]
         public ActionResult UploadFiles()
         {
@@ -49,7 +52,10 @@ namespace SuperAdmin.WebUI.Controllers
                 return Json(new { status = false, meg = "未获得文件" });
             }
         }
-
+        /// <summary>
+        /// 上传并生成套图
+        /// </summary>
+        /// <returns></returns>
         [HttpPost]
         public ActionResult UploadSuitFiles()
         {
