@@ -488,5 +488,26 @@ where ArtStatus=20 and ID In (" +ids.TrimEnd(',')+")";
             }
             return list;
         }
+        /// <summary>
+        /// 得到文章和分类的对照
+        /// </summary>
+        /// <returns></returns>
+        public Dictionary<int, List<string>> GetJobCategoryAndArticle()
+        {
+            Dictionary<int, List<string>> dic = new Dictionary<int, List<string>>();
+            string sqltxt = @"SELECT  cateId ,articleids
+FROM   dbo.JobCategory_Article";
+            DataTable dt = helper.Query(sqltxt).Tables[0];
+            foreach (DataRow item in dt.Rows)
+            {
+                int cate = Convert.ToInt32(item["cateId"]);
+                string[] aids = item["articleids"].ToString().TrimEnd(',').Split(',');
+                if (!dic.ContainsKey(cate))
+                {
+                    dic.Add(cate,aids.ToList());
+                }
+            }
+            return dic;
+        }
     }
 }

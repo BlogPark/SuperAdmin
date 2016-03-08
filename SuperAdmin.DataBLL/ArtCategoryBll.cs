@@ -39,5 +39,6 @@ namespace SuperAdmin.DataBLL
         {
             return dal.GetALLModel(isuse);
         }
+        
     }
 }

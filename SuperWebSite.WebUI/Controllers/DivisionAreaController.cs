@@ -65,5 +65,21 @@ namespace SuperWebSite.WebUI.Controllers
             }
             return View(model);
         }
+        /// <summary>
+        /// 网站Footer
+        /// </summary>
+        /// <returns></returns>
+        public ActionResult pageFooter()
+        {
+            return View();
+        }
+        /// <summary>
+        /// 网页的最底层Footer
+        /// </summary>
+        /// <returns></returns>
+        public ActionResult PageSubFooter()
+        {
+            return View();
+        }
     }
 }

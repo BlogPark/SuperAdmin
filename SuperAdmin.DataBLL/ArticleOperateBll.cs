@@ -89,5 +89,14 @@ namespace SuperAdmin.DataBLL
         {
             return dal.GetAllArticlesbyids(ids);
         }
+        /// <summary>
+        /// 得到文章和分类的对照
+        /// </summary>
+        /// <returns></returns>
+        public Dictionary<int, List<string>> GetJobCategoryAndArticle()
+        {
+            return dal.GetJobCategoryAndArticle();
+        }
+
     }
 }

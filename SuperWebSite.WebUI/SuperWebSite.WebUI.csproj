@@ -111,6 +111,7 @@
   <ItemGroup>
     <Compile Include="Areas\Article\ArticleAreaRegistration.cs" />
     <Compile Include="Areas\Article\Controllers\ArticlesController.cs" />
+    <Compile Include="Areas\Article\Models\ArticleIndexViewModel.cs" />
     <Compile Include="Controllers\DivisionAreaController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Global.asax.cs">
@@ -419,7 +420,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Areas\Article\Models\" />
     <Folder Include="Areas\Article\Views\Shared\" />
   </ItemGroup>
   <ItemGroup>
@@ -505,6 +505,15 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Areas\Article\Views\Web.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\DivisionArea\PageSubFooter.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\DivisionArea\pageFooter.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\Article\Views\Articles\Index.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
