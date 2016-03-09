@@ -23,7 +23,7 @@ namespace SuperAdmin.DataBLL
         {
             return dal.GetAllArticles();
         }
-         /// <summary>
+        /// <summary>
         /// 查询一条文章信息
         /// </summary>
         /// <param name="aid"></param>
@@ -61,7 +61,7 @@ namespace SuperAdmin.DataBLL
         /// <summary>
         /// 更新一条文章信息
         /// </summary>
-        public bool UpdateArticle(ArticlesModel model) 
+        public bool UpdateArticle(ArticlesModel model)
         {
             return dal.UpdateArticle(model);
         }
@@ -78,7 +78,7 @@ namespace SuperAdmin.DataBLL
         /// <returns></returns>
         public List<ArticlesModel> GetArticleDataBypage(ArticlesModel wheremodel, int pageindex, int pagesize, out int totalrowCount, out int pageCount)
         {
-            return dal.GetArticleDataBypage(wheremodel,pageindex,pagesize,out totalrowCount,out pageCount);
+            return dal.GetArticleDataBypage(wheremodel, pageindex, pagesize, out totalrowCount, out pageCount);
         }
 
         /// <summary>
@@ -97,6 +97,13 @@ namespace SuperAdmin.DataBLL
         {
             return dal.GetJobCategoryAndArticle();
         }
-
+        /// <summary>
+        ///得到文章根据分类id
+        /// </summary>
+        /// <returns></returns>
+        public List<string> GetJobCategoryAndArticleByCateid(int cateid)
+        {
+            return dal.GetJobCategoryAndArticleByCateid(cateid);
+        }
     }
 }

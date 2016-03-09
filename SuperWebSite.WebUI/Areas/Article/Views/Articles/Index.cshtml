@@ -1,4 +1,65 @@
 ﻿@model  SuperWebSite.WebUI.Areas.Article.Models.ArticleIndexViewModel
 @{
-    Layout = "~/Views/_DefaultLayout.cshtml";
+    Layout = "~/Views/_ArticleLayout.cshtml";
 }
+<div class="container">
+    <div class="row">
+        <!-- main start -->
+        <div class="main col-md-12">
+            @foreach (var item in Model.catelist)
+            {
+                <h1 class="page-title"><a>@item.CName</a></h1>
+                var list = Model.articles[item.ID];
+                <div class="masonry-grid row">
+                    @foreach (var artitem in list)
+                    {
+                        if (!string.IsNullOrWhiteSpace(artitem.ArtPic))
+                        { 
+                        <div class="masonry-grid-item col-sm-6 col-md-4">
+                            <article class="clearfix blogpost">
+                                <div class="overlay-container">
+                                    <img src="@(artitem.ArtPicWidth > 400 ? artitem.ArtPic + ".400.jpg" : artitem.ArtPic)" alt="@artitem.ArtTitle">
+                                </div>
+                                <div class="blogpost-body">
+                                    <div class="post-info">
+                                        <span class="day">@artitem.ArtPublishTime.Day</span>
+                                        <span class="month">@artitem.ArtPublishTime.ToString("yyyy-MM")</span>
+                                    </div>
+                                    <div class="blogpost-content">
+                                        <header>
+                                            <h2 class="title"><a href="#">@artitem.ArtTitle</a></h2>
+                                            <div class="submitted"><i class="fa fa-user pr-5"></i>作者：@(artitem.MemberID == 0 ? "本站编辑" : artitem.MemberName)</div>
+                                        </header>
+                                        <p>@Html.Raw(artitem.ArtSummary)</p>
+                                    </div>
+                                </div>
+                            </article>
+                        </div>
+                        }
+                        else
+                        {
+                        <div class="masonry-grid-item col-sm-6 col-md-4">
+                            <article class="clearfix blogpost">
+                                <div class="blogpost-body">
+                                    <div class="post-info">
+                                        <span class="day">@artitem.ArtPublishTime.Day</span>
+                                        <span class="month">@artitem.ArtPublishTime.ToString("yyyy-MM")</span>
+                                    </div>
+                                    <div class="blogpost-content">
+                                        <header>
+                                            <h2 class="title"><a href="#">@artitem.ArtTitle</a></h2>
+                                            <div class="submitted"><i class="fa fa-user pr-5"></i>作者：@(artitem.MemberID == 0 ? "本站编辑" : artitem.MemberName)</div>
+                                        </header>
+                                        <p>@Html.Raw(artitem.ArtSummary)</p>
+                                    </div>
+                                </div>
+                            </article>
+                        </div>
+                        }
+                    }
+                </div>
+            }
+        </div>
+        <!-- main end -->
+    </div>
+</div>

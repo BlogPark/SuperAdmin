@@ -444,15 +444,12 @@ WHERE   ID = @id";
         ArtOuterchain ,
         ArtFrom ,
         ArtFromUrl ,
-        AntitrialReasons ,
-        CheckUserID ,
-        CheckUserName ,
-        CheckTime ,
         AddTime ,
         ArtCID ,
         ArtCName ,
         ArtIsTop ,
         ArtUserTags,
+       ArtStatus,
         CASE ArtStatus
           WHEN 10 THEN '待审核'
           WHEN 20 THEN '已审核'
@@ -466,7 +463,7 @@ WHERE   ID = @id";
           WHEN 5 THEN '引用图集'
         END AS ArtTypeName 
 FROM    dbo.Articles
-where ArtStatus=20 and ID In (" +ids.TrimEnd(',')+")";
+where ArtStatus=20 and ID In (" + ids.TrimEnd(',') + ")";
             DataTable dt = helper.Query(sqltxt).Tables[0];
             foreach (DataRow item in dt.Rows)
             {
@@ -484,6 +481,10 @@ where ArtStatus=20 and ID In (" +ids.TrimEnd(',')+")";
                 model.ArtCID = int.Parse(item["ArtCID"].ToString());
                 model.ArtCName = item["ArtCName"].ToString();
                 model.ArtContent = item["ArtContent"].ToString();
+                model.ArtPic = string.IsNullOrWhiteSpace(item["ArtPic"].ToString()) ? "" : appcontent.Imgdomain + item["ArtPic"];
+                model.ArtSummary = item["ArtSummary"].ToString();
+                model.ArtPicWidth = Convert.ToInt32(item["ArtPicWidth"]);
+                model.ArtPicHeight = Convert.ToInt32(item["ArtPicHeight"]);
                 list.Add(model);
             }
             return list;
@@ -504,10 +505,28 @@ FROM   dbo.JobCategory_Article";
                 string[] aids = item["articleids"].ToString().TrimEnd(',').Split(',');
                 if (!dic.ContainsKey(cate))
                 {
-                    dic.Add(cate,aids.ToList());
+                    dic.Add(cate, aids.ToList());
                 }
             }
             return dic;
+        }
+        /// <summary>
+        /// 得到文章根据分类Id
+        /// </summary>
+        /// <returns></returns>
+        public List<string> GetJobCategoryAndArticleByCateid(int cateid)
+        {
+            List<string> list = new List<string>();
+            string sqltxt = @"SELECT  cateId ,articleids
+FROM   dbo.JobCategory_Article
+where cateId=@cateid";
+            SqlParameter[] paramter = { new SqlParameter("@cateid",cateid) };
+            DataTable dt = helper.Query(sqltxt,paramter).Tables[0];
+            if (dt.Rows.Count > 0)
+            {
+                list = dt.Rows[0]["articleids"].ToString().TrimEnd(',').Split(',').ToList();                
+            }
+            return list;
         }
     }
 }

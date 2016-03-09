@@ -60,6 +60,43 @@ namespace SuperAdmin.DataBLL
             }
             return currentArtIds;
         }
+        /// <summary>
+        /// 得到单个分类的信息
+        /// </summary>
+        /// <param name="cateid"></param>
+        /// <returns></returns>
+        public ArtCategoryModel GetArticleCategoryByID(int cateid)
+        {
+            return catebll.GetSingleModel(cateid);
+        }
+        /// <summary>
+        /// 根据分类得到文章的分页信息
+        /// </summary>
+        /// <param name="cateid"></param>
+        /// <param name="pagecurrent"></param>
+        /// <param name="pagesize"></param>
+        /// <param name="pagecount"></param>
+        /// <param name="recordcount"></param>
+        /// <returns></returns>
+        public List<ArticlesModel> GetArticlesByCategoryID(int cateid, int pagecurrent, int pagesize, out int pagecount, out int recordcount)
+        {
+            pagecount = recordcount = 0;
+            List<string> list = artbll.GetJobCategoryAndArticleByCateid(cateid);
+            if (list.Count > 0)
+            {
+                List<ArticlesModel> arts = null;
+                List<string> artids = ComputePageByLinq(list, pagecurrent, pagesize, out pagecount, out recordcount);
+                if (artids.Count > 0)
+                {
+                    arts = artbll.GetAllArticlesbyids(string.Join(",", artids));
+                }
+                return arts;
+            }
+            else
+            {
+                return null;
+            }
+        }
 
     }
 }

@@ -504,7 +504,7 @@ FROM    dbo.WebSettings";
                 model.WebDescription = dt.Rows[0]["WebDescription"].ToString();
                 model.WebEmail = dt.Rows[0]["WebEmail"].ToString();
                 model.WebFax = dt.Rows[0]["WebFax"].ToString();
-                model.WebLogo = dt.Rows[0]["WebLogo"].ToString();
+                model.WebLogo = string.IsNullOrWhiteSpace(dt.Rows[0]["WebLogo"].ToString()) ? "" : string.Format("{0}{1}", appcontent.Imgdomain, dt.Rows[0]["WebLogo"].ToString());
                 model.WebLogoAlt = dt.Rows[0]["WebLogoAlt"].ToString();
                 model.WebMobile = dt.Rows[0]["WebMobile"].ToString();
                 model.WebName = dt.Rows[0]["WebName"].ToString();

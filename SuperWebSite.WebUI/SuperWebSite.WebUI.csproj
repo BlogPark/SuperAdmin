@@ -111,12 +111,14 @@
   <ItemGroup>
     <Compile Include="Areas\Article\ArticleAreaRegistration.cs" />
     <Compile Include="Areas\Article\Controllers\ArticlesController.cs" />
+    <Compile Include="Areas\Article\Models\ArticleCateViewModel.cs" />
     <Compile Include="Areas\Article\Models\ArticleIndexViewModel.cs" />
     <Compile Include="Controllers\DivisionAreaController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Helper\PageHelper.cs" />
     <Compile Include="Models\PageArticleIntroViewModel.cs" />
     <Compile Include="Models\PageNavViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -514,6 +516,15 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Areas\Article\Views\Articles\Index.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\_ArticleLayout.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\DivisionArea\PageSectionPart.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\Article\Views\Articles\catepage.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

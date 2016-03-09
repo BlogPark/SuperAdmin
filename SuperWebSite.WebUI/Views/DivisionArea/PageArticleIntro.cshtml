@@ -11,7 +11,7 @@
                     @foreach (var item in Model.Categories)
                     {
                         if (k > 11)
-                            break;
+                        { break; }
                          <div class="@classstr"><span><a href="#">@item.Value</a></span></div>
                         k++;
                     }

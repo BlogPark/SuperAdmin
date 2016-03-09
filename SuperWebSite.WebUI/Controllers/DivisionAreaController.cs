@@ -81,5 +81,13 @@ namespace SuperWebSite.WebUI.Controllers
         {
             return View();
         }
+        /// <summary>
+        /// 网页底端footer以上部分
+        /// </summary>
+        /// <returns></returns>
+        public ActionResult PageSectionPart()
+        {
+            return View();
+        }
     }
 }
