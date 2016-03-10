@@ -96,7 +96,7 @@ namespace SuperWebSite.WebUI.Areas.Article.Controllers
         public ActionResult ArticleDetail(int aid)
         {
             ArticleDetailViewModel model = new ArticleDetailViewModel();
-
+            model.Article = bll.GetArticleModel(aid);
             return View(model);
         }
     }

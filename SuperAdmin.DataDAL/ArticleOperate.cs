@@ -79,11 +79,38 @@ FROM    dbo.Articles";
         MemberID ,
         MemberName ,
         ArtPic ,
+        ArtPicWidth ,
+        ArtPicHeight ,
         ArtSummary ,
         ArtContent ,
         ArtTags ,
-        ArtPublishTime,
-        ArtAlbumJson
+        ArtPublishTime ,
+        ArtType ,
+        ArtFavoriteCount ,
+        ArtCommentCount ,
+        ArtHitCount ,
+        ArtIsAlbum ,
+        ArtOuterchain ,
+        ArtFrom ,
+        ArtFromUrl ,
+        AddTime ,
+        ArtCID ,
+        ArtCName ,
+        ArtIsTop ,
+        ArtUserTags,
+       ArtStatus,
+        CASE ArtStatus
+          WHEN 10 THEN '待审核'
+          WHEN 20 THEN '已审核'
+          WHEN 30 THEN '已删除'
+        END AS ArtStatusName ,
+        CASE ArtType
+          WHEN 1 THEN '原创文章'
+          WHEN 2 THEN '原创图集'
+          WHEN 3 THEN '广告软文'
+          WHEN 4 THEN '引用文章'
+          WHEN 5 THEN '引用图集'
+        END AS ArtTypeName 
 FROM    dbo.Articles WITH(NOLOCK)
 WHERE ID=@id";
             SqlParameter[] paramter = { new SqlParameter("@id", aid) };
@@ -94,12 +121,20 @@ WHERE ID=@id";
                 model.ArtTitle = dt.Rows[0]["ArtTitle"].ToString();
                 model.MemberID = int.Parse(dt.Rows[0]["MemberID"].ToString());
                 model.MemberName = dt.Rows[0]["MemberName"].ToString();
-                model.ArtPic = dt.Rows[0]["ArtPic"].ToString();
-                model.ArtSummary = dt.Rows[0]["ArtSummary"].ToString();
-                model.ArtContent = dt.Rows[0]["ArtContent"].ToString();
-                model.ArtTags = dt.Rows[0]["ArtTags"].ToString();
                 model.ArtPublishTime = DateTime.Parse(dt.Rows[0]["ArtPublishTime"].ToString());
-                model.ArtAlbumJson = dt.Rows[0]["ArtAlbumJson"].ToString();
+                model.ArtStatus = int.Parse(dt.Rows[0]["ArtStatus"].ToString());
+                model.ArtStatusName = dt.Rows[0]["ArtStatusName"].ToString();
+                model.ArtType = int.Parse(dt.Rows[0]["ArtType"].ToString());
+                model.ArtTypeName = dt.Rows[0]["ArtTypeName"].ToString();
+                model.AddTime = DateTime.Parse(dt.Rows[0]["AddTime"].ToString());
+                model.ArtCID = int.Parse(dt.Rows[0]["ArtCID"].ToString());
+                model.ArtCName = dt.Rows[0]["ArtCName"].ToString();
+                model.ArtContent = dt.Rows[0]["ArtContent"].ToString();
+                model.ArtPic = string.IsNullOrWhiteSpace(dt.Rows[0]["ArtPic"].ToString()) ? "" : appcontent.Imgdomain + dt.Rows[0]["ArtPic"];
+                model.ArtSummary = dt.Rows[0]["ArtSummary"].ToString();
+                model.ArtPicWidth = Convert.ToInt32(dt.Rows[0]["ArtPicWidth"]);
+                model.ArtPicHeight = Convert.ToInt32(dt.Rows[0]["ArtPicHeight"]);
+                model.ArtUserTags = dt.Rows[0]["ArtUserTags"].ToString();
             }
             return model;
         }

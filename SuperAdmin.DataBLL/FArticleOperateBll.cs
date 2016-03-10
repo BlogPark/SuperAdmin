@@ -97,6 +97,15 @@ namespace SuperAdmin.DataBLL
                 return null;
             }
         }
+        /// <summary>
+        /// 得到文章信息
+        /// </summary>
+        /// <param name="aid"></param>
+        /// <returns></returns>
+        public ArticlesModel GetArticleModel(int aid)
+        {
+            return artbll.GetSingleArticleByID(aid);
+        }
 
     }
 }
