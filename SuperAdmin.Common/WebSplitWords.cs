@@ -2,8 +2,10 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using PanGu;
+using SuperAdmin.datamodel;
 
 namespace SuperAdmin.Common
 {
@@ -79,6 +81,43 @@ namespace SuperAdmin.Common
             }
             catch { jsonstr = ""; }
             return jsonstr;
+        }
+        /// <summary>
+        /// 分析分出的关键词
+        /// </summary>
+        /// <param name="tagjsonstr"></param>
+        /// <returns></returns>
+        public List<SplitTagModel> AnalyticalTagJson(string tagstr)
+        {
+            List<SplitTagModel> list = new List<SplitTagModel>();
+            string str = tagstr.ToString().TrimEnd('/');
+            string[] totaltags = str.Split('/');
+            foreach (var item in totaltags)
+            {
+                string[] subitems = item.Split('^');
+                string word = subitems[0];
+                long tagid = Convert.ToInt64(subitems[2]);
+                int hot = Convert.ToInt32(subitems[3]);
+                if (word.Length < 2 || word.Length > 4)
+                {
+                    //关键词太长或者太短 都不要
+                    continue;
+                }
+                Regex re = new Regex(word);
+                int repet = re.Matches(tagstr).Count;
+                var result = list.Where(m => m.TagName == word).ToList();
+                if (result.Count > 0)
+                {
+                    continue;
+                }
+                SplitTagModel model = new SplitTagModel();
+                model.TagID = tagid;
+                model.TagName = word;
+                model.RepeatTime = repet;
+                model.hot = hot;
+                list.Add(model);
+            }
+            return list;
         }
     }
 }

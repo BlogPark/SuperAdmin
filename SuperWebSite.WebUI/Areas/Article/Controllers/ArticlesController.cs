@@ -26,7 +26,20 @@ namespace SuperWebSite.WebUI.Areas.Article.Controllers
             ArticleIndexViewModel model = new ArticleIndexViewModel();
             model.catelist = bll.GetAllCategory();
             model.articles = bll.GetCategoryAndArticles();
-            ViewBag.Title = "吃货礼仪_健康养生_热点新闻";
+            List<ArticlesModel> article = new List<ArticlesModel>();
+            foreach (var item in model.articles)
+            {
+                article.AddRange(item.Value);
+            }
+            string catestr = ""; int k = 0;
+            foreach (var item in model.catelist)
+            {
+                if (k > 2)
+                    continue;
+                catestr += item.CName + "_";
+                k++;
+            }
+            ViewBag.Title = catestr.TrimEnd('_');
             ViewBag.Keywords = "健康,养生,温润,美食,烹饪,美味";
             ViewBag.Description = "告诉你怎么吃健康，看看人家都怎么吃，怎么吃才最时尚、最健康，我是吃货我骄傲";
             return View(model);
@@ -39,7 +52,7 @@ namespace SuperWebSite.WebUI.Areas.Article.Controllers
         /// <param name="p"></param>
         /// <returns></returns>
         [OutputCache(Duration = 1800, VaryByParam = "*")]
-        public ActionResult catepage(int cateid,int p=1)
+        public ActionResult catepage(int cateid, int p = 1)
         {
             ArticleCateViewModel model = new ArticleCateViewModel();
             int pagecount = 0;
@@ -54,6 +67,36 @@ namespace SuperWebSite.WebUI.Areas.Article.Controllers
             model.Articles = articles;
             model.pageparam = "p";
             model.PageSize = PageSize;
+            return View(model);
+        }
+
+        private string getmetainfo(List<ArticlesModel> article, out string decription, out string keyword)
+        {
+            string title = "";
+            decription = keyword = "";           
+            var cutSummary = article.Where(w => w.ArtSummary.Length < 400 && w.ArtSummary.Length > 100);
+            if (cutSummary != null && cutSummary.Count() > 0)
+            {
+                decription = cutSummary.OrderByDescending(o => o.ID).FirstOrDefault().ArtSummary;
+                if (!string.IsNullOrEmpty(decription))
+                {
+                    if (decription.Length > 160)
+                        decription = decription.Substring(0, 160);
+                }
+            }
+            return title;
+        }
+
+        /// <summary>
+        /// 文章明细页面
+        /// </summary>
+        /// <param name="aid"></param>
+        /// <returns></returns>
+        [OutputCache(Duration=1800,VaryByParam="*")]
+        public ActionResult ArticleDetail(int aid)
+        {
+            ArticleDetailViewModel model = new ArticleDetailViewModel();
+
             return View(model);
         }
     }

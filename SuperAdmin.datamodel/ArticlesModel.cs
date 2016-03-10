@@ -188,6 +188,11 @@ namespace SuperAdmin.datamodel
         /// </summary>
         [DataMember]
         public DateTime? EndTime { get; set; }
+        /// <summary>
+        /// 文章关键词
+        /// </summary>
+        [DataMember]
+        public Dictionary<long, string> Tags { get; set; }
         #endregion
     }
 }

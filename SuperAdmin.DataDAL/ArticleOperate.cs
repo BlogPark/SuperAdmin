@@ -467,6 +467,16 @@ where ArtStatus=20 and ID In (" + ids.TrimEnd(',') + ")";
             DataTable dt = helper.Query(sqltxt).Tables[0];
             foreach (DataRow item in dt.Rows)
             {
+                Dictionary<long, string> tagdic = new Dictionary<long, string>();
+                string tags = item["ArtTags"].ToString();
+                if (!string.IsNullOrWhiteSpace(tags))
+                {
+                    foreach (var tagitem in tags.Split(','))
+                    {
+                        string[] tag = tagitem.Split('|');
+                        tagdic.Add(Convert.ToInt64(tag[0]),tag[1].ToString());
+                    }
+                }
                 ArticlesModel model = new ArticlesModel();
                 model.ID = int.Parse(item["ID"].ToString());
                 model.ArtTitle = item["ArtTitle"].ToString();
@@ -485,6 +495,8 @@ where ArtStatus=20 and ID In (" + ids.TrimEnd(',') + ")";
                 model.ArtSummary = item["ArtSummary"].ToString();
                 model.ArtPicWidth = Convert.ToInt32(item["ArtPicWidth"]);
                 model.ArtPicHeight = Convert.ToInt32(item["ArtPicHeight"]);
+                model.ArtUserTags = item["ArtUserTags"].ToString();
+                model.Tags = tagdic;
                 list.Add(model);
             }
             return list;

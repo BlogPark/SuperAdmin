@@ -112,6 +112,7 @@
     <Compile Include="Areas\Article\ArticleAreaRegistration.cs" />
     <Compile Include="Areas\Article\Controllers\ArticlesController.cs" />
     <Compile Include="Areas\Article\Models\ArticleCateViewModel.cs" />
+    <Compile Include="Areas\Article\Models\ArticleDetailViewModel.cs" />
     <Compile Include="Areas\Article\Models\ArticleIndexViewModel.cs" />
     <Compile Include="Controllers\DivisionAreaController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -525,6 +526,9 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Areas\Article\Views\Articles\catepage.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\Article\Views\Articles\ArticleDetail.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
