@@ -13,6 +13,11 @@ namespace SuperWebSite.WebUI.Areas.Article.Models
     {
         [DataMember]
         public ArticlesModel Article { get; set; }
-
+        [DataMember]
+        public List<WebSiteCommentsModel> comments { get; set; }
+        [DataMember]
+        public List<ArticlesModel> RecommendArticle { get; set; }
+        [DataMember]
+        public List<ArticlesModel> RecommendArticlebuttom { get; set; }
     }
 }

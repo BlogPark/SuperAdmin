@@ -11,6 +11,7 @@ namespace SuperAdmin.DataBLL
     {
         ArtCategoryBll catebll = new ArtCategoryBll();
         ArticleOperateBll artbll = new ArticleOperateBll();
+        WebSiteCommentsBll combll = new WebSiteCommentsBll();
         public List<ArtCategoryModel> GetAllCategory()
         {
             return catebll.GetALLModel(1);
@@ -106,6 +107,24 @@ namespace SuperAdmin.DataBLL
         {
             return artbll.GetSingleArticleByID(aid);
         }
-
+        /// <summary>
+        /// 返回文章的评论
+        /// </summary>
+        /// <param name="aid"></param>
+        /// <returns></returns>
+        public List<WebSiteCommentsModel> GetCommentsByArticleID(int aid)
+        {
+            return combll.GetAllListModel(aid, 1);
+        }
+        /// <summary>
+        /// 得到推荐的文章
+        /// </summary>
+        /// <param name="categoryids"></param>
+        /// <param name="artids"></param>
+        /// <returns></returns>
+        public List<ArticlesModel> GetRecommendArticle(string categoryids, string artids)
+        {
+            return artbll.GetRecommendArticle(categoryids, artids);
+        }
     }
 }

@@ -58,6 +58,7 @@
     <Compile Include="SystemSettings.cs" />
     <Compile Include="WebfaqMsgDal.cs" />
     <Compile Include="WebNewsDal.cs" />
+    <Compile Include="WebSiteCommentsDal.cs" />
     <Compile Include="WebSiteImageDal.cs" />
   </ItemGroup>
   <ItemGroup>

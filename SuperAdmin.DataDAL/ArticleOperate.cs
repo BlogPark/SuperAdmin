@@ -452,7 +452,6 @@ WHERE   ID = @id";
             pageCount = Convert.ToInt32(pageCountParam.Value);
             return list;
         }
-
         /// <summary>
         /// 根据ID列表得到所需文章列表
         /// </summary>
@@ -509,7 +508,7 @@ where ArtStatus=20 and ID In (" + ids.TrimEnd(',') + ")";
                     foreach (var tagitem in tags.Split(','))
                     {
                         string[] tag = tagitem.Split('|');
-                        tagdic.Add(Convert.ToInt64(tag[0]),tag[1].ToString());
+                        tagdic.Add(Convert.ToInt64(tag[0]), tag[1].ToString());
                     }
                 }
                 ArticlesModel model = new ArticlesModel();
@@ -567,11 +566,96 @@ FROM   dbo.JobCategory_Article";
             string sqltxt = @"SELECT  cateId ,articleids
 FROM   dbo.JobCategory_Article
 where cateId=@cateid";
-            SqlParameter[] paramter = { new SqlParameter("@cateid",cateid) };
-            DataTable dt = helper.Query(sqltxt,paramter).Tables[0];
+            SqlParameter[] paramter = { new SqlParameter("@cateid", cateid) };
+            DataTable dt = helper.Query(sqltxt, paramter).Tables[0];
             if (dt.Rows.Count > 0)
             {
-                list = dt.Rows[0]["articleids"].ToString().TrimEnd(',').Split(',').ToList();                
+                list = dt.Rows[0]["articleids"].ToString().TrimEnd(',').Split(',').ToList();
+            }
+            return list;
+        }
+        /// <summary>
+        /// 得到推荐阅读的文章
+        /// </summary>
+        /// <param name="categoryids"></param>
+        /// <param name="artids"></param>
+        /// <returns></returns>
+        public List<ArticlesModel> GetRecommendArticle(string categoryids, string artids)
+        {
+            List<ArticlesModel> list = new List<ArticlesModel>();
+            string sqltxt = @"SELECT Top 11 ID ,
+        ArtTitle ,
+        MemberID ,
+        MemberName ,
+        ArtPic ,
+        ArtPicWidth ,
+        ArtPicHeight ,
+        ArtSummary ,
+        ArtContent ,
+        ArtTags ,
+        ArtPublishTime ,
+        ArtType ,
+        ArtFavoriteCount ,
+        ArtCommentCount ,
+        ArtHitCount ,
+        ArtIsAlbum ,
+        ArtOuterchain ,
+        ArtFrom ,
+        ArtFromUrl ,
+        AddTime ,
+        ArtCID ,
+        ArtCName ,
+        ArtIsTop ,
+        ArtUserTags,
+       ArtStatus,
+        CASE ArtStatus
+          WHEN 10 THEN '待审核'
+          WHEN 20 THEN '已审核'
+          WHEN 30 THEN '已删除'
+        END AS ArtStatusName ,
+        CASE ArtType
+          WHEN 1 THEN '原创文章'
+          WHEN 2 THEN '原创图集'
+          WHEN 3 THEN '广告软文'
+          WHEN 4 THEN '引用文章'
+          WHEN 5 THEN '引用图集'
+        END AS ArtTypeName 
+FROM    dbo.Articles
+where ArtStatus=20 and ArtPic <>'' and ArtCID IN (" + categoryids.TrimEnd(',') + ") AND ID NOT IN(" + artids.TrimEnd(',') + ")   ORDER BY ArtIsTop DESC,ID DESC";
+            DataTable dt = helper.Query(sqltxt).Tables[0];
+            foreach (DataRow item in dt.Rows)
+            {
+                Dictionary<long, string> tagdic = new Dictionary<long, string>();
+                string tags = item["ArtTags"].ToString();
+                if (!string.IsNullOrWhiteSpace(tags))
+                {
+                    foreach (var tagitem in tags.Split(','))
+                    {
+                        string[] tag = tagitem.Split('|');
+                        tagdic.Add(Convert.ToInt64(tag[0]), tag[1].ToString());
+                    }
+                }
+                ArticlesModel model = new ArticlesModel();
+                model.ID = int.Parse(item["ID"].ToString());
+                model.ArtTitle = item["ArtTitle"].ToString();
+                model.MemberID = int.Parse(item["MemberID"].ToString());
+                model.MemberName = item["MemberName"].ToString();
+                model.ArtPublishTime = DateTime.Parse(item["ArtPublishTime"].ToString());
+                model.ArtStatus = int.Parse(item["ArtStatus"].ToString());
+                model.ArtStatusName = item["ArtStatusName"].ToString();
+                model.ArtType = int.Parse(item["ArtType"].ToString());
+                model.ArtTypeName = item["ArtTypeName"].ToString();
+                model.AddTime = DateTime.Parse(item["AddTime"].ToString());
+                model.ArtCID = int.Parse(item["ArtCID"].ToString());
+                model.ArtCName = item["ArtCName"].ToString();
+                model.ArtContent = item["ArtContent"].ToString();
+                model.ArtPic = string.IsNullOrWhiteSpace(item["ArtPic"].ToString()) ? "" : appcontent.Imgdomain + item["ArtPic"];
+                model.ArtSummary = item["ArtSummary"].ToString();
+                model.ArtPicWidth = Convert.ToInt32(item["ArtPicWidth"]);
+                model.ArtPicHeight = Convert.ToInt32(item["ArtPicHeight"]);
+                model.ArtUserTags = item["ArtUserTags"].ToString();
+                model.Tags = tagdic;
+                list.Add(model);
             }
             return list;
         }

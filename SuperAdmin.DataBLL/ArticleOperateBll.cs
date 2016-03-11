@@ -105,5 +105,15 @@ namespace SuperAdmin.DataBLL
         {
             return dal.GetJobCategoryAndArticleByCateid(cateid);
         }
+        /// <summary>
+        /// 得到推荐阅读的文章
+        /// </summary>
+        /// <param name="categoryids"></param>
+        /// <param name="artids"></param>
+        /// <returns></returns>
+        public List<ArticlesModel> GetRecommendArticle(string categoryids, string artids)
+        {
+            return dal.GetRecommendArticle(categoryids,artids);
+        }
     }
 }

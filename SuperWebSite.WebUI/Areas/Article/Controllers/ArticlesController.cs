@@ -97,6 +97,12 @@ namespace SuperWebSite.WebUI.Areas.Article.Controllers
         {
             ArticleDetailViewModel model = new ArticleDetailViewModel();
             model.Article = bll.GetArticleModel(aid);
+            model.comments = bll.GetCommentsByArticleID(aid);
+            model.RecommendArticlebuttom = bll.GetRecommendArticle(model.Article.ArtCID.ToString(), model.Article.ID.ToString()).Take(6).ToList();
+            model.RecommendArticle = bll.GetRecommendArticle(model.Article.ArtCID.ToString(), model.Article.ID.ToString()).Skip(6).Take(5).ToList();
+            ViewBag.Title = model.Article.ArtTitle;
+            ViewBag.Keywords =model.Article.ArtTags+model.Article.ArtUserTags;
+            ViewBag.Description = model.Article.ArtSummary;
             return View(model);
         }
     }
