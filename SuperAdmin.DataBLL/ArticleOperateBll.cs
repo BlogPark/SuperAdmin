@@ -111,9 +111,9 @@ namespace SuperAdmin.DataBLL
         /// <param name="categoryids"></param>
         /// <param name="artids"></param>
         /// <returns></returns>
-        public List<ArticlesModel> GetRecommendArticle(string categoryids, string artids)
+        public List<ArticlesModel> GetRecommendArticle(string categoryids, string artids,int top=11)
         {
-            return dal.GetRecommendArticle(categoryids,artids);
+            return dal.GetRecommendArticle(categoryids,artids,top);
         }
     }
 }

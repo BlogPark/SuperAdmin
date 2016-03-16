@@ -13,9 +13,11 @@ File Description:Red Skin
 ----------------------------------------------------------------------------- */
 a, .text-default {
 	color: #e84c3d;
+    text-decoration:none;
 }
 a:hover {
 	color: #cd3c2e;
+    text-decoration:none;
 }
 mark,
 .mark {

@@ -17,6 +17,9 @@ namespace SuperAdmin.WebUI.Filters
             //登录模式不做验证
             if (ctx.ActionDescriptor.ControllerDescriptor.ControllerName == "Login")
                 return;
+            //对外接口不做验证
+            if (ctx.ActionDescriptor.ControllerDescriptor.ControllerName == "publicaction")
+                return;
             //部分视图不做验证
             if (ctx.IsChildAction)
                 return;

@@ -221,15 +221,16 @@ namespace SuperAdmin.WebUI.Areas.AdminArea.Controllers
         /// <param name="content"></param>
         /// <returns></returns>
         [HttpPost]
-        public ActionResult spliteword(string title,string content)
+        public ActionResult spliteword(string title, string content)
         {
-            string result = "";
+            List<SplitTagModel> list = new List<SplitTagModel>();
             string newcontent = title + " " + content;
             if (!string.IsNullOrWhiteSpace(newcontent))
             {
-                result = sp.DoSegmentToJsonstr(newcontent);
+                string liststr = sp.DisplaySegment(newcontent);
+                list = sp.AnalyticalTagJson(liststr).Where(m=>m.hot>0).OrderByDescending(m=>m.RepeatTime).Take(10).ToList();                
             }
-            return Json(result);
+            return Json(list);
         }
 
         private Dictionary<int, string> GetTypeDic()

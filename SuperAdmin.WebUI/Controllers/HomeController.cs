@@ -12,7 +12,7 @@ namespace SuperAdmin.WebUI.Controllers
     {
         //
         // GET: /Home/
-
+       
         public ActionResult Index()
         {
             return View();
@@ -83,5 +83,6 @@ namespace SuperAdmin.WebUI.Controllers
                 return Json(new { status = false, meg = "未获得文件" });
             }
         }
+       
     }
 }

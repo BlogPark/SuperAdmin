@@ -12,7 +12,7 @@
                     {
                         if (k > 11)
                         { break; }
-                         <div class="@classstr"><span><a href="#">@item.Value</a></span></div>
+                         <div class="@classstr"><span class="secondnav"><a href="@Url.Action("catepage", "Articles", new { area="Article",cateid=item.Key,p=1})">@item.Value</a></span></div>
                         k++;
                     }
                 </div>

@@ -43,6 +43,7 @@
     <Compile Include="AdminSiteNewsModel.cs" />
     <Compile Include="ArtCategoryModel.cs" />
     <Compile Include="ArticlesModel.cs" />
+    <Compile Include="ArticleTagsModel.cs" />
     <Compile Include="MemberInfoModel.cs" />
     <Compile Include="PicCategoryModel.cs" />
     <Compile Include="ProductCategoryModel.cs" />

@@ -212,10 +212,10 @@
                     data: { "title": $("#article_ArtTitle").val(), "content": ue.getContentTxt() },
                     type: 'POST',
                     success: function (data) {
-                        var result =eval("("+  data+")") ;
+                        //var result =eval("("+  data+")") ;
                         var tagsrt = '';
-                        $.each(result, function (i, item) {
-                            tagsrt = tagsrt + item.tagId + '|' + item.tagName + ',';
+                        $.each(data, function (i, item) {
+                            tagsrt = tagsrt + item.TagID + '|' + item.TagName + ',';
                         });
                         $("#article_ArtTags").val(tagsrt);
                     }

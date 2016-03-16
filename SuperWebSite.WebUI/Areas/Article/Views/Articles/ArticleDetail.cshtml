@@ -24,7 +24,20 @@
                     <footer class="clearfix">
                         <ul class="links pull-left">
                             <li><i class="fa fa-comment-o pr-5"></i><a href="#">@Model.Article.ArtCommentCount 条评论</a> |</li>
-                            <li><i class="fa fa-tags pr-5"></i>@Model.Article.ArtUserTags</li>
+                            <li>
+                                @if (!string.IsNullOrWhiteSpace(Model.Article.ArtTags))
+                                {
+                                    string[] tags = Model.Article.ArtTags.TrimEnd(',').Split(',');
+                                    string tagstr = "";
+                                    foreach (var item in tags)
+                                    {
+                                        tagstr += item.Split('|')[1] + ",";
+                                    }
+                                    <i class="fa fa-tags pr-5"></i>@tagstr
+                                }
+                                else
+                                { <i class="fa fa-tags pr-5"></i>@Model.Article.ArtUserTags }
+                            </li>
                         </ul>
                     </footer>
                 </div>
@@ -41,10 +54,11 @@
                             { break; }
                             <div class="image-box col-md-4">
                                 <div class="overlay-container">
-                                    <img src="@(item.ArtPicWidth > 320 ? item.ArtPic + ".320.jpg" : item.ArtPic)" alt="@item.ArtTitle">
+                                    <a target="_self" href="@Url.Action("ArticleDetail", "Articles", new { area = "Article", aid = @item.ID })">
+                                        <img src="@(item.ArtPicWidth > 320 ? item.ArtPic + ".320.jpg" : item.ArtPic)" alt="@item.ArtTitle"></a>
                                 </div>
                                 <div class="image-box-body">
-                                    <h4 class="title"><a href="#">@item.ArtTitle</a></h4>
+                                    <h4 class="title"><a target="_self" href="@Url.Action("ArticleDetail", "Articles", new { area = "Article", aid = @item.ID })">@item.ArtTitle</a></h4>
                                     @Html.Raw(item.ArtSummary.Substring(0, 100))
                                 </div>
                             </div>
@@ -56,10 +70,11 @@
                         {
                             <div class="image-box col-md-4">
                                 <div class="overlay-container">
-                                    <img src="@(Model.RecommendArticlebuttom[i].ArtPicWidth > 320 ? Model.RecommendArticlebuttom[i].ArtPic + ".320.jpg" : Model.RecommendArticlebuttom[i].ArtPic)" alt="@Model.RecommendArticlebuttom[i].ArtTitle">
+                                    <a target="_self" href="@Url.Action("ArticleDetail", "Articles", new { area = "Article", aid = Model.RecommendArticlebuttom[i].ID })">
+                                        <img src="@(Model.RecommendArticlebuttom[i].ArtPicWidth > 320 ? Model.RecommendArticlebuttom[i].ArtPic + ".320.jpg" : Model.RecommendArticlebuttom[i].ArtPic)" alt="@Model.RecommendArticlebuttom[i].ArtTitle"></a>
                                 </div>
                                 <div class="image-box-body">
-                                    <h4 class="title"><a href="#">@Model.RecommendArticlebuttom[i].ArtTitle</a></h4>
+                                    <h4 class="title"><a target="_self" href="@Url.Action("ArticleDetail", "Articles", new { area = "Article", aid = Model.RecommendArticlebuttom[i].ID })">@Model.RecommendArticlebuttom[i].ArtTitle</a></h4>
                                     @Html.Raw(Model.RecommendArticlebuttom[i].ArtSummary.Substring(0, 100))
                                 </div>
                             </div>
@@ -87,7 +102,7 @@
             </div>
 
             <div class="comments-form col-md-10">
-                <h2 class="title">Add your comment</h2>
+                <h2 class="title">评论</h2>
                 <form role="form" id="comment-form">
                     <div class="form-group has-feedback">
                         <textarea class="form-control" rows="5" id="message4" placeholder="" name="message4" required></textarea>
@@ -108,10 +123,11 @@
                     {
                         <div class="image-box">
                             <div class="overlay-container">
-                                <img src="@(item.ArtPicWidth > 320 ? item.ArtPic + ".320.jpg" : item.ArtPic)" alt="@item.ArtTitle">
+                                <a target="_self" href="@Url.Action("ArticleDetail", "Articles", new { area = "Article", aid = @item.ID })">
+                                    <img src="@(item.ArtPicWidth > 320 ? item.ArtPic + ".320.jpg" : item.ArtPic)" alt="@item.ArtTitle"></a>
                             </div>
                             <div class="image-box-body">
-                                <h4 class="title"><a href="#">@item.ArtTitle</a></h4>
+                                <h4 class="title"><a target="_self" href="@Url.Action("ArticleDetail", "Articles", new { area = "Article", aid = @item.ID })">@item.ArtTitle</a></h4>
                                 @Html.Raw(item.ArtSummary.Substring(0, 100))
                             </div>
                         </div>

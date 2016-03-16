@@ -122,9 +122,9 @@ namespace SuperAdmin.DataBLL
         /// <param name="categoryids"></param>
         /// <param name="artids"></param>
         /// <returns></returns>
-        public List<ArticlesModel> GetRecommendArticle(string categoryids, string artids)
+        public List<ArticlesModel> GetRecommendArticle(string categoryids, string artids,int top =11)
         {
-            return artbll.GetRecommendArticle(categoryids, artids);
+            return artbll.GetRecommendArticle(categoryids, artids,top);
         }
     }
 }

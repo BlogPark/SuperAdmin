@@ -229,7 +229,7 @@ WHERE   ID = @id";
                         new SqlParameter("@ArtSummary", SqlDbType.NVarChar) ,            
                         new SqlParameter("@ArtContent", SqlDbType.NVarChar)       
             };
-            parameters[0].Value = model.ArtUserTags;//model.ArtTags;//在没有建设好关键词库之前  先记入用户自己填写的关键词
+            parameters[0].Value = model.ArtTags;
             parameters[1].Value = model.ArtPublishTime;
             parameters[2].Value = model.ArtStatus;
             parameters[3].Value = model.ArtType;
@@ -248,7 +248,7 @@ WHERE   ID = @id";
             parameters[16].Value = model.ArtCName;
             parameters[17].Value = model.ArtIsTop;
             parameters[18].Value = model.MemberID;
-            parameters[19].Value = model.ArtUserTags;
+            parameters[19].Value = model.ArtUserTags.Replace("，",",");
             parameters[20].Value = model.MemberName;
             parameters[21].Value = model.ArtPic;
             parameters[22].Value = model.ArtPicWidth;
@@ -580,10 +580,10 @@ where cateId=@cateid";
         /// <param name="categoryids"></param>
         /// <param name="artids"></param>
         /// <returns></returns>
-        public List<ArticlesModel> GetRecommendArticle(string categoryids, string artids)
+        public List<ArticlesModel> GetRecommendArticle(string categoryids, string artids,int top=11)
         {
             List<ArticlesModel> list = new List<ArticlesModel>();
-            string sqltxt = @"SELECT Top 11 ID ,
+            string sqltxt = @"SELECT Top "+top.ToString() +@" ID ,
         ArtTitle ,
         MemberID ,
         MemberName ,

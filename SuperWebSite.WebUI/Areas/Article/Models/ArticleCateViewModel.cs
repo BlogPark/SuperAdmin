@@ -34,5 +34,11 @@ namespace SuperWebSite.WebUI.Areas.Article.Models
 
         [DataMember]
         public int PageSize { get; set; }
+
+        [DataMember]
+        public List<ArticlesModel> RecommendArticle { get; set; }
+
+        [DataMember]
+        public List<ArticleTagsModel> HotTagsList { get; set; }
     }
 }
