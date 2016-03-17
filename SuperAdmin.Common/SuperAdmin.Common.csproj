@@ -86,6 +86,8 @@
     <Content Include="Database\SystemAdPosition.sql" />
     <Content Include="Database\SystemAdSchedule.sql" />
     <Content Include="Database\SystemAdSite.sql" />
+    <Content Include="Database\存储过程修改.sql" />
+    <Content Include="lib\MvcPager.dll" />
     <Content Include="lib\Newtonsoft.Json.dll" />
     <Content Include="lib\PanGu.dll" />
     <Content Include="lib\System.Json.dll" />

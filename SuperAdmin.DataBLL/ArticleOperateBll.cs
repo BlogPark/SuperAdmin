@@ -76,9 +76,9 @@ namespace SuperAdmin.DataBLL
         /// <param name="totalrowCount">总数</param>
         /// <param name="pageCount">总页数</param>
         /// <returns></returns>
-        public List<ArticlesModel> GetArticleDataBypage(ArticlesModel wheremodel, int pageindex, int pagesize, out int totalrowCount, out int pageCount)
+        public List<ArticlesModel> GetArticleDataBypage(ArticlesModel wheremodel, out int totalrowCount, out int pageCount)
         {
-            return dal.GetArticleDataBypage(wheremodel, pageindex, pagesize, out totalrowCount, out pageCount);
+            return dal.GetArticleDataBypage(wheremodel,out totalrowCount, out pageCount);
         }
 
         /// <summary>

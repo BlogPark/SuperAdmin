@@ -23,7 +23,7 @@ namespace SuperAdmin.DataDAL
         public List<ArticlesModel> GetAllArticles()
         {
             List<ArticlesModel> list = new List<ArticlesModel>();
-            string sqltxt = @"SELECT  ID ,
+            string sqltxt = @"SELECT top 10 ID ,
         ArtTitle ,
         MemberID ,
         MemberName ,
@@ -135,6 +135,7 @@ WHERE ID=@id";
                 model.ArtPicWidth = Convert.ToInt32(dt.Rows[0]["ArtPicWidth"]);
                 model.ArtPicHeight = Convert.ToInt32(dt.Rows[0]["ArtPicHeight"]);
                 model.ArtUserTags = dt.Rows[0]["ArtUserTags"].ToString();
+                model.ArtTags = dt.Rows[0]["ArtTags"].ToString();
             }
             return model;
         }
@@ -386,7 +387,7 @@ WHERE   ID = @id";
         /// <param name="totalrowCount">总数</param>
         /// <param name="pageCount">总页数</param>
         /// <returns></returns>
-        public List<ArticlesModel> GetArticleDataBypage(ArticlesModel wheremodel, int pageindex, int pagesize, out int totalrowCount, out int pageCount)
+        public List<ArticlesModel> GetArticleDataBypage(ArticlesModel wheremodel, out int totalrowCount, out int pageCount)
         {
             List<ArticlesModel> list = new List<ArticlesModel>();
             totalrowCount = 0;
@@ -396,8 +397,8 @@ WHERE   ID = @id";
             var pageCountParam = new SqlParameter("@pageCount", System.Data.SqlDbType.Int);
             pageCountParam.Direction = System.Data.ParameterDirection.Output;
             SqlParameter[] paramter = new[] { 
-            new SqlParameter("@pageindex",pageindex),
-            new SqlParameter("@pagesize",pagesize),
+            new SqlParameter("@pageindex",wheremodel.page),
+            new SqlParameter("@pagesize",wheremodel.pageSize),
             new SqlParameter("@starttime",wheremodel.StarTime),
             new SqlParameter("@endtime",wheremodel.EndTime),
             new SqlParameter("@statusnum",wheremodel.ArtStatus),
@@ -412,39 +413,40 @@ WHERE   ID = @id";
             DataSet ds = helper.RunProcedureDataSet("SeleArticleByPage", paramter);
             if (ds != null && ds.Tables.Count > 0)
             {
-                int statusVal = 0;
                 DataTable dt = ds.Tables[0];
                 foreach (DataRow item in dt.Rows)
                 {
-                    statusVal = Convert.ToInt32(item["tStatus"]);
                     list.Add(new ArticlesModel
                     {
-                        ID = Convert.ToInt32(item["ID"]),
-                        MemberID = Convert.ToInt32(item["MemberID"]),
-                        ArtTitle = Convert.ToString(item["ArtTitle"]),
-                        MemberName = Convert.ToString(item["MemberName"]),
-                        ArtPic = Convert.ToString(item["ArtPic"]),
-                        ArtPicWidth = Convert.ToInt32(item["ArtPicWidth"]),
-                        ArtPicHeight = Convert.ToInt32(item["ArtPicHeight"]),
-                        ArtSummary = Convert.ToString(item["ArtSummary"]),
-                        ArtContent = Convert.ToString(item["ArtContent"]),
-                        ArtTags = Convert.ToString(item["ArtTags"]),
-                        ArtPublishTime = Convert.ToDateTime(item["ArtPublishTime"]),
-                        ArtType = Convert.ToInt32(item["ArtType"]),
-                        ArtFavoriteCount = Convert.ToInt32(item["ArtFavoriteCount"]),
-                        ArtCommentCount = Convert.ToInt32(item["ArtCommentCount"]),
-                        ArtHitCount = Convert.ToInt32(item["ArtHitCount"]),
-                        ArtFrom = Convert.ToString(item["ArtFrom"]),
-                        ArtFromUrl = Convert.ToString(item["ArtFromUrl"]),
-                        ArtOuterchain = Convert.ToString(item["ArtOuterchain"]),
-                        AntitrialReasons = Convert.ToString(item["AntitrialReasons"]),
-                        CheckUserID = Convert.ToInt32(item["CheckUserID"]),
-                        CheckUserName = Convert.ToString(item["CheckUserName"]),
-                        ArtCID = Convert.ToInt32(item["ArtCID"]),
-                        ArtCName = Convert.ToString(item["ArtCName"]),
-                        ArtIsTop = Convert.ToInt32(item["ArtIsTop"]),
-                        ArtUserTags = Convert.ToString(item["ArtUserTags"]),
-                        ArtTypeName = Convert.ToString(item["TypeName"])
+                        ID = string.IsNullOrWhiteSpace(item["ID"].ToString()) ? 0 : Convert.ToInt32(item["ID"].ToString()),
+                        MemberID = string.IsNullOrWhiteSpace(item["MemberID"].ToString()) ? 0 : Convert.ToInt32(item["MemberID"].ToString()),
+                        ArtTitle = Convert.ToString(item["ArtTitle"].ToString()),
+                        MemberName = Convert.ToString(item["MemberName"].ToString()),
+                        ArtPic = Convert.ToString(item["ArtPic"].ToString()),
+                        ArtPicWidth = string.IsNullOrWhiteSpace(item["ArtPicWidth"].ToString()) ? 0 : Convert.ToInt32(item["ArtPicWidth"].ToString()),
+                        ArtPicHeight = string.IsNullOrWhiteSpace(item["ArtPicHeight"].ToString()) ? 0 : Convert.ToInt32(item["ArtPicHeight"].ToString()),
+                        ArtSummary = Convert.ToString(item["ArtSummary"].ToString()),
+                        ArtContent = Convert.ToString(item["ArtContent"].ToString()),
+                        ArtTags = Convert.ToString(item["ArtTags"].ToString()),
+                        ArtPublishTime = Convert.ToDateTime(item["ArtPublishTime"].ToString()),
+                        ArtType = string.IsNullOrWhiteSpace(item["ArtType"].ToString()) ? 0 : Convert.ToInt32(item["ArtType"].ToString()),
+                        ArtFavoriteCount = string.IsNullOrWhiteSpace(item["ArtFavoriteCount"].ToString()) ? 0 : Convert.ToInt32(item["ArtFavoriteCount"].ToString()),
+                        ArtCommentCount = string.IsNullOrWhiteSpace(item["ArtCommentCount"].ToString()) ? 0 : Convert.ToInt32(item["ArtCommentCount"].ToString()),
+                        ArtHitCount = string.IsNullOrWhiteSpace(item["ArtHitCount"].ToString()) ? 0 : Convert.ToInt32(item["ArtHitCount"].ToString()),
+                        ArtFrom = Convert.ToString(item["ArtFrom"].ToString()),
+                        ArtFromUrl = Convert.ToString(item["ArtFromUrl"].ToString()),
+                        ArtOuterchain = Convert.ToString(item["ArtOuterchain"].ToString()),
+                        AntitrialReasons = Convert.ToString(item["AntitrialReasons"].ToString()),
+                        CheckUserID = string.IsNullOrWhiteSpace(item["CheckUserID"].ToString()) ? 0 : Convert.ToInt32(item["CheckUserID"].ToString()),
+                        CheckUserName = Convert.ToString(item["CheckUserName"].ToString()),
+                        ArtCID = string.IsNullOrWhiteSpace(item["ArtCID"].ToString()) ? 0 : Convert.ToInt32(item["ArtCID"].ToString()),
+                        ArtCName = Convert.ToString(item["ArtCName"].ToString()),
+                        ArtIsTop = string.IsNullOrWhiteSpace(item["ArtIsTop"].ToString()) ? 0 : Convert.ToInt32(item["ArtIsTop"].ToString()),
+                        ArtUserTags = Convert.ToString(item["ArtUserTags"].ToString()),
+                        ArtTypeName = Convert.ToString(item["ArtTypeName"].ToString()),
+                        AddTime = Convert.ToDateTime(item["AddTime"]),
+                        ArtStatusName = Convert.ToString(item["ArtStatusName"]),
+                        ArtStatus = string.IsNullOrWhiteSpace(item["ArtStatus"].ToString()) ? 0 : Convert.ToInt32(item["ArtStatus"].ToString()),
                     });
                 }
             }
@@ -505,7 +507,7 @@ where ArtStatus=20 and ID In (" + ids.TrimEnd(',') + ")";
                 string tags = item["ArtTags"].ToString();
                 if (!string.IsNullOrWhiteSpace(tags))
                 {
-                    foreach (var tagitem in tags.Split(','))
+                    foreach (var tagitem in tags.TrimEnd(',').Split(','))
                     {
                         string[] tag = tagitem.Split('|');
                         tagdic.Add(Convert.ToInt64(tag[0]), tag[1].ToString());
@@ -530,6 +532,7 @@ where ArtStatus=20 and ID In (" + ids.TrimEnd(',') + ")";
                 model.ArtPicWidth = Convert.ToInt32(item["ArtPicWidth"]);
                 model.ArtPicHeight = Convert.ToInt32(item["ArtPicHeight"]);
                 model.ArtUserTags = item["ArtUserTags"].ToString();
+                model.ArtTags = item["ArtTags"].ToString();
                 model.Tags = tagdic;
                 list.Add(model);
             }
@@ -629,7 +632,7 @@ where ArtStatus=20 and ArtPic <>'' and ArtCID IN (" + categoryids.TrimEnd(',') +
                 string tags = item["ArtTags"].ToString();
                 if (!string.IsNullOrWhiteSpace(tags))
                 {
-                    foreach (var tagitem in tags.Split(','))
+                    foreach (var tagitem in tags.TrimEnd(',').Split(','))
                     {
                         string[] tag = tagitem.Split('|');
                         tagdic.Add(Convert.ToInt64(tag[0]), tag[1].ToString());

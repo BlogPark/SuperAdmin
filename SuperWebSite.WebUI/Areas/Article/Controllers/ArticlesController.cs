@@ -160,6 +160,10 @@ namespace SuperWebSite.WebUI.Areas.Article.Controllers
                         list.Add(model);
                     }
                 }
+                if (list.Count > 0)
+                {
+                    list = list.OrderByDescending(m => m.Hot).ToList().Take(20).ToList();
+                }
             }
             return list;
         }

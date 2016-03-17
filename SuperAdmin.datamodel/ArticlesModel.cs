@@ -73,8 +73,14 @@ namespace SuperAdmin.datamodel
         /// <summary>
         /// 文章状态(10 待审 20 已审 30 反审)
         /// </summary>       
+
+        public int _ArtStatus = 10;
         [DataMember]
-        public int ArtStatus { get; set; }
+        public int ArtStatus
+        {
+            get { return _ArtStatus; }
+            set { _ArtStatus = value; }
+        }
         /// <summary>
         /// 文章类型(1 原创文章 2 原创图集 3 广告软文 4 引用文章 5 引用图集)
         /// </summary>       
@@ -143,8 +149,14 @@ namespace SuperAdmin.datamodel
         /// <summary>
         /// 分类ID
         /// </summary>       
+        public int _ArtCID = 0;
         [DataMember]
-        public int ArtCID { get; set; }
+        public int ArtCID
+        {
+            get { return _ArtCID; }
+            set { _ArtCID = value; }
+        }
+
         /// <summary>
         /// 分类名称
         /// </summary>       
@@ -193,6 +205,16 @@ namespace SuperAdmin.datamodel
         /// </summary>
         [DataMember]
         public Dictionary<long, string> Tags { get; set; }
+        /// <summary>
+        /// 页数
+        /// </summary>
+        [DataMember]
+        public int page { get; set; }
+        /// <summary>
+        /// 页容量
+        /// </summary>
+        [DataMember]
+        public int pageSize { get; set; }
         #endregion
     }
 }

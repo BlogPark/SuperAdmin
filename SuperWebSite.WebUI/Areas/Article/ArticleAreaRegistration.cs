@@ -17,7 +17,7 @@ namespace SuperWebSite.WebUI.Areas.Article
             //分类页面路由
             context.MapRoute(
                "Article_detail",
-               "Article/d{aid}",
+               "Article/d{aid}.html",
                new { action = "ArticleDetail", controller = "Articles", aid = 1, id = UrlParameter.Optional }
            );
             context.MapRoute(

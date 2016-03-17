@@ -10,6 +10,7 @@ using SuperAdmin.datamodel;
 using SuperAdmin.WebUI.Areas.AdminArea.Models;
 using SuperAdmin.WebUI.Controllers;
 using SuperAdmin.WebUI.Models;
+using Webdiyer.WebControls.Mvc;
 
 namespace SuperAdmin.WebUI.Areas.AdminArea.Controllers
 {
@@ -17,15 +18,31 @@ namespace SuperAdmin.WebUI.Areas.AdminArea.Controllers
     {
         //系统文章管理控制器
         // GET: /AdminArea/Article/
+        // string content = "<p><img alt='英国演员Henry Cavill出席第88届奥斯卡颁奖典礼'  src='http://www.yoka.com/dna/pics/ba1dabb9/2/d359b35a5e19e1ee5a1.jpg'><i>英国演员Henry Cavill出席第88届奥斯卡颁奖典礼</i> </p>";
+        //string newcount=  GetContentPic(content);
         ArticleOperateBll bll = new ArticleOperateBll();
         ArtCategoryBll catebll = new ArtCategoryBll();
         WebSplitWords sp = new WebSplitWords();
-        public ActionResult Index()
+        private readonly int PageSize = 20;
+        public ActionResult Index(ArticlesModel seachmodel, int page = 1)
         {
-            // string content = "<p><img alt='英国演员Henry Cavill出席第88届奥斯卡颁奖典礼'  src='http://www.yoka.com/dna/pics/ba1dabb9/2/d359b35a5e19e1ee5a1.jpg'><i>英国演员Henry Cavill出席第88届奥斯卡颁奖典礼</i> </p>";
-            //string newcount=  GetContentPic(content);
+            this.ViewData["seachmodel.ArtCID"] = GetCategoriesListItem();
+            this.ViewData["seachmodel.ArtStatus"] = GetStatusListItem(10);
             ArticleIndexViewModel model = new ArticleIndexViewModel();
-            model.articlelist = bll.GetAllArticles();
+            int totalrowCount, pageCount;
+            seachmodel.page = page;
+            seachmodel.pageSize = PageSize;
+             List<ArticlesModel> article=bll.GetArticleDataBypage(seachmodel,out totalrowCount,out pageCount);
+             PagedList<ArticlesModel> pageList = null;
+             if (article != null)
+             {
+                 pageList = new PagedList<ArticlesModel>(article, page, PageSize, totalrowCount);
+             }
+             model.articlelist = pageList;
+            model.seachmodel = seachmodel;
+            model.pagesize = PageSize;
+            model.totalcount = totalrowCount;
+            model.currentpage = page;
             return View(model);
         }
         /// <summary>
@@ -171,7 +188,6 @@ namespace SuperAdmin.WebUI.Areas.AdminArea.Controllers
             }
             return Json("0");
         }
-
         /// <summary>
         /// 分析客户发表的内容，处理内容中图片
         /// </summary>
@@ -228,7 +244,7 @@ namespace SuperAdmin.WebUI.Areas.AdminArea.Controllers
             if (!string.IsNullOrWhiteSpace(newcontent))
             {
                 string liststr = sp.DisplaySegment(newcontent);
-                list = sp.AnalyticalTagJson(liststr).Where(m=>m.hot>0).OrderByDescending(m=>m.RepeatTime).Take(10).ToList();                
+                list = sp.AnalyticalTagJson(liststr).Where(m => m.hot > 0).OrderByDescending(m => m.RepeatTime).Take(10).ToList();
             }
             return Json(list);
         }
@@ -242,6 +258,41 @@ namespace SuperAdmin.WebUI.Areas.AdminArea.Controllers
             dic.Add(4, "引用文章");
             dic.Add(5, "引用图集");
             return dic;
+        }
+
+        /// <summary>
+        /// 获取分类列表
+        /// </summary>
+        /// <returns></returns>
+        private List<SelectListItem> GetCategoriesListItem(long defval = 0)
+        {
+            List<SelectListItem> items = new List<SelectListItem>();
+            items.Add(new SelectListItem { Text = "请选择", Value = "0", Selected = defval == 0 ? true : false });
+            var classList = catebll.GetALLModel(1);
+
+            if (classList != null && classList.Count() > 0)
+            {
+                foreach (var item in classList)
+                {
+                    string strName = item.CName;
+                    int cateid = item.ID;
+
+                    items.Add(new SelectListItem { Text = strName, Value = cateid.ToString(), Selected = defval == item.ID });
+                }
+            }
+            return items;
+        }
+        /// <summary>
+        /// 得到状态列表
+        /// </summary>
+        /// <param name="defval"></param>
+        /// <returns></returns>
+        private List<SelectListItem> GetStatusListItem(int defval = 1)
+        {
+            List<SelectListItem> items = new List<SelectListItem>();
+            items.Add(new SelectListItem { Text = "审核", Value = "20", Selected = defval == 20 });
+            items.Add(new SelectListItem { Text = "未审", Value = "10", Selected = defval == 10 });
+            return items;
         }
     }
 }
