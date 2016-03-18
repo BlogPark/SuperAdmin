@@ -35,6 +35,10 @@ namespace SuperAdmin.WebUI.Controllers
             }
             else
             {
+                HttpCookie aCookie = new HttpCookie("skin_color");
+                aCookie.Value = result.WebSkin;
+                aCookie.Expires = DateTime.Now.AddHours(1);
+                Response.Cookies.Add(aCookie);
                 List<SysAdminMenuModel> usermenu = bll.GetUserAttributeMenu(result);
                 result.UserPwd = "";
                 SessionLoginModel sessionmodel = new SessionLoginModel();
@@ -52,6 +56,26 @@ namespace SuperAdmin.WebUI.Controllers
                 }              
             }
             return View(model);
+        }
+        /// <summary>
+        /// 更改用户皮肤配置
+        /// </summary>
+        /// <param name="skinname"></param>
+        /// <returns></returns>
+        [HttpPost]
+        public ActionResult updateskin(string skinname)
+        {
+            SessionLoginModel user = Session[AppContext.SESSION_LOGIN_NAME] as SessionLoginModel;
+            int rowcount = bll.UpdateUserWebSkin(user.User.ID,skinname);
+            if (rowcount > 0)
+            {
+                return Json("1");
+            }
+            else
+            {
+                return Json("0");
+            }
+
         }
 
     }

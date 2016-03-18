@@ -3,6 +3,25 @@
 @{
     Layout = "~/Views/_Layout.cshtml";
 }
+<!-- SAMPLE BOX CONFIGURATION MODAL FORM-->
+<div class="bootbox modal fade in" id="box-config" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content modal-form">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title" id="articletitle"></h4>
+            </div>
+            <div class="modal-body">
+                <div class="bootbox-body" id="articlecontent">
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">关 闭</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- /SAMPLE BOX CONFIGURATION MODAL FORM-->
 <div class="container">
     <div class="row">
         <div id="content" class="col-lg-12">
@@ -114,9 +133,17 @@
                                         </td>
                                         <td>
                                             <p class="btn-toolbar">
-                                                <button class="btn btn-success" data-toggle="modal"><i class="fa fa-pencil-square-o"></i>&nbsp;预  览</button>
-                                                <button class="btn btn-warning" data-toggle="modal" onclick="checkart(@item.ID)" ><i class="fa fa-pencil-square-o"></i>&nbsp;审核</button>
-                                                <button class="btn btn-danger" data-toggle="modal" onclick="delart(@item.ID)" ><i class="fa fa-times-circle"></i>&nbsp; 删 除</button>
+                                                <a class="btn btn-success" data-toggle="modal" href="#box-config" onclick="showprivew(@item.ID)"><i class="fa fa-pencil-square-o"></i>&nbsp;预  览</a>
+                                                @if (item.ArtStatus == 10)
+                                                { 
+                                                    <button class="btn btn-warning" data-toggle="modal" onclick="checkart(@item.ID)" ><i class="fa fa-pencil-square-o"></i>&nbsp;审核</button>
+                                                }
+                                                else if (item.ArtStatus == 20)
+                                                { 
+                                                    <button class="btn btn-warning" data-toggle="modal" onclick="checkart(@item.ID)" ><i class="fa fa-pencil-square-o"></i>&nbsp;反审</button>
+                                                }
+                                                @if (item.ArtStatus != 30)
+                                                {   <button class="btn btn-danger" data-toggle="modal" onclick="delart(@item.ID)" ><i class="fa fa-times-circle"></i>&nbsp; 删 除</button>}
                                             </p>
                                         </td>
                                     </tr>
@@ -165,13 +192,13 @@
                     var str = ''; var img = '';
                     if (data == '1') {
                         var id = $("#tr" + aid + " td:nth-child(8)").attr("name");
-                        if (id == '0') {
-                            $("#tr" + aid + " td:nth-child(8)").attr("name", "1");
-                            $("#tr" + aid + " td:nth-child(8)").html("启用");
+                        if (id == '10') {
+                            $("#tr" + aid + " td:nth-child(8)").attr("name", "20");
+                            $("#tr" + aid + " td:nth-child(8)").html("已审");
                         }
                         else {
-                            $("#tr" + aid + " td:nth-child(8)").attr("name", "0");
-                            $("#tr" + aid + " td:nth-child(8)").html("已作废");
+                            $("#tr" + aid + " td:nth-child(8)").attr("name", "10");
+                            $("#tr" + aid + " td:nth-child(8)").html("未审");
                         }
                         str = "操作成功！";
                         img = '/img/gritter/success.jpg';
@@ -215,15 +242,8 @@
                 success: function (data) {
                     var str = ''; var img = '';
                     if (data == '1') {
-                        var id = $("#tr" + aid + " td:nth-child(8)").attr("name");
-                        if (id == '0') {
-                            $("#tr" + aid + " td:nth-child(8)").attr("name", "1");
-                            $("#tr" + aid + " td:nth-child(8)").html("启用");
-                        }
-                        else {
-                            $("#tr" + aid + " td:nth-child(8)").attr("name", "0");
-                            $("#tr" + aid + " td:nth-child(8)").html("已作废");
-                        }
+                        $("#tr" + aid + " td:nth-child(8)").attr("name", "30");
+                        $("#tr" + aid + " td:nth-child(8)").html("已作废");
                         str = "操作成功！";
                         img = '/img/gritter/success.jpg';
                     }
@@ -254,6 +274,21 @@
                             });
                         }, 3000);
                     }, 0);
+                }
+            });
+        }
+        function showprivew(id) {
+            var title = $("#tr" + id + " td:nth-child(2)").html();
+            $("#articletitle").html(title);
+            $.ajax({
+                url: '@Url.Action("GetArticleContent", "Article", new { area = "AdminArea" })',
+                dataType: 'Json',
+                data: { 'id': id },
+                type: 'POST',
+                async: false,
+                success: function (data) {
+                    var c = data.ArtContent;
+                    $("#articlecontent").html(c);
                 }
             });
         }

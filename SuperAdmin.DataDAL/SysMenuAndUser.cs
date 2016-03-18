@@ -34,7 +34,7 @@ namespace SuperAdmin.DataDAL
         Answer ,
         GID ,
         GName,
-        LoginName,HeaderImg
+        LoginName,HeaderImg,WebSkin
 FROM    dbo.SysAdminUser
 WHERE LoginName=@loginname ";
             SqlParameter[] paramter ={
@@ -57,6 +57,7 @@ WHERE LoginName=@loginname ";
                 result.UserPwd = dt.Rows[0]["UserPwd"].ToString();
                 result.HeaderImg = dt.Rows[0]["HeaderImg"].ToString();
                 result.UserStatus = int.Parse(dt.Rows[0]["UserStatus"].ToString());
+                result.WebSkin = string.IsNullOrWhiteSpace(dt.Rows[0]["WebSkin"].ToString()) ? "default" : dt.Rows[0]["WebSkin"].ToString();
                 if (result.UserPwd != user.UserPwd)
                 {
                     result.LoginResult = "0用户密码不正确";
@@ -663,6 +664,22 @@ WHERE ID=@id";
   WHERE ID=@id";
             SqlParameter[] paramter = { new SqlParameter("@type",model.PermissionType),new SqlParameter("@id",model.ID) };
             rowcount = helper.ExecuteSql(sqltxt,paramter);
+            return rowcount;
+        }
+        /// <summary>
+        /// 保留用户的默认皮肤
+        /// </summary>
+        /// <param name="userid"></param>
+        /// <param name="skinname"></param>
+        /// <returns></returns>
+        public int UpdateUserWebSkin(int userid,string skinname)
+        {
+            int rowcount = 0;
+            string sqltxt = @"UPDATE  dbo.SysAdminUser
+SET     WebSkin = @WebSkin
+WHERE   ID = @id";
+            SqlParameter[] paramter = { new SqlParameter("@WebSkin", skinname), new SqlParameter("@id", userid) };
+            rowcount = helper.ExecuteSql(sqltxt, paramter);
             return rowcount;
         }
     }

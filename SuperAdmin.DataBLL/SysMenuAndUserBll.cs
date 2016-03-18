@@ -20,7 +20,7 @@ namespace SuperAdmin.DataBLL
         {
             return dal.GetUserForLogin(user);
         }
-         /// <summary>
+        /// <summary>
         /// 查询用户拥有的菜单权限
         /// </summary>
         /// <param name="user"></param>
@@ -87,7 +87,7 @@ namespace SuperAdmin.DataBLL
         {
             return dal.GetMenuByGroupID(gid);
         }
-         /// <summary>
+        /// <summary>
         /// 得到所有菜单并包含当前组是否有权限
         /// </summary>
         /// <param name="gid"></param>
@@ -131,6 +131,17 @@ namespace SuperAdmin.DataBLL
         public int UpdatePermissionByID(SysAdminGrouprMenuModel model)
         {
             return dal.UpdatePermissionByID(model);
+        }
+
+        /// <summary>
+        /// 保留用户的默认皮肤
+        /// </summary>
+        /// <param name="userid"></param>
+        /// <param name="skinname"></param>
+        /// <returns></returns>
+        public int UpdateUserWebSkin(int userid, string skinname)
+        {
+            return dal.UpdateUserWebSkin(userid, skinname);
         }
     }
 }

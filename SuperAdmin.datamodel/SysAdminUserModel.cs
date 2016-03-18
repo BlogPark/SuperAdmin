@@ -91,6 +91,11 @@ namespace SuperAdmin.datamodel
         /// </summary>
         [DataMember]
         public string FirstPinYin { get; set; }
+        /// <summary>
+        /// 网站主题样式
+        /// </summary>
+        [DataMember]
+        public string WebSkin { get; set; }
         #endregion
 
         /// <summary>

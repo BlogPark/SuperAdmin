@@ -248,7 +248,10 @@ namespace SuperAdmin.WebUI.Areas.AdminArea.Controllers
             }
             return Json(list);
         }
-
+        /// <summary>
+        /// 得到类型字典
+        /// </summary>
+        /// <returns></returns>
         private Dictionary<int, string> GetTypeDic()
         {
             Dictionary<int, string> dic = new Dictionary<int, string>();
@@ -259,7 +262,6 @@ namespace SuperAdmin.WebUI.Areas.AdminArea.Controllers
             dic.Add(5, "引用图集");
             return dic;
         }
-
         /// <summary>
         /// 获取分类列表
         /// </summary>
@@ -290,9 +292,25 @@ namespace SuperAdmin.WebUI.Areas.AdminArea.Controllers
         private List<SelectListItem> GetStatusListItem(int defval = 1)
         {
             List<SelectListItem> items = new List<SelectListItem>();
-            items.Add(new SelectListItem { Text = "审核", Value = "20", Selected = defval == 20 });
             items.Add(new SelectListItem { Text = "未审", Value = "10", Selected = defval == 10 });
+            items.Add(new SelectListItem { Text = "审核", Value = "20", Selected = defval == 20 });
+            items.Add(new SelectListItem { Text = "删除", Value = "30", Selected = defval == 30 });  
             return items;
+        }
+        /// <summary>
+        /// 得到一篇文章的Model
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        [HttpPost]
+        public ActionResult GetArticleContent(int id)
+        {
+            ArticlesModel article = new ArticlesModel();
+            if (id > 0)
+            {
+                article = bll.GetSingleArticleByID(id);
+            }
+            return Json(article);
         }
     }
 }

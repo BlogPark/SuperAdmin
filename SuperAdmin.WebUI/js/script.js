@@ -3013,6 +3013,13 @@ var App = function () {
         }
         $('ul.skins > li a').click(function () {
             var color = $(this).data("skin");
+            $.ajax({
+                url: '/Login/updateskin',
+                data: { 'skinname': color },
+                dataType: 'json',
+                type: 'POST',
+                success: function (data) { }
+            });
             setSkin(color);
         });
 
