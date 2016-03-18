@@ -565,7 +565,7 @@ WHERE   ID = 1";
         public List<WebModuleModel> GetAllWebModules()
         {
             StringBuilder strSql = new StringBuilder();
-            strSql.Append("select ID, ModuleName, ModuleDescription, ModuleWidth, ModuleHeight, ModuleStatus, AddUserID, AddUserName, AddTime  ");
+            strSql.Append("select ID, ModuleName, ModuleDescription, ModuleWidth, ModuleHeight, ModuleStatus, AddUserID, AddUserName, AddTime,ModuleCode,ModuleImg  ");
             strSql.Append("  from WebModule ");
             DataSet ds = helper.Query(strSql.ToString());
             List<WebModuleModel> list = new List<WebModuleModel>();
@@ -581,6 +581,8 @@ WHERE   ID = 1";
                 model.ModuleName = item["ModuleName"].ToString();
                 model.ModuleStatus = int.Parse(item["ModuleStatus"].ToString());
                 model.ModuleWidth = string.IsNullOrWhiteSpace(item["ModuleWidth"].ToString()) ? 0 : int.Parse(item["ModuleWidth"].ToString());
+                model.ModuleCode = item["ModuleCode"].ToString();
+                model.ModuleImg = item["ModuleImg"].ToString();
                 list.Add(model);
             }
             return list;
@@ -592,7 +594,7 @@ WHERE   ID = 1";
         public WebModuleModel GetSingleWebModulesByName(string name)
         {
             StringBuilder strSql = new StringBuilder();
-            strSql.Append("select ID, ModuleName, ModuleDescription, ModuleWidth, ModuleHeight, ModuleStatus, AddUserID, AddUserName, AddTime  ");
+            strSql.Append("select ID, ModuleName, ModuleDescription, ModuleWidth, ModuleHeight, ModuleStatus, AddUserID, AddUserName, AddTime,ModuleCode,ModuleImg  ");
             strSql.Append("  from WebModule ");
             strSql.Append(" where ModuleName=@ModuleName");
             SqlParameter[] parameters = {
@@ -633,6 +635,8 @@ WHERE   ID = 1";
                 {
                     model.AddTime = DateTime.Parse(ds.Tables[0].Rows[0]["AddTime"].ToString());
                 }
+                model.ModuleCode = ds.Tables[0].Rows[0]["ModuleCode"].ToString();
+                model.ModuleImg = ds.Tables[0].Rows[0]["ModuleImg"].ToString();
                 return model;
             }
             else
@@ -648,11 +652,11 @@ WHERE   ID = 1";
         public WebModuleModel GetWebModuleByID(int id)
         {
             StringBuilder strSql = new StringBuilder();
-            strSql.Append("select ID, ModuleName, ModuleDescription, ModuleWidth, ModuleHeight, ModuleStatus, AddUserID, AddUserName, AddTime  ");
+            strSql.Append("select ID, ModuleName, ModuleDescription, ModuleWidth, ModuleHeight, ModuleStatus, AddUserID, AddUserName, AddTime,ModuleCode,ModuleImg  ");
             strSql.Append("  from WebModule ");
             strSql.Append(" where ID=@ID");
             SqlParameter[] parameters = {
-					new SqlParameter("@ID", SqlDbType.Int,4)
+					new SqlParameter("@ID", SqlDbType.Int)
 			};
             parameters[0].Value = id;
 
@@ -689,6 +693,8 @@ WHERE   ID = 1";
                 {
                     model.AddTime = DateTime.Parse(ds.Tables[0].Rows[0]["AddTime"].ToString());
                 }
+                model.ModuleCode = ds.Tables[0].Rows[0]["ModuleCode"].ToString();
+                model.ModuleImg = ds.Tables[0].Rows[0]["ModuleImg"].ToString();
                 return model;
             }
             else

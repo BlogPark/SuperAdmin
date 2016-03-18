@@ -14,6 +14,7 @@ namespace SuperAdmin.datamodel
     [DataContract]
     public class WebModuleModel
     {
+        #region 原始字段
         /// <summary>
         /// ID
         /// </summary>       
@@ -59,5 +60,16 @@ namespace SuperAdmin.datamodel
         /// </summary>       
         [DataMember]
         public DateTime AddTime { get; set; }
+        /// <summary>
+        /// 模块代码
+        /// </summary>
+        [DataMember]
+        public string ModuleCode { get; set; }
+        /// <summary>
+        /// 模块引用图片
+        /// </summary>
+        [DataMember]
+        public string ModuleImg { get; set; } 
+        #endregion
     }
 }

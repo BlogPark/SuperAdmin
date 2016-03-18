@@ -56,6 +56,18 @@ namespace SuperAdmin.WebUI.Areas.AdminArea.Controllers
             model.list = bll.GetAllWebModules();
             return View(model);
         }
+        /// <summary>
+        /// 添加网页位置
+        /// </summary>
+        /// <returns></returns>
+        public ActionResult AddModule()
+        {
+            return View();
+        }
+        /// <summary>
+        /// 添加网页位置
+        /// </summary>
+        /// <returns></returns>
         [HttpPost]
         [ValidateInput(false)]
         public ActionResult AddModule(WebModuleModel addmodel)

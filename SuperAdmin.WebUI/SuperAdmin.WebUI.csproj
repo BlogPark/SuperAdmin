@@ -127,6 +127,7 @@
     <Compile Include="Areas\AdminArea\Controllers\WebImgageController.cs" />
     <Compile Include="Areas\AdminArea\Controllers\WebNewsController.cs" />
     <Compile Include="Areas\AdminArea\Models\AddArticleViewModel.cs" />
+    <Compile Include="Areas\AdminArea\Models\AddModuleViewModel.cs" />
     <Compile Include="Areas\AdminArea\Models\ArticleCategoryViewModel.cs" />
     <Compile Include="Areas\AdminArea\Models\ArticleIndexViewModel.cs" />
     <Compile Include="Areas\AdminArea\Models\MemberViewModel.cs" />
@@ -972,6 +973,8 @@
     <Content Include="js\hubspot-messenger\js\messenger-theme-flat.js" />
     <Content Include="js\hubspot-messenger\js\messenger-theme-future.js" />
     <Content Include="js\hubspot-messenger\js\messenger.min.js" />
+    <Content Include="js\image-picker\image-picker.css" />
+    <Content Include="js\image-picker\image-picker.min.js" />
     <Content Include="js\inbox.js" />
     <Content Include="js\isotope\imagesloaded.pkgd.min.js" />
     <Content Include="js\isotope\jquery.isotope.min.js" />
@@ -1779,6 +1782,9 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Areas\AdminArea\Views\WebImgage\Index.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\AdminArea\Views\FrontSetting\AddModule.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

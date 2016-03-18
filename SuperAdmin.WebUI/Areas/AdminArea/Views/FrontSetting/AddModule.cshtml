@@ -1,0 +1,151 @@
+﻿@model SuperAdmin.WebUI.Areas.AdminArea.Models.AddModuleViewModel
+@{
+    Layout = "~/Views/_Layout.cshtml";
+}
+<div class="container">
+    <div class="row">
+        <div id="content" class="col-lg-12">
+            <!-- PAGE HEADER-->
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="page-header">
+                        <!-- BREADCRUMBS -->
+                        <ul class="breadcrumb">
+                            <li>
+                                <i class="fa fa-home"></i>
+                                <a href="index.html">Home</a>
+                            </li>
+                            <li>
+                                <a href="#">网站模块管理
+                                </a>
+                            </li>
+                            <li>添加模块</li>
+                        </ul>
+                        <!-- /BREADCRUMBS -->
+                        <div class="clearfix">
+                            <h3 class="content-title pull-left">添加模块</h3>
+                        </div>
+                        <div class="description"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    @using (Html.BeginForm("AddModule", "FrontSetting", new { area = "AdminArea" }, FormMethod.Post, new { @id = "form1", @class = "form-horizontal", @role = "form" }))
+                    {
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">模块名称</label>
+                            <div class="col-sm-7">
+                                @Html.TextBoxFor(m => m.addmodel.ModuleName, new { @class = "form-control", @placeholder = "模块名称" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">模块描述</label>
+                            <div class="col-sm-6">
+                                @Html.TextBoxFor(m => m.addmodel.ModuleDescription, new { @class = "form-control", @placeholder = "模块描述" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">模块宽度</label>
+                            <div class="col-sm-6">
+                                @Html.TextBoxFor(m => m.addmodel.ModuleWidth, new { @class = "form-control", @placeholder = "模块宽度" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">模块高度</label>
+                            <div class="col-sm-7">
+                                @Html.TextBoxFor(m => m.addmodel.ModuleHeight, new { @class = "form-control", @placeholder = "模块高度" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">模块代码</label>
+                            <div class="col-sm-7">
+                                <script type="text/plain" id="newseditor"></script>
+                                @Html.HiddenFor(m => m.addmodel.ModuleCode)
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label"></label>
+                            <div class="col-sm-9">
+                                <div class="box">
+                                    <div class="box-title">
+                                        <h4><i class="fa fa-plus"></i>模块引用图片</h4>
+                                        <div class="tools">
+                                            <a class="expand" href="javascript:;">
+                                                <i class="fa fa-chevron-down"></i>
+                                            </a>
+                                        </div>
+                                    </div>
+                                    <div style="display: none" class="box-body">
+                                        <div class="well well-sm">
+                                            <div class="row">
+                                                <div class="col-sm-11">
+                                                    @using (Html.BeginForm("Index", "Article", FormMethod.Get, new { @id = "form1" }))
+                                                    {                                                        
+                                                        <label class="pull-left control-label">编号</label>
+                                                        <div class="col-sm-2">
+                                                            @Html.TextBoxFor(m => m.websiteimg.ID, new { @class = "form-control" })
+                                                        </div>                                                      
+                                                        <label class="pull-left control-label">名称</label>
+                                                        <div class="col-sm-3">
+                                                            @Html.TextBoxFor(m => m.websiteimg.PicName, new { @class = "form-control" })
+                                                        </div>                                                        
+                                                        <div class="btn-group hidden-xs pull-right invoice-btn-group">
+                                                            <p class="btn-toolbar">
+                                                                <a class="btn btn-primary" type="submit"><i class="fa fa-search"></i>&nbsp;搜索</a>
+                                                            </p>
+                                                        </div>
+                                                    }
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <div class="col-sm-11">
+                                                <div class="picker">
+                                                    <select multiple="multiple" class="image-picker show-html" style="display: none" id='souceimg'>
+                                                        <option data-img-src='/img/inbox/1.jpg' value='qqqq'>Cute Kitten 1</option>
+                                                        <option data-img-src='/img/inbox/2.jpg' value='wwww'>Cute Kitten 2</option>
+                                                        <option data-img-src='/img/inbox/3.jpg' value='eeee'>Cute Kitten 3</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer center">
+                            <a class="btn btn-lg btn-default" href="#">取 消</a>
+                            <button type="button" class="btn btn-lg btn-primary" onclick="checkform()">保  存</button>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section mycss{
+    <link rel="stylesheet" href="@Url.Content("/js/image-picker/image-picker.css")">
+}
+@section scriptfiles{
+    <script type="text/javascript" src="@Url.Content("/ueditor/ueditor.config.js")"></script>
+    <script type="text/javascript" src="@Url.Content("/ueditor/ueditor.all.min.js")"></script>
+    <script type="text/javascript" src="@Url.Content("/ueditor/lang/zh-cn/zh-cn.js")"></script>
+    <script src="@Url.Content("/js/image-picker/image-picker.min.js")"></script>
+}
+@section myscript{
+    <script type="text/javascript">
+        $(function () {
+            App.init(); //Initialise plugins and elements
+            var ue = UE.getEditor('newseditor', UE.utils.extend({
+                toolbars: [['source', '|', 'bold', 'italic', 'underline', 'fontborder', 'strikethrough', 'superscript', 'subscript', '|', 'fontsize', '|', 'directionalityltr', 'directionalityrtl', 'indent', '|', 'justifyleft', 'justifycenter', 'justifyright', 'justifyjustify']]
+        , zIndex: 0, initialFrameHeight: 300
+            }, null, true));
+            $("#souceimg").imagepicker({
+                hide_select: false,
+                show_label: true,
+            });
+        });
+    </script>
+}
