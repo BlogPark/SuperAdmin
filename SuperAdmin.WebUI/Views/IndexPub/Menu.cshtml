@@ -6,7 +6,7 @@
         <ul>
             <li>
                     <a href="@Url.Action("Index", "Home")">
-                        <i class="fa fa-dashboard fa-fw"></i><span class="menu-text">首页 @ViewBag.PageTitle</span>
+                        <i class="fa fa-dashboard fa-fw"></i><span class="menu-text">首页</span>
                     </a>
                 </li>
             @{
@@ -18,7 +18,7 @@
                         string page = Model.Currentpage;
                         var result = list.Where(m => m.MenuName == page).ToList();                        
                         
-                <li class="has-sub @(result.Count>0?"active":page)">
+                <li class="has-sub @(result.Count>0?"active":"")">
                     <a href="javascript:;" class="">
                         <i class="fa @(item.MenuIcon) fa-fw"></i><span class="menu-text">@item.MenuName</span>
                         <span class="arrow"></span>
