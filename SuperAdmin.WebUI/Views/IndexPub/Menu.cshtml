@@ -6,7 +6,7 @@
         <ul>
             <li>
                     <a href="@Url.Action("Index", "Home")">
-                        <i class="fa fa-dashboard fa-fw"></i><span class="menu-text">首页</span>
+                        <i class="fa fa-dashboard fa-fw"></i><span class="menu-text">首页 @ViewBag.PageTitle</span>
                     </a>
                 </li>
             @{
@@ -15,7 +15,10 @@
                     List<SuperAdmin.datamodel.SysAdminMenuModel> list = Model.sublist.Where(p => p.FatherID == item.ID).ToList();
                     if (list.Count > 0)
                     {
-                <li class="has-sub">
+                        string page = Model.Currentpage;
+                        var result = list.Where(m => m.MenuName == page).ToList();                        
+                        
+                <li class="has-sub @(result.Count>0?"active":page)">
                     <a href="javascript:;" class="">
                         <i class="fa @(item.MenuIcon) fa-fw"></i><span class="menu-text">@item.MenuName</span>
                         <span class="arrow"></span>
@@ -23,7 +26,7 @@
                     <ul class="sub">
                         @foreach (SuperAdmin.datamodel.SysAdminMenuModel subitem in list)
                         {
-                            <li><a class="" href="@Url.Action(subitem.ActionName, subitem.ControllerName, new { area = subitem.AreaName })"><span class="sub-menu-text">@subitem.MenuName</span></a></li>
+                            <li class="@(subitem.MenuName==page?"current":"")"><a class="" href="@Url.Action(subitem.ActionName, subitem.ControllerName, new { area = subitem.AreaName })"><span class="sub-menu-text">@subitem.MenuName</span></a></li>
                         }
                     </ul>
                 </li>

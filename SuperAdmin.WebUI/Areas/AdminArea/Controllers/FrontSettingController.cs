@@ -28,6 +28,7 @@ namespace SuperAdmin.WebUI.Areas.AdminArea.Controllers
         {
             WebSettingViewModel model = new WebSettingViewModel();
             model.settings = bll.GetWebSetting();
+            ViewBag.PageTitle = "编辑基础信息";
             return View(model);
         }
         /// <summary>
@@ -44,6 +45,7 @@ namespace SuperAdmin.WebUI.Areas.AdminArea.Controllers
                 int rowcount = bll.UpdateWebSetting(model.settings);
             }
             model.settings = bll.GetWebSetting();
+            
             return View(model);
         }
         /// <summary>
@@ -54,6 +56,7 @@ namespace SuperAdmin.WebUI.Areas.AdminArea.Controllers
         {
             WebModuleViewModel model = new WebModuleViewModel();
             model.list = bll.GetAllWebModules();
+            ViewBag.PageTitle = "网站模块管理";
             return View(model);
         }
         /// <summary>
@@ -100,6 +103,7 @@ namespace SuperAdmin.WebUI.Areas.AdminArea.Controllers
             WebMenuViewModel model = new WebMenuViewModel();
             model.fatherlist = bll.GetAllFirstWebMenu();
             model.list = bll.GetAllWebMenusList();
+            ViewBag.PageTitle = "网站菜单管理";
             return View(model);
         }
         [HttpPost]

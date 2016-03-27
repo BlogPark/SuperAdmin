@@ -21,6 +21,7 @@ namespace SuperAdmin.WebUI.Areas.AdminArea.Controllers
             WebImgageIndexViewModel model = new WebImgageIndexViewModel();
             model.list = bll.GetAllModel();
             model.categories = bll.GetPicCategoryModel();
+            ViewBag.PageTitle = "图片管理";
             return View(model);
         }
         [HttpPost]

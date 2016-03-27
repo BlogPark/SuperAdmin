@@ -20,6 +20,7 @@ namespace SuperAdmin.WebUI.Areas.AdminArea.Controllers
         {
             MemberViewModel model = new MemberViewModel();
             model.memberlist = bll.GetAllMemberInfo();
+            ViewBag.PageTitle = "会员管理";
             return View(model);
         }
         /// <summary>

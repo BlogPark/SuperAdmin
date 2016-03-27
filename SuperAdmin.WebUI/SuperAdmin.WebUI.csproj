@@ -1786,6 +1786,9 @@
   <ItemGroup>
     <Content Include="Areas\AdminArea\Views\FrontSetting\AddModule.cshtml" />
   </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\IndexPub\mytest.cshtml" />
+  </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>

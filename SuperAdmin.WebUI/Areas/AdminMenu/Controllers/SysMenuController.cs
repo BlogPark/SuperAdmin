@@ -20,6 +20,7 @@ namespace SuperAdmin.WebUI.Areas.AdminMenu.Controllers
             SysMenuIndexViewModel vm = new SysMenuIndexViewModel();
             vm.MenuLists = models;
             vm.SingleMenu = new SysAdminMenuModel();
+            ViewBag.PageTitle = "系统菜单";
             return View(vm);
         }
 
@@ -45,6 +46,7 @@ namespace SuperAdmin.WebUI.Areas.AdminMenu.Controllers
             SysAdminGroupViewModel model = new SysAdminGroupViewModel();
             model.AdminGroupLists = list;
             model.AdminGroup = new SysAdminUserGroupModel();
+            ViewBag.PageTitle = "系统用户组";
             return View(model);
         }
 
@@ -68,6 +70,7 @@ namespace SuperAdmin.WebUI.Areas.AdminMenu.Controllers
             SysUserMenuViewModel model = new SysUserMenuViewModel();
             model.AdminUser = bll.GetAllAdminGroup();
             model.Menus = bll.GetAllUserMenu();
+            ViewBag.PageTitle = "菜单权限管理";
             return View(model);
         }
 

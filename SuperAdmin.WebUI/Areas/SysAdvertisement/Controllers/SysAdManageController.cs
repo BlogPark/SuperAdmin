@@ -30,6 +30,7 @@ namespace SuperAdmin.WebUI.Areas.SysAdvertisement.Controllers
             model.Adlists = bll.GetAllSystemAd();
             model.AddAdinfo = new SystemAdModel();
             model.UpdAdinfo = new SystemAdModel();
+            ViewBag.PageTitle = "广告信息";
             return View(model);
         }
         #region 系统广告信息
@@ -128,6 +129,7 @@ namespace SuperAdmin.WebUI.Areas.SysAdvertisement.Controllers
             SysAdPositionViewModel model = new SysAdPositionViewModel();
             model.syssite = bll.GetAllSysSites();
             model.positions = bll.GetAllAdPosition();
+            ViewBag.PageTitle = "广告位置";
             return View(model);
         }
         #region 系统广告位置
@@ -174,6 +176,7 @@ namespace SuperAdmin.WebUI.Areas.SysAdvertisement.Controllers
         {
             SysAdScheduleViewModel model = new SysAdScheduleViewModel();
             model.schedules = bll.GetAllSchedule();
+            ViewBag.PageTitle = "广告排期";
             return View(model);
         }
         #region 系统广告排期设置

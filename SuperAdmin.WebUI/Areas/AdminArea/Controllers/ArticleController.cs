@@ -43,6 +43,7 @@ namespace SuperAdmin.WebUI.Areas.AdminArea.Controllers
             model.pagesize = PageSize;
             model.totalcount = totalrowCount;
             model.currentpage = page;
+            ViewBag.PageTitle = "文章管理";
             return View(model);
         }
         /// <summary>
@@ -54,6 +55,7 @@ namespace SuperAdmin.WebUI.Areas.AdminArea.Controllers
             AddArticleViewModel model = new AddArticleViewModel();
             model.typelist = GetTypeDic();
             model.categorylist = catebll.GetALLModel();
+            ViewBag.PageTitle = "添加文章";
             return View(model);
         }
         /// <summary>
@@ -147,6 +149,7 @@ namespace SuperAdmin.WebUI.Areas.AdminArea.Controllers
         {
             ArticleCategoryViewModel model = new ArticleCategoryViewModel();
             model.list = catebll.GetALLModel();
+            ViewBag.PageTitle = "文章类别管理";
             return View(model);
         }
         /// <summary>

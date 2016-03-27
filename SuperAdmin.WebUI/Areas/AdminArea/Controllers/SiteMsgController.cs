@@ -26,6 +26,7 @@ namespace SuperAdmin.WebUI.Areas.AdminArea.Controllers
             }
             SiteMsgIndexViewModel model = new SiteMsgIndexViewModel();
             model.msglist = bll.GetTop3ModelListByUserID(user.User.ID);
+            ViewBag.PageTitle = "消息管理";
             return View(model);
         }
         /// <summary>

@@ -20,6 +20,7 @@ namespace SuperAdmin.WebUI.Areas.AdminArea.Controllers
         {
             webfaqindexViewModel model = new webfaqindexViewModel();
             model.list = bll.GetAllDataModel();
+            ViewBag.PageTitle = "留言管理";
             return View(model);
         }
         /// <summary>

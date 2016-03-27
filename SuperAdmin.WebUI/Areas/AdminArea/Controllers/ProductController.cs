@@ -19,6 +19,7 @@ namespace SuperAdmin.WebUI.Areas.AdminArea.Controllers
         public ActionResult Index()
         {
             ProductIndexViewModel model = new ProductIndexViewModel();
+            ViewBag.PageTitle = "产品管理";
             return View(model);
         }
 
@@ -29,6 +30,7 @@ namespace SuperAdmin.WebUI.Areas.AdminArea.Controllers
         public ActionResult productspec()
         {
             productspecViewModel model = new productspecViewModel();
+            ViewBag.PageTitle = "";
             return View(model);
         }
         [HttpPost]
@@ -44,6 +46,7 @@ namespace SuperAdmin.WebUI.Areas.AdminArea.Controllers
         public ActionResult productcategory()
         {
             productcategoryViewModel model = new productcategoryViewModel();
+            ViewBag.PageTitle = "类别管理";
             return View(model);
         }
         /// <summary>
@@ -53,6 +56,7 @@ namespace SuperAdmin.WebUI.Areas.AdminArea.Controllers
         public ActionResult AddProduct()
         {
             ProductInfoModel model = new ProductInfoModel();
+            ViewBag.PageTitle = "添加产品";
             return View(model);
         }
     }

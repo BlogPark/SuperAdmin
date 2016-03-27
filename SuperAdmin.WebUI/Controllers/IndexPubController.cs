@@ -26,7 +26,7 @@ namespace SuperAdmin.WebUI.Controllers
         /// 首页左侧菜单
         /// </summary>
         /// <returns></returns>
-        public ActionResult Menu()
+        public ActionResult Menu(string currentpage)
         {
             SessionLoginModel model = Session[AppContext.SESSION_LOGIN_NAME] as SessionLoginModel;
             string idstr = "";
@@ -34,6 +34,7 @@ namespace SuperAdmin.WebUI.Controllers
             MenuViewModel models = new MenuViewModel();
             models.firstlist = bll.GetSysMenuByIds(idstr.TrimEnd(','));
             models.sublist = model.UserMenus.Where(p => p.FatherID != 0).ToList();
+            models.Currentpage = currentpage;
             return View(models);
         }
         /// <summary>
@@ -81,6 +82,11 @@ namespace SuperAdmin.WebUI.Controllers
         {
             Session.Clear();// Session[AppContext.SESSION_LOGIN_NAME] = null;
             return RedirectToAction("Index", "Login", new { returnurl = "" });
+        }
+
+        public ActionResult mytest()
+        {
+            return View();
         }
 
     }

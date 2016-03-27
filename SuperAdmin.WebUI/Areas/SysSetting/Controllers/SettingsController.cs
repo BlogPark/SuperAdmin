@@ -29,6 +29,7 @@ namespace SuperAdmin.WebUI.Areas.SysSetting.Controllers
             AdminUserViewModel model = new AdminUserViewModel();
             model.UserLists = bll.GetAllSysAdminUser();
             model.Groups = mbll.GetAllAdminGroup();
+            ViewBag.PageTitle = "系统用户";
             return View(model);
         }
         [HttpPost]
@@ -81,6 +82,7 @@ namespace SuperAdmin.WebUI.Areas.SysSetting.Controllers
             SysConfigsViewModel model = new SysConfigsViewModel();
             model.Allconfigs = bll.GetAllConfigs();
             model.FatherConfigs = bll.GetFirstConfigs();
+            ViewBag.PageTitle = "系统配置";
             return View(model);
         }
         [HttpPost]

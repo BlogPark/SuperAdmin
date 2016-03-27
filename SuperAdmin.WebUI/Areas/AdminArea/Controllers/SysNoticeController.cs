@@ -20,6 +20,7 @@ namespace SuperAdmin.WebUI.Areas.AdminArea.Controllers
         {
             SysnoticeIndexViewModel model = new SysnoticeIndexViewModel();
             model.modellist = bll.GetAllSysNotice();
+            ViewBag.PageTitle = "公告管理";
             return View(model);
         }
 

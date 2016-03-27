@@ -160,6 +160,7 @@
 @section myscript{
     <script type="text/javascript">
         $(function () {
+            App.setPage("@ViewBag.PageTitle");
             App.init(); //Initialise plugins and elements
             $("#erradpic").hide();
             $("#fileupload").fileupload({

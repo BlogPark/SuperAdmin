@@ -107,7 +107,7 @@
     <!-- PAGE -->
     <section id="page">
         <!-- SIDEBAR -->
-        @Html.Action("Menu", "IndexPub", new { area = "" })
+        @Html.Action("Menu", "IndexPub", new { area = "" ,currentpage=ViewBag.PageTitle})
         <!-- /SIDEBAR -->
         <div id="main-content">
             @RenderBody()

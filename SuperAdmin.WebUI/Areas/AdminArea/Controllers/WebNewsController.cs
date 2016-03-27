@@ -18,10 +18,9 @@ namespace SuperAdmin.WebUI.Areas.AdminArea.Controllers
         WebNewsBll bll = new WebNewsBll();
         public ActionResult Index()
         {
-            WebSplitWords sp = new WebSplitWords();
-            string ss = sp.DoSegmentToJsonstr("安稳中国张成航");
             WebNewsIndexViewModel model = new WebNewsIndexViewModel();
             model.list = bll.GetAllModelList();
+            ViewBag.PageTitle = "网站新闻";
             return View(model);
         }
 

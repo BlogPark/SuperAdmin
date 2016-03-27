@@ -15,5 +15,11 @@ namespace SuperAdmin.WebUI.Models
 
         [DataMember]
         public List<SysAdminMenuModel> sublist { get; set; }
+
+        [DataMember]
+        public string Currentpage { get; set; }
+
+
+
     }
 }
