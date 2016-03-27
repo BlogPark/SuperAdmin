@@ -65,7 +65,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Class1.cs" />
+    <Compile Include="ComClass.cs" />
+    <Compile Include="DESEncrypt.cs" />
     <Compile Include="JsonHelper.cs" />
     <Compile Include="PinYinConverter.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

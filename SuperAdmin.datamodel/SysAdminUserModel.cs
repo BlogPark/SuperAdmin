@@ -96,6 +96,16 @@ namespace SuperAdmin.datamodel
         /// </summary>
         [DataMember]
         public string WebSkin { get; set; }
+        /// <summary>
+        /// 上次登陆IP
+        /// </summary>
+        [DataMember]
+        public string LastLoginIP { get; set; }
+        /// <summary>
+        /// 上次登录时间
+        /// </summary>
+        [DataMember]
+        public DateTime LastLoginTime { get; set; }
         #endregion
 
         /// <summary>

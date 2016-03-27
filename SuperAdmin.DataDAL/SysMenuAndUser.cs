@@ -68,6 +68,7 @@ WHERE LoginName=@loginname ";
                     result.LoginResult = "0用户已经被禁用";
                     return result;
                 }
+                UpdateLoginMsg(user.LastLoginTime,user.LastLoginIP,result.ID);
                 result.LoginResult = "1";
             }
             else
@@ -77,6 +78,24 @@ WHERE LoginName=@loginname ";
                 return result;
             }
             return result;
+        }
+        /// <summary>
+        /// 修改用户登录信息
+        /// </summary>
+        /// <param name="lasttime"></param>
+        /// <param name="ip"></param>
+        /// <param name="id"></param>
+        public void UpdateLoginMsg(DateTime lasttime, string ip,int id)
+        {
+            string sqltxt = @"UPDATE  dbo.SysAdminUser
+SET     LastLoginIP = @LastLoginIP ,
+        LastLoginTime = @LastLoginTime
+WHERE   ID = @id";
+            SqlParameter[] paramter = { new SqlParameter("@id", id),
+                                      new SqlParameter("@LastLoginIP",ip),
+                                      new SqlParameter("@LastLoginTime",lasttime)};
+             helper.ExecuteSql(sqltxt, paramter);
+
         }
         /// <summary>
         /// 查询用户拥有的菜单权限

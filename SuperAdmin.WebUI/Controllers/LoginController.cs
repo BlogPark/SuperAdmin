@@ -6,6 +6,7 @@ using System.Web.Mvc;
 using SuperAdmin.DataBLL;
 using SuperAdmin.WebUI.Models;
 using SuperAdmin.datamodel;
+using SuperAdmin.Common;
 
 namespace SuperAdmin.WebUI.Controllers
 {
@@ -28,6 +29,8 @@ namespace SuperAdmin.WebUI.Controllers
             SysAdminUserModel user = new SysAdminUserModel();
             user.LoginName = model.LoginId;
             user.UserPwd = model.Pass;
+            user.LastLoginTime = DateTime.Now;
+            user.LastLoginIP = ComClass.GetIP();
             SysAdminUserModel result = bll.GetUserForLogin(user);
             if (result.LoginResult.StartsWith("0"))
             {

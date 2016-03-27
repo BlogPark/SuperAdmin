@@ -38,7 +38,8 @@ namespace SuperAdmin.WebUI.Areas.SysSetting.Controllers
             if (User != null)
             {
                 User.HeaderImg = "/img/avatars/avatar3.jpg";
-                User.UserPwd = "0000";
+                string defaultpwd = "123456";//创建默认密码
+                User.UserPwd = DESEncrypt.Encrypt(defaultpwd);
                 User.GName = User.GName.Trim();
                 string pinyin = PinYinConverter.Get(User.UserName.Trim());
                 User.PinYin = pinyin;
