@@ -1060,6 +1060,8 @@
     <Content Include="js\jquery-validate\additional-methods.min.js" />
     <Content Include="js\jquery-validate\jquery.validate.js" />
     <Content Include="js\jquery-validate\jquery.validate.min.js" />
+    <Content Include="js\jquerycopy\jquery.zclip.min.js" />
+    <Content Include="js\jquerycopy\ZeroClipboard.swf" />
     <Content Include="js\jquery\jquery-1.9.1.min.js" />
     <Content Include="js\jquery\jquery-2.0.3.min.js" />
     <Content Include="js\jquery\jquery-migrate-1.2.1.min.js" />

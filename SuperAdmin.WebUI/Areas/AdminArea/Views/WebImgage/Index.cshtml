@@ -52,7 +52,7 @@
                                         <span>&nbsp;上传图片&nbsp;</span>
                                         <input id="fileupload" type="file" name="files[]" data-url="@Url.Action("UploadFiles", "Home", new { area = "" })">
                                     </span>
-                                    <p id="erradpic" class="text-danger"></p>
+                                    <p id="erradpic" class="text-danger"></p>                                    
                                 </div>
                                 @Html.HiddenFor(m => m.addmodel.PicUrl)
                             </div>
@@ -255,20 +255,12 @@
      <script src="@Url.Content("/js/jquery-upload/js/vendor/jquery.ui.widget.js")"></script>
     <script src="@Url.Content("/js/jquery-upload/js/jquery.iframe-transport.js")"></script>
     <script src="@Url.Content("/js/jquery-upload/js/jquery.fileupload.js")"></script>
-    <script src="@Url.Content("/js/gritter/js/jquery.gritter.min.js")"></script>
+    <script src="@Url.Content("/js/gritter/js/jquery.gritter.min.js")"></script>    
 }
 @section myscript{
     <script type="text/javascript">
         $(function () {
             App.init(); //Initialise plugins and elements
-            $('.filter-content').hover(function () {
-                var hoverContent = $(this).children('.hover-content');
-                hoverContent.removeClass('fadeOut').addClass('animated fadeIn').show();
-            }, function () {
-                var hoverContent = $(this).children('.hover-content');
-                hoverContent.removeClass('fadeIn').addClass('fadeOut');
-            });
-            $('.colorbox-button').colorbox({ rel: 'colorbox-button', maxWidth: '95%', maxHeight: '95%' });
             $("#erradpic").hide();
             $("#fileupload").fileupload({
                 dataType: 'json',
@@ -293,6 +285,15 @@
                     }
                 }
             });
+           
+            $('.filter-content').hover(function () {
+                var hoverContent = $(this).children('.hover-content');
+                hoverContent.removeClass('fadeOut').addClass('animated fadeIn').show();
+            }, function () {
+                var hoverContent = $(this).children('.hover-content');
+                hoverContent.removeClass('fadeIn').addClass('fadeOut');
+            });
+            $('.colorbox-button').colorbox({ rel: 'colorbox-button', maxWidth: '95%', maxHeight: '95%' });            
             $("#addmodel_PicCateID").val($("#catelist").val());
             $("#addmodel_PicCateName").val($("#catelist").find("option:selected").text());
             $("#catelist").change(function () {
