@@ -58,60 +58,16 @@
                             </div>
                         </div>
                         <div class="form-group">
+                            <label class="col-sm-3 control-label">模块引用图片ID</label>
+                            <div class="col-sm-7">
+                                @Html.TextBoxFor(m => m.addmodel.ModuleImg, new { @class = "form-control", @placeholder = "模块引用图片ID,请用逗号隔开" })
+                            </div>
+                        </div>
+                        <div class="form-group">
                             <label class="col-sm-3 control-label">模块代码</label>
                             <div class="col-sm-7">
                                 <script type="text/plain" id="newseditor"></script>
                                 @Html.HiddenFor(m => m.addmodel.ModuleCode)
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="col-sm-2 control-label"></label>
-                            <div class="col-sm-9">
-                                <div class="box">
-                                    <div class="box-title">
-                                        <h4><i class="fa fa-plus"></i>模块引用图片</h4>
-                                        <div class="tools">
-                                            <a class="expand" href="javascript:;">
-                                                <i class="fa fa-chevron-down"></i>
-                                            </a>
-                                        </div>
-                                    </div>
-                                    <div style="display: none" class="box-body">
-                                        <div class="well well-sm">
-                                            <div class="row">
-                                                <div class="col-sm-11">
-                                                    @using (Html.BeginForm("Index", "Article", FormMethod.Get, new { @id = "form1" }))
-                                                    {                                                        
-                                                        <label class="pull-left control-label">编号</label>
-                                                        <div class="col-sm-2">
-                                                            @Html.TextBoxFor(m => m.websiteimg.ID, new { @class = "form-control" })
-                                                        </div>                                                      
-                                                        <label class="pull-left control-label">名称</label>
-                                                        <div class="col-sm-3">
-                                                            @Html.TextBoxFor(m => m.websiteimg.PicName, new { @class = "form-control" })
-                                                        </div>                                                        
-                                                        <div class="btn-group hidden-xs pull-right invoice-btn-group">
-                                                            <p class="btn-toolbar">
-                                                                <a class="btn btn-primary" type="submit"><i class="fa fa-search"></i>&nbsp;搜索</a>
-                                                            </p>
-                                                        </div>
-                                                    }
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="form-group">
-                                            <div class="col-sm-11">
-                                                <div class="picker">
-                                                    <select multiple="multiple" class="image-picker show-html" style="display: none" id='souceimg'>
-                                                        <option data-img-src='/img/inbox/1.jpg' value='qqqq'>Cute Kitten 1</option>
-                                                        <option data-img-src='/img/inbox/2.jpg' value='wwww'>Cute Kitten 2</option>
-                                                        <option data-img-src='/img/inbox/3.jpg' value='eeee'>Cute Kitten 3</option>
-                                                    </select>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
                             </div>
                         </div>
                         <div class="modal-footer center">
