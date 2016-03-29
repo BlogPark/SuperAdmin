@@ -11,9 +11,10 @@ namespace SuperAdmin.DataBLL
     /// <summary>
     /// 系统设置数据层操作
     /// </summary>
-    public  class SystemSettingsBll
+    public class SystemSettingsBll
     {
         public SystemSettings dal = new SystemSettings();
+        private WebSiteImageDal imagedal = new WebSiteImageDal();
         /// <summary>
         /// 得到所有的系统用户
         /// </summary>
@@ -92,7 +93,7 @@ namespace SuperAdmin.DataBLL
         {
             return dal.UpdateConfigs(model);
         }
-         /// <summary>
+        /// <summary>
         /// 得到顶级配置项目
         /// </summary>
         /// <returns></returns>
@@ -100,7 +101,7 @@ namespace SuperAdmin.DataBLL
         {
             return dal.GetFirstConfigs();
         }
-         /// <summary>
+        /// <summary>
         /// 禁用配置项
         /// </summary>
         /// <param name="id"></param>
@@ -227,6 +228,27 @@ namespace SuperAdmin.DataBLL
         public List<WebMenusModel> GetAllFirstWebMenu()
         {
             return dal.GetAllFirstWebMenu();
+        }
+        #endregion
+
+        #region 查询网页图片
+        /// <summary>
+        /// 根据ID或分类得到网站图片信息
+        /// </summary>
+        /// <param name="name"></param>
+        /// <param name="cateid"></param>
+        /// <returns></returns>
+        public List<WebSiteImageModel> GetImageList(string name, int cateid)
+        {
+            return imagedal.GetModelListByNamecate(name,cateid);
+        }
+        /// <summary>
+        /// 得到网站图片的分类
+        /// </summary>
+        /// <returns></returns>
+        public List<PicCategoryModel> GetWebImageCatelist()
+        {
+            return imagedal.GetPicCategoryModel();
         }
         #endregion
     }

@@ -155,7 +155,7 @@ namespace SuperAdmin.DataDAL
             }
         }
         /// <summary>
-        /// 得到一个对象实体
+        /// 得到全部对象实体
         /// </summary>
         public List<WebSiteImageModel> GetAllModel()
         {
@@ -270,6 +270,66 @@ namespace SuperAdmin.DataDAL
                     {
                         model.AddUserID = int.Parse(item["AddUserID"].ToString());
                     }
+                    list.Add(model);
+                }
+            }
+            return list;
+        }
+
+        /// <summary>
+        /// 根据名称和分类查找图片
+        /// </summary>
+        public List<WebSiteImageModel> GetModelListByNamecate(string name,int cateid)
+        {
+            StringBuilder strSql = new StringBuilder();
+            strSql.Append("select ID, AddTime, PicCateID, PicCateName, PicName, PicTags, PicUrl, PicWidth, PicHeight, PicStatus, AddUserID, AddUserName");
+            strSql.Append("  from WebSiteImage ");
+            strSql.Append(" WHERE PicStatus＝１ AND  PicCateID="+cateid.ToString());
+            if (!string.IsNullOrWhiteSpace(name))
+            {
+                strSql.Append(" AND PicName like '%" + name + "%'");
+            }
+            DataSet ds = helper.Query(strSql.ToString());
+            List<WebSiteImageModel> list = new List<WebSiteImageModel>();
+            if (ds.Tables[0].Rows.Count > 0)
+            {
+                foreach (DataRow item in ds.Tables[0].Rows)
+                {
+                    WebSiteImageModel model = new WebSiteImageModel();
+                    if (item["ID"].ToString() != "")
+                    {
+                        model.ID = int.Parse(item["ID"].ToString());
+                    }
+                    if (item["AddTime"].ToString() != "")
+                    {
+                        model.AddTime = DateTime.Parse(item["AddTime"].ToString());
+                    }
+                    if (item["PicCateID"].ToString() != "")
+                    {
+                        model.PicCateID = int.Parse(item["PicCateID"].ToString());
+                    }
+                    model.PicCateName = item["PicCateName"].ToString();
+                    model.PicName = item["PicName"].ToString();
+                    model.PicTags = item["PicTags"].ToString();
+                    model.PicUrl = item["PicUrl"].ToString();
+                    if (item["PicWidth"].ToString() != "")
+                    {
+                        model.PicWidth = int.Parse(item["PicWidth"].ToString());
+                    }
+                    if (item["PicHeight"].ToString() != "")
+                    {
+                        model.PicHeight = int.Parse(item["PicHeight"].ToString());
+                    }
+                    if (item["PicStatus"].ToString() != "")
+                    {
+                        model.PicStatus = int.Parse(item["PicStatus"].ToString());
+                    }
+                    if (item["AddUserID"].ToString() != "")
+                    {
+                        model.AddUserID = int.Parse(item["AddUserID"].ToString());
+                    }
+                    model.PicUrlStr = appcontent.Imgdomain + item["PicUrl"].ToString();
+                    model.AddUserName = item["AddUserName"].ToString();                   
                     list.Add(model);
                 }
             }

@@ -129,5 +129,12 @@ namespace SuperAdmin.WebUI.Areas.AdminArea.Controllers
             }
             return RedirectToAction("WebMenu", "FrontSetting", new { area = "AdminArea" });
         }
+
+        [HttpGet]
+        public ActionResult GetwebImglist(string name,string tags)
+        {
+
+            return Json("");
+        }
     }
 }

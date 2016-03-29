@@ -2,6 +2,91 @@
 @{
     Layout = "~/Views/_Layout.cshtml";
 }
+<!-- SAMPLE BOX CONFIGURATION MODAL FORM-->
+<div class="bootbox modal fade in" id="box-config" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content modal-form">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title">添加图片</h4>
+            </div>
+            <div class="modal-body">
+                <div class="bootbox-body">
+                    @using (Html.BeginForm("AddMenu", "FrontSetting", new { area = "AdminArea" }, FormMethod.Get, new { @id = "form3" }))
+                    {
+                        <div class="form-group">
+                            <label class="pull-left control-label">菜单名称：</label>
+                            <div class="col-sm-3">
+                                <input type="text" class="form-control" />
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="pull-left control-label">菜单描述：</label>
+                            <div class="col-sm-3">
+                                <input type="text" class="form-control" />
+                            </div>
+                        </div>   
+                        <div class="btn-group hidden-xs pull-right invoice-btn-group">
+                            <p class="btn-toolbar">
+                                <button class="btn btn-primary" type="submit"><i class="fa fa-search"></i>&nbsp;搜索</button>
+                            </p>
+                        </div>    
+                    }
+                </div>
+                <div class="box-body clearfix" style="padding-top: 50px">
+                    <div class="row" style="padding-bottom: 10px">
+                        <div class="col-xs-3">
+                            <img src="http://www.superimg.com//IIXIVIX3IIIX/VI3VIXIVH3IX7IIXIIIIVVIVI7II.jpg" class="img-responsive" />
+                        </div>
+                        <div class="col-xs-3">
+                            <img src="http://www.superimg.com//IIXIVIX3IIIX/VI3VIXIVH3IX7IIXIIIIVVIVI7II.jpg" class="img-responsive" />
+                        </div>
+                        <div class="col-xs-3">
+                            <img src="http://www.superimg.com//IIXIVIX3IIIX/VI3VIXIVH3IX7IIXIIIIVVIVI7II.jpg" class="img-responsive" />
+                        </div>
+                        <div class="col-xs-3">
+                            <img src="http://www.superimg.com//IIXIVIX3IIIX/VI3VIXIVH3IX7IIXIIIIVVIVI7II.jpg" class="img-responsive" />
+                        </div>
+                    </div>
+                    <div class="row" style="padding-bottom: 10px">
+                        <div class="col-xs-3">
+                            <img src="http://www.superimg.com//IIXIVIX3IIIX/VI3VIXIVH3IX7IIXIIIIVVIVI7II.jpg" class="img-responsive" />
+                        </div>
+                        <div class="col-xs-3">
+                            <img src="http://www.superimg.com//IIXIVIX3IIIX/VI3VIXIVH3IX7IIXIIIIVVIVI7II.jpg" class="img-responsive" />
+                        </div>
+                        <div class="col-xs-3">
+                            <img src="http://www.superimg.com//IIXIVIX3IIIX/VI3VIXIVH3IX7IIXIIIIVVIVI7II.jpg" class="img-responsive" />
+                        </div>
+                        <div class="col-xs-3">
+                            <img src="http://www.superimg.com//IIXIVIX3IIIX/VI3VIXIVH3IX7IIXIIIIVVIVI7II.jpg" class="img-responsive" />
+                        </div>
+                    </div>
+                    <div class="row" style="padding-bottom: 10px">
+                        <div class="col-xs-3">
+                            <img src="http://www.superimg.com//IIXIVIX3IIIX/VI3VIXIVH3IX7IIXIIIIVVIVI7II.jpg" class="img-responsive" />
+                        </div>
+                        <div class="col-xs-3">
+                            <img src="http://www.superimg.com//IIXIVIX3IIIX/VI3VIXIVH3IX7IIXIIIIVVIVI7II.jpg" class="img-responsive" />
+                        </div>
+                        <div class="col-xs-3">
+                            <img src="http://www.superimg.com//IIXIVIX3IIIX/VI3VIXIVH3IX7IIXIIIIVVIVI7II.jpg" class="img-responsive" />
+                        </div>
+                        <div class="col-xs-3">
+                            <img src="http://www.superimg.com//IIXIVIX3IIIX/VI3VIXIVH3IX7IIXIIIIVVIVI7II.jpg" class="img-responsive" />
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" onclick="javascript: document.getElementById('form1').submit(); return false;">Save changes</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- /SAMPLE BOX CONFIGURATION MODAL FORM-->
 <div class="container">
     <div class="row">
         <div id="content" class="col-lg-12">
@@ -60,7 +145,8 @@
                         <div class="form-group">
                             <label class="col-sm-3 control-label">模块引用图片ID</label>
                             <div class="col-sm-7">
-                                @Html.TextBoxFor(m => m.addmodel.ModuleImg, new { @class = "form-control", @placeholder = "模块引用图片ID,请用逗号隔开" })
+                                <a class="btn btn-primary" data-toggle="modal" href="#box-config" id="addnew"><i class="fa fa-plus"></i>选择图片</a>
+                                @Html.HiddenFor(m => m.addmodel.ModuleImg)
                             </div>
                         </div>
                         <div class="form-group">
@@ -82,13 +168,12 @@
 </div>
 
 @section mycss{
-    <link rel="stylesheet" href="@Url.Content("/js/image-picker/image-picker.css")">
+
 }
 @section scriptfiles{
     <script type="text/javascript" src="@Url.Content("/ueditor/ueditor.config.js")"></script>
     <script type="text/javascript" src="@Url.Content("/ueditor/ueditor.all.min.js")"></script>
     <script type="text/javascript" src="@Url.Content("/ueditor/lang/zh-cn/zh-cn.js")"></script>
-    <script src="@Url.Content("/js/image-picker/image-picker.min.js")"></script>
 }
 @section myscript{
     <script type="text/javascript">
@@ -98,10 +183,6 @@
                 toolbars: [['source', '|', 'bold', 'italic', 'underline', 'fontborder', 'strikethrough', 'superscript', 'subscript', '|', 'fontsize', '|', 'directionalityltr', 'directionalityrtl', 'indent', '|', 'justifyleft', 'justifycenter', 'justifyright', 'justifyjustify']]
         , zIndex: 0, initialFrameHeight: 300
             }, null, true));
-            $("#souceimg").imagepicker({
-                hide_select: false,
-                show_label: true,
-            });
         });
     </script>
 }

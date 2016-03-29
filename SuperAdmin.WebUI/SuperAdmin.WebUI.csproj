@@ -973,8 +973,6 @@
     <Content Include="js\hubspot-messenger\js\messenger-theme-flat.js" />
     <Content Include="js\hubspot-messenger\js\messenger-theme-future.js" />
     <Content Include="js\hubspot-messenger\js\messenger.min.js" />
-    <Content Include="js\image-picker\image-picker.css" />
-    <Content Include="js\image-picker\image-picker.min.js" />
     <Content Include="js\inbox.js" />
     <Content Include="js\isotope\imagesloaded.pkgd.min.js" />
     <Content Include="js\isotope\jquery.isotope.min.js" />
