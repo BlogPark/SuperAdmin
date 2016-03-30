@@ -711,9 +711,9 @@ WHERE   ID = 1";
         {
             StringBuilder strSql = new StringBuilder();
             strSql.Append("insert into dbo.WebModule(");
-            strSql.Append("ModuleName,ModuleDescription,ModuleWidth,ModuleHeight,ModuleStatus,AddUserID,AddUserName,AddTime");
+            strSql.Append("ModuleName,ModuleDescription,ModuleWidth,ModuleHeight,ModuleStatus,AddUserID,AddUserName,AddTime,ModuleCode,ModuleImg");
             strSql.Append(") values (");
-            strSql.Append("@ModuleName,@ModuleDescription,@ModuleWidth,@ModuleHeight,@ModuleStatus,@AddUserID,@AddUserName,GETDATE()");
+            strSql.Append("@ModuleName,@ModuleDescription,@ModuleWidth,@ModuleHeight,@ModuleStatus,@AddUserID,@AddUserName,GETDATE(),@ModuleCode,@ModuleImg");
             strSql.Append(") ");
             SqlParameter[] parameters = {
 			            new SqlParameter("@ModuleName", SqlDbType.NVarChar,50) ,            
@@ -722,7 +722,9 @@ WHERE   ID = 1";
                         new SqlParameter("@ModuleHeight", SqlDbType.Int,4) ,            
                         new SqlParameter("@ModuleStatus", SqlDbType.Int,4) ,            
                         new SqlParameter("@AddUserID", SqlDbType.Int,4) ,            
-                        new SqlParameter("@AddUserName", SqlDbType.NVarChar,50) 
+                        new SqlParameter("@AddUserName", SqlDbType.NVarChar,50) ,
+                        new SqlParameter("@ModuleCode",SqlDbType.NVarChar),
+                        new SqlParameter("@ModuleImg",SqlDbType.NVarChar)
             };
             parameters[0].Value = model.ModuleName;
             parameters[1].Value = model.ModuleDescription;
@@ -731,6 +733,8 @@ WHERE   ID = 1";
             parameters[4].Value = model.ModuleStatus;
             parameters[5].Value = model.AddUserID;
             parameters[6].Value = model.AddUserName;
+            parameters[7].Value = model.ModuleCode;
+            parameters[8].Value = model.ModuleImg;
 
             int rowcount = helper.ExecuteSql(strSql.ToString(), parameters);
             return rowcount;

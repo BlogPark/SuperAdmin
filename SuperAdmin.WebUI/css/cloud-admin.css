@@ -12810,3 +12810,17 @@ ul.stats
         background: #0076ff;
         text-decoration: none;
     }
+/*添加模块页面图片选中状态*/
+.webimg
+{
+    border: 1px solid;
+    margin: 5px;
+    padding: 2px;
+}
+.webimgfouce
+{
+    background-color:red;
+    border: 1px solid;
+    margin: 5px;
+    padding: 2px;
+}

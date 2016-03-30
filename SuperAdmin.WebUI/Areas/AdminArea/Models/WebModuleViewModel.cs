@@ -26,5 +26,10 @@ namespace SuperAdmin.WebUI.Areas.AdminArea.Models
         /// </summary>
         [DataMember]
         public WebModuleModel updatemodel { get; set; }
+        /// <summary>
+        /// 网站图片分类
+        /// </summary>
+        [DataMember]
+        public List<PicCategoryModel> PicCategory { get; set; }
     }
 }

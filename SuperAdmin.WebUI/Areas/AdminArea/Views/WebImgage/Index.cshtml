@@ -26,7 +26,6 @@
                                 <select class="form-control" id="catelist">
                                     @foreach (var item in Model.categories)
                                     {
-
                                         <option value="@item.ID">@item.PiccName</option>
                                     }
                                 </select>
@@ -284,16 +283,7 @@
                         $("#erradpic").html(msg);
                     }
                 }
-            });
-           
-            $('.filter-content').hover(function () {
-                var hoverContent = $(this).children('.hover-content');
-                hoverContent.removeClass('fadeOut').addClass('animated fadeIn').show();
-            }, function () {
-                var hoverContent = $(this).children('.hover-content');
-                hoverContent.removeClass('fadeIn').addClass('fadeOut');
-            });
-            $('.colorbox-button').colorbox({ rel: 'colorbox-button', maxWidth: '95%', maxHeight: '95%' });            
+            });               
             $("#addmodel_PicCateID").val($("#catelist").val());
             $("#addmodel_PicCateName").val($("#catelist").find("option:selected").text());
             $("#catelist").change(function () {

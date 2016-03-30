@@ -284,7 +284,7 @@ namespace SuperAdmin.DataDAL
             StringBuilder strSql = new StringBuilder();
             strSql.Append("select ID, AddTime, PicCateID, PicCateName, PicName, PicTags, PicUrl, PicWidth, PicHeight, PicStatus, AddUserID, AddUserName");
             strSql.Append("  from WebSiteImage ");
-            strSql.Append(" WHERE PicStatus＝１ AND  PicCateID="+cateid.ToString());
+            strSql.Append(" WHERE PicStatus=1 AND  PicCateID="+cateid.ToString());
             if (!string.IsNullOrWhiteSpace(name))
             {
                 strSql.Append(" AND PicName like '%" + name + "%'");

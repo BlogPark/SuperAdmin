@@ -65,7 +65,9 @@ namespace SuperAdmin.WebUI.Areas.AdminArea.Controllers
         /// <returns></returns>
         public ActionResult AddModule()
         {
-            return View();
+            AddModuleViewModel model = new AddModuleViewModel();
+            model.picCategory = bll.GetWebImageCatelist();
+            return View(model);
         }
         /// <summary>
         /// 添加网页位置
@@ -129,12 +131,17 @@ namespace SuperAdmin.WebUI.Areas.AdminArea.Controllers
             }
             return RedirectToAction("WebMenu", "FrontSetting", new { area = "AdminArea" });
         }
-
-        [HttpGet]
-        public ActionResult GetwebImglist(string name,string tags)
+        /// <summary>
+        /// 根据条件查询得到的图片
+        /// </summary>
+        /// <param name="name"></param>
+        /// <param name="cateids"></param>
+        /// <returns></returns>
+        [HttpPost]
+        public ActionResult GetwebImglist(string name,int  cateids)
         {
-
-            return Json("");
+            List<WebSiteImageModel> imagelist = bll.GetImageList(name,cateids);           
+            return Json(imagelist);
         }
     }
 }

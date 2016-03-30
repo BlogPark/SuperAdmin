@@ -13,7 +13,7 @@ namespace SuperAdmin.DataBLL
     /// </summary>
     public class SystemSettingsBll
     {
-        public SystemSettings dal = new SystemSettings();
+        private SystemSettings dal = new SystemSettings();
         private WebSiteImageDal imagedal = new WebSiteImageDal();
         /// <summary>
         /// 得到所有的系统用户
