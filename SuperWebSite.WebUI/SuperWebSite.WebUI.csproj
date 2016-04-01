@@ -532,6 +532,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Properties\PublishProfiles\superwebsite.pubxml" />
+    <Content Include="Views\DivisionArea\DefaultFooter.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

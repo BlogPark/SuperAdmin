@@ -89,6 +89,13 @@ namespace SuperWebSite.WebUI.Controllers
         {
             return View();
         }
-       
+        /// <summary>
+        /// 公用footer
+        /// </summary>
+        /// <returns></returns>
+        public ActionResult DefaultFooter()
+        {
+            return View();
+        }
     }
 }
