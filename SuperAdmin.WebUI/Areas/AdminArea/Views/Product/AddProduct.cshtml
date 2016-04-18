@@ -84,7 +84,7 @@
 
                         <div class="form-group">
                             <label class="col-sm-3 control-label">产品主图</label>
-                            <div class="col-sm-7">
+                            <div class="col-sm-6">
                                 <div class="col-lg-5">
                                     <img id="adpic" height="120" width="200" src="/img/fileupload-default.jpg" class="pull-left">
                                 </div>
@@ -101,8 +101,8 @@
                         </div>
 
                         <div class="form-group">
-                            <label class="col-sm-3 control-label">文章内容</label>
-                            <div class="col-sm-7" id="procates">
+                            <label class="col-sm-3 control-label">产品属性</label>
+                            <div class="col-sm-8" id="procates">
                                 <input type="hidden" id="cateindex" value="0" />
                                 <div role="form" class="form-inline">
                                     <div class="form-sub-group">                                        
@@ -111,6 +111,9 @@
                                     <div class="form-sub-group">                                        
                                         <input type="text" placeholder="属性值" id="product_AttrLists_0_AttrValue" name="product.AttrLists[0].AttrValue" class="form-control">
                                     </div>
+                                    <div class="form-sub-group">
+                                        <input type="text" placeholder="备注" id="product_AttrLists_0_descript" name="product.AttrLists[0].descript" class="form-control">
+                                    </div>                                    
                                     <a class="btn btn-success" onclick='addcateitem()'>继续添加</a>
                                 </div>                                
                             </div>
@@ -182,7 +185,7 @@
         function addcateitem()
         {
             var index = parseInt($("#cateindex").val())+1;
-            var str = "<div role='form' class='form-inline'><div class='form-sub-group'><input type='text' placeholder='属性名称' id='product_AttrLists_" + index + "_AttrKey' name='product.AttrLists[" + index + "].AttrKey' class='form-control'></div><div class='form-sub-group'><input type='text' placeholder='属性值' id='product_AttrLists_" + index + "_AttrValue' name='product.AttrLists[" + index + "].AttrValue' class='form-control'></div><a class='btn btn-success' onclick='addcateitem()' >继续添加</a></div>";
+            var str = "<div role='form' class='form-inline'><div class='form-sub-group'><input type='text' placeholder='属性名称' id='product_AttrLists_" + index + "_AttrKey' name='product.AttrLists[" + index + "].AttrKey' class='form-control'></div><div class='form-sub-group'><input type='text' placeholder='属性值' id='product_AttrLists_" + index + "_AttrValue' name='product.AttrLists[" + index + "].AttrValue' class='form-control'></div><div class='form-sub-group'><input type='text' placeholder='备注' id='product_AttrLists_" + index + "_descript' name='product.AttrLists[" + index + "].descript' class='form-control'></div></div>";
             $(str).appendTo("#procates");
             $("#cateindex").val(index);
         }
