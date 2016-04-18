@@ -49,6 +49,7 @@
     <Compile Include="FArticleOperateBll.cs" />
     <Compile Include="FDivisionAreaBll.cs" />
     <Compile Include="MemberOperaBll.cs" />
+    <Compile Include="ProductAttributesBll.cs" />
     <Compile Include="ProductCategoryBll.cs" />
     <Compile Include="ProductInfoBll.cs" />
     <Compile Include="ProductSpecBll.cs" />

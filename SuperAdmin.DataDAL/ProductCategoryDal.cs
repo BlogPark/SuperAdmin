@@ -124,11 +124,15 @@ namespace SuperAdmin.DataDAL
         /// <summary>
         /// 得到全部对象实体
         /// </summary>
-        public List<ProductCategoryModel> GetAllModel()
+        public List<ProductCategoryModel> GetAllModel(int isuse=0)
         {
             StringBuilder strSql = new StringBuilder();
             strSql.Append("select ID, CateName, CateStatus, AddUserID, AddUserName, AddTime, CateDescription  ");
             strSql.Append("  from ProductCategory ");
+            if (isuse == 1)
+            {
+                strSql.Append("  where CateStatus=1 ");
+            }
             List<ProductCategoryModel> list = new List<ProductCategoryModel>();
             DataSet ds = helper.Query(strSql.ToString());
             if (ds.Tables[0].Rows.Count > 0)

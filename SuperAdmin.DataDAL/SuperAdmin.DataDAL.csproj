@@ -51,6 +51,7 @@
     <Compile Include="ArticleOperate.cs" />
     <Compile Include="DbHelperSQL.cs" />
     <Compile Include="MemberOpera.cs" />
+    <Compile Include="ProductAttributesDal.cs" />
     <Compile Include="ProductCategoryDal.cs" />
     <Compile Include="ProductInfoDal.cs" />
     <Compile Include="ProductSpecDal.cs" />

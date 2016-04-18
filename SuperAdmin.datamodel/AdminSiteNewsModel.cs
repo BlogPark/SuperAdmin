@@ -11,6 +11,7 @@ namespace SuperAdmin.datamodel
     [DataContract]
     public class AdminSiteNewsModel
     {
+        #region 原表字段
         /// <summary>
         /// 自增主键
         /// </summary>       
@@ -65,6 +66,7 @@ namespace SuperAdmin.datamodel
         /// 是否置顶
         /// </summary>       
         [DataMember]
-        public int IsTop { get; set; }
+        public int IsTop { get; set; } 
+        #endregion
     }
 }

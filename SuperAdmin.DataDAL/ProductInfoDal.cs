@@ -134,7 +134,6 @@ namespace SuperAdmin.DataDAL
         /// </summary>
         public ProductInfoModel GetSingleModel(int ID)
         {
-
             StringBuilder strSql = new StringBuilder();
             strSql.Append("select ID, ProductCoverImg, ProductStatus, AddUserID, AddUserName, AddTime, ProductName, ProductSpecID, ProductSpecName, ProductAttributeIDs, ProductCostPrice, ProductStandardPrice, ProductSalePrice, ProductDescription,ProductCateID,ProductCateName  ");
             strSql.Append("  from ProductInfo ");

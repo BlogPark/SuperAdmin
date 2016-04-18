@@ -35,9 +35,9 @@ namespace SuperAdmin.DataBLL
         /// <summary>
         /// 得到全部对象实体
         /// </summary>
-        public List<ProductCategoryModel> GetAllModel()
+        public List<ProductCategoryModel> GetAllModel(int isuse = 0)
         {
-            return dal.GetAllModel();
+            return dal.GetAllModel(isuse);
         }
     }
 }

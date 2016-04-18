@@ -7,6 +7,9 @@ using System.Threading.Tasks;
 
 namespace SuperAdmin.datamodel
 {
+    /// <summary>
+    /// 产品分类
+    /// </summary>
     [Serializable]
     [DataContract]
     public class ProductCategoryModel

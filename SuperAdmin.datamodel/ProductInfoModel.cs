@@ -95,6 +95,17 @@ namespace SuperAdmin.datamodel
         /// </summary>       
         [DataMember]
         public string ProductCateName { get; set; }
+        /// <summary>
+        /// 产品详细描述
+        /// </summary>
+        [DataMember]
+        public string ProductContent { get; set; }
         #endregion
+
+        /// <summary>
+        /// 产品属性列表
+        /// </summary>
+        [DataMember]
+        public List<ProductSimpleAttr> AttrLists { get; set; }
     }
 }

@@ -128,6 +128,7 @@
     <Compile Include="Areas\AdminArea\Controllers\WebNewsController.cs" />
     <Compile Include="Areas\AdminArea\Models\AddArticleViewModel.cs" />
     <Compile Include="Areas\AdminArea\Models\AddModuleViewModel.cs" />
+    <Compile Include="Areas\AdminArea\Models\AddProductViewModel.cs" />
     <Compile Include="Areas\AdminArea\Models\ArticleCategoryViewModel.cs" />
     <Compile Include="Areas\AdminArea\Models\ArticleIndexViewModel.cs" />
     <Compile Include="Areas\AdminArea\Models\MemberViewModel.cs" />

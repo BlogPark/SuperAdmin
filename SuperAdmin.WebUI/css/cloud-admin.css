@@ -2705,13 +2705,23 @@ textarea.input-lg
 
 @media (min-width: 768px)
 {
+     .form-inline 
+    {
+        margin-bottom: 10px;
+    }
     .form-inline .form-group
     {
         display: inline-block;
         margin-bottom: 0;
         vertical-align: middle;
     }
-
+    .form-inline .form-sub-group
+    {
+        display: inline-block;
+        margin-bottom: 0;
+        margin-right: 15px;
+        vertical-align: middle;
+    }
     .form-inline .form-control
     {
         display: inline-block;

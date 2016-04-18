@@ -11,12 +11,25 @@ namespace SuperAdmin.DataBLL
     public class ProductInfoBll
     {
         ProductInfoDal dal = new ProductInfoDal();
+        ProductAttributesBll proattr = new ProductAttributesBll();
         /// <summary>
         /// 增加一条数据
         /// </summary>
         public int AddProduct(ProductInfoModel model)
         {
-            return dal.AddProduct(model);
+           int productid= dal.AddProduct(model);
+           if (productid > 0)
+           {
+               bool success = proattr.AddList(productid,model.AttrLists);
+               if (success)
+                   return 1;
+               else
+                   return 0;
+           }
+           else
+           {
+               return 0;
+           }
         }
         /// <summary>
         /// 更新一条数据
