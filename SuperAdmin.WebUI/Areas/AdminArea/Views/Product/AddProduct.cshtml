@@ -32,7 +32,7 @@
                 <div class="col-md-12">
                     <div class="box border green" id="formWizard">
                         @using (Html.BeginForm("AddProduct", "Product", new { area = "AdminArea" }, FormMethod.Post, new { @id = "wizForm", @class = "form-horizontal" }))
-                        {                        
+                        {
                             <div class="wizard-form">
                                 <div class="wizard-content">
                                     <ul class="nav nav-pills nav-justified steps">
@@ -161,7 +161,6 @@
                                                     @Html.HiddenFor(m => m.product.ProductCoverImg)
                                                 </div>
                                             </div>
-
                                             <div class="form-group">
                                                 <label class="col-sm-3 control-label">产品副图</label>
                                                 <div class="col-sm-7">
@@ -189,13 +188,13 @@
                                                     @Html.HiddenFor(m => m.product.ProductSmallPic)
                                                 </div>
                                             </div>
-
                                         </div>
                                         <div class="tab-pane" id="confirm">
                                             <div class="form-group">
                                                 <label class="col-sm-3 control-label">产品描述</label>
                                                 <div class="col-sm-7">
-                                                    <script type="text/plain" id="producteditor"></script>
+                                                    <script type="text/plain" id="producteditor">
+                                                    </script>
                                                     @Html.HiddenFor(m => m.product.ProductContent)
                                                 </div>
                                             </div>
@@ -207,11 +206,13 @@
                                         <div class="col-md-12">
                                             <div class="col-md-offset-3 col-md-9">
                                                 <a href="javascript:;" class="btn btn-default prevBtn">
-                                                    <i class="fa fa-arrow-circle-left"></i>上一步 
+                                                    <i class="fa fa-arrow-circle-left"></i>上一步
                                                 </a>
-                                                <a href="javascript:;" class="btn btn-primary nextBtn">下一步 <i class="fa fa-arrow-circle-right"></i>
+                                                <a href="javascript:;" class="btn btn-primary nextBtn">
+                                                    下一步 <i class="fa fa-arrow-circle-right"></i>
                                                 </a>
-                                                <button type="submit" class="btn btn-success submitBtn">提 交 <i class="fa fa-arrow-circle-right"></i>
+                                                <button type="submit" class="btn btn-success submitBtn">
+                                                    提 交 <i class="fa fa-arrow-circle-right"></i>
                                                 </button>
                                             </div>
                                         </div>
@@ -234,12 +235,13 @@
     <link rel="stylesheet" type="text/css" href="@Url.Content("/js/uniform/css/uniform.default.min.css")" />
 }
 @section scriptfiles{
-    <script src="@Url.Content("/js/jquery-upload/js/vendor/jquery.ui.widget.js")"></script>
-    <script src="@Url.Content("/js/jquery-upload/js/jquery.iframe-transport.js")"></script>
-    <script src="@Url.Content("/js/jquery-upload/js/jquery.fileupload.js")"></script>
     <script type="text/javascript" src="@Url.Content("/ueditor/ueditor.config.js")"></script>
     <script type="text/javascript" src="@Url.Content("/ueditor/ueditor.all.min.js")"></script>
     <script type="text/javascript" src="@Url.Content("/ueditor/lang/zh-cn/zh-cn.js")"></script>
+    <script src="@Url.Content("/js/jquery-upload/js/vendor/jquery.ui.widget.js")"></script>
+    <script src="@Url.Content("/js/jquery-upload/js/jquery.iframe-transport.js")"></script>
+    <script src="@Url.Content("/js/jquery-upload/js/jquery.fileupload.js")"></script>
+
     <!-- SELECT2 -->
     <script type="text/javascript" src="@Url.Content("/js/select2/select2.min.js")"></script>
     <!-- UNIFORM -->
@@ -260,7 +262,7 @@
     <script type="text/javascript">
         $(function () {
             App.init(); //Initialise plugins and elements
-            FormWizard.init();
+
             $("#fileupload").fileupload({
                 dataType: 'json',
                 type: "POST",
@@ -296,7 +298,7 @@
                     if (ustatus) {
                         $("#erradpic").hide();
                         $("#adsmallpic" + indeximg).attr("src", urlpath);
-                        var fullpath = $("#product_ProductSmallPic").val() + path+";";
+                        var fullpath = $("#product_ProductSmallPic").val() + path + ";";
                         $("#product_ProductSmallPic").val(fullpath);
                         indeximg = indeximg + 1;
                         $("#indeximg").val(indeximg);
@@ -306,14 +308,15 @@
                         $("#erradpic").html(msg);
                     }
                 }
-            });           
+            });
             var ue = UE.getEditor('producteditor', UE.utils.extend({
                 toolbars: [['source', '|', 'bold', 'italic', 'underline', 'fontborder', 'strikethrough', 'superscript', 'subscript', '|', 'fontsize', '|', 'directionalityltr', 'directionalityrtl', 'indent', '|', 'justifyleft', 'justifycenter', 'justifyright', 'justifyjustify', '|', 'simpleupload']]
-       , zIndex: 0, initialFrameHeight: 640
+       , zIndex: 0, initialFrameHeight: 640, enableAutoSave: false
             }, null, true));
             ue.addListener("contentChange", function (type, mode) {
                 $("#product_ProductContent").val(ue.getContent());
             });
+            FormWizard.init();
             $("#product_ProductCateID").val($("#catelist").val());
             $("#product_ProductCateName").val($("#catelist").find("option:selected").text());
             $("#catelist").change(function () {
