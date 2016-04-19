@@ -66,5 +66,29 @@ namespace SuperAdmin.WebUI.Areas.AdminArea.Controllers
             ViewBag.PageTitle = "添加产品";
             return View(model);
         }
+        /// <summary>
+        /// 添加产品
+        /// </summary>
+        /// <returns></returns>
+        public ActionResult AddProduct2()
+        {
+            AddProductViewModel model = new AddProductViewModel();
+            model.categories = catebll.GetAllModel(1);
+            ViewBag.PageTitle = "添加产品";
+            return View(model);
+        }
+        /// <summary>
+        /// 添加产品
+        /// </summary>
+        /// <returns></returns>
+        [HttpPost]
+        public ActionResult AddProduct(ProductInfoModel product)
+        {
+            int k = 0;
+            AddProductViewModel model = new AddProductViewModel();
+            model.categories = catebll.GetAllModel(1);
+            ViewBag.PageTitle = "添加产品";
+            return View(model);
+        }
     }
 }

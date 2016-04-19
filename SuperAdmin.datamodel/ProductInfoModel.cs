@@ -100,6 +100,11 @@ namespace SuperAdmin.datamodel
         /// </summary>
         [DataMember]
         public string ProductContent { get; set; }
+        /// <summary>
+        /// 产品副图
+        /// </summary>
+        [DataMember]
+        public string ProductSmallPic { get; set; }
         #endregion
 
         /// <summary>

@@ -1776,7 +1776,7 @@
     <Content Include="Areas\AdminArea\Views\Product\productcategory.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Areas\AdminArea\Views\Product\AddProduct.cshtml" />
+    <Content Include="Areas\AdminArea\Views\Product\AddProduct2.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Areas\AdminArea\Views\Article\ArticleCategory.cshtml" />
@@ -1789,6 +1789,9 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\IndexPub\mytest.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\AdminArea\Views\Product\AddProduct.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
