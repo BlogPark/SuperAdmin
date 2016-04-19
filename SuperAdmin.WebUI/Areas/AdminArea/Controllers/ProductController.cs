@@ -6,6 +6,8 @@ using System.Web.Mvc;
 using SuperAdmin.DataBLL;
 using SuperAdmin.datamodel;
 using SuperAdmin.WebUI.Areas.AdminArea.Models;
+using SuperAdmin.WebUI.Controllers;
+using SuperAdmin.WebUI.Models;
 
 namespace SuperAdmin.WebUI.Areas.AdminArea.Controllers
 {
@@ -16,6 +18,7 @@ namespace SuperAdmin.WebUI.Areas.AdminArea.Controllers
 
         #region 变量声明
         private ProductCategoryBll catebll = new ProductCategoryBll();
+        private ProductInfoBll bll = new ProductInfoBll();
         #endregion
         /// <summary>
         ///  产品管理首页
@@ -82,9 +85,21 @@ namespace SuperAdmin.WebUI.Areas.AdminArea.Controllers
         /// </summary>
         /// <returns></returns>
         [HttpPost]
+        [ValidateInput(false)]
         public ActionResult AddProduct(ProductInfoModel product)
         {
-            int k = 0;
+            SessionLoginModel user = Session[AppContext.SESSION_LOGIN_NAME] as SessionLoginModel;
+            if (user == null)
+            {
+                return RedirectToAction("Index", "Login", new { area = "" });
+            }
+            if (product != null)
+            {
+                product.AddUserID = user.User.ID;
+                product.AddUserName = user.User.UserName;
+                product.ProductStatus = 1;
+                int rowcount = bll.AddProduct(product);
+            }
             AddProductViewModel model = new AddProductViewModel();
             model.categories = catebll.GetAllModel(1);
             ViewBag.PageTitle = "添加产品";

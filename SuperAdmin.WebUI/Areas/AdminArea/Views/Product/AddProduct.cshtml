@@ -105,7 +105,7 @@
                                             <div class="form-group">
                                                 <label class="control-label col-md-3">产品分类</label>
                                                 <div class="col-md-2">
-                                                    <select class="form-control" id="typelist">
+                                                    <select class="form-control" id="catelist">
                                                         @foreach (var item in Model.categories)
                                                         {
                                                             <option value="@item.ID">@item.CateName</option>
@@ -116,7 +116,7 @@
                                                 </div>
                                             </div>
                                             <div class="form-group">
-                                                <label class="control-label col-md-3">产品描述</label>
+                                                <label class="control-label col-md-3">产品简介</label>
                                                 <div class="col-md-5">
                                                     @Html.TextAreaFor(m => m.product.ProductDescription, new { @row = "4", @placeholder = "产品描述", @class = "form-control" })
                                                     <span class="error-span"></span>
@@ -306,7 +306,7 @@
                         $("#erradpic").html(msg);
                     }
                 }
-            });
+            });           
             var ue = UE.getEditor('producteditor', UE.utils.extend({
                 toolbars: [['source', '|', 'bold', 'italic', 'underline', 'fontborder', 'strikethrough', 'superscript', 'subscript', '|', 'fontsize', '|', 'directionalityltr', 'directionalityrtl', 'indent', '|', 'justifyleft', 'justifycenter', 'justifyright', 'justifyjustify', '|', 'simpleupload']]
        , zIndex: 0, initialFrameHeight: 640
@@ -314,6 +314,15 @@
             ue.addListener("contentChange", function (type, mode) {
                 $("#product_ProductContent").val(ue.getContent());
             });
+            $("#product_ProductCateID").val($("#catelist").val());
+            $("#product_ProductCateName").val($("#catelist").find("option:selected").text());
+            $("#catelist").change(function () {
+                var changetext = $("#catelist").find("option:selected").text();
+                var changeval = $("#catelist").val();
+                $("#product_ProductCateID").val(changeval);
+                $("#product_ProductCateName").val(changetext);
+            });
+            $('#wizForm').reset();
         });
         function addcateitem() {
             var index = parseInt($("#cateindex").val()) + 1;

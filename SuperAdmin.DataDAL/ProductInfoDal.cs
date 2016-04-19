@@ -22,9 +22,9 @@ namespace SuperAdmin.DataDAL
         {
             StringBuilder strSql = new StringBuilder();
             strSql.Append("insert into ProductInfo(");
-            strSql.Append("ProductCoverImg,ProductStatus,AddUserID,AddUserName,AddTime,ProductName,ProductSpecID,ProductSpecName,ProductAttributeIDs,ProductCostPrice,ProductStandardPrice,ProductSalePrice,ProductDescription,ProductCateID,ProductCateName");
+            strSql.Append("ProductCoverImg,ProductStatus,AddUserID,AddUserName,AddTime,ProductName,ProductSpecID,ProductSpecName,ProductAttributeIDs,ProductCostPrice,ProductStandardPrice,ProductSalePrice,ProductDescription,ProductCateID,ProductCateName,ProductSmallPic,ProductContent");
             strSql.Append(") values (");
-            strSql.Append("@ProductCoverImg,@ProductStatus,@AddUserID,@AddUserName,GETDATE(),@ProductName,@ProductSpecID,@ProductSpecName,@ProductAttributeIDs,@ProductCostPrice,@ProductStandardPrice,@ProductSalePrice,@ProductDescription,@ProductCateID,@ProductCateName");
+            strSql.Append("@ProductCoverImg,@ProductStatus,@AddUserID,@AddUserName,GETDATE(),@ProductName,@ProductSpecID,@ProductSpecName,@ProductAttributeIDs,@ProductCostPrice,@ProductStandardPrice,@ProductSalePrice,@ProductDescription,@ProductCateID,@ProductCateName,@ProductSmallPic,@ProductContent");
             strSql.Append(") ");
             strSql.Append(";select @@IDENTITY");
             SqlParameter[] parameters = {
@@ -41,7 +41,9 @@ namespace SuperAdmin.DataDAL
                         new SqlParameter("@ProductSalePrice", SqlDbType.Decimal,9) ,            
                         new SqlParameter("@ProductDescription", SqlDbType.NVarChar,500) , 
                          new SqlParameter("@ProductCateID", SqlDbType.Int) ,
-                          new SqlParameter("@ProductCateName", SqlDbType.NVarChar) 
+                          new SqlParameter("@ProductCateName", SqlDbType.NVarChar),
+                          new SqlParameter("@ProductSmallPic",SqlDbType.NVarChar),
+                          new SqlParameter("@ProductContent",SqlDbType.NVarChar)
             };
 
             parameters[0].Value = model.ProductCoverImg;
@@ -58,6 +60,8 @@ namespace SuperAdmin.DataDAL
             parameters[11].Value = model.ProductDescription;
             parameters[12].Value = model.ProductCateID;
             parameters[13].Value = model.ProductCateName;
+            parameters[14].Value = model.ProductSmallPic;
+            parameters[15].Value = model.ProductContent;
             object obj = helper.GetSingle(strSql.ToString(), parameters);
             if (obj == null)
             {
