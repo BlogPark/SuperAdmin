@@ -51,5 +51,10 @@ namespace SuperAdmin.datamodel
         [DataMember]
         public string CateDescription { get; set; }
         #endregion
+        /// <summary>
+        /// 状态名称
+        /// </summary>
+        [DataMember]
+        public string CateStatusName { get; set; }
     }
 }

@@ -39,5 +39,12 @@ namespace SuperAdmin.DataBLL
         {
             return dal.GetAllModel(isuse);
         }
+        /// <summary>
+        /// 删除一条数据
+        /// </summary>
+        public bool DeleteProductCategory(int cateid)
+        {
+            return dal.DeleteProductCategory(cateid);
+        }
     }
 }

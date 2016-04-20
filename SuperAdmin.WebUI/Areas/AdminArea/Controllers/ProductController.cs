@@ -54,6 +54,7 @@ namespace SuperAdmin.WebUI.Areas.AdminArea.Controllers
         public ActionResult productcategory()
         {
             productcategoryViewModel model = new productcategoryViewModel();
+            model.catelists = catebll.GetAllModel();
             ViewBag.PageTitle = "类别管理";
             return View(model);
         }
@@ -70,7 +71,7 @@ namespace SuperAdmin.WebUI.Areas.AdminArea.Controllers
             return View(model);
         }
         /// <summary>
-        /// 添加产品
+        /// 添加产品（测试）
         /// </summary>
         /// <returns></returns>
         public ActionResult AddProduct2()
@@ -104,6 +105,28 @@ namespace SuperAdmin.WebUI.Areas.AdminArea.Controllers
             model.categories = catebll.GetAllModel(1);
             ViewBag.PageTitle = "添加产品";
             return View(model);
+        }
+        /// <summary>
+        /// 禁用一条数据
+        /// </summary>
+        /// <param name="cateid"></param>
+        /// <returns></returns>
+        [HttpPost]
+        public ActionResult DeleteCate(int cateid)
+        {
+            if (cateid < 1)
+            {
+                return Json("0");
+            }
+            bool success = catebll.DeleteProductCategory(cateid);
+            if (success)
+            {
+                return Json("1");
+            }
+            else
+            {
+                return Json("0");
+            }
         }
     }
 }

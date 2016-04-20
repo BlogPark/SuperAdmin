@@ -79,6 +79,30 @@ namespace SuperAdmin.DataDAL
             }
         }
         /// <summary>
+        /// 删除一条数据
+        /// </summary>
+        public bool DeleteProductCategory(int cateid)
+        {
+            StringBuilder strSql = new StringBuilder();
+            strSql.Append("update ProductCategory set ");
+            strSql.Append(" CateStatus = 0 ");
+            strSql.Append(" where ID=@ID ");
+
+            SqlParameter[] parameters = {
+			            new SqlParameter("@ID", SqlDbType.Int)
+            };
+            parameters[0].Value = cateid;
+            int rows = helper.ExecuteSql(strSql.ToString(), parameters);
+            if (rows > 0)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+        /// <summary>
         /// 得到一个对象实体
         /// </summary>
         public ProductCategoryModel GetSingleModel(int ID)
@@ -127,7 +151,7 @@ namespace SuperAdmin.DataDAL
         public List<ProductCategoryModel> GetAllModel(int isuse=0)
         {
             StringBuilder strSql = new StringBuilder();
-            strSql.Append("select ID, CateName, CateStatus, AddUserID, AddUserName, AddTime, CateDescription  ");
+            strSql.Append("select ID, CateName, CateStatus, AddUserID, AddUserName, AddTime, CateDescription,Case CateStatus when 1 then '启用' when 0 then '禁用' end as  CateStatusName ");
             strSql.Append("  from ProductCategory ");
             if (isuse == 1)
             {
@@ -140,25 +164,26 @@ namespace SuperAdmin.DataDAL
                 foreach (DataRow item in ds.Tables[0].Rows)
                 {
                     ProductCategoryModel model = new ProductCategoryModel();
-                    if (ds.Tables[0].Rows[0]["ID"].ToString() != "")
+                    if (item["ID"].ToString() != "")
                     {
-                        model.ID = int.Parse(ds.Tables[0].Rows[0]["ID"].ToString());
+                        model.ID = int.Parse(item["ID"].ToString());
                     }
-                    model.CateName = ds.Tables[0].Rows[0]["CateName"].ToString();
-                    if (ds.Tables[0].Rows[0]["CateStatus"].ToString() != "")
+                    model.CateName = item["CateName"].ToString();
+                    if (item["CateStatus"].ToString() != "")
                     {
-                        model.CateStatus = int.Parse(ds.Tables[0].Rows[0]["CateStatus"].ToString());
+                        model.CateStatus = int.Parse(item["CateStatus"].ToString());
                     }
-                    if (ds.Tables[0].Rows[0]["AddUserID"].ToString() != "")
+                    if (item["AddUserID"].ToString() != "")
                     {
-                        model.AddUserID = int.Parse(ds.Tables[0].Rows[0]["AddUserID"].ToString());
+                        model.AddUserID = int.Parse(item["AddUserID"].ToString());
                     }
-                    model.AddUserName = ds.Tables[0].Rows[0]["AddUserName"].ToString();
-                    if (ds.Tables[0].Rows[0]["AddTime"].ToString() != "")
+                    model.AddUserName = item["AddUserName"].ToString();
+                    if (item["AddTime"].ToString() != "")
                     {
-                        model.AddTime = DateTime.Parse(ds.Tables[0].Rows[0]["AddTime"].ToString());
+                        model.AddTime = DateTime.Parse(item["AddTime"].ToString());
                     }
-                    model.CateDescription = ds.Tables[0].Rows[0]["CateDescription"].ToString();
+                    model.CateDescription = item["CateDescription"].ToString();
+                    model.CateStatusName = item["CateStatusName"].ToString();
                     list.Add(model);
                 }
             }
