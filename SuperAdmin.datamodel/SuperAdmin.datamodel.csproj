@@ -45,6 +45,7 @@
     <Compile Include="ArticlesModel.cs" />
     <Compile Include="ArticleTagsModel.cs" />
     <Compile Include="MemberInfoModel.cs" />
+    <Compile Include="PageProModel.cs" />
     <Compile Include="PicCategoryModel.cs" />
     <Compile Include="ProductAttributesModel.cs" />
     <Compile Include="ProductCategoryModel.cs" />

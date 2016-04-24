@@ -56,6 +56,7 @@
     <Compile Include="ProductInfoDal.cs" />
     <Compile Include="ProductSpecDal.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="PublicHelperDal.cs" />
     <Compile Include="SysAdManager.cs" />
     <Compile Include="SysMenuAndUser.cs" />
     <Compile Include="SysNoticeMessageDal.cs" />

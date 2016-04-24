@@ -1,4 +1,5 @@
-﻿@model SuperAdmin.WebUI.Areas.AdminArea.Models.ProductIndexViewModel
+﻿@using Webdiyer.WebControls.Mvc
+@model SuperAdmin.WebUI.Areas.AdminArea.Models.ProductIndexViewModel
 @{
     Layout = "~/Views/_Layout.cshtml";
 }
@@ -18,11 +19,11 @@
                             <li>
                                 <a href="#">产品管理</a>
                             </li>
-                            <li>类别管理</li>
+                            <li>产品管理</li>
                         </ul>
                         <!-- /BREADCRUMBS -->
                         <div class="clearfix">
-                            <h3 class="content-title pull-left">类别管理</h3>
+                            <h3 class="content-title pull-left">产品管理</h3>
                         </div>
                         <div class="description"></div>
                     </div>
@@ -44,27 +45,27 @@
                             <thead>
                                 <tr>
                                     <th class="text-center">类别编号</th>
-                                    <th class="text-center">分类名称</th>
-                                    <th class="text-center">分类描述</th>
+                                    <th class="text-center">产品名称</th>
+                                    <th class="text-center">产品描述</th>
                                     <th class="text-center">添加人</th>
                                     <th class="text-center">状        态</th>
                                     <th class="text-center">操        作</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach (var item in Model.catelists)
+                                @foreach (var item in Model.productlist)
                                 {
                                     <tr id="tr@(item.ID)" class="text-center">
                                         <td>@item.ID</td>
-                                        <td>@item.CateName</td>
-                                        <td>@item.CateDescription</td>
+                                        <td>@item.ProductName</td>
+                                        <td>@item.ProductDescription</td>
                                         <td>@item.AddUserName</td>
-                                        <td name="@(item.CateStatus)">
-                                            @item.CateStatusName
+                                        <td name="@(item.ProductStatus)">
+                                            @item.ProductStatus
                                         </td>
                                         <td>
                                             <p class="btn-toolbar">
-                                                @if (item.CateStatus == 1)
+                                                @if (item.ProductStatus == 1)
                                                 {
                                                     <button class="btn btn-danger" data-toggle="modal" onclick="delcate(@item.ID)" ><i class="fa fa-times-circle"></i>&nbsp; 禁 用</button>
                                                 }
@@ -75,8 +76,18 @@
                             </tbody>
                         </table>
                     </div>
+                    <div class="row center col-xs-12 mycss">
+                        @Html.Pager(Model.productlist, new PagerOptions { PageIndexParameterName = "page", ShowPageIndexBox = false, PageIndexBoxType = PageIndexBoxType.DropDownList, ShowGoButton = false })
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 </div>
+@section myscript{
+    <script type="text/javascript">
+        $(function () {
+            App.init(); //Initialise plugins and elements
+        });
+    </script>
+}

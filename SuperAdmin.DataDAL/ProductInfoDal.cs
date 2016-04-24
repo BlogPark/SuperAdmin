@@ -263,5 +263,93 @@ namespace SuperAdmin.DataDAL
             }
             return list;
         }
+        /// <summary>
+        /// 得到分页数据
+        /// </summary>
+        /// <param name="model"></param>
+        /// <param name="totalrowcount"></param>
+        /// <returns></returns>
+        public List<ProductInfoModel> GetProductListForPage(ProductInfoModel model, out int totalrowcount)
+        {
+            List<ProductInfoModel> list = new List<ProductInfoModel>();
+            string columms = @"ID,ProductName,ProductSpecID,ProductSpecName,ProductAttributeIDs,ProductCostPrice,ProductStandardPrice,ProductSalePrice,ProductDescription,ProductCoverImg,ProductStatus,AddUserID,AddUserName,AddTime,ProductCateID,ProductCateName,ProductContent,ProductSmallPic";
+            string where = "";
+            if (model != null)
+            {
+                if (model.ID > 0)
+                {
+                    where += "ID=" + model.ID;
+                }
+                if (!string.IsNullOrWhiteSpace(model.ProductName) && string.IsNullOrWhiteSpace(where))
+                {
+                    where += @" ProductName Like '%" + model.ProductName + "%'";
+                }
+                else if (!string.IsNullOrWhiteSpace(model.ProductName) && !string.IsNullOrWhiteSpace(where))
+                {
+                    where += @" AND ProductName Like '%" + model.ProductName + "%'";
+                }
+            }
+            PageProModel page = new PageProModel();
+            page.colums = columms;
+            page.orderby = "ID";
+            page.pageindex = model.PageIndex;
+            page.pagesize = model.PageSize;
+            page.tablename = @"dbo.ProductInfo";
+            page.where = where;
+            DataTable dt = PublicHelperDal.GetTable(page, out totalrowcount);
+            if (dt.Rows.Count > 0)
+            {
+                foreach (DataRow item in dt.Rows)
+                {
+                    ProductInfoModel promodel = new ProductInfoModel();
+                    if (item["ID"].ToString() != "")
+                    {
+                        promodel.ID = int.Parse(item["ID"].ToString());
+                    }
+                    model.ProductCoverImg = item["ProductCoverImg"].ToString();
+                    if (item["ProductStatus"].ToString() != "")
+                    {
+                        promodel.ProductStatus = int.Parse(item["ProductStatus"].ToString());
+                    }
+                    if (item["AddUserID"].ToString() != "")
+                    {
+                        promodel.AddUserID = int.Parse(item["AddUserID"].ToString());
+                    }
+                    promodel.AddUserName = item["AddUserName"].ToString();
+                    if (item["AddTime"].ToString() != "")
+                    {
+                        promodel.AddTime = DateTime.Parse(item["AddTime"].ToString());
+                    }
+                    promodel.ProductName = item["ProductName"].ToString();
+                    if (item["ProductSpecID"].ToString() != "")
+                    {
+                        promodel.ProductSpecID = int.Parse(item["ProductSpecID"].ToString());
+                    }
+                    promodel.ProductSpecName = item["ProductSpecName"].ToString();
+                    promodel.ProductAttributeIDs = item["ProductAttributeIDs"].ToString();
+                    if (item["ProductCostPrice"].ToString() != "")
+                    {
+                        promodel.ProductCostPrice = decimal.Parse(item["ProductCostPrice"].ToString());
+                    }
+                    if (item["ProductStandardPrice"].ToString() != "")
+                    {
+                        promodel.ProductStandardPrice = decimal.Parse(item["ProductStandardPrice"].ToString());
+                    }
+                    if (item["ProductSalePrice"].ToString() != "")
+                    {
+                        promodel.ProductSalePrice = decimal.Parse(item["ProductSalePrice"].ToString());
+                    }
+                    if (item["ProductCateID"].ToString() != "")
+                    {
+                        promodel.ProductCateID = int.Parse(item["ProductCateID"].ToString());
+                    }
+                    promodel.ProductDescription = item["ProductDescription"].ToString();
+                    promodel.ProductCateName = item["ProductCateName"].ToString();
+                    list.Add(promodel);
+                }
+            }
+            return list;
+
+        }
     }
 }

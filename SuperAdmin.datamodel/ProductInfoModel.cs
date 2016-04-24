@@ -112,5 +112,26 @@ namespace SuperAdmin.datamodel
         /// </summary>
         [DataMember]
         public List<ProductSimpleAttr> AttrLists { get; set; }
+        /// <summary>
+        /// 页容量
+        /// </summary>
+        [DataMember]
+        public int PageSize { get; set; }
+        /// <summary>
+        /// 页索引
+        /// </summary>
+        [DataMember]
+        public int PageIndex { get; set; }
+        /// <summary>
+        /// 开始时间
+        /// </summary>
+        [DataMember]
+        public DateTime? begintime { get; set; }
+        /// <summary>
+        /// 结束时间
+        /// </summary>
+        [DataMember]
+        public DateTime? endtime { get; set; }
+
     }
 }

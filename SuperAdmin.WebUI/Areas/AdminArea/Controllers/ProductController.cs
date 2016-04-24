@@ -8,6 +8,7 @@ using SuperAdmin.datamodel;
 using SuperAdmin.WebUI.Areas.AdminArea.Models;
 using SuperAdmin.WebUI.Controllers;
 using SuperAdmin.WebUI.Models;
+using Webdiyer.WebControls.Mvc;
 
 namespace SuperAdmin.WebUI.Areas.AdminArea.Controllers
 {
@@ -19,14 +20,28 @@ namespace SuperAdmin.WebUI.Areas.AdminArea.Controllers
         #region 变量声明
         private ProductCategoryBll catebll = new ProductCategoryBll();
         private ProductInfoBll bll = new ProductInfoBll();
+        private readonly int PageSize = 2;
         #endregion
         /// <summary>
         ///  产品管理首页
         /// </summary>
         /// <returns></returns>
-        public ActionResult Index()
+        public ActionResult Index(ProductInfoModel product,int page = 1)
         {
+            int totalrowcount = 0;
+            product.PageIndex = page;
+            product.PageSize = PageSize;
+            List<ProductInfoModel> list = bll.GetProductListForPage(product, out totalrowcount);
+            PagedList<ProductInfoModel> pageList = null;
+            if (list != null)
+            {
+                pageList = new PagedList<ProductInfoModel>(list, page, PageSize, totalrowcount);
+            }
             ProductIndexViewModel model = new ProductIndexViewModel();
+            model.productlist = pageList;
+            model.totalcount = totalrowcount;
+            model.pagesize = PageSize;
+            model.currentpage = page;
             ViewBag.PageTitle = "产品管理";
             return View(model);
         }

@@ -52,5 +52,16 @@ namespace SuperAdmin.DataBLL
         {
             return dal.GetAllModel();
         }
+         /// <summary>
+        /// 得到分页数据
+        /// </summary>
+        /// <param name="model"></param>
+        /// <param name="totalrowcount"></param>
+        /// <returns></returns>
+        public List<ProductInfoModel> GetProductListForPage(ProductInfoModel model, out int totalrowcount)
+        {
+            List<ProductInfoModel> list= dal.GetProductListForPage(model,out totalrowcount);
+            return list;
+        }
     }
 }
