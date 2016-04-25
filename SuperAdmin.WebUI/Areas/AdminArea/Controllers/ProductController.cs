@@ -20,7 +20,7 @@ namespace SuperAdmin.WebUI.Areas.AdminArea.Controllers
         #region 变量声明
         private ProductCategoryBll catebll = new ProductCategoryBll();
         private ProductInfoBll bll = new ProductInfoBll();
-        private readonly int PageSize = 2;
+        private readonly int PageSize = 30;
         #endregion
         /// <summary>
         ///  产品管理首页
