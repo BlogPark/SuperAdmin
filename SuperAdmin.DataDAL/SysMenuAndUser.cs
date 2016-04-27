@@ -34,7 +34,7 @@ namespace SuperAdmin.DataDAL
         Answer ,
         GID ,
         GName,
-        LoginName,HeaderImg,WebSkin
+        LoginName,HeaderImg,WebSkin,LastLoginIP,LastLoginTime
 FROM    dbo.SysAdminUser
 WHERE LoginName=@loginname ";
             SqlParameter[] paramter ={
@@ -58,6 +58,8 @@ WHERE LoginName=@loginname ";
                 result.HeaderImg = dt.Rows[0]["HeaderImg"].ToString();
                 result.UserStatus = int.Parse(dt.Rows[0]["UserStatus"].ToString());
                 result.WebSkin = string.IsNullOrWhiteSpace(dt.Rows[0]["WebSkin"].ToString()) ? "default" : dt.Rows[0]["WebSkin"].ToString();
+                result.LastLoginIP = string.IsNullOrWhiteSpace(dt.Rows[0]["LastLoginIP"].ToString()) ? "" : dt.Rows[0]["LastLoginIP"].ToString();
+                result.LastLoginTime = string.IsNullOrWhiteSpace(dt.Rows[0]["LastLoginTime"].ToString()) ? DateTime.MinValue : DateTime.Parse(dt.Rows[0]["LastLoginTime"].ToString());
                 if (result.UserPwd != user.UserPwd)
                 {
                     result.LoginResult = "0用户密码不正确";

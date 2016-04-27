@@ -52,6 +52,7 @@
     <Compile Include="ProductInfoModel.cs" />
     <Compile Include="ProductSpecModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ServiceInfoModel.cs" />
     <Compile Include="SplitTagModel.cs" />
     <Compile Include="SysAdminConfigsModel.cs" />
     <Compile Include="SysAdminGrouprMenuModel.cs" />

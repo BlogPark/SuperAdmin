@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using SuperAdmin.Common;
 using SuperAdmin.datamodel;
+using SuperAdmin.WebUI.Models;
 
 namespace SuperAdmin.WebUI.Controllers
 {
@@ -15,7 +16,22 @@ namespace SuperAdmin.WebUI.Controllers
        
         public ActionResult Index()
         {
-            return View();
+             SessionLoginModel user = Session[AppContext.SESSION_LOGIN_NAME] as SessionLoginModel;
+            if (user == null)
+            {
+                return RedirectToAction("Index", "Login", new { area = "" });
+            }
+            ServiceInfoModel server = new ServiceInfoModel();
+            server.ServerName=System.Net.Dns.GetHostName();
+            server.ServerIPAdd = System.Net.Dns.Resolve(server.ServerName).AddressList[0].ToString();
+            server.ServerSysversion = System.Environment.OSVersion.Version.ToString();
+            server.ServerRAMCapacity = "";
+            server.RAMCount = System.Environment.WorkingSet;
+            server.ServerLocalTime = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
+            server.ServerSysversion = "";
+            HomeIndexViewModel model = new HomeIndexViewModel();
+            model.LocalUser = user.User;
+            return View(model);
         }
 
         public ActionResult Login()

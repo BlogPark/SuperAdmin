@@ -1,4 +1,5 @@
-﻿@{
+﻿@model SuperAdmin.WebUI.Models.HomeIndexViewModel
+@{
     Layout = "~/Views/_Layout.cshtml";
 }
 
@@ -17,20 +18,137 @@
                                 <i class="fa fa-home"></i>
                                 <a href="index.html">Home</a>
                             </li>
-                            <li>
-                                <a href="#">Other Pages</a>
-                            </li>
-                            <li>Blank Page</li>
+                            <li>主页</li>
                         </ul>
                         <!-- /BREADCRUMBS -->
                         <div class="clearfix">
-                            <h3 class="content-title pull-left">Blank Page</h3>
+                            <h3 class="content-title pull-left">主页</h3>
                         </div>
-                        <div class="description">Blank Page</div>
+                        <div class="description"></div>
                     </div>
                 </div>
             </div>
             <!-- /PAGE HEADER -->
+            <div class="row">
+                <div class="col-md-12">
+                    <!-- BOX -->
+                    <div class="box border red">
+                        <div class="box-title">
+                            <h4><i class="fa fa-home"></i><span class="hidden-inline-mobile">欢迎使用云管理平台</span></h4>
+                        </div>
+                        <div class="box-body">
+                            <div class="tabbable header-tabs">
+                                <ul class="nav nav-tabs">
+                                    <li><a href="#box_tab3" data-toggle="tab"><i class="fa fa-user"></i><span class="hidden-inline-mobile">用户信息</span></a></li>
+                                    <li><a href="#box_tab2" data-toggle="tab"><i class="fa fa-bars"></i><span class="hidden-inline-mobile">统计信息</span></a></li>
+                                    <li class="active"><a href="#box_tab1" data-toggle="tab"><i class="fa fa-desktop"></i><span class="hidden-inline-mobile">服务器信息</span></a></li>
+                                </ul>
+                                <div class="tab-content">
+                                    <div class="tab-pane fade in active" id="box_tab1">
+                                        <table class="table table-hover">
+                                            <thead>
+                                                <tr>
+                                                    <th colspan="2">当前服务器信息</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td class="col-md-3">服务器计算机名</td>
+                                                    <td class="col-md-9">Mark</td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="col-md-3">服务器IP地址</td>
+                                                    <td class="col-md-9">Jacob</td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="col-md-3">服务器端口</td>
+                                                    <td class="col-md-9">Larry</td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="col-md-3">服务器IIS版本</td>
+                                                    <td class="col-md-9">Larry</td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="col-md-3">本文件所在文件夹</td>
+                                                    <td class="col-md-9">Larry</td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="col-md-3">服务器操作系统</td>
+                                                    <td class="col-md-9">Larry</td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="col-md-3">.NET Framework 版本</td>
+                                                    <td class="col-md-9">Larry</td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="col-md-3">服务器当前时间</td>
+                                                    <td class="col-md-9">Larry</td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="col-md-3">服务器IE版本</td>
+                                                    <td class="col-md-9">Larry</td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="col-md-3">当前Session数量</td>
+                                                    <td class="col-md-9">Larry</td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="col-md-3">当前程序占用内存 </td>
+                                                    <td class="col-md-9">Larry</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    <div class="tab-pane fade" id="box_tab2">
+                                        <p>Content #2</p>
+                                        <p>There were flying cantaloupes, rainbows and songs of happiness near by, I mean I was a little frightened by the flying fruit but I'll take this any day over prison inmates. I skipped closer and closer to the festivities and when I arrived I seen all my friends I had went to high school with there were holding hands and singing Kumbayah around the camp ice.. Yes It was a giant block of ice situated on three wood logs. </p>
+                                    </div>
+                                    <div class="tab-pane fade" id="box_tab3">
+                                        <table class="table table-hover">
+                                            <thead>
+                                                <tr>
+                                                    <th colspan="2">当前登陆用户信息</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td class="col-md-3">登陆用户名</td>
+                                                    <td class="col-md-9">@Model.LocalUser.UserName</td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="col-md-3">登录用户邮箱</td>
+                                                    <td class="col-md-9">@Model.LocalUser.UserEmail</td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="col-md-3">登录用户真实姓名</td>
+                                                    <td class="col-md-9">@Model.LocalUser.TruethName</td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="col-md-3">登录用户手机号</td>
+                                                    <td class="col-md-9">@Model.LocalUser.UserPhone</td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="col-md-3">登录用户所属系统分组</td>
+                                                    <td class="col-md-9">@Model.LocalUser.GName</td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="col-md-3">上次登陆地址</td>
+                                                    <td class="col-md-9">@(string.IsNullOrWhiteSpace(Model.LocalUser.LastLoginIP) ? "" : Model.LocalUser.LastLoginIP)</td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="col-md-3">上次登录时间</td>
+                                                    <td class="col-md-9">@(Model.LocalUser.LastLoginTime !=DateTime.MinValue ? Model.LocalUser.LastLoginTime.ToString("yyyy-MM-dd HH:mm:ss") : "")</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- /BOX -->
+                </div>
+            </div>
         </div>
     </div>
 </div>
@@ -39,5 +157,5 @@
         jQuery(document).ready(function () {
             App.init(); //Initialise plugins and elements
         });
-        </script>
-    }
+    </script>
+}
