@@ -14,7 +14,14 @@ namespace SuperAdmin.WebUI.Areas.AdminArea.Models
     {
         [DataMember]
         public PagedList<ProductInfoModel> productlist { get; set; }
-
+        /// <summary>
+        /// 查询条件
+        /// </summary>
+        [DataMember]
+        public ProductInfoModel product { get; set; }
+        /// <summary>
+        /// 总记录数
+        /// </summary>
         [DataMember]
         public int totalcount { get; set; }
         /// <summary>
@@ -27,5 +34,10 @@ namespace SuperAdmin.WebUI.Areas.AdminArea.Models
         /// </summary>
         [DataMember]
         public int pagesize { get; set; }
+        /// <summary>
+        /// 分类列表
+        /// </summary>
+        [DataMember]
+        public List<ProductCategoryModel> catelist { get; set; }
     }
 }

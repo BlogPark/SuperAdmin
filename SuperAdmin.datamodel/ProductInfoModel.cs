@@ -66,10 +66,15 @@ namespace SuperAdmin.datamodel
         [DataMember]
         public string ProductCoverImg { get; set; }
         /// <summary>
-        /// 产品状态
+        /// 产品状态(1 已发布2 已下架3 已删除)
         /// </summary>       
         [DataMember]
         public int ProductStatus { get; set; }
+        /// <summary>
+        /// 产品状态名称(1 已发布2 已下架3 已删除)
+        /// </summary>       
+        [DataMember]
+        public string ProductStatusName { get; set; }
         /// <summary>
         /// 添加人ID
         /// </summary>       
@@ -105,6 +110,22 @@ namespace SuperAdmin.datamodel
         /// </summary>
         [DataMember]
         public string ProductSmallPic { get; set; }
+        /// <summary>
+        /// 是否推荐
+        /// </summary>
+        [DataMember]
+        public int _IsCommend=10;
+
+        public int IsCommend
+        {
+            get { return _IsCommend; }
+            set { _IsCommend = value; }
+        }
+        /// <summary>
+        /// 是否推荐
+        /// </summary>
+        [DataMember]
+        public string IsCommendName { get; set; }
         #endregion
 
         /// <summary>
@@ -132,6 +153,10 @@ namespace SuperAdmin.datamodel
         /// </summary>
         [DataMember]
         public DateTime? endtime { get; set; }
-
+        /// <summary>
+        /// 产品幅图列表
+        /// </summary>
+        [DataMember]
+        public List<string> prosmallpic { get; set; }
     }
 }

@@ -63,5 +63,32 @@ namespace SuperAdmin.DataBLL
             List<ProductInfoModel> list= dal.GetProductListForPage(model,out totalrowcount);
             return list;
         }
+        /// <summary>
+        /// 设置推荐
+        /// </summary>
+        /// <param name="ids"></param>
+        /// <param name="iscommend"></param>
+        /// <returns></returns>
+        public int SetCommend(string ids, int iscommend)
+        {
+            return dal.SetCommend(ids,iscommend);
+        }
+         /// <summary>
+        /// 下架产品
+        /// </summary>
+        /// <param name="pid"></param>
+        /// <returns></returns>
+        public int DeleteProduct(int pid)
+        {
+            return dal.DeleteProduct(pid);
+        }
+
+         /// <summary>
+        /// 得到推荐的产品列表
+        /// </summary>
+        public List<ProductInfoModel> GetCommendProductList(int top=8)
+        {
+            return dal.GetCommendProductList(top);
+        }
     }
 }

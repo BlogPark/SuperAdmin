@@ -29,12 +29,59 @@
                     </div>
                 </div>
             </div>
-            <div class="row">
-                <div class="col-sm-11">
-                    <div class="btn-group hidden-xs pull-right invoice-btn-group">
-                        <p class="btn-toolbar">
-                            <a class="btn btn-primary" data-toggle="modal" href="#" id="addnew"><i class="fa fa-search"></i>&nbsp;查询条件预留</a>
-                        </p>
+            <div class="well well-sm">
+                <div class="row">
+                    <div class="col-sm-12">
+                        @using (Html.BeginForm("Index", "Product", FormMethod.Get, new { @id = "form1" }))
+                        {
+                            <div class="form-group">
+                                <label  class="pull-left control-label">编号</label>
+                                <div class="col-sm-1">
+                                    @Html.TextBoxFor(m => m.product.ID, new { @class = "form-control" })
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label  class="pull-left control-label">标题</label>
+                                <div class="col-sm-2">
+                                    @Html.TextBoxFor(m => m.product.ProductName, new { @class = "form-control" })
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label  class="pull-left control-label">分类</label>
+                                <div class="col-sm-2">
+                                    @Html.DropDownListFor(m => m.product.ProductCateID, null, new { @class = "form-control" })
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="pull-left control-label">状态</label>
+                                <div class="col-sm-2">
+                                    @Html.DropDownListFor(m => m.product.ProductStatus, null, new { @class = "form-control" })
+                                </div>
+                            </div>           
+                            <div class="form-group">
+                                <label class="pull-left control-label">是否推荐</label>
+                                <div class="col-sm-2">
+                                    @Html.DropDownListFor(m => m.product.IsCommend, null, new { @class = "form-control" })
+                                </div>
+                            </div>                           
+                            <div class="btn-group hidden-xs pull-right invoice-btn-group">
+                                <p class="btn-toolbar">
+                                    <button class="btn btn-primary" type="submit"><i class="fa fa-search"></i>&nbsp;搜索</button>
+                                </p>
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+            <div class="well well-sm">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="btn-group hidden-xs pull-left invoice-btn-group">
+                                <p class="btn-toolbar">
+                                    <button class="btn btn-info" type="button" onclick="setcommend(1)"><i class="fa fa-cog"></i>&nbsp;设置推荐</button>
+                                    <button class="btn btn-info" type="button" onclick="setcommend(0)"><i class="fa fa-times"></i>&nbsp;取消推荐</button>
+                                </p>
+                            </div>
                     </div>
                 </div>
             </div>
@@ -44,9 +91,11 @@
                         <table class="table table-striped table-bordered" id="menutab">
                             <thead>
                                 <tr>
-                                    <th class="text-center">类别编号</th>
+                                    <th  class="text-center"><input type="checkbox" id="chk_all" /></th>
+                                    <th class="text-center">产品编号</th>
                                     <th class="text-center">产品名称</th>
                                     <th class="text-center">产品描述</th>
+                                     <th class="text-center">是否推荐</th>
                                     <th class="text-center">添加人</th>
                                     <th class="text-center">状        态</th>
                                     <th class="text-center">操        作</th>
@@ -56,18 +105,20 @@
                                 @foreach (var item in Model.productlist)
                                 {
                                     <tr id="tr@(item.ID)" class="text-center">
+                                        <td><input type="checkbox" name="proList" value="@item.ID" /></td>
                                         <td>@item.ID</td>
                                         <td>@item.ProductName</td>
                                         <td>@item.ProductDescription</td>
+                                        <td>@item.IsCommendName</td>
                                         <td>@item.AddUserName</td>
                                         <td name="@(item.ProductStatus)">
-                                            @item.ProductStatus
+                                            @item.ProductStatusName
                                         </td>
                                         <td>
                                             <p class="btn-toolbar">
                                                 @if (item.ProductStatus == 1)
                                                 {
-                                                    <button class="btn btn-danger" data-toggle="modal" onclick="delcate(@item.ID)" ><i class="fa fa-times-circle"></i>&nbsp; 禁 用</button>
+                                                    <button class="btn btn-danger" data-toggle="modal" onclick="delpro(@item.ID)" ><i class="fa fa-times-circle"></i>&nbsp; 下 架</button>
                                                 }
                                             </p>
                                         </td>
@@ -84,10 +135,66 @@
         </div>
     </div>
 </div>
+@section scriptfiles{
+    <script src="@Url.Content("/js/bootbox/bootbox.min.js")"></script>
+    }
 @section myscript{
     <script type="text/javascript">
         $(function () {
             App.init(); //Initialise plugins and elements
+          
+            //全选
+            $("#chk_all").click(function () {
+                if ($("#chk_all").is(":checked")) {
+                    $("input[type='checkbox'][name='proList']").prop("checked", true);
+                }
+                else {
+                    $("input[type='checkbox'][name='proList']").prop("checked", false);
+                }
+            });
         });
+        function setcommend(commend)
+        {
+            var idlist = '';
+            $("input[type='checkbox'][name='proList']").each(function () {
+                if ($(this).prop("checked"))
+                {
+                    idlist = idlist + $(this).val()+",";
+                }
+            });
+            $.ajax({
+                url: '@Url.Action("setcommend", "Product", new { area = "AdminArea" })',
+                dataType: 'Json',
+                data: { 'ids': idlist, 'commend': commend },
+                type: 'POST',
+                async: false,
+                success: function (data) {
+                    if (data == "1") {
+                        location.reload();
+                    }
+                    else {
+                        bootbox.alert("操作失败");
+                    }
+                }
+            });
+        }
+        function delpro(id)
+        {
+            $.ajax({
+                url: '@Url.Action("delepro", "Product", new { area = "AdminArea" })',
+                dataType: 'Json',
+                data: { 'pid': id },
+                type: 'POST',
+                async: false,
+                success: function (data) {
+                    if (data == "1") {
+                        location.reload();
+                    }
+                    else {
+                        bootbox.alert("操作失败");
+                    }
+                }
+            });
+        }
     </script>
 }

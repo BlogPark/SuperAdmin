@@ -37,6 +37,9 @@ namespace SuperAdmin.WebUI.Areas.AdminArea.Controllers
             {
                 pageList = new PagedList<ProductInfoModel>(list, page, PageSize, totalrowcount);
             }
+            this.ViewData["product.ProductCateID"] = GetCategoriesListItem();
+            this.ViewData["product.ProductStatus"] = GetStatusListItem(0);
+            this.ViewData["product.IsCommend"] = GetcommendListItem(10);
             ProductIndexViewModel model = new ProductIndexViewModel();
             model.productlist = pageList;
             model.totalcount = totalrowcount;
@@ -142,6 +145,92 @@ namespace SuperAdmin.WebUI.Areas.AdminArea.Controllers
             {
                 return Json("0");
             }
+        }
+        /// <summary>
+        /// 设置推荐
+        /// </summary>
+        /// <param name="ids"></param>
+        /// <param name="commend"></param>
+        /// <returns></returns>
+        [HttpPost]
+        public ActionResult setcommend(string ids,int commend)
+        {
+            int rowcount = bll.SetCommend(ids,commend);
+            if (rowcount > 0)
+            {
+                return Json("1");
+            }
+            else
+            {
+                return Json("0");
+            }
+        }
+        /// <summary>
+        /// 下架产品
+        /// </summary>
+        /// <param name="pid"></param>
+        /// <returns></returns>
+        [HttpPost]
+        public ActionResult delepro(int pid)
+        {
+            int rowcount = bll.DeleteProduct(pid);
+            if (rowcount > 0)
+            {
+                return Json("1");
+            }
+            else
+            {
+                return Json("0");
+            }
+        }
+        /// <summary>
+        /// 获取分类列表
+        /// </summary>
+        /// <returns></returns>
+        private List<SelectListItem> GetCategoriesListItem(long defval = 0)
+        {
+            List<SelectListItem> items = new List<SelectListItem>();
+            items.Add(new SelectListItem { Text = "请选择", Value = "0", Selected = defval == 0 ? true : false });
+            var classList = catebll.GetAllModel(1);
+
+            if (classList != null && classList.Count() > 0)
+            {
+                foreach (var item in classList)
+                {
+                    string strName = item.CateName;
+                    int cateid = item.ID;
+
+                    items.Add(new SelectListItem { Text = strName, Value = cateid.ToString(), Selected = defval == item.ID });
+                }
+            }
+            return items;
+        }
+        /// <summary>
+        /// 得到状态列表
+        /// </summary>
+        /// <param name="defval"></param>
+        /// <returns></returns>
+        private List<SelectListItem> GetStatusListItem(int defval = 1)
+        {
+            List<SelectListItem> items = new List<SelectListItem>();
+            items.Add(new SelectListItem { Text = "全部", Value = "0", Selected = defval == 0 });
+            items.Add(new SelectListItem { Text = "已发布", Value = "1", Selected = defval == 1 });
+            items.Add(new SelectListItem { Text = "已下架", Value = "2", Selected = defval == 2 });
+            items.Add(new SelectListItem { Text = "已删除", Value = "3", Selected = defval == 3 });
+            return items;
+        }
+        /// <summary>
+        /// 得到状态列表
+        /// </summary>
+        /// <param name="defval"></param>
+        /// <returns></returns>
+        private List<SelectListItem> GetcommendListItem(int defval = 1)
+        {
+            List<SelectListItem> items = new List<SelectListItem>();
+            items.Add(new SelectListItem { Text = "请选择", Value = "10", Selected = defval == 10 });
+            items.Add(new SelectListItem { Text = "是", Value = "1", Selected = defval == 1 });
+            items.Add(new SelectListItem { Text = "否", Value = "0", Selected = defval == 0 });
+            return items;
         }
     }
 }

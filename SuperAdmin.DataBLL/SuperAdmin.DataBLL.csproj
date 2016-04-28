@@ -62,6 +62,7 @@
     <Compile Include="WebNewsBll.cs" />
     <Compile Include="WebSiteCommentsBll.cs" />
     <Compile Include="WebSiteImageBll.cs" />
+    <Compile Include="Website\WebIndexBll.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\SuperAdmin.Common\SuperAdmin.Common.csproj">

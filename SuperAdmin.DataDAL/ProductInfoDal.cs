@@ -272,7 +272,7 @@ namespace SuperAdmin.DataDAL
         public List<ProductInfoModel> GetProductListForPage(ProductInfoModel model, out int totalrowcount)
         {
             List<ProductInfoModel> list = new List<ProductInfoModel>();
-            string columms = @"ID,ProductName,ProductSpecID,ProductSpecName,ProductAttributeIDs,ProductCostPrice,ProductStandardPrice,ProductSalePrice,ProductDescription,ProductCoverImg,ProductStatus,AddUserID,AddUserName,AddTime,ProductCateID,ProductCateName,ProductContent,ProductSmallPic";
+            string columms = @"ID,ProductName,ProductSpecID,ProductSpecName,ProductAttributeIDs,ProductCostPrice,ProductStandardPrice,ProductSalePrice,ProductDescription,ProductCoverImg,ProductStatus,AddUserID,AddUserName,AddTime,ProductCateID,ProductCateName,ProductContent,ProductSmallPic,IsCommend";
             string where = "";
             if (model != null)
             {
@@ -287,6 +287,30 @@ namespace SuperAdmin.DataDAL
                 else if (!string.IsNullOrWhiteSpace(model.ProductName) && !string.IsNullOrWhiteSpace(where))
                 {
                     where += @" AND ProductName Like '%" + model.ProductName + "%'";
+                }
+                if (model.ProductCateID > 0 && string.IsNullOrWhiteSpace(where))
+                {
+                    where += @" ProductCateID =" + model.ProductCateID;
+                }
+                else if (model.ProductCateID > 0 && !string.IsNullOrWhiteSpace(where))
+                {
+                    where += @" AND ProductCateID =" + model.ProductCateID;
+                }
+                if (model.ProductStatus > 0 && string.IsNullOrWhiteSpace(where))
+                {
+                    where += @" ProductStatus =" + model.ProductStatus;
+                }
+                else if (model.ProductStatus > 0 && !string.IsNullOrWhiteSpace(where))
+                {
+                    where += @" AND ProductStatus =" + model.ProductStatus;
+                }
+                if (model.IsCommend != 10 && string.IsNullOrWhiteSpace(where))
+                {
+                    where += @" IsCommend =" + model.IsCommend;
+                }
+                else if (model.ProductStatus != 10 && !string.IsNullOrWhiteSpace(where))
+                {
+                    where += @" AND IsCommend =" + model.IsCommend;
                 }
             }
             PageProModel page = new PageProModel();
@@ -345,11 +369,132 @@ namespace SuperAdmin.DataDAL
                     }
                     promodel.ProductDescription = item["ProductDescription"].ToString();
                     promodel.ProductCateName = item["ProductCateName"].ToString();
+                    promodel.IsCommend = string.IsNullOrWhiteSpace(item["IsCommend"].ToString()) ? 0 : int.Parse(item["IsCommend"].ToString());
+                    promodel.IsCommendName = promodel.IsCommend == 1 ? "是" : "否";
+                    string statusname = "已发布";
+                    if (promodel.ProductStatus == 2)
+                    {
+                        statusname = "已下架";
+                    }
+                    else if (promodel.ProductStatus == 3)
+                    {
+                        statusname = "已删除";
+                    }
+                    promodel.ProductStatusName = statusname;
                     list.Add(promodel);
                 }
             }
             return list;
 
+        }
+        /// <summary>
+        /// 设置推荐
+        /// </summary>
+        /// <param name="ids"></param>
+        /// <param name="iscommend"></param>
+        /// <returns></returns>
+        public int SetCommend(string ids, int iscommend)
+        {
+            if (string.IsNullOrWhiteSpace(ids))
+            {
+                return 0;
+            }
+            string sqltxt = @"UPDATE dbo.ProductInfo
+   SET IsCommend = @IsCommend
+ WHERE ID IN (" + ids.TrimStart(',').TrimEnd(',') + ")";
+            SqlParameter[] paramter = { 
+                                      new SqlParameter("@IsCommend",iscommend)
+                                      };
+            int rowcount = helper.ExecuteSql(sqltxt, paramter);
+            return rowcount;
+        }
+        /// <summary>
+        /// 下架产品
+        /// </summary>
+        /// <param name="pid"></param>
+        /// <returns></returns>
+        public int DeleteProduct(int pid)
+        {
+            string sqltxt = @"UPDATE dbo.ProductInfo
+   SET ProductStatus = 2
+ WHERE ID=@id";
+            SqlParameter[] paramter = { new SqlParameter("@id",pid)};
+            int rowcount = helper.ExecuteSql(sqltxt,paramter);
+            return rowcount;
+        }
+
+        /// <summary>
+        /// 得到推荐的产品列表
+        /// </summary>
+        public List<ProductInfoModel> GetCommendProductList(int top=8)
+        {
+            StringBuilder strSql = new StringBuilder();
+            strSql.Append("select TOP "+top.ToString()+" ID, ProductCoverImg, ProductStatus, AddUserID, AddUserName, AddTime, ProductName, ProductSpecID, ProductSpecName, ProductAttributeIDs, ProductCostPrice, ProductStandardPrice, ProductSalePrice, ProductDescription,ProductCateID,ProductCateName,ProductSmallPic  ");
+            strSql.Append("  from ProductInfo ");
+            List<ProductInfoModel> list = new List<ProductInfoModel>();
+            DataSet ds = helper.Query(strSql.ToString());
+            if (ds.Tables[0].Rows.Count > 0)
+            {
+                foreach (DataRow item in ds.Tables[0].Rows)
+                {
+                    ProductInfoModel model = new ProductInfoModel();
+                    if (item["ID"].ToString() != "")
+                    {
+                        model.ID = int.Parse(item["ID"].ToString());
+                    }
+                    model.ProductCoverImg =appcontent.Imgdomain+ item["ProductCoverImg"].ToString();
+                    if (item["ProductStatus"].ToString() != "")
+                    {
+                        model.ProductStatus = int.Parse(item["ProductStatus"].ToString());
+                    }
+                    if (item["AddUserID"].ToString() != "")
+                    {
+                        model.AddUserID = int.Parse(item["AddUserID"].ToString());
+                    }
+                    model.AddUserName = item["AddUserName"].ToString();
+                    if (item["AddTime"].ToString() != "")
+                    {
+                        model.AddTime = DateTime.Parse(item["AddTime"].ToString());
+                    }
+                    model.ProductName = item["ProductName"].ToString();
+                    if (item["ProductSpecID"].ToString() != "")
+                    {
+                        model.ProductSpecID = int.Parse(item["ProductSpecID"].ToString());
+                    }
+                    model.ProductSpecName = item["ProductSpecName"].ToString();
+                    model.ProductAttributeIDs = item["ProductAttributeIDs"].ToString();
+                    if (item["ProductCostPrice"].ToString() != "")
+                    {
+                        model.ProductCostPrice = decimal.Parse(item["ProductCostPrice"].ToString());
+                    }
+                    if (item["ProductStandardPrice"].ToString() != "")
+                    {
+                        model.ProductStandardPrice = decimal.Parse(item["ProductStandardPrice"].ToString());
+                    }
+                    if (item["ProductSalePrice"].ToString() != "")
+                    {
+                        model.ProductSalePrice = decimal.Parse(item["ProductSalePrice"].ToString());
+                    }
+                    if (item["ProductCateID"].ToString() != "")
+                    {
+                        model.ProductCateID = int.Parse(item["ProductCateID"].ToString());
+                    }
+                    model.ProductDescription = item["ProductDescription"].ToString();
+                    model.ProductCateName = item["ProductCateName"].ToString();
+                    if (!string.IsNullOrWhiteSpace(item["ProductSmallPic"].ToString()))
+                    {
+                        string[] smallpic = item["ProductSmallPic"].ToString().TrimStart(';').TrimEnd(';').Split(';');
+                        List<string> piclist = new List<string>();
+                        foreach (string picitem in smallpic)
+                        {
+                            piclist.Add(appcontent.Imgdomain+picitem);
+                        }
+                        model.prosmallpic = piclist;
+                    }
+                    list.Add(model);
+                }
+            }
+            return list;
         }
     }
 }
