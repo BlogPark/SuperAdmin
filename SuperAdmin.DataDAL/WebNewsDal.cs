@@ -192,5 +192,41 @@ ORDER BY ID DESC
                 return false;
             }
         }
+
+        /// <summary>
+        /// 得到全部的对象实体
+        /// </summary>
+        /// <returns></returns>
+        public List<WebNewsModel> GetNewsByAddtimelList(int top)
+        {
+            string sqltxt = @"SELECT  Top "+top.ToString()+ @" ID ,
+        NTitle ,
+        NContent ,
+        NStatus ,
+        NAddUser ,
+        NAddUserName ,
+        NAddTime,
+       CASE  NStatus WHEN 1 THEN '已发布'  WHEN 0 THEN '新建' WHEN 2 THEN '已删除'END AS StatusName
+FROM    SuperWebSite.dbo.WebNews WITH(NOLOCK)
+WHERE NStatus=1
+ORDER BY NAddTime DESC
+";
+            DataTable dt = helper.Query(sqltxt).Tables[0];
+            List<WebNewsModel> list = new List<WebNewsModel>();
+            foreach (DataRow item in dt.Rows)
+            {
+                WebNewsModel model = new WebNewsModel();
+                model.ID = int.Parse(item["ID"].ToString());
+                model.NAddTime = DateTime.Parse(item["NAddTime"].ToString());
+                model.NAddUser = int.Parse(item["NAddUser"].ToString());
+                model.NAddUserName = item["NAddUserName"].ToString();
+                model.NContent = item["NContent"].ToString();
+                model.NStatus = int.Parse(item["NStatus"].ToString());
+                model.NTitle = item["NTitle"].ToString();
+                model.StatusName = item["StatusName"].ToString();
+                list.Add(model);
+            }
+            return list;
+        }
     }
 }

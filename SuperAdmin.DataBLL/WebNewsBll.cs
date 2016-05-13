@@ -53,5 +53,14 @@ namespace SuperAdmin.DataBLL
         {
             return dal.UpdateWebnewsStatus(id,status);
         }
+
+         /// <summary>
+        /// 得到全部的对象实体
+        /// </summary>
+        /// <returns></returns>
+        public List<WebNewsModel> GetNewsByAddtimelList(int top = 8)
+        {
+            return dal.GetNewsByAddtimelList(top);
+        }
     }
 }

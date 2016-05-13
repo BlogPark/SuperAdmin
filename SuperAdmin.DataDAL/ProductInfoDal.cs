@@ -431,6 +431,7 @@ namespace SuperAdmin.DataDAL
             StringBuilder strSql = new StringBuilder();
             strSql.Append("select TOP "+top.ToString()+" ID, ProductCoverImg, ProductStatus, AddUserID, AddUserName, AddTime, ProductName, ProductSpecID, ProductSpecName, ProductAttributeIDs, ProductCostPrice, ProductStandardPrice, ProductSalePrice, ProductDescription,ProductCateID,ProductCateName,ProductSmallPic  ");
             strSql.Append("  from ProductInfo ");
+            strSql.Append(" WHERE IsCommend=1 AND ProductStatus=1");
             List<ProductInfoModel> list = new List<ProductInfoModel>();
             DataSet ds = helper.Query(strSql.ToString());
             if (ds.Tables[0].Rows.Count > 0)

@@ -105,7 +105,7 @@
                         <div class="form-group">
                             <label class="col-sm-3 control-label">模块引用图片ID</label>
                             <div class="col-sm-7">
-                                <a class="btn btn-primary" data-toggle="modal" href="#box-config" id="addnew"><i class="fa fa-plus"></i>选择图片</a>
+                                <a class="btn btn-primary" data-toggle="modal" href="#box-config" id="addnew"><i class="fa fa-plus"></i>选择图片</a><label style="color:red" id="showresult">没有选择关联图片</label>
                                 @Html.HiddenFor(m => m.addmodel.ModuleImg)
                             </div>
                         </div>
@@ -163,6 +163,7 @@
                 var raval = $("input:radio[name=optionsRadios1]:checked").val();
                 $("#addmodel_ModuleStatus").val(raval);
             });
+            
         });
         function searchdata() {
             var cateid = $("#catelist").val();
@@ -195,6 +196,18 @@
                 $("#addmodel_ModuleImg").val(text);
                 obj.removeClass("webimg");
                 obj.addClass("webimgfouce");
+                var test = $("#addmodel_ModuleImg").val();
+                if (test == '' || test == ",") {
+                    $("#showresult").html("没有选择关联图片");
+                }
+                else {
+                    var t = test.substring(1, test.length - 1);
+                    if (t == '') { $("#showresult").html("没有选择关联图片"); }
+                    else {
+                        var ts = t.split(',');
+                        $("#showresult").html("已选择" + ts.length + "张图片");
+                    }
+                }
             }
             else
             {
@@ -203,7 +216,20 @@
                 $("#addmodel_ModuleImg").val(text.replace(idstr, ','));
                 obj.removeClass("webimgfouce");
                 obj.addClass("webimg");
+                var test = $("#addmodel_ModuleImg").val();
+                if (test == ''||test==",") {
+                    $("#showresult").html("没有选择关联图片");
+                }
+                else {
+                    var t = test.substring(1, test.length - 1);
+                    if (t == '') { $("#showresult").html("没有选择关联图片"); }
+                    else {
+                        var ts = t.split(',');
+                        $("#showresult").html("已选择" + ts.length + "张图片");
+                    }
+                }
             }
         }
+
     </script>
 }
