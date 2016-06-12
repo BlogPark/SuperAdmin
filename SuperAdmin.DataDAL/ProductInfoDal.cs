@@ -330,7 +330,7 @@ namespace SuperAdmin.DataDAL
                     {
                         promodel.ID = int.Parse(item["ID"].ToString());
                     }
-                    model.ProductCoverImg = item["ProductCoverImg"].ToString();
+                    promodel.ProductCoverImg = item["ProductCoverImg"].ToString();
                     if (item["ProductStatus"].ToString() != "")
                     {
                         promodel.ProductStatus = int.Parse(item["ProductStatus"].ToString());
